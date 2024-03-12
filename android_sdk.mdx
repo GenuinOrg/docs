@@ -11,10 +11,11 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 ## Installation
 
+1. Add repo details in project level gradle
+
 <CodeGroup>
 
-```kotline Kotline Using build.gradle.kts
-// 1. Need to add below code in project level settings.gradle.kts
+```settings.gradle.kts (Kotlin)
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
@@ -27,17 +28,38 @@ dependencyResolutionManagement {
   }
 }
 
-// 2. Need to add dependency in app level build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar{
-   isTransitive=true
+```
+
+```build.gradle (Groovy)
+allprojects {
+    
+repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven {
+            setUrl("https://jitpack.io")
+        } 
+    }
 }
 
 ```
+</CodeGroup>
 
-```kotline Kotline Using build.gradle
-// 1. Need to add below code in project level settings.gradle
 
-// 2. Need to add dependency in app level build.gradle
+2. Add dependency in app level gradle
 
+<CodeGroup>
+
+```settings.gradle.kts (Kotlin)
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar{
+   isTransitive=true
+}
+```
+
+```build.gradle (Groovy)
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
+    transitive = true
+}
 ```
 </CodeGroup>
