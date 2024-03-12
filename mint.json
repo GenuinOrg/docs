@@ -25,9 +25,9 @@
     {
       "group": "SDK Integration",
       "pages": [
-        "ios_sdk.mdx",
-        "android_sdk.mdx",
-        "web_sdk.mdx"
+        "ios_sdk",
+        "android_sdk",
+        "web_sdk"
       ]
     }
   ]
