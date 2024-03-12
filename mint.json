@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Genuin SDK",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -15,7 +15,7 @@
       "to": "#07C983"
     }
   },
-  "topbarLinks": [
+  /*"topbarLinks": [
     {
       "name": "Support",
       "url": "mailto:hi@mintlify.com"
@@ -47,7 +47,7 @@
       "icon": "newspaper",
       "url": "https://mintlify.com/blog"
     }
-  ],
+  ],*/
   "navigation": [
     {
       "group": "Get Started",
@@ -56,7 +56,8 @@
         "quickstart",
         "development"
       ]
-    },
+    }
+    /*,
     {
       "group": "Essentials",
       "pages": [
@@ -81,11 +82,12 @@
         "api-reference/endpoint/create",
         "api-reference/endpoint/delete"
       ]
-    }
-  ],
+    }*/
+  ]
+  /*,
   "footerSocials": {
     "twitter": "https://twitter.com/mintlify",
     "github": "https://github.com/mintlify",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+  }*/
 }
