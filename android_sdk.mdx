@@ -15,7 +15,7 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 <CodeGroup>
 
-```settings.gradle.kts (Kotlin)
+``` settings.gradle.kts (Kotlin)
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
@@ -30,17 +30,16 @@ dependencyResolutionManagement {
 
 ```
 
-```build.gradle (Groovy)
-allprojects {
-    
-repositories {
-        google()
-        mavenCentral()
-        jcenter()
-        maven {
-            setUrl("https://jitpack.io")
-        } 
-    }
+``` build.gradle (Groovy)
+allprojects {  
+  repositories {
+    google()
+    mavenCentral()
+    jcenter()
+    maven {
+      setUrl("https://jitpack.io")
+    } 
+  }
 }
 
 ```
@@ -51,15 +50,144 @@ repositories {
 
 <CodeGroup>
 
-```settings.gradle.kts (Kotlin)
+``` settings.gradle.kts (Kotlin)
 implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar{
-   isTransitive=true
+  isTransitive=true
 }
 ```
 
-```build.gradle (Groovy)
+``` build.gradle (Groovy)
 implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
-    transitive = true
+  transitive = true
+}
+```
+</CodeGroup>
+
+2. Add dependency in app level gradle
+
+<CodeGroup>
+
+``` settings.gradle.kts (Kotlin)
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar{
+  isTransitive=true
+}
+```
+
+``` build.gradle (Groovy)
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
+  transitive = true
+}
+```
+</CodeGroup>
+
+3. Initialize SDK in your Application class
+
+<CodeGroup>
+
+``` 
+class YourApplication : Application() {
+  override fun onCreate() {
+    GenuinSDK.initialize(app_key, app_secret)
+  }
+}
+```
+</CodeGroup>
+
+4. Load SDK in seperate activity
+
+<CodeGroup>
+
+``` 
+GenuinSDK.loadSDK(context)
+
+```
+</CodeGroup>
+
+5. Show SDK Screen
+
+### To integrate SDK with **bottomNavigationView**, add below code in _res/navigation/mobile_navigation.xml_
+
+<CodeGroup>
+
+``` 
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+
+    <fragment
+        android:id="@+id/navigation_community"
+        android:name="com.begenuin.sdk.ui.fragment.FeedFragment"
+        android:label="@string/title_communities" />
+
+</navigation>
+
+```
+</CodeGroup>
+
+### To integrate SDK in your activity
+
+<CodeGroup>
+
+``` Using ViewPage2
+override fun onCreate(savedInstanceState: Bundle?) {
+  super.onCreate(savedInstanceState)
+  setSupportActionBar(Toolbar(this))
+  initViewPager()
+  val navView: BottomNavigationView = binding.navView
+  navView.setOnItemSelectedListener { item ->
+    when (item.itemId) {
+      R.id.navigation_community -> {
+        binding.viewPager.setCurrentItem(1, false)
+        true
+      }
+
+      else -> false
+    }
+  }
+}
+private fun initViewPager() {
+  val myPagerAdapter = MyPagerAdapter(this)
+  binding.viewPager.adapter = myPagerAdapter
+}
+
+class MyPagerAdapter(fragmentActivity: FragmentActivity) :
+  FragmentStateAdapter(fragmentActivity) {
+  override fun createFragment(position: Int): Fragment {
+    return when (position) {
+      0 -> FeedFragment()
+      else -> FeedFragment()
+    }
+  }
+  override fun getItemCount(): Int {
+    return NUM_PAGES
+  }
+  companion object {
+    private const val NUM_PAGES = 1
+  }
+}
+
+```
+
+``` Using NavHost
+override fun onCreate(savedInstanceState: Bundle?) {
+  super.onCreate(savedInstanceState)
+
+  setSupportActionBar(Toolbar(this))
+  val navView: BottomNavigationView = binding.navView
+
+  val navController =
+    findNavController(R.id.nav_host_fragment_activity_bottom_tab_with_nav_host)
+  // Passing each menu ID as a set of Ids because each
+  // menu should be considered as top level destinations.
+  val appBarConfiguration = AppBarConfiguration(
+    setOf(
+      R.id.navigation_community
+    )
+  )
+  setupActionBarWithNavController(navController, appBarConfiguration)
+  navView.setupWithNavController(navController)
 }
 ```
 </CodeGroup>
