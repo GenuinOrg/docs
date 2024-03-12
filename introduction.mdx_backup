@@ -3,6 +3,17 @@ title: Introduction
 description: 'Genuin communities for brands are currently available on mobile native SDKs for Android and iOS platforms. These SDKs seamlessly integrate with a brand's O&O apps, facilitating community-driven social video experience within the mobile environment.'
 ---
 
+/*<img
+  className="block dark:hidden"
+  src="/images/hero-light.svg"
+  alt="Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/hero-dark.svg"
+  alt="Hero Dark"
+/>*/
+
 ## Setting up
 
 The first step to world-class documentation is setting up your editing environments.
