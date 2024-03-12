@@ -15,7 +15,7 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 <CodeGroup>
 
-``` Using Kotlin-settings.gradle.kts
+```kotlin Kotlin-settings.gradle.kts
 dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
@@ -30,7 +30,7 @@ dependencyResolutionManagement {
 
 ```
 
-``` Using Groovy-build.gradle
+```java Groovy-build.gradle
 allprojects {  
   repositories {
     google()
@@ -50,13 +50,13 @@ allprojects {
 
 <CodeGroup>
 
-``` Using Kotlin-settings.gradle.kts 
+```kotlin Kotlin-settings.gradle.kts 
 implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar{
   isTransitive=true
 }
 ```
 
-``` Using Groovy-build.gradle
+```java Groovy-build.gradle
 implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
   transitive = true
 }
@@ -67,13 +67,13 @@ implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
 
 <CodeGroup>
 
-``` Using Kotlin-settings.gradle.kts
+```kotlin Kotlin-settings.gradle.kts
 implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar{
   isTransitive=true
 }
 ```
 
-``` Using Groovy-build.gradle
+```java Groovy-build.gradle
 implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
   transitive = true
 }
@@ -83,17 +83,21 @@ implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
 3. Initialize SDK in your Application class
 
 <CodeGroup>
+```kotlin
 class YourApplication : Application() {
   override fun onCreate() {
     GenuinSDK.initialize(app_key, app_secret)
   }
 }
+```
 </CodeGroup>
 
 4. Load SDK in seperate activity
 
 <CodeGroup>
+```kotlin
 GenuinSDK.loadSDK(context)
+```
 </CodeGroup>
 
 5. Show SDK Screen
@@ -101,6 +105,7 @@ GenuinSDK.loadSDK(context)
 ### To integrate SDK with **bottomNavigationView**, add below code in _res/navigation/mobile_navigation.xml_
 
 <CodeGroup>
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -113,13 +118,14 @@ GenuinSDK.loadSDK(context)
         android:label="@string/title_communities" />
 
 </navigation>
+```
 </CodeGroup>
 
 ### To integrate SDK in your activity
 
 <CodeGroup>
 
-``` Using ViewPage2
+```kotlin ViewPage2
 override fun onCreate(savedInstanceState: Bundle?) {
   super.onCreate(savedInstanceState)
   setSupportActionBar(Toolbar(this))
@@ -159,7 +165,7 @@ class MyPagerAdapter(fragmentActivity: FragmentActivity) :
 
 ```
 
-``` Using NavHost
+```kotlin NavHost
 override fun onCreate(savedInstanceState: Bundle?) {
   super.onCreate(savedInstanceState)
 
