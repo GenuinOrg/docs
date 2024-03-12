@@ -50,3 +50,42 @@ end
 ```
 
 </CodeGroup>
+
+### Example
+
+Import the BGHome module in your view controller.
+
+<CodeGroup>
+
+```swift ViewController.swift
+import BGHome
+```
+
+</CodeGroup>
+
+Then you can display the home feed view controller. For example, to use it in your UITabBarController:
+
+<CodeGroup>
+
+```swift ViewController.swift
+import UIKit
+import BGHome
+class TabBarController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var configuration = BGHome.Configuration()
+        configuration.showSidePanel = false
+
+        BGHome.shared.initialize(appKey: "YOUR_GENUIN_APP_KEY", appSecret: "YOUR_GENUIN_APP_SECRET", configuration: configuration)
+
+        if let homeFeedController = BGHome.shared.getHomeScreen() {
+            homeFeedController.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 0)
+            self.viewControllers = [homeFeedController]
+        }
+    }
+}
+
+```
+
+</CodeGroup>
