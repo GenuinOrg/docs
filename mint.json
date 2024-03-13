@@ -18,7 +18,7 @@
   "tabs": [
     {
         "name": "SDK Docs",
-        "url": "sdkdocs"
+        "url": "sdk-docs"
     }
 ],
   "navigation": [
@@ -44,10 +44,16 @@
     {
       "group": "SDK Integration",
       "pages": [
-        "sdkdocs/integration_methods",
-        "sdkdocs/ios_sdk",
-        "sdkdocs/android_sdk",
-        "sdkdocs/web_sdk"
+        "sdk-docs/integration_methods",
+        "sdk-docs/ios_sdk",
+        "sdk-docs/android_sdk",
+        "sdk-docs/web_sdk"
+      ]
+    },
+    {
+      "group": "For Community Builders",
+      "pages": [
+        "community-builder/overview"
       ]
     }
   ]
