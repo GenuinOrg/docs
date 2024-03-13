@@ -25,7 +25,8 @@
     {
       "group": "Platforms",
       "pages": [
-        "platforms/ios_platform"
+        "platforms/ios_platform",
+        "platforms/android_platform"
       ]
     },
     {
