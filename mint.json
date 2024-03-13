@@ -17,15 +17,15 @@
   },
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Getting Started",
       "pages": [
-        "introduction",
-        {
-          "group": "Plateforms",
-          "pages": [
-            "introduction"
-          ]
-        }
+        "introduction"
+      ]
+    },
+    {
+      "group": "Platforms",
+      "pages": [
+        "platforms/ios_platform.mdx"
       ]
     },
     {

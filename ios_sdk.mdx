@@ -23,7 +23,7 @@ description: 'Genuin iOS SDK comprises features such as brand feed, communities,
 
 ### Standard CocoaPods Install
 
-If your project doesn't have the CocoaPods setup then start with ```pod init``` which will create the Podfile, else do following changes in the pod file to install BGHome.
+If your project doesn't have the CocoaPods setup then start with `pod init` which will create the Podfile, else do following changes in the pod file to install GenuinSDK.
 
 <CodeGroup>
 
@@ -35,7 +35,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "BGHome", :git => "https://bitbucket.org/genuindev/genuin_demo_xcframework_ios.git", :tag => "0.0.5"
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "0.0.1"
 
 end
 
@@ -58,7 +58,7 @@ Import the BGHome module in your view controller.
 <CodeGroup>
 
 ```swift ViewController.swift
-import BGHome
+import GenuinSDK
 ```
 
 </CodeGroup>
@@ -69,17 +69,17 @@ Then you can display the home feed view controller. For example, to use it in yo
 
 ```swift ViewController.swift
 import UIKit
-import BGHome
+import GenuinSDK
 class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var configuration = BGHome.Configuration()
+        var configuration = GenuinSDK.Configuration()
         configuration.showSidePanel = false
 
-        BGHome.shared.initialize(appKey: "YOUR_GENUIN_APP_KEY", appSecret: "YOUR_GENUIN_APP_SECRET", configuration: configuration)
+        GenuinSDK.shared.initialize(appKey: "YOUR_GENUIN_APP_KEY", appSecret: "YOUR_GENUIN_APP_SECRET", configuration: configuration)
 
-        if let homeFeedController = BGHome.shared.getHomeScreen() {
+        if let homeFeedController = GenuinSDK.shared.getHomeScreen() {
             homeFeedController.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 0)
             self.viewControllers = [homeFeedController]
         }
