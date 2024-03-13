@@ -17,10 +17,6 @@
   },
   "tabs": [
     {
-        "name": "Documentation",
-        "url": "documentation"
-    },
-    {
         "name": "SDK Docs",
         "url": "sdkdocs"
     }
@@ -48,10 +44,10 @@
     {
       "group": "SDK Integration",
       "pages": [
-        "integration_methods",
-        "ios_sdk",
-        "android_sdk",
-        "web_sdk"
+        "sdkdocs/integration_methods",
+        "sdkdocs/ios_sdk",
+        "sdkdocs/android_sdk",
+        "sdkdocs/web_sdk"
       ]
     }
   ]
