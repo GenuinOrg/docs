@@ -19,7 +19,13 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction"
+        "introduction",
+        {
+          "group": "Plateforms",
+          "pages": [
+            "introduction"
+          ]
+        }
       ]
     },
     {
