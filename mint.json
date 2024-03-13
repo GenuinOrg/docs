@@ -25,7 +25,7 @@
     {
       "group": "Platforms",
       "pages": [
-        "platforms/ios_platform.mdx"
+        "platforms/ios_platform"
       ]
     },
     {
