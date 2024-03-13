@@ -19,7 +19,8 @@
     {
       "group": "Getting Started",
       "pages": [
-        "introduction"
+        "introduction",
+        "ecosystem_overview"
       ]
     },
     {
@@ -37,6 +38,7 @@
     {
       "group": "SDK Integration",
       "pages": [
+        "integration_methods",
         "ios_sdk",
         "android_sdk",
         "web_sdk"
