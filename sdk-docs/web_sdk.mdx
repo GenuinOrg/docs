@@ -2,3 +2,30 @@
 title: 'Web SDK'
 description: 'Genuin Web SDK comprises features such as brand feed, communities, and loops.'
 ---
+
+## Steps to embed Brand Community:
+To embed your Brand community into your website, follow the steps below:
+1. Identify the location on your website where you want to embed the community widget.
+2. Paste the provided code block into the desired location in your website's HTML markup.
+3. Adjust the height and width of the embed container as per your design requirements.
+   You can specify these dimensions within the code block itself.
+
+## Code-block for Brand Community Embedding:
+
+```html
+<div
+id="gen-sdk"
+style="max-width: 1080px; height: 720px; display: flex;"
+></div>
+<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+<script>
+	// Callback function that can be used to initiate the SDK
+	window.onGenuinReady = (genuin) => {
+	genuin.initialize({
+			embed: 1,
+			brand_id: 'panova',
+			hide_navbar: 0,
+		})
+	}
+</script>
+
