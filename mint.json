@@ -37,6 +37,7 @@
       "group": "For Brands",
       "pages": [
         "brands/overview",
+        "brands/bcc",
         "brands/build_profile",
         "brands/create_community",
         "brands/add_moderators",
