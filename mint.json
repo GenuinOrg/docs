@@ -85,12 +85,6 @@
         "sdk-docs/android_sdk",
         "sdk-docs/web_sdk"
       ]
-    },
-    {
-      "group": "Genuin Wallet",
-      "pages": [
-        "wallet/overview"
-      ]
     }
   ]
 }
