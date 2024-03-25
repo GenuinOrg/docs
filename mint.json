@@ -20,10 +20,6 @@
   },
   "tabs": [
     {
-      "name": "Knowledge Base",
-      "url": "knowledge-base"
-    },
-    {
         "name": "SDK Docs",
         "url": "sdk-docs"
     }
