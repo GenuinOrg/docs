@@ -54,22 +54,16 @@
       "group": "For Community Builders",
       "pages": [
         "community-builder/overview",
-        "community-builder/what_is",
-        "community-builder/login_signup",
-        "community-builder/create_avatar",
+        "community-builder/goals",
+        "community-builder/get_started",
         "community-builder/create_community",
         "community-builder/adding_moderators",
         "community-builder/adding_loops",
         "community-builder/adding_collaborators",
-        "community-builder/growing_community",
+        "community-builder/home_curate_feed",
         "community-builder/manage_privacy",
         "community-builder/manage_communities",
-        "community-builder/complete_profile",
-        "community-builder/usecases",
-        "community-builder/best_practices",
-        "community-builder/diversifying_content",
-        "community-builder/posting_schedule",
-        "community-builder/home_curate_feed"
+        "community-builder/growing_community"
       ]
     },
     {
