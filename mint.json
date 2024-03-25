@@ -45,16 +45,9 @@
         "brands/add_collaborators",
         "brands/add_subscribers",
         "brands/white_label",
+        "brands/embed",
         "brands/market_communities",
-        "brands/moderate_community",
-        "brands/get_data",
-        "brands/automate_engagement",
-        "brands/get_insights",
-        "brands/generate_reports",
-        "brands/virtual_gifts",
-        "brands/buy_products",
-        "brands/usecases",
-        "brands/best_practices"
+        "brands/get_data"
       ]
     },
     {
