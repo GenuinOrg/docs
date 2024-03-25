@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Genuin SDK",
+  "name": "Genuin Knowledge Base",
   "logo": {
     "dark": "/logo/genuin_logo.svg",
     "light": "/logo/genuin_logo.svg"
@@ -16,6 +16,10 @@
     }
   },
   "tabs": [
+    {
+      "name": "Knowledge Base",
+      "url": "knowledge-base"
+    },
     {
         "name": "SDK Docs",
         "url": "sdk-docs"
