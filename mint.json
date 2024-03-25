@@ -29,8 +29,8 @@
     {
       "group": "Getting Started",
       "pages": [
-        "introduction",
-        "ecosystem_overview"
+        "knowledge-base/introduction",
+        "knowledge-base/ecosystem_overview"
       ]
     },
     {
