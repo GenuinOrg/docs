@@ -34,24 +34,26 @@
       ]
     },
     {
-      "group": "Platforms",
+      "group": "For Brands",
       "pages": [
-        "platforms/ios_platform",
-        "platforms/android_platform",
-        "platforms/ios_sdk_platform",
-        "platforms/android_sdk_platform",
-        "platforms/web_platform",
-        "platforms/web_sdk_platform",
-        "platforms/bcc_platform"
-      ]
-    },
-    {
-      "group": "SDK Integration",
-      "pages": [
-        "sdk-docs/integration_methods",
-        "sdk-docs/ios_sdk",
-        "sdk-docs/android_sdk",
-        "sdk-docs/web_sdk"
+        "brands/overview",
+        "brands/build_profile",
+        "brands/create_community",
+        "brands/add_moderators",
+        "brands/add_loops",
+        "brands/add_collaborators",
+        "brands/add_subscribers",
+        "brands/white_label",
+        "brands/market_communities",
+        "brands/moderate_community",
+        "brands/get_data",
+        "brands/automate_engagement",
+        "brands/get_insights",
+        "brands/generate_reports",
+        "brands/virtual_gifts",
+        "brands/buy_products",
+        "brands/usecases",
+        "brands/best_practices"
       ]
     },
     {
@@ -77,26 +79,24 @@
       ]
     },
     {
-      "group": "For Brands",
+      "group": "Platforms",
       "pages": [
-        "brands/overview",
-        "brands/build_profile",
-        "brands/create_community",
-        "brands/add_moderators",
-        "brands/add_loops",
-        "brands/add_collaborators",
-        "brands/add_subscribers",
-        "brands/white_label",
-        "brands/market_communities",
-        "brands/moderate_community",
-        "brands/get_data",
-        "brands/automate_engagement",
-        "brands/get_insights",
-        "brands/generate_reports",
-        "brands/virtual_gifts",
-        "brands/buy_products",
-        "brands/usecases",
-        "brands/best_practices"
+        "platforms/ios_platform",
+        "platforms/android_platform",
+        "platforms/ios_sdk_platform",
+        "platforms/android_sdk_platform",
+        "platforms/web_platform",
+        "platforms/web_sdk_platform",
+        "platforms/bcc_platform"
+      ]
+    },
+    {
+      "group": "SDK Integration",
+      "pages": [
+        "sdk-docs/integration_methods",
+        "sdk-docs/ios_sdk",
+        "sdk-docs/android_sdk",
+        "sdk-docs/web_sdk"
       ]
     },
     {
