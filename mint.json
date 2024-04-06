@@ -38,14 +38,6 @@
       "pages": [
         "brands/overview",
         "brands/why_genuin",
-          {
-            "group": "Solutions for different types of Brands",
-            "pages": [
-                "brands/smes",
-                "brands/large_enterprises",
-                "brands/emerging_digital_consumer_&_product_businesses"
-            ]
-        },
         "brands/get_started",
         "brands/create_community",
         "brands/add_moderators",
