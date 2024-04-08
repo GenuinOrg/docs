@@ -39,15 +39,8 @@
         "brands/overview",
         "brands/why_genuin",
         "brands/getting_started",
-        "brands/create_community",
-        "brands/add_moderators",
-        "brands/add_loops",
-        "brands/add_collaborators",
-        "brands/add_subscribers",
-        "brands/white_label",
-        "brands/embed",
-        "brands/market_communities",
-        "brands/get_data"
+        "brands/manage",
+        "brands/moderate"
       ]
     },
     {
