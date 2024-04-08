@@ -43,7 +43,11 @@
         "brands/moderate",
         "brands/settings",
         "brands/brand_embedding",
-        "brands/market_your_community"
+        "brands/market_your_community",
+        "brands/segments",
+        "brands/dashboard",
+        "brands/engage_engine",
+        "brands/marketplace"
       ]
     },
     {
