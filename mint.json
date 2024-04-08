@@ -42,7 +42,7 @@
         "brands/manage",
         "brands/moderate",
         "brands/settings",
-        "brands/embedding",
+        "brands/brand_embedding",
         "brands/market_your_community"
       ]
     },
