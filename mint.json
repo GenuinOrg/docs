@@ -58,7 +58,7 @@
       "group": "For Community Builders",
       "pages": [
         "community-builder/overview_cb",
-        "community-builder/goals",
+        "community-builder/community_builder_roles.mdx",
         "community-builder/get_started",
         "community-builder/create_community",
         "community-builder/adding_moderators",
