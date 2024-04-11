@@ -59,15 +59,8 @@
       "pages": [
         "community-builder/overview_cb",
         "community-builder/community_builder_roles",
-        "community-builder/get_started",
-        "community-builder/create_community",
-        "community-builder/adding_moderators",
-        "community-builder/adding_loops",
-        "community-builder/adding_collaborators",
-        "community-builder/home_curate_feed",
-        "community-builder/manage_privacy",
-        "community-builder/manage_communities",
-        "community-builder/growing_community"
+        "community-builder/privacy_management"
+        
       ]
     },
     {
