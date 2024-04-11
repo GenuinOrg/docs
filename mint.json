@@ -59,8 +59,8 @@
       "pages": [
         "community-builder/overview_cb",
         "community-builder/community_builder_roles",
-        "community-builder/privacy_management"
-        
+        "community-builder/privacy_management",
+        "community-builder/managing_multiple_communities" 
       ]
     },
     {
