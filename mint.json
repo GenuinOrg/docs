@@ -68,12 +68,8 @@
     {
       "group": "Platforms",
       "pages": [
-        "platforms/ios_platform",
-        "platforms/ios_sdk_platform",
-        "platforms/android_platform",
-        "platforms/android_sdk_platform",
-        "platforms/web_platform",
-        "platforms/web_sdk_platform"
+        "platforms/for_brands",
+        "platforms/for_CBs"
       ]
     },
     {
