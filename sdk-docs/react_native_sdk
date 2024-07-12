@@ -1,0 +1,81 @@
+---
+title: 'React Native SDK'
+description: 'The genuin-react-native SDK is designed to seamlessly integrate the features of the "Genuin" mobile application into your own React Native projects. Follow the instructions below to install and integrate the SDK into your application.'
+---
+
+## Requirements
+To install the SDK, run the following command in your project directory:
+'npm install genuin-react-native'
+
+## How to Integrate
+
+To integrate the genuin-react-native SDK into your application, follow these steps:
+
+1. Import the Feed Component: In your app.jsx file, import the Feed component from the genuin-react-native SDK.
+2. Obtain Your API Key: Contact the Genuin team to obtain your unique API_KEY. This key is essential for authenticating your application with the Genuin service.
+3. Implement the Feed Component: Use the Feed component within your application, passing the API_KEY as a prop. Below is an example of how to implement this:
+
+<CodeGroup>
+
+```
+import React from "react";
+import Feed from "genuin-react-native";
+
+export default function App() {
+  return <Feed apiKey="API_KEY" />;
+}
+```
+
+</CodeGroup>
+
+### Example
+
+Here's a complete example of how your app.jsx file might look:
+
+<CodeGroup>
+
+```import React from "react";
+import { SafeAreaView, StyleSheet, Text } from "react-native";
+import Feed from "genuin-react-native";
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>Welcome to the Genuin Feed</Text>
+      <Feed apiKey="YOUR_API_KEY_HERE" />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
+  },
+  header: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10,
+  },
+});
+```
+
+</CodeGroup>
+
+## Additonal Information
+** Handling Errors **
+Ensure you handle any potential errors gracefully. The Feed component can throw errors if the API key is invalid or if there are network issues. Implement error handling in your component as needed.
+
+** Styling the Feed **
+You can style the Feed component using standard React Native styling techniques. Customize it to fit the design and aesthetics of your application.
+
+** Updating the API Key **
+If you need to update your API key, simply modify the apiKey prop passed to the Feed component. Ensure your application is reloaded to apply the changes.
+
+## Support
+For further assistance with integrating the genuin-react-native SDK, please contact the Genuin support team or refer to the official documentation. The Genuin team is available to help you with any issues or questions you might have during the integration process.
+
+## Keywords
+None
