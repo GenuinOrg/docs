@@ -79,9 +79,8 @@
         "sdk-docs/integration_methods",
         "sdk-docs/ios_sdk",
         "sdk-docs/android_sdk",
-        "sdk-docs/web_sdk"
+        "sdk-docs/web_sdk",
         "sdk-docs/react_native_sdk"
-        
       ]
     }
   ]
