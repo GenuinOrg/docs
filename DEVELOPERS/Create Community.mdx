@@ -9,7 +9,7 @@ The Create Community API enables developers to create a new community within the
 
 **Auth required**  : YES
 
-**Mandatory Fields**: handle, name, type, actions,  
+**Mandatory Fields**: handle, name, type, actions  
 
 # Request Body
 ```
@@ -47,9 +47,10 @@ The Create Community API enables developers to create a new community within the
 ## Success Response
 
 **Condition**: If Everything is okay and community is created. 
+
 **Code**: `200`
 
-Content
+**Content**
 ```json
 {
   "code": 200,
@@ -87,9 +88,10 @@ Content
 ## Bad Request
 
 **Condition**: If the request contains errors or invalid data, resulting in the community not being created.
+
 **Code**: `400`
 
-Content
+**Content**
 ```
 {}
 ```
@@ -102,6 +104,7 @@ Content
 Category Doesn't exists
 
 **Code**: `5220`
+
 **Content**
 ```json
 {
@@ -114,6 +117,7 @@ Category Doesn't exists
 Invalid Usage of API
 
 **Code**: `5166`
+
 **Content**
 ```json
 {
@@ -126,7 +130,9 @@ Invalid Usage of API
 ## Internal Server Error
 
 **Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+
 **Code**: `500`
+
 **Content**
 ```json
 {
