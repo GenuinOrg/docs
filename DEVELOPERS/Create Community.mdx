@@ -9,8 +9,6 @@ The Create Community API enables developers to create a new community within the
 
 **Auth required**  : YES
 
-**Permissions required**  : None
-
 **Mandatory Fields**: handle, name, type, actions,  
 
 # Request Body
@@ -84,6 +82,8 @@ Content
 }
 ```
 
+**Note**: In the `community_id` you will get the actual ID of community and the link from `share_url`
+
 ## Bad Request
 
 **Condition**: If the request contains errors or invalid data, resulting in the community not being created.
@@ -97,7 +97,7 @@ Content
 
 ## Invalid API Usage
 
-**Condition**: "If the community categories do not exist or there is invalid use of the API, a `5220` or `5166` error is returned, respectively.
+**Condition**: "If the community categories do not exist or there is invalid use of the API, a `404` or `412` error is returned, respectively.
 
 Category Doesn't exists
 
