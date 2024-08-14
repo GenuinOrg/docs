@@ -1,0 +1,137 @@
+# Create Community
+
+The Create Community API enables developers to create a new community within the platform programmatically. This API is crucial for automating community setup, allowing for seamless integration with your application or service.
+
+
+**URL**  :  `/api/v3/community/create`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+**Permissions required**  : None
+
+**Mandatory Fields**: handle, name, type, actions,  
+
+# Request Body
+```
+{
+  "community_id": "0061a029-f8a2-405d-bf0c-d45a66961550",
+  "handle": "genuin-community",
+  "name": "Genuin Community",
+  "description": "some community description #genuinCommunity #genuinAmdCommunity",
+  "tags": "genuinCommunity,genuinAmdCommunity",
+  "dp": "1.png",
+  "categories": {
+    "existing": [
+      1,
+      2
+    ],
+    "new": [
+      "abc",
+      "aAa",
+      "xYZ"
+    ]
+  },
+  "is_ai_generated": false,
+  "is_ai_generated_dp": true,
+  "is_ai_generated_banner": true,
+  "banner": "1.png",
+  "users": [
+    {
+      "user_id": "b12f13af-ef5a-4906-b0a0-2995e106200d"
+    }
+  ]
+}
+```
+
+
+## Success Response
+
+**Condition**: If Everything is okay and community is created. 
+**Code**: `200`
+
+Content
+```json
+{
+  "code": 200,
+  "message": "XXXX-[Community has been created successfully.]",
+  "data": {
+    "community_id": "0a2be302-04af-4642-a436-1612554e48a6",
+    "share_url": "https://community.dhruvpatel.com/community/dqwd-w5oa",
+    "dp": "https://media.qa.begenuin.com/uploads/profile_images/community/eeqfwee12.png",
+    "banner": "https://media.qa.begenuin.com/uploads/community/banner/dqwdq.png",
+    "color_code": "#A4E6DA",
+    "text_color_code": "#49CDB5",
+    "leader": {
+      "member_id": "0bf977ed-4887-4056-a8f4-1f0de71101f1",
+      "name": "hoo hwwoo",
+      "bio": "jai hwwooo",
+      "nickname": "wdqwdqwdq",
+      "phone": "91333333333333",
+      "is_brand_system_user": true,
+      "is_avatar": false,
+      "brand": {
+        "brand_id": 1,
+        "brand_slug": "dqwd-dqjb"
+      },
+      "profile_image": "https://media.qa.begenuin.com/uploads/profile_images/1706610191569_Vector.png",
+      "profile_image_s": "https://media.qa.begenuin.com/uploads/profile_images/s/1706610191569_Vector.png",
+      "profile_image_m": "https://media.qa.begenuin.com/uploads/profile_images/m/1706610191569_Vector.png",
+      "profile_image_l": "https://media.qa.begenuin.com/uploads/profile_images/l/1706610191569_Vector.png"
+    }
+  }
+}
+```
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in the community not being created.
+**Code**: `400`
+
+Content
+```
+{}
+```
+
+
+## Invalid API Usage
+
+**Condition**: "If the community categories do not exist or there is invalid use of the API, a `5220` or `5166` error is returned, respectively.
+
+Category Doesn't exists
+
+**Code**: `5220`
+**Content**
+```json
+{
+  "code": "5220",
+  "message": "XXXX-[community categories does not exists.]",
+  "data": {}
+}
+```
+
+Invalid Usage of API
+
+**Code**: `5166`
+**Content**
+```json
+{
+  "code": "5166",
+  "message": "XXXX-[Invalid Use of API]",
+  "data": {}
+}
+```
+
+## Internal Server Error
+
+**Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+**Code**: `500`
+**Content**
+```json
+{
+  "code": "5216",
+  "message": "XXXX-[community handle already exists.]",
+  "data": {}
+}
+```
