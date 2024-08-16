@@ -1,0 +1,84 @@
+
+**URL**  :  `/api/v3/community/add_users`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+
+# Request Body
+
+```json
+{
+  "onboarding_communities": "any",
+  "communities": "any",
+  "single_tap_join": "any",
+  "invite_members": "any",
+  "join_request_approved": "any",
+  "users": "any"
+}
+```
+## Success Response
+
+**Condition**: If Everything is okay and video is posted. 
+**Code**: `200`
+
+Content
+```json
+{
+  "code": 200,
+  "message": "XXXX-[Members Added]",
+  "data": {
+    "member_id": "7c05a011-609e-42ff-b07e-00b9e4482861",
+    "name": "string",
+    "bio": "string",
+    "nickname": "string",
+    "phone": "916351407089",
+    "profile_image": "https://media.qa.begenuin.com/uploads/profile_images/undefined",
+    "profile_image_s": "https://media.qa.begenuin.com/uploads/profile_images/s/undefined",
+    "profile_image_m": "https://media.qa.begenuin.com/uploads/profile_images/m/undefined",
+    "profile_image_l": "https://media.qa.begenuin.com/uploads/profile_images/l/undefined"
+  }
+}
+```
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in video not posted.
+**Code**: `400`
+
+Content
+```json
+{
+  "code": "1099",
+  "message": "An unexpected error occurred processing the request",
+  "data": {}
+}
+```
+
+## Not Found
+
+**Condition**: 
+**Code**: 404
+
+**Content**
+```json
+{
+  "code": "5218",
+  "message": "The community you are looking for is no longer available.",
+  "data": {}
+}
+```
+
+##   Precondition Failed
+
+**Condition**:
+**Code**: `412`
+**Content**
+```json
+{
+  "code": "5166",
+  "message": "XXXX-[Invalid Use of API]",
+  "data": {}
+}
+```
