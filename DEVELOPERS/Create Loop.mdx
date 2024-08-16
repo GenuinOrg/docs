@@ -1,0 +1,122 @@
+# Create Loop
+
+The **Create Loop** API enables quick setup of collaborative spaces called Loops, where collection of videos organized around a specific theme or topic.
+
+
+**URL**  :  `/api/v3/conversation/create`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+**Mandatory Fields**: type, Community_id
+
+# Request Body
+
+```json
+{
+  "type": 4,
+  "chat_id": "d854e4a1-51ce-4402-a801-3e832d934147",
+  "recorded_video": {
+    "message_id": "6de6a86e-2f24-4c43-8b05-2bcf68f3ea25",
+    "video_name": "0132d743-711c-44c6-a11d-90f3d45c6075_1617684450854_hi81.mp4",
+    "thumbnail_name": "0132d743-711c-44c6-a11d-90f3d45c6075_1617684450854_hi81.jpg",
+    "video_path": "trends_videos/2024/5/6/genuin",
+    "thumbnail_path": "trends_thumbnail/2024/5/6/genuin",
+    "is_ai_generated_video": true,
+    "is_ai_generated_thumbnail": true,
+    "link": "",
+    "size": "5MB",
+    "duration": 5,
+    "aspect_ratio": "720x1280",
+    "resolution": "1080p",
+    "description_text": "hi this is @hg and i like community abc",
+    "description_data": "[\"hithisis\",{\"user_id\":\"355c0856-9d99-4286-a3e0-fc5164b77861\"},\"andilikecommunity\",{\"community_id\":\"fe3bdd3b-1fcb-44f3-a7ac-15b59796b6f9\"}]",
+    "meta_data": {
+      "topic": "We Are Hiring"
+    }
+  },
+  "community_id": "f4868404-0bbb-4ce0-aaeb-0229be0dc50f",
+  "actions": [
+    {
+      "action_id": 5,
+      "access_type_id": 9
+    }
+  ],
+  "group": {
+    "name": "debug aerospike",
+    "description": "#red",
+    "tags": "red",
+    "dp": "1.png",
+    "topics": [
+      1,
+      2
+    ],
+    "members": [
+      {
+        "user_id": "0132d743-711c-44c6-a11d-90f3d45c6075"
+      }
+    ]
+  },
+  "repost": {
+    "source_video_id": "99e2cebd-91e8-490d-9945-ff19d1029967",
+    "content_type": 2
+  },
+  "settings": {
+    "discoverable": false
+  },
+  "template_id": 2,
+  "is_ai_generated": false
+}
+```
+
+## Success Response
+
+**Condition**: If Everything is okay and loop is created. 
+**Code**: `200`
+
+Content
+```json
+{
+  "code": 200,
+  "message": "Conversation has been created successfully.",
+  "data": {
+    "chat_id": "92ed9264-a34a-44ec-b142-27d4ff3e82b9",
+    "group_id": "2f1bb584-a632-4ccb-9ff3-6c37243e0975",
+    "video_share_url": "https://app.qa.begenuin.com/video/1ba5246c3c001401?community=1ba4cea37c000fad&loop=1ba5246c2f801400",
+    "conversation_id": "68af12bf-095f-4678-9563-e9e6971683a4",
+    "video_url": "https://media.qa.begenuin.com/temp_video/0132d743-711c-44c6-a11d-90f3d45c6075_1617684450854_hi81.mp4",
+    "thumbnail_url": "https://media.qa.begenuin.com/uploads/thumbnails/0132d743-711c-44c6-a11d-90f3d45c6075_1617684450854_hi81.jpg",
+    "share_url": "https://app.qa.begenuin.com/loop/debug-aerospike-2-wn70?community=1ba4cea37c000fad",
+    "members": [
+      {
+        "member_id": "753bba33-0d34-48b6-8131-e42522382b03",
+        "phone": "918460985705"
+      }
+    ]
+  }
+}
+```
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in the loop not being created.
+**Code**: `400`
+
+Content
+```
+{}
+```
+
+## Internal Server Error
+
+**Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+**Code**: `500`
+**Content**
+```json
+{
+  "code": "5026",
+  "message": "Could not find the video.",
+  "data": {}
+}
+```
