@@ -1,0 +1,135 @@
+The **Post Video** API allows you to upload and share videos directly within a Loop.
+
+**URL**  :  `/api/v3/conversation/reply`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+**Mandatory Fields**: chat_id, aspect_ratio, duration, link, resolution, size, video_name, thumbnail_name
+
+# Request Body
+
+```json
+{
+  "aspect_ratio": "16:9",
+  "duration": "8",
+  "link": "",
+  "resolution": "688x1220",
+  "size": "5",
+  "chat_id": "1a14b9e2-9552-48d5-b1e3-a1ba237891cf",
+  "video_name": "917016535860_15954965.mp4",
+  "thumbnail_name": "917016535860_15954965.jpg",
+  "description_text": "hi this is @hg and i like community abc",
+  "description_data": "[\"hithisis\",{\"user_id\":\"355c0856-9d99-4286-a3e0-fc5164b77861\"},\"andilikecommunity\",{\"community_id\":\"fe3bdd3b-1fcb-44f3-a7ac-15b59796b6f9\"}]",
+  "questions": [
+    "1305faddc8000a5b",
+    "1305f96cac800a5a"
+  ],
+  "is_ai_generated": false,
+  "message_id": "d282b66a-9c3d-4712-b0d5-1c698d923dec",
+  "video_path": "trends_videos/2024/5/6/genuin",
+  "thumbnail_path": "trends_thumbnail/2024/5/6/genuin",
+  "is_ai_generated_video": true,
+  "is_ai_generated_thumbnail": true
+}
+```
+
+## Success Response
+
+**Condition**: If Everything is okay and video is posted. 
+**Code**: `200`
+
+Content
+```json
+{
+  "code": 200,
+  "message": "Reply Sent Successfully",
+  "data": {
+    "chat_id": "1a14b9e2-9552-48d5-b1e3-a1ba237891cf",
+    "type": 4,
+    "no_of_views": 0,
+    "share_url": "https://app.qa.begenuin.com/l/11d88992ba811475",
+    "is_offline": false,
+    "settings": {
+      "discoverable": true
+    },
+    "group": {
+      "group_id": "9f71fbc4-7a2d-4969-a812-73aa4043a1d8",
+      "group_name": "debug aerospike",
+      "group_description": "#red",
+      "color_code": "#8DC6E8",
+      "text_color_code": "#1B8DD1",
+      "dp": "http://media.qa.begenuin.com/uploads/profile_images/rt/123.png",
+      "dp_s": "http://media.qa.begenuin.com/uploads/profile_images/rt/s/123.png",
+      "dp_m": "http://media.qa.begenuin.com/uploads/profile_images/rt/m/123.png",
+      "dp_l": "http://media.qa.begenuin.com/uploads/profile_images/rt/l/123.png",
+      "no_of_views": 0,
+      "no_of_videos": 0,
+      "no_of_members": 0,
+      "no_of_subscribers": 0
+    },
+    "chats": [
+      {
+        "owner": {
+          "member_id": "355c0856-9d99-4286-a3e0-fc5164b77861",
+          "name": "Hiren Ganatra",
+          "nickname": "hg",
+          "bio": "🤐🤨😐😑😶😏😒🙄😷😴🤤😪😔😌🤥😬🤒🤕🤢🤮🤧🥵🥶🥴😵🤯🤠🥳🥸😎🤓🧐😳😲😯😮☹🙁😟😕😤😡😠🤬😈👿🤖👾👽👺👻👹🤡💩💯💯💯💤💤💤💤🤳🤳🏿🤳🏿🦾🦿👅👅👅👅👅👅👅",
+          "is_avatar": true,
+          "profile_image": "cow_face"
+        },
+        "user_id": "355c0856-9d99-4286-a3e0-fc5164b77861",
+        "thumbnail_url": "http://media.begenuin.com/uploads/thumbnails/917016535860_15954966.jpg",
+        "thumbnail_url_s": "",
+        "thumbnail_url_l": "",
+        "video_url": "http://media.begenuin.com/temp_video/917016535860_15954966.mp4",
+        "link": "",
+        "duration": "8",
+        "size": "5",
+        "aspect_ratio": "16:9",
+        "resolution": "688x1220",
+        "conversation_id": "a5006e51-8950-4e1f-9b9a-65714720b0a6",
+        "conversation_at": 1644237352000,
+        "is_read": true,
+        "is_reply": false,
+        "questions": [
+          {
+            "question_id": "1305f96cac800a5a",
+            "question": "What would you do with your life if money were no object?",
+            "date": 1640683621000,
+            "share_url": "https://app.qa.begenuin.com/q/1305f96cac800a5a"
+          }
+        ],
+        "no_of_views": 0,
+        "no_of_comments": 0,
+        "share_url": "https://app.qa.begenuin.com/v/11d88992ba811475?l=136fe23cf7001400"
+      }
+    ]
+  }
+}
+```
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in video not posted.
+**Code**: `400`
+
+Content
+```
+{}
+```
+
+## Internal Server Error
+
+**Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+**Code**: `500`
+**Content**
+```json
+{
+  "code": "5057",
+  "message": "You have already replied to this video.",
+  "data": {}
+}
+```
+
