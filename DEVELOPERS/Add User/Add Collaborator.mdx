@@ -1,0 +1,98 @@
+**URL**  :  `/api/v3/community/add_users`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+
+# Request Body
+
+```json
+{
+  "members_added": [
+    {
+      "user_id": "b12f13af-ef5a-4906-b0a0-2995e106200d"
+    }
+  ],
+  "members_removed": [
+    "b12f13af-ef5a-4906-b0a0-2995e106200d"
+  ],
+  "subscribers_removed": [
+    "b12f13af-ef5a-4906-b0a0-2995e106200d"
+  ],
+  "name": "new name",
+  "description": "new description #abc #xyz",
+  "tags": "abc,xyz",
+  "dp": "1.png",
+  "topics": [
+    1,
+    2
+  ],
+  "settings": {
+    "discoverable": false
+  }
+}
+```
+
+## Success Response
+
+**Condition**: If Everything is okay and video is posted. 
+**Code**: `200`
+
+Content
+```json
+{
+  "code": 200,
+  "message": "Conversation updated successfully.",
+  "data": {
+    "members_added": [],
+    "members_removed": [],
+    "subscribers_removed": [],
+    "subscribers_added": [],
+    "name_updated": true,
+    "description_updated": true,
+    "dp_updated": true,
+    "settings_updated": true
+  }
+}
+```
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in video not posted.
+**Code**: `400`
+
+Content
+```json
+{
+  "code": "1099",
+  "message": "An unexpected error occurred processing the request",
+  "data": {}
+}
+```
+
+## Unauthorized
+
+**Condition**: 
+**Code**: 401
+
+**Content**
+```json
+{
+  "code": "5159",
+  "message": "Invalid Use of API",
+  "data": {}
+}
+```
+##   Internal Server Error
+
+**Condition**:
+**Code**: `500`
+**Content**
+```json
+{
+  "code": "5158",
+  "message": "Could not update the conversation.",
+  "data": {}
+}
+```
