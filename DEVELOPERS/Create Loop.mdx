@@ -73,9 +73,10 @@ The **Create Loop** API enables quick setup of collaborative spaces called Loops
 ## Success Response
 
 **Condition**: If Everything is okay and loop is created. 
+
 **Code**: `200`
 
-Content
+**Content**
 ```json
 {
   "code": 200,
@@ -101,9 +102,10 @@ Content
 ## Bad Request
 
 **Condition**: If the request contains errors or invalid data, resulting in the loop not being created.
+
 **Code**: `400`
 
-Content
+**Content**
 ```
 {}
 ```
@@ -111,7 +113,9 @@ Content
 ## Internal Server Error
 
 **Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+
 **Code**: `500`
+
 **Content**
 ```json
 {
