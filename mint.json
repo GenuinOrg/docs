@@ -92,7 +92,13 @@
       "pages": [
         "developers/create_community",
         "developers/create_loop",
-        "developers/post_video"
+        "developers/post_video",
+        "Add Users", 
+        {
+          "pages" : [
+            "developers/create_loop"
+          ]
+        }
       ]
     }
   ]
