@@ -28,19 +28,38 @@ Add Member API enables adding a new member to a community, granting them access 
 **Content**
 ```json
 {
-  "code": 200,
-  "message": "XXXX-[Members Added]",
-  "data": {
-    "member_id": "7c05a011-609e-42ff-b07e-00b9e4482861",
-    "name": "string",
-    "bio": "string",
-    "nickname": "string",
-    "phone": "916351407089",
-    "profile_image": "https://media.qa.begenuin.com/uploads/profile_images/undefined",
-    "profile_image_s": "https://media.qa.begenuin.com/uploads/profile_images/s/undefined",
-    "profile_image_m": "https://media.qa.begenuin.com/uploads/profile_images/m/undefined",
-    "profile_image_l": "https://media.qa.begenuin.com/uploads/profile_images/l/undefined"
-  }
+    "code": 200,
+    "message": "XXXX-[Members Added]",
+    "data": {
+        "members_added": [
+            {
+                "member_id": "c2fd91a1-faf8-48a8-9b3e-b2248c8acf21",
+                "name": null,
+                "bio": null,
+                "nickname": null,
+                "phone": "91943724335",
+                "is_brand_system_user": false,
+                "is_avatar": true,
+                "profile_image": "alien",
+                "profile_image_s": "",
+                "profile_image_m": "",
+                "profile_image_l": ""
+            },
+            {
+                "member_id": "bd7608b7-5c0b-4fcc-9799-5944de1b6f5d",
+                "name": null,
+                "bio": null,
+                "nickname": null,
+                "phone": "34684433270",
+                "is_brand_system_user": false,
+                "is_avatar": true,
+                "profile_image": "smiling_face_with_horns",
+                "profile_image_s": "",
+                "profile_image_m": "",
+                "profile_image_l": ""
+            }
+        ]
+    }
 }
 ```
 
