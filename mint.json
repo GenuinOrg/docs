@@ -90,9 +90,9 @@
     {
       "group": "API Docs",
       "pages": [
-        "developers/create_community",
-        "developers/create_loop",
-        "developers/post_video"
+        "DEVELOPERS/create_community",
+        "DEVELOPERS/create_loop",
+        "DEVELOPERS/post_video"
       ]
     }
   ]
