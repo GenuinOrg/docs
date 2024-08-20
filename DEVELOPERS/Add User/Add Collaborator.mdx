@@ -45,18 +45,36 @@ Add Collaborator API enables adding a new collaborator to a specified Loop, allo
 **Content**
 ```json
 {
-  "code": 200,
-  "message": "Conversation updated successfully.",
-  "data": {
-    "members_added": [],
-    "members_removed": [],
-    "subscribers_removed": [],
-    "subscribers_added": [],
-    "name_updated": true,
-    "description_updated": true,
-    "dp_updated": true,
-    "settings_updated": true
-  }
+    "code": 200,
+    "message": "Conversation updated successfully.",
+    "data": {
+        "members_added": [
+            {
+                "member_id": "9a42d4ed-3720-49cb-8697-57d7e8269b9d",
+                "name": null,
+                "bio": null,
+                "nickname": null,
+                "phone": "9533333315",
+                "is_brand_system_user": false,
+                "is_avatar": true,
+                "status": 2,
+                "role": 2,
+                "profile_image": "sloth",
+                "profile_image_s": "",
+                "profile_image_m": "",
+                "profile_image_l": ""
+            }
+        ],
+        "members_removed": [],
+        "subscribers_added": [],
+        "subscribers_removed": [],
+        "requester_removed": [],
+        "name_updated": false,
+        "description_updated": false,
+        "dp_updated": false,
+        "topics_updated": false,
+        "settings_updated": false
+    }
 }
 ```
 
