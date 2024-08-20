@@ -86,6 +86,14 @@
         "sdk-docs/web_sdk",
         "sdk-docs/react_native_sdk"
       ]
+    },
+    {
+      "group": "API Docs",
+      "pages": [
+        "developers/create_community.mdx",
+        "developers/create_loop.mdx",
+        "developers/post_video.mdx",
+      ]
     }
   ]
 }
