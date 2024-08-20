@@ -22,10 +22,6 @@
     {
         "name": "SDK Docs",
         "url": "sdk-docs"
-    },
-    {
-        "name": "Developers",
-        "url": "DEVELOPERS"
     }
 ],
   "navigation": [
@@ -85,14 +81,6 @@
         "sdk-docs/android_sdk",
         "sdk-docs/web_sdk",
         "sdk-docs/react_native_sdk"
-      ]
-    },
-    {
-      "group": "API Docs",
-      "pages": [
-        "DEVELOPERS/create_community",
-        "DEVELOPERS/create_loop",
-        "DEVELOPERS/post_video"
       ]
     }
   ]
