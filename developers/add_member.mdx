@@ -1,0 +1,113 @@
+# Add Member
+
+Add Member API enables adding a new member to a community, granting them access to participate and engage with content within the platform.
+
+**URL**  :  `/api/v3/community/add_users`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+
+# Request Body
+
+```json
+{
+  "onboarding_communities": "any",
+  "communities": "any",
+  "single_tap_join": "any",
+  "invite_members": "any",
+  "join_request_approved": "any",
+  "users": "any"
+}
+```
+## Success Response
+
+**Condition**: If Everything is okay and the member is added. 
+
+**Code**: `200`
+
+**Content**
+```json
+{
+    "code": 200,
+    "message": "XXXX-[Members Added]",
+    "data": {
+        "members_added": [
+            {
+                "member_id": "c2fd91a1-faf8-48a8-9b3e-b2248c8acf21",
+                "name": null,
+                "bio": null,
+                "nickname": null,
+                "phone": "91943724335",
+                "is_brand_system_user": false,
+                "is_avatar": true,
+                "profile_image": "alien",
+                "profile_image_s": "",
+                "profile_image_m": "",
+                "profile_image_l": ""
+            },
+            {
+                "member_id": "bd7608b7-5c0b-4fcc-9799-5944de1b6f5d",
+                "name": null,
+                "bio": null,
+                "nickname": null,
+                "phone": "34684433270",
+                "is_brand_system_user": false,
+                "is_avatar": true,
+                "profile_image": "smiling_face_with_horns",
+                "profile_image_s": "",
+                "profile_image_m": "",
+                "profile_image_l": ""
+            }
+        ]
+    }
+}
+```
+
+**Note**: In the `members_added` array, each object contains a `member_id`, which uniquely identifies each added member.
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in video not posted.
+
+**Code**: `400`
+
+**Content**
+```json
+{
+  "code": "1099",
+  "message": "An unexpected error occurred processing the request",
+  "data": {}
+}
+```
+
+## Not Found
+
+**Condition**: The API returns a not found response if the specified community or resource does not exist.
+
+**Code**: 404
+
+**Content**
+```json
+{
+  "code": "5218",
+  "message": "The community you are looking for is no longer available.",
+  "data": {}
+}
+```
+
+##   Precondition Failed
+
+**Condition**: The API returns a pre-condition failed response if required conditions, such as mandatory fields or criteria, are not met before adding the member.
+
+**Code**: `412`
+
+**Content**
+```json
+{
+  "code": "5166",
+  "message": "XXXX-[Invalid Use of API]",
+  "data": {}
+}
+```
