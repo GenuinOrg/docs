@@ -1,3 +1,4 @@
+Add Member API enables adding a new member to a community, granting them access to participate and engage with content within the platform.
 
 **URL**  :  `/api/v3/community/add_users`
 
@@ -21,9 +22,10 @@
 ## Success Response
 
 **Condition**: If Everything is okay and video is posted. 
+
 **Code**: `200`
 
-Content
+**Content**
 ```json
 {
   "code": 200,
@@ -45,9 +47,10 @@ Content
 ## Bad Request
 
 **Condition**: If the request contains errors or invalid data, resulting in video not posted.
+
 **Code**: `400`
 
-Content
+**Content**
 ```json
 {
   "code": "1099",
@@ -58,7 +61,8 @@ Content
 
 ## Not Found
 
-**Condition**: 
+**Condition**: The API returns a not found response if the specified community or resource does not exist.
+
 **Code**: 404
 
 **Content**
@@ -72,8 +76,10 @@ Content
 
 ##   Precondition Failed
 
-**Condition**:
+**Condition**: The API returns a pre-condition failed response if required conditions, such as mandatory fields or criteria, are not met before adding the member.
+
 **Code**: `412`
+
 **Content**
 ```json
 {
