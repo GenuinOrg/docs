@@ -1,0 +1,101 @@
+# Create Loop
+
+The **Create Loop** API enables quick setup of collaborative spaces called Loops, where collection of videos organized around a specific theme or topic.
+
+
+**URL**  :  `/api/v3/conversation/create`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+**Mandatory Fields**: type, Community_id
+
+# Request Body
+
+```json
+{
+    "type": 4,
+    "settings": {"discoverable": true},
+    "recorded_video": {
+        "video_name": "7ac2d6a1-b4c3-4660-920ee-3eesweedf_e1w7r3effwee78.mp4",
+        "thumbnail_name": "d549b688-ff23-40e1-ae7es6ede9-5wdewb_1wrqweqee8.jpg",
+        "link": "",
+        "size": "5M",
+        "resolution": "360x640",
+        "duration": "31",
+        "aspect_ratio": "9:16",
+        "is_ai_generated": true,
+        "description_text": "Rhythm dand eBelues (R&B) is 3a popular African-American music genre with soulful vocaeationships, freedom, economics, aspirations, and sex.",
+        "description_data": "[Rhythm and Bl3ues (R&B) is a popular African-American music genre with soulful vocals, caedies, and a strong rhythm section. Its lyrics focus on themes of triumphs and failures in relationships, freedom, economics, aspirations, and sex.]"
+    },
+    "group": {
+        "name": "Rhythm and scdas",
+        "description": "A genre of epopular 3African-American music that originated in the 1940s as urbane, ",
+        "tags": "dwed",
+        "dp": "dwdedw.png"
+    },
+    "community_id": "1254012b-35e1-407e-92df-d222d1c1bbbf",
+    "is_ai_generated": true,
+    "actions": [
+        {"action_id": 3, "access_type_id": 5},
+        {"action_id": 5, "access_type_id": 10}
+    ]
+}
+```
+
+## Success Response
+
+**Condition**: If Everything is okay and loop is created. 
+
+**Code**: `200`
+
+**Content**
+```json
+{
+    "code": 200,
+    "message": "Conversation has been created successfully.",
+    "data": {
+        "chat_id": "3c29b316-f59e-4b15-b2d2-2c35d8ed83d7",
+        "group_id": "e4177c16-8b13-4ec5-b42b-790e6d90aadb",
+        "video_share_url": "https://dhruvpatel.com/video/rhythm-dand-e-belues-r-b-is-3-a-popular-african-ui27?community=1c6afe6e9b000e0e&loop=1cbd6ff481001405",
+        "conversation_id": "9841911d-9df0-4a41-8268-86a676d4a5a0",
+        "video_url": "https://media.qa.begenuin.com/temp_video/7ac2d6a1-b4c3-4660-920ee-3eesweedf_e1w7r3effwee78.mp4",
+        "thumbnail_url": "https://media.qa.begenuin.com/uploads/thumbnails/d549b688-ff23-40e1-ae7es6ede9-5wdewb_1wrqweqee8.jpg",
+        "share_url": "https://dhruvpatel.com/loop/rhythm-and-scdas-txj2?community=1c6afe6e9b000e0e",
+        "members": [
+            {
+                "member_id": "bd053996-1ade-4c59-9a27-7d4bf9424534",
+                "phone": "6723355661233"
+            }
+        ]
+    }
+}
+```
+**Note**: `chat_id` is the unique identifier for a Loop, and you can obtain the URL from the `share_url`.
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in the loop not being created.
+
+**Code**: `400`
+
+**Content**
+```
+{}
+```
+
+## Internal Server Error
+
+**Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+
+**Code**: `500`
+
+**Content**
+```json
+{
+  "code": "5026",
+  "message": "Could not find the video.",
+  "data": {}
+}
+```
