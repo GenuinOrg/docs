@@ -1,3 +1,5 @@
+Add Moderators API allows assigning a user as a moderator to manage content and maintain community guidelines within the platform.
+
 **URL**  :  `/api/v3/community/add_moderators`
 
 **Method**  :  `POST`
@@ -17,9 +19,10 @@
 ## Success Response
 
 **Condition**: If Everything is okay and video is posted. 
+
 **Code**: `200`
 
-Content
+**Content**
 ```json
 {
   "code": 200,
@@ -48,9 +51,10 @@ Content
 ## Bad Request
 
 **Condition**: If the request contains errors or invalid data, resulting in video not posted.
+
 **Code**: `400`
 
-Content
+**Content**
 ```json
 {
   "code": "1099",
@@ -61,7 +65,8 @@ Content
 
 ## Not Found
 
-**Condition**: 
+**Condition**: The API returns a not found response if the specified moderator or community does not exist.
+ 
 **Code**: 404
 
 **Content**
