@@ -1,3 +1,5 @@
+# Add Member
+
 Add Member API enables adding a new member to a community, granting them access to participate and engage with content within the platform.
 
 **URL**  :  `/api/v3/community/add_users`
@@ -62,6 +64,8 @@ Add Member API enables adding a new member to a community, granting them access 
     }
 }
 ```
+
+**Note**: In the `members_added` array, each object contains a `member_id`, which uniquely identifies each added member.
 
 ## Bad Request
 
