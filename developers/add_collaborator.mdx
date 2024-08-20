@@ -1,0 +1,127 @@
+# Add Collaborator
+
+Add Collaborator API enables adding a new collaborator to a specified Loop, allowing them to contribute content and manage posts within the community.
+
+**URL**  :  `/api/v3/update_conversation/{chat_id}`
+
+**Method**  :  `Patch`
+
+**Auth required**  : YES
+
+
+# Request Body
+
+```json
+{
+  "members_added": [
+    {
+      "user_id": "b12f13af-ef5a-4906-b0a0-2995e106200d"
+    }
+  ],
+  "members_removed": [
+    "b12f13af-ef5a-4906-b0a0-2995e106200d"
+  ],
+  "subscribers_removed": [
+    "b12f13af-ef5a-4906-b0a0-2995e106200d"
+  ],
+  "name": "new name",
+  "description": "new description #abc #xyz",
+  "tags": "abc,xyz",
+  "dp": "1.png",
+  "topics": [
+    1,
+    2
+  ],
+  "settings": {
+    "discoverable": false
+  }
+}
+```
+
+## Success Response
+
+**Condition**: If Everything is okay and collaborator is added. 
+
+**Code**: `200`
+
+**Content**
+```json
+{
+    "code": 200,
+    "message": "Conversation updated successfully.",
+    "data": {
+        "members_added": [
+            {
+                "member_id": "9a42d4ed-3720-49cb-8697-57d7e8269b9d",
+                "name": null,
+                "bio": null,
+                "nickname": null,
+                "phone": "9533333315",
+                "is_brand_system_user": false,
+                "is_avatar": true,
+                "status": 2,
+                "role": 2,
+                "profile_image": "sloth",
+                "profile_image_s": "",
+                "profile_image_m": "",
+                "profile_image_l": ""
+            }
+        ],
+        "members_removed": [],
+        "subscribers_added": [],
+        "subscribers_removed": [],
+        "requester_removed": [],
+        "name_updated": false,
+        "description_updated": false,
+        "dp_updated": false,
+        "topics_updated": false,
+        "settings_updated": false
+    }
+}
+```
+
+**Note**: In the `members_added` array, each object includes the `member_id`, which uniquely identifies the added Collaborators. 
+
+## Bad Request
+
+**Condition**: The API returns an error response if the request contains invalid data or errors, preventing the collaborator from being added.
+
+**Code**: `400`
+
+**Content**
+```json
+{
+  "code": "1099",
+  "message": "An unexpected error occurred processing the request",
+  "data": {}
+}
+```
+
+## Unauthorized
+
+**Condition**: The API returns an `unauthorized` response if the provided authentication credentials are invalid or missing.
+
+**Code**: `401`
+
+**Content**
+```json
+{
+  "code": "5159",
+  "message": "Invalid Use of API",
+  "data": {}
+}
+```
+##   Internal Server Error
+
+**Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+
+**Code**: `500`
+
+**Content**
+```json
+{
+  "code": "5158",
+  "message": "Could not update the conversation.",
+  "data": {}
+}
+```
