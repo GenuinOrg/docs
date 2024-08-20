@@ -1,0 +1,92 @@
+Add Moderators API allows assigning a user as a moderator to manage content and maintain community guidelines within the platform.
+
+**URL**  :  `/api/v3/community/add_moderators`
+
+**Method**  :  `POST`
+
+**Auth required**  : YES
+
+
+# Request Body
+
+```json
+{
+  "community_id": "any",
+  "users": "any"
+}
+```
+
+## Success Response
+
+**Condition**: If Everything is okay and moderator is added. 
+
+**Code**: `200`
+
+**Content**
+```json
+{
+    "code": 200,
+    "message": "XXXX-[Members Added]",
+    "data": {
+        "moderators_added": [
+            {
+                "name": null,
+                "bio": null,
+                "nickname": null,
+                "is_brand_system_user": false,
+                "is_avatar": true,
+                "profile_image": "dog_face",
+                "profile_image_s": "",
+                "profile_image_m": "",
+                "profile_image_l": "",
+                "member_id": "8bf08f1f-9fb6-445b-85b4-156f19f6ae8b",
+                "role": 3
+            }
+        ]
+    }
+}
+```
+
+**Note**: In the `moderators_added` array, each object includes a `member_id`, which uniquely identifies the added moderators.
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, resulting in video not posted.
+
+**Code**: `400`
+
+**Content**
+```json
+{
+  "code": "1099",
+  "message": "An unexpected error occurred processing the request",
+  "data": {}
+}
+```
+
+## Not Found
+
+**Condition**: The API returns a not found response if the specified moderator or community does not exist.
+ 
+**Code**: 404
+
+**Content**
+```json
+{
+  "code": "5218",
+  "message": "The community you are looking for is no longer available.",
+  "data": {}
+}
+```
+##   Precondition Failed
+
+**Condition**:
+**Code**: `412`
+**Content**
+```json
+{
+  "code": "5166",
+  "message": "XXXX-[Invalid Use of API]",
+  "data": {}
+}
+```
