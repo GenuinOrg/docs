@@ -1,3 +1,5 @@
+# Add Collaborator
+
 Add Collaborator API enables adding a new collaborator to a specified Loop, allowing them to contribute content and manage posts within the community.
 
 **URL**  :  `/api/v3/update_conversation/{chat_id}`
@@ -77,6 +79,8 @@ Add Collaborator API enables adding a new collaborator to a specified Loop, allo
     }
 }
 ```
+
+**Note**: In the `members_added` array, each object includes the `member_id`, which uniquely identifies the added members. 
 
 ## Bad Request
 
