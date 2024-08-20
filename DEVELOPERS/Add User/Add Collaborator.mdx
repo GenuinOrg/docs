@@ -37,9 +37,10 @@
 ## Success Response
 
 **Condition**: If Everything is okay and video is posted. 
+
 **Code**: `200`
 
-Content
+**Content**
 ```json
 {
   "code": 200,
@@ -62,7 +63,7 @@ Content
 **Condition**: If the request contains errors or invalid data, resulting in video not posted.
 **Code**: `400`
 
-Content
+**Content**
 ```json
 {
   "code": "1099",
@@ -74,7 +75,8 @@ Content
 ## Unauthorized
 
 **Condition**: 
-**Code**: 401
+
+**Code**: `401`
 
 **Content**
 ```json
@@ -86,8 +88,10 @@ Content
 ```
 ##   Internal Server Error
 
-**Condition**:
+**Condition**: If an unexpected issue occurs on the server, an `Internal Server Error` is returned.
+
 **Code**: `500`
+
 **Content**
 ```json
 {
