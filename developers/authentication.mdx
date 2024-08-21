@@ -4,7 +4,7 @@ The **Authentication** API provides users with a secure access token. This token
 
 **Method**  :  `POST`
 
-**Auth required**  : No
+**Auth required**  : YES
 
 **Mandatory Fields** : api_key, api_secret
 
@@ -15,9 +15,59 @@ The **Authentication** API provides users with a secure access token. This token
 { "api_key": "814be4c5aaae50e018b924ae959784e6fd4100893f0384a7", "api_secret": "09c6acb39484c937cc8f2ec3b8491d70" }
 ```
 
-## Response
+## Success Response
 
-**Condition**: If `api_key` and `api_secret` are okay, `gn-access-token` will be generated  in the `Response Header`.
+**Condition**: If `api_key` and `api_secret` are okay, `gn-access-token` will be generated  in the `Body` > `Header`.
+
+**Code**: `200`
 
  
 **Note**: Only with the help of this `gn-access-token`, you will be able to use other APIs
+
+
+## Bad Request
+
+**Condition**: If the request contains errors or invalid data, authentication will fail.
+
+**Code**: `400`
+
+Content
+
+```json
+{
+  "code": "1099",
+  "message": "An unexpected error occurred processing the request",
+  "data": {}
+}
+
+```
+
+## Parameters Missing
+
+**Condition**: -   If required parameters are missing, authentication will not be processed.
+
+**Code**: 404
+
+**Content**
+```json
+{
+  "code": "5235",
+  "message": "Brand not exists.",
+  "data": {}
+}
+```
+
+##   Precondition Failed
+
+**Condition**: If a precondition is not met, the authentication process will be denied, preventing further access.
+
+**Code**: `412`
+
+**Content**
+```json
+{
+  "code": "5166",
+  "message": "XXXX-[Invalid Use of API]",
+  "data": {}
+}
+```
