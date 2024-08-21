@@ -2,13 +2,15 @@
 The Create Community API enables developers to create a new community within the platform programmatically. This API is crucial for automating community setup, allowing for seamless integration with your application or service.
 
 
-**URL**  :  `/api/v3/community/create`
+**URL**  :  `/api/thirdparty/community/create`
 
 **Method**  :  `POST`
 
 **Auth required**  : YES
 
-**Mandatory Fields**: handle, name, type, actions  
+**Mandatory Fields**: handle, name, type, actions 
+
+**Note** : You need to Authorize [`gn-access-token`](https://resources.begenuin.com/developers/authentication) as `Bearer Token` to run the API.
 
 # Request Body
 ```
