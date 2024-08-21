@@ -90,6 +90,7 @@
     {
       "group": "API Doc",
       "pages": [
+        "developers/authentication",
         "developers/create_community",
         "developers/create_loop",
         "developers/post_video",
