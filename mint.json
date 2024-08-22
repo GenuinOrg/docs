@@ -88,7 +88,17 @@
       ]
     },
     {
-      "group": "API Doc",
+      "group": "SDK Doc",
+      "pages": [
+        "developers/sdk-docs/integration_methods",
+        "developers/sdk-docs/ios_sdk",
+        "developers/sdk-docs/android_sdk",
+        "developers/sdk-docs/web_sdk",
+        "developers/sdk-docs/react_native_sdk"
+      ]
+    },
+    {
+       "group": "API Doc",
       "pages": [
         "developers/authentication",
         "developers/create_community",
@@ -97,12 +107,6 @@
         "developers/add_collaborator",
         "developers/add_moderator",
         "developers/add_member"
-      ]
-    },
-    {
-      "group": "SDK Doc",
-      "pages": [
-        "developers/sdk-docs/android_sdk"
       ]
     }
   ]
