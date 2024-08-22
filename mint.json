@@ -97,6 +97,11 @@
         "developers/add_collaborator",
         "developers/add_moderator",
         "developers/add_member",
+      ]
+    },
+    {
+      "group": "SDK Doc",
+      "pages": [
         "developers/sdk-docs/android_sdk"
       ]
     }
