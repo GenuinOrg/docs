@@ -1,0 +1,41 @@
+---
+title: 'Web SDK'
+description: 'Genuin Web SDK comprises features such as brand feed, communities, and loops.'
+---
+
+## Prerequisites
+Genuin will provide you with the established community under the subdomain URL - website.begenuin.com which you can manage under your brand control center login.
+
+## Steps to embed Brand Community:
+To embed your Brand community into your website, follow the steps below:
+1. Identify the location on your website where you want to embed the community widget.
+2. Paste the provided code block into the desired location in your website's HTML markup.
+3. Adjust the height and width of the embed container as per your design requirements.
+   You can specify these dimensions within the code block itself.
+
+## Code-block for Brand Community Embedding:
+
+```html
+<div
+id="gen-sdk"
+style="max-width: 1080px; height: 720px; display: flex;"
+></div>
+<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+<script>
+	// Callback function that can be used to initiate the SDK
+	window.onGenuinReady = (genuin) => {
+	genuin.initialize({
+			embed: 1,
+			brand_id: 'panova',
+			hide_navbar: 0,
+		})
+	}
+</script>
+```
+
+| **Setting** | **Description** | **Default** |
+| ----------- | --------------- | ----------- |
+| max-width | Max width is the maximum width of the embedded content and this parameter is variable. so you can change this as per your preferences and your website UI. | 1080px |
+| height | The height of the embedded content is adjustable for optimal display, same as width parameter. | 720px |
+| hide_navbar | Toggle to show or hide the navigation bar in the embedded community. Set to 1 to hide the nav bar. | 0 |
+| brand_id | This parameter represents your brand name which shows your Brand content, and it's not changeable parameter. |  | 
