@@ -96,7 +96,8 @@
         "developers/post_video",
         "developers/add_collaborator",
         "developers/add_moderator",
-        "developers/add_member"
+        "developers/add_member",
+        "developers/sdk-docs/android_sdk"
       ]
     }
   ]
