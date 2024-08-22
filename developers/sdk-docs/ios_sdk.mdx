@@ -74,11 +74,11 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var configuration = GenuinSDK.Configuration()
-        configuration.showSidePanel = false
 
-        GenuinSDK.shared.initialize(appKey: "YOUR_GENUIN_APP_KEY", appSecret: "YOUR_GENUIN_APP_SECRET", configuration: configuration)
+        let configuration = GenuinConfiguration.shared
+        configuration.setCustomLoader("YOUR_LOADER", bundle: Bundle(for: TabBarController.self))
 
+        GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
         if let homeFeedController = GenuinSDK.shared.getHomeScreen() {
             homeFeedController.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 0)
             self.viewControllers = [homeFeedController]
