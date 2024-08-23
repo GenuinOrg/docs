@@ -68,13 +68,13 @@ implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
 <CodeGroup>
 
 ```kotlin Kotlin-settings.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar{
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.7@aar{
   isTransitive=true
 }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.7@aar') {
   transitive = true
 }
 ```
@@ -86,7 +86,7 @@ implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.0@aar') {
 ```kotlin
 class YourApplication : Application() {
   override fun onCreate() {
-    GenuinSDK.initialize(app_key, app_secret)
+    GenuinSDK.initSDK(this@MainActivity, "d9efe6b856b7a4c6a78f7e59f4953225e245796e583345fe")
   }
 }
 ```
