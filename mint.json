@@ -19,10 +19,7 @@
     "name": "Knowledge Base"
   },
   "tabs": [
-    {
-        "name": "SDK Docs",
-        "url": "sdk-docs"
-    },
+    
     {
        "name": "Developers",
         "url": "developers"
@@ -75,16 +72,6 @@
       "pages": [
         "platforms/for_brands",
         "platforms/for_CBs"
-      ]
-    },
-    {
-      "group": "SDK Integration",
-      "pages": [
-        "sdk-docs/integration_methods",
-        "sdk-docs/ios_sdk",
-        "sdk-docs/android_sdk",
-        "sdk-docs/web_sdk",
-        "sdk-docs/react_native_sdk"
       ]
     },
     {
