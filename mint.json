@@ -75,7 +75,7 @@
       ]
     },
     {
-      group": "Guides",
+      "group": "Guides",
       "pages": [
         "developers/guides/ios_app_for_community_builders"
       ]
