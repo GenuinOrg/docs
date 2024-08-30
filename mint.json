@@ -75,6 +75,12 @@
       ]
     },
     {
+      "group": "Guides",
+      "pages": [
+        "developers/guides/iOS_app_for_community_builders"
+      ]
+    },
+    {
       "group": "SDK Doc",
       "pages": [
         "developers/sdk-docs/integration_methods",
@@ -99,12 +105,6 @@
             "developers/add_member"
           ]
         }
-      ]
-    },
-    {
-      "group": "Guides",
-      "pages": [
-        "developers/guides/iOS_app_for_community_builders"
       ]
     }
   ]
