@@ -75,6 +75,12 @@
       ]
     },
     {
+      group": "Guides",
+      "pages": [
+        "developers/guides/ios_app_for_community_builders"
+      ]
+    },
+    {
       "group": "SDK Doc",
       "pages": [
         "developers/sdk-docs/integration_methods",
