@@ -104,7 +104,9 @@
     {
       "group": "Guides",
       "pages": [
-        "developers/guides/ios_app_for_community_builders"
+        "developers/add_collaborator",
+        "developers/add_moderator",
+        "developers/add_member"
       ]
     }
   ]
