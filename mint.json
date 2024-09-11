@@ -19,7 +19,10 @@
     "name": "Knowledge Base"
   },
   "tabs": [
-    
+    {
+      "name": "Retail Media",
+      "url": "retail-media"
+    },
     {
        "name": "Developers",
         "url": "developers"
@@ -73,6 +76,15 @@
         "platforms/for_CBs"
       ]
     },
+    {
+      "group": "Overview",
+      "pages": [
+        "retail-media/overview/what_is_a_retail_media_network?",
+        "retail-media/overview/take_back_control",
+        "retail-media/overview/benefits_of_adding_community_to_your_website_or_app",
+        "retail-media/overview/example_use_case_for_retail_media_networks"
+      ]
+    },    
     {
       "group": "Guides",
       "pages": [
