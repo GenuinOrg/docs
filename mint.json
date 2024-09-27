@@ -84,7 +84,16 @@
         "retail-media/overview/benefits_of_adding_community_to_your_website_or_app",
         "retail-media/overview/example_use_case_for_retail_media_networks"
       ]
-    },    
+    },
+    {
+      "group": "Plan",
+      "pages": [
+        "retail-media/plan/intro_to _the_brand_control_center",
+        "retail-media/plan/sign_up_and_login",
+        "retail-media/plan/create_your_brand_profile",
+        "retail-media/plan/create_a_community"
+      ]
+    },
     {
       "group": "Guides",
       "pages": [
