@@ -92,34 +92,3 @@ class TabBarController: UITabBarController {
 
 </CodeGroup>
 
-To present brand's feed from your UIViewController by click on UIButton:
-
-
-``` swift ViewController.swift
-
-import UIKit
-import GenuinSDK
-
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func openFeed() {
-        let configuration = GenuinConfiguration.shared
-        configuration.showNavigationBar = true
-        configuration.setCustomLoader("YOUR_LOADER", bundle: Bundle(for: ViewController.self))
-        GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
-        if let vc = GenuinSDK.shared.getHomeScreen() {
-            vc.navigationBar.isTranslucent = false
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }
-    }
-}
-
-```
-
