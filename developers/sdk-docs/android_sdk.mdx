@@ -86,7 +86,7 @@ implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.9.2@aar') {
 ```kotlin
 class YourApplication : Application() {
   override fun onCreate() {
-    GenuinSDK.initSDK(this@MainActivity, "d9efe6b856b7a4c6a78f7e59f4953225e245796e583345fe")
+    GenuinSDK.initSDK(this@MainActivity, "YOUR_API_KEY")
   }
 }
 ```
@@ -188,7 +188,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 </CodeGroup>
 
 
-### Important Points
+### Note
 
 1. In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"`
 2. If you are having/managing your own Application class which extends `Application()`, change its super-class to `GenuInApplication()` from `Application()` , and in the AndroidManifest.xml add `tools:replace="android:name"` to the `<application>` tag.
