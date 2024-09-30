@@ -35,7 +35,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "0.0.4"
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.12"
 
 end
 
@@ -47,6 +47,36 @@ post_install do |installer|
     end
   end
 end
+```
+
+</CodeGroup>
+
+If you are using Xcode 16 the kindly refer then below podfile :
+
+<CodeGroup>
+
+```swift Podfile.swift
+platform :ios, '15.0'
+
+target 'YourProject' do
+  use_frameworks!
+
+pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.12"
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'Giphy'
+      `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
+    end
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+    end
+  end
+end
+
 ```
 
 </CodeGroup>
