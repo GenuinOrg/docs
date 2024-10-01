@@ -18,6 +18,7 @@ description: 'Genuin iOS SDK comprises features such as brand feed, communities,
 | Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.|
 | Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.|
 | Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.|
+| Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.|
 
 ## Installation
 
@@ -119,3 +120,34 @@ class TabBarController: UITabBarController {
 ```
 
 </CodeGroup>
+
+To present brand's feed from your UIViewController by click on UIButton:
+
+
+``` swift ViewController.swift
+
+import UIKit
+import GenuinSDK
+
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func openFeed() {
+        let configuration = GenuinConfiguration.shared
+        configuration.showNavigationBar = true
+        configuration.setCustomLoader("YOUR_LOADER", bundle: Bundle(for: ViewController.self))
+        GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+        if let vc = GenuinSDK.shared.getHomeScreen() {
+            vc.navigationBar.isTranslucent = false
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+    }
+}
+
+```
