@@ -95,6 +95,12 @@
       ]
     },
     {
+      "group": "Plan",
+      "pages": [
+        "retail-media/build/how_to_create_a_community"
+      ]
+    },
+    {
       "group": "Guides",
       "pages": [
         "developers/guides/ios_app_for_community_builders",
