@@ -50,23 +50,6 @@ allprojects {
 
 <CodeGroup>
 
-```kotlin Kotlin-settings.gradle.kts 
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.9.2@aar{
-  isTransitive=true
-}
-```
-
-```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.9.2@aar') {
-  transitive = true
-}
-```
-</CodeGroup>
-
-2. Add dependency in app level gradle
-
-<CodeGroup>
-
 ```kotlin Kotlin-settings.gradle.kts
 implementation("org.bitbucket.genuindev:genuin_android_sdk:1.0.9.2@aar{
   isTransitive=true
@@ -125,7 +108,7 @@ GenuinSDK.loadSDK(context)
 
 <CodeGroup>
 
-```kotlin ViewPage2
+```kotlin ViewPager2
 override fun onCreate(savedInstanceState: Bundle?) {
   super.onCreate(savedInstanceState)
   setSupportActionBar(Toolbar(this))
