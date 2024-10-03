@@ -25,7 +25,7 @@
     },
     {
       "name": "Commerce Media",
-      "url": "commerce media"
+      "url": "commerce-media"
     },
     {
        "name": "Developers",
@@ -137,38 +137,38 @@
     {
       "group": "Plan",
       "pages": [
-        "commerce media/plan/intro_to_the_brand_control_center",
-        "commerce media/plan/sign_up_and_login",
-        "commerce media/plan/create_your_brand_profile",
-        "commerce media/plan/create_a_community",
-        "commerce media/plan/what_is_a_creator"
+        "commerce-media/plan/intro_to_the_brand_control_center",
+        "commerce-media/plan/sign_up_and_login",
+        "commerce-media/plan/create_your_brand_profile",
+        "commerce-media/plan/create_a_community",
+        "commerce-media/plan/what_is_a_creator"
       ]
     },
         {
       "group": "Build",
       "pages": [
-        "commerce media/build/white_labeling_your_community",
-        "commerce media/build/how to_white_label_your_community",
-        "commerce media/build/how_to_create_a_community",
-        "commerce media/build/add_admins",
-        "commerce media/build/how_to_add_admins",
-        "commerce media/build/connect_your_brand_network"
+        "commerce-media/build/white_labeling_your_community",
+        "commerce-media/build/how to_white_label_your_community",
+        "commerce-media/build/how_to_create_a_community",
+        "commerce-media/build/add_admins",
+        "commerce-media/build/how_to_add_admins",
+        "commerce-media/build/connect_your_brand_network"
       ]
     },
     {
       "group": "Engage",
       "pages": [
-        "commerce media/engage/add_members",
-        "commerce media/engage/how_to_add_and_manage_members",
-        "commerce media/engage/what_are_subscribers",
-        "commerce media/engage/activate_your_community"
+        "commerce-media/engage/add_members",
+        "commerce-media/engage/how_to_add_and_manage_members",
+        "commerce-media/engage/what_are_subscribers",
+        "commerce-media/engage/activate_your_community"
       ]
     },
     {
       "group": "Promote",
       "pages": [
-        "commerce media/Promote/are_you_ready_to_go_to_market",
-        "commerce media/Promote/best_practices_multi_touchpoint_activation_examples"
+        "commerce-media/Promote/are_you_ready_to_go_to_market",
+        "commerce-media/Promote/best_practices_multi_touchpoint_activation_examples"
       ]
     },
     {
