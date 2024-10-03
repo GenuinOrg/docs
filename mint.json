@@ -24,6 +24,10 @@
       "url": "retail-media"
     },
     {
+      "name": "Commerce Media",
+      "url": "commerce media"
+    },
+    {
        "name": "Developers",
         "url": "developers"
     }
@@ -119,6 +123,13 @@
       "pages": [
         "retail-media/promote/are_you_ready_to_go_to_market",
         "retail-media/promote/best_practices_for_multi_touchpoint_activation_in_marketing_your_community"
+      ]
+    },
+    {
+      "group": "Overview",
+      "pages": [
+        "commerce media/overview/what_is_a_commerce_media_network",
+        "commerce media/overview/take_back_control"
       ]
     },
     {
