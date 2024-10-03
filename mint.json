@@ -91,13 +91,34 @@
         "retail-media/plan/intro_to _the_brand_control_center",
         "retail-media/plan/sign_up_and_login",
         "retail-media/plan/create_your_brand_profile",
-        "retail-media/plan/create_a_community"
+        "retail-media/plan/create_a_community",
+        "retail-media/plan/what_is _a_creator"
       ]
     },
     {
-      "group": "Plan",
+      "group": "Build",
       "pages": [
-        "retail-media/build/how_to_create_a_community"
+        "retail-media/build/white_labeling_your_community",
+        "retail-media/build/how_to_white-label_your_community",
+        "retail-media/build/how_to_create_a_community",
+        "retail-media/build/add_admins",
+        "retail-media/build/connect_your_brand_network"
+      ]
+    },
+    {
+      "group": "Engage",
+      "pages": [
+        "retail-media/build/add_members",
+        "retail-media/build/how_to_add_and_manage_members",
+        "retail-media/build/what_are_subscribers",
+        "retail-media/build/activate_your_community"
+      ]
+    },
+    {
+      "group": "Promote",
+      "pages": [
+        "retail-media/promote/are_you_ready_to_go_to_market",
+        "retail-media/promote/best_practices_for_multi_touchpoint_activation_in_marketing_your_community"
       ]
     },
     {
