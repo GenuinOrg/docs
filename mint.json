@@ -128,10 +128,10 @@
     {
       "group": "Overview",
       "pages": [
-        "commerce media/overview/what_is_a_commerce_media_network",
-        "commerce media/overview/take_back_control",
-        "commerce media/overview/benefits_of_adding_community_to_your_website_or_app",
-        "commerce media/overview/example_use_case_for_commerce_media_networks"
+        "commerce-media/overview/what_is_a_commerce_media_network",
+        "commerce-media/overview/take_back_control",
+        "commerce-media/overview/benefits_of_adding_community_to_your_website_or_app",
+        "commerce-media/overview/example_use_case_for_commerce_media_networks"
       ]
     },
     {
