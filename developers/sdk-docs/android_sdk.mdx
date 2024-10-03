@@ -67,9 +67,9 @@ implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.9.2@aar') {
 
 <CodeGroup>
 ```kotlin
-class YourApplication : Application() {
+class YourApplication : GenuInApplication() {
   override fun onCreate() {
-    GenuinSDK.initSDK(this@MainActivity, "YOUR_API_KEY")
+    GenuinSDK.initSDK(this, "YOUR_API_KEY")
   }
 }
 ```
@@ -82,8 +82,58 @@ class YourApplication : Application() {
 GenuinSDK.loadSDK(context)
 ```
 </CodeGroup>
+                                
 
-5. Show SDK Screen
+5. Load SDK in your custom activity
+
+<CodeGroup>
+```Kotlin CustomActivity.kt
+import com.begenuin.begenuin.FeedFragment
+
+class CustomActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_custom)
+
+        val genuinFeedFragment = FeedFragment()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.frameLayout, genuinFeedFragment)
+            .addToBackStack("feedFragment").commit()
+    }
+}
+```
+</CodeGroup>
+
+<CodeGroup>
+```Kotlin activity_custom.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+```
+</CodeGroup>
+
+**Note**: In your custom activity, set soft input mode to adjustPan for better performance (edited) 
+
+<CodeGroup>
+
+``` kotlin AndroidManifest.xml
+android:windowSoftInputMode="adjustPan"
+```
+</CodeGroup>
+
+
+6. Load SDK with bottom navigation and fragment
 
 ### To integrate SDK with **bottomNavigationView**, add below code in _res/navigation/mobile_navigation.xml_
 
