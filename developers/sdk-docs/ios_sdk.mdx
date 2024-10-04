@@ -283,5 +283,14 @@ Accordingly`.
 3. Use `GenuinSDK.shared.handleDeeplink(viewController: rootVC)` to manage the deep link using the app's root view controller.
 
 
-**Note**: To handle the Deeplink from another controller call the `GenuinSDK.shared.handleDeeplink(viewController: vc)` function from specific controller
+**Note**: 
+1. To handle the Deeplink from another controller call the `GenuinSDK.shared.handleDeeplink(viewController: vc)` function from specific controller
 
+2. If you are following the `SceneDelegate` method then calling this `GenuinSDK.shared.handleDeeplink(viewController: self)` function is mandatory
+```swift
+
+override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    GenuinSDK.shared.handleDeeplink(viewController: self)
+}
+```
