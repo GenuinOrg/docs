@@ -88,11 +88,59 @@ Import the BGHome module in your view controller.
 
 <CodeGroup>
 
-```swift ViewController.swift
+```swift SceneDelegate.swift
 import GenuinSDK
+
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Optional configuration and attaching the UIWindow to UIWindowScene
+    guard let _ = (scene as? UIWindowScene) else { return }
+
+    // Initialize the SDK configuration 
+    let configuration = GenuinConfiguration.shared
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+    //configuration.showNavigationBar = true - In order to show the navigation bar add this line
+
+
+    // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+
+    // Notify the SDK that the scene will connect
+    GenuinSDK.shared.scene(scene, willConnectTo: session, options: connectionOptions)
+}
+
 ```
 
+```swift AppDelegate.swift
+import GenuinSDK
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Initialize the SDK configuration
+    let configuration = GenuinConfiguration.shared
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+    //configuration.showNavigationBar = true - In order to show the navigation bar add this line
+
+   // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+    return true
+}
+
+```
 </CodeGroup>
+
+### If you are using `SceneDelegate` method follow the instructions:
+
+1. Ensure you are using the `UISceneDelegate` in your app.
+2. In your `SceneDelegate.swift` file, implement the `scene(_:willConnectTo:options:)` method.
+3. Use the shared configuration and set up any custom loaders or additional parameters.
+4. Call `GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)` with your API key and the configured options.
+5. Ensure that `GenuinSDK.shared.scene(scene, willConnectTo: session, options: connectionOptions)` is called to notify the SDK of the scene connection.
+
+### If you are using `AppDelegate` method follow the instructions:
+
+1. In your `AppDelegate.swift`, implement the `application(_:didFinishLaunchingWithOptions:)` method.
+2. Set up the shared configuration and initialize the SDK with your API key.
+3. Call `GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)` with your API key and the configured options.
+4. Return `true` to indicate successful launch configuration.
 
 Then you can display the home feed view controller. For example, to use it in your UITabBarController:
 
@@ -106,10 +154,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let configuration = GenuinConfiguration.shared
-        configuration.setCustomLoader("YOUR_LOADER", bundle: Bundle(for: TabBarController.self))
-
-        GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
         if let homeFeedController = GenuinSDK.shared.getHomeScreen() {
             homeFeedController.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 0)
             self.viewControllers = [homeFeedController]
@@ -138,10 +182,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func openFeed() {
-        let configuration = GenuinConfiguration.shared
-        configuration.showNavigationBar = true
-        configuration.setCustomLoader("YOUR_LOADER", bundle: Bundle(for: ViewController.self))
-        GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
         if let vc = GenuinSDK.shared.getHomeScreen() {
             vc.navigationBar.isTranslucent = false
             vc.modalPresentationStyle = .fullScreen
@@ -151,3 +191,97 @@ class ViewController: UIViewController {
 }
 
 ```
+
+## Carousel Embed
+
+**Note**: Make sure you have followed the installation steps in order to implement the Carousel Embed
+
+To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function.
+
+<CodeGroup>
+
+```swift ViewController.swift
+GenuinSDK.shared.initializeEmbed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>)
+
+```
+
+</CodeGroup>
+
+## Handling Deep Link
+
+**Note**: Make sure you have followed the installation steps in order to handle the deep links 
+
+**Prerequisite**:
+
+1. Make sure you have white labelled your community by following these [steps](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) 
+
+2. Enable Associated Domains in Certificates, Identifiers & Profiles using your Apple Developer account at https://developer.apple.com/account/resources/identifiers/list
+
+3. Create apple-app-site-association (without extension) file with following settings:
+
+<CodeGroup>
+
+```json apple-app-site-association
+{"appclips":{"apps":["YOUR_TEAM_ID.APP_BUNDLE_ID.Clip"]},"applinks":{"apps":[],"details":[{"paths":["/*"],"appID":"YOUR_TEAM_ID.APP_BUNDLE_ID"}]}}
+```
+</CodeGroup>
+
+Once the file is created, host it on the white labeled domain at https://YOUR_WHITE-LABELLED_DOMAIN/.well-known/apple-app-site-association
+
+4. Add Associated Domains in capabilities if not already,
+<img height="200" src="/visual-aids/developers/guides/iOS Target Configuration.png" />
+
+Add applinks in domains, for Example:
+
+applinks:YOUR_WHITE-LABELLED_DOMAIN
+
+applinks:www.YOUR_WHITE-LABELLED_DOMAIN
+
+To handle deep links in your app use the following methods.
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    GenuinSDK.shared.scene(scene, continue: userActivity)
+    if let rootVC = window?.rootViewController as? UIViewController {
+        GenuinSDK.shared.handleDeeplink(viewController: rootVC)
+    }
+}
+
+```
+
+```swift AppDelegate.swift
+func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
+    let _ = GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    if let rootVC = window?.rootViewController as? UIViewController {
+        GenuinSDK.shared.handleDeeplink(viewController: rootVC)
+    }
+    return true
+}
+
+```
+
+</CodeGroup>
+
+### If you are using `SceneDelegate` method follow the instructions:
+
+
+1. In `SceneDelegate.swift`, implement the `scene(_:continue:)` method.
+2. Notify the SDK of the continued scene via `GenuinSDK.shared.scene(scene, continue: userActivity)`.
+3. Handle deep links using the root view controller by calling `GenuinSDK.shared.handleDeeplink(viewController: rootVC)`.
+
+**NOTE**: To handle redirection of the deeplink , it is mandatory to call 
+`GenuinSDK.shared.scene(scene, continue: userActivity)` OR 
+`GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
+Accordingly`.
+
+### If you are using `AppDelegate` method follow the instructions:
+
+1. In `AppDelegate.swift`, implement the `application(_:continue:restorationHandler:)` method.
+2. Call `GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)` to let the SDK process the user activity.
+3. Use `GenuinSDK.shared.handleDeeplink(viewController: rootVC)` to manage the deep link using the app's root view controller.
+
+
+**Note**: To handle the Deeplink from another controller call the `GenuinSDK.shared.handleDeeplink(viewController: vc)` function from specific controller
+
