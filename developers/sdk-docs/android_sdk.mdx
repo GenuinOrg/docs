@@ -276,9 +276,9 @@ carouselEmbedView.apply {
 
 </CodeGroup>
 
-**EmbedId** = The Embed Id that you want to load
+**embedId** = The Embed Id that you want to load
 
-**UniqueId** = This is optional parameters. This uniqueId is used when we need to display same embed in multiple screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
+**uniqueId** = This is optional parameters. This uniqueId is used when we need to display same embed in multiple screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
 
 ### Load Carousel Embed Programmatically
 
@@ -291,12 +291,13 @@ carouselEmbedView.apply {
 <LinearLayout
      android:id="@+id/llCarouselContainer"
      android:layout_width="match_parent"
-     android:layout_height="270dp">           
+     android:layout_height="300dp">           
 </LinearLayout>
 ```
 
-
 </CodeGroup>
+
+**Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear.
 
 <CodeGroup>
 
@@ -306,8 +307,8 @@ llCarouselContainer.addView(carouselEmbedView)
 
 carouselEmbedView.apply {
             setEmbedParams(
-               embedId = "66f29f7dcffef5a29ad0acd6", 
-               uniqueId="AnyUniqueID"
+               embedId = "YOUR_EMBED_ID", 
+               uniqueId="UNIQUE_ID"
             )
             setActivity(activityContext)
             load()
@@ -315,6 +316,9 @@ carouselEmbedView.apply {
 ```
 </CodeGroup>
 
+**embedId** = The Embed Id that you want to load
+
+**uniqueId** = This is optional parameters. This uniqueId is used when we need to display same embed in multiple screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
 
 ### Manage carousel videos auto-play as per Activity/Fragment lifecycle
 
