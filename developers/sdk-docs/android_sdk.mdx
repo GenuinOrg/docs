@@ -66,20 +66,26 @@ implementation('org.bitbucket.genuindev:genuin_android_sdk:1.0.9.2@aar') {
 3. Initialize SDK in your Application class
 
 <CodeGroup>
+
 ```kotlin
+
 class YourApplication : GenuInApplication() {
   override fun onCreate() {
     GenuinSDK.initSDK(this, "YOUR_API_KEY")
   }
 }
+
 ```
 </CodeGroup>
 
 4. Load SDK in seperate activity
 
 <CodeGroup>
+
 ```kotlin
+
 GenuinSDK.loadSDK(context)
+
 ```
 </CodeGroup>
                                 
@@ -87,7 +93,9 @@ GenuinSDK.loadSDK(context)
 5. Load SDK in your custom activity
 
 <CodeGroup>
+
 ```Kotlin CustomActivity.kt
+
 import com.begenuin.begenuin.FeedFragment
 
 class CustomActivity : AppCompatActivity() {
