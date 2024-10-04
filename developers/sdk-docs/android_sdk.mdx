@@ -252,7 +252,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 <LinearLayout
       android:id="@+id/llCarouselContainer"
       android:layout_width="match_parent"
-      android:layout_height="270dp">
+      android:layout_height="300dp">
 
       <com.begenuin.sdk.ui.customview.embed.CarouselEmbedView
       android:id="@+id/carouselEmbedView"
@@ -275,10 +275,6 @@ carouselEmbedView.apply {
 ```
 
 </CodeGroup>
-
-**embedId** = The Embed Id that you want to load
-
-**uniqueId** = This is optional parameters. This uniqueId is used when we need to display same embed in multiple screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
 
 ### Load Carousel Embed Programmatically
 
@@ -316,9 +312,12 @@ carouselEmbedView.apply {
 ```
 </CodeGroup>
 
-**embedId** = The Embed Id that you want to load
+**Note**:
+1. Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear.
 
-**uniqueId** = This is optional parameters. This uniqueId is used when we need to display same embed in multiple screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
+2. **embedId** = The Embed Id that you want to load
+
+3. **uniqueId** = This is optional parameters. This uniqueId is used when we need to display same embed in multiple screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
 
 ### Manage carousel videos auto-play as per Activity/Fragment lifecycle
 
