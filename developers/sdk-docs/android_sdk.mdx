@@ -105,9 +105,7 @@ class CustomActivity : AppCompatActivity() {
 
 
 ```
-</CodeGroup>
 
-<CodeGroup>
 ```Kotlin activity_custom.xml
 
 <?xml version="1.0" encoding="utf-8"?>
@@ -140,7 +138,9 @@ android:windowSoftInputMode="adjustPan"
 ### To integrate SDK with **bottomNavigationView**, add below code in _res/navigation/mobile_navigation.xml_
 
 <CodeGroup>
+
 ```xml
+
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -153,6 +153,7 @@ android:windowSoftInputMode="adjustPan"
         android:label="@string/title_communities" />
 
 </navigation>
+
 ```
 </CodeGroup>
 
@@ -227,3 +228,101 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 1. In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"`
 2. If you are having/managing your own Application class which extends `Application()`, change its super-class to `GenuInApplication()` from `Application()` , and in the AndroidManifest.xml add `tools:replace="android:name"` to the `<application>` tag.
+
+
+
+## Carousel Embed
+
+**Note**: Make sure you have followed the first 3 installation steps in order to implement the Carousel Embed
+
+### Load Carousel Embed with XML
+
+<CodeGroup>
+
+```xml activity_embed.xml
+
+<LinearLayout
+      android:id="@+id/llCarouselContainer"
+      android:layout_width="match_parent"
+      android:layout_height="270dp">
+
+      <com.begenuin.sdk.ui.customview.embed.CarouselEmbedView
+      android:id="@+id/carouselEmbedView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+</LinearLayout>
+
+```
+
+</CodeGroup>
+
+<CodeGroup>
+
+```kotlin EmbedActivity.kt
+
+carouselEmbedView.apply {
+            setEmbedParams(embedId = "YOUR_EMBED_ID", uniqueId = "UNIQUE_ID")
+                .setActivity(activityContext).load()
+        }
+```
+
+</CodeGroup>
+
+**EmbedId** = The Embed Id that you want to load
+
+**UniqueId** = This is optional parameters. This uniqueId is used when we need to display same embed in multiple screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
+
+### Load Carousel Embed Programmatically
+
+
+
+<CodeGroup>
+
+```xml activity_embed.xml
+
+<LinearLayout
+     android:id="@+id/llCarouselContainer"
+     android:layout_width="match_parent"
+     android:layout_height="270dp">           
+</LinearLayout>
+```
+
+
+</CodeGroup>
+
+<CodeGroup>
+
+```kotlin EmbedActivity.kt
+val carouselEmbedView = CarouselEmbedView(context)
+llCarouselContainer.addView(carouselEmbedView)
+
+carouselEmbedView.apply {
+            setEmbedParams(
+               embedId = "66f29f7dcffef5a29ad0acd6", 
+               uniqueId="AnyUniqueID"
+            )
+            setActivity(activityContext)
+            load()
+        }
+```
+</CodeGroup>
+
+
+### Manage carousel videos auto-play as per Activity/Fragment lifecycle
+
+<CodeGroup>
+
+```kotlin EmbedActivity.kt
+
+override fun onResume() {
+    super.onResume()
+    carouselEmbedView.resumeVideoAutoPlay()
+}
+
+override fun onPause() {
+    carouselEmbedView.pauseVideoAutoPlay()
+    super.onPause()
+}
+
+```
+</CodeGroup>
