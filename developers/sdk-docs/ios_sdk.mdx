@@ -36,7 +36,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.14"
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.15"
 
 end
 
@@ -62,7 +62,7 @@ platform :ios, '15.0'
 target 'YourProject' do
   use_frameworks!
 
-pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.14"
+pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.15"
 
 end
 
@@ -207,7 +207,7 @@ GenuinSDK.shared.initializeEmbed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_
 
 </CodeGroup>
 
-`interactionDeepLink` - It is an optional string parameter. By passing the deeplink in this parameter user will get interactive deeplink feed and from that user will be redirected to specific deeplink by any of the interaction in the feed. 
+**interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work.
 
 **Note**: The `interactionDeepLink` must be a valid url else user will not be redirected.
 
