@@ -7,7 +7,8 @@ description: 'Genuin iOS SDK comprises features such as brand feed, communities,
 
 | Platform | Minimum Deployment Target | Language | Supported Orientations | Supported Destinations |
 | -------- | ------------------------- | -------- | ---------------------- | ---------------------- |
-| iOS      | 15.0                      | Swift    | Portrait               | iPhone                 |
+| iOS      | 13.0                      | Swift    | Portrait               | iPhone                 |
+
 
 ## Required Permissions (to be added in info.plist file of brand’s application)
 
@@ -29,7 +30,7 @@ If your project doesn't have the CocoaPods setup then start with `pod init` whic
 <CodeGroup>
 
 ```swift Podfile.swift
-platform :ios, '15.0'
+platform :ios, '13.0'
 
 target 'YourProject' do
   use_frameworks!
@@ -43,7 +44,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
       config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
     end
   end
@@ -57,7 +58,7 @@ If you are using Xcode 16 then kindly refer the below podfile :
 <CodeGroup>
 
 ```swift Podfile.swift
-platform :ios, '15.0'
+platform :ios, '13.0'
 
 target 'YourProject' do
   use_frameworks!
@@ -72,7 +73,7 @@ post_install do |installer|
       `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
     end
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
       config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
     end
   end
@@ -83,6 +84,43 @@ end
 </CodeGroup>
 
 ### Example
+
+**Note**: Our SDK is well optimized for iOS version 15.0 and above, but if you are using iOS version 13 or 14 then put the below condition while importing the GenuinSDK
+
+<CodeGroup>
+
+```swift 
+
+if #available(iOS 15.0, *) {
+
+
+// Initialize the SDK configuration 
+    let configuration = GenuinConfiguration.shared
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+    //configuration.showNavigationBar = true - In order to show the navigation bar add this line
+
+
+    // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+
+    // Notify the SDK that the scene will connect
+    GenuinSDK.shared.scene(scene, willConnectTo: session, options: connectionOptions)
+}
+
+
+if #available(iOS 15.0, *) {
+    if let vc = GenuinSDK.shared.getHomeScreen() {
+        vc.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 3)
+        self.viewControllers = [vc]
+        self.selectedIndex = 0
+    }
+}
+
+```
+
+</CodeGroup>
+
+
 
 Import the GenuinSDK module in your SceneDelegate/AppDelegate.
 
