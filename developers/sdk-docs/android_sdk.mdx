@@ -11,6 +11,23 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 ## Installation
 
+**Note**: Currently minimum SDK version of our SDK is 24 but if you want to use our SDK in version below 24, use the below code snippet in the App level manifest file. 
+
+<CodeGroup>
+
+```kotlin
+
+<uses-sdk
+    tools:overrideLibrary="com.begenuin.sdk, com.google.mediapipe.tasks.vision, com.google.mediapipe.tasks.core, com.arthenica.ffmpegkit"/>
+
+```
+
+</CodeGroup>
+
+**Warning**: If you use the above code then possible it may lead to the functionality failure in some cases. 
+
+
+
 1. Add repo details in project level gradle
 
 <CodeGroup>
