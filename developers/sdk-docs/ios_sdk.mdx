@@ -85,43 +85,6 @@ end
 
 ### Example
 
-**Note**: Our SDK is well optimized for iOS version 15.0 and above, but if you are using iOS version 13 or 14 then put the below condition while importing the GenuinSDK
-
-<CodeGroup>
-
-```swift 
-
-if #available(iOS 15.0, *) {
-
-
-// Initialize the SDK configuration 
-    let configuration = GenuinConfiguration.shared
-    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
-    //configuration.showNavigationBar = true - In order to show the navigation bar add this line
-
-
-    // Initialize the SDK with your API key and configuration
-    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
-
-    // Notify the SDK that the scene will connect
-    GenuinSDK.shared.scene(scene, willConnectTo: session, options: connectionOptions)
-}
-
-
-if #available(iOS 15.0, *) {
-    if let vc = GenuinSDK.shared.getHomeScreen() {
-        vc.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 3)
-        self.viewControllers = [vc]
-        self.selectedIndex = 0
-    }
-}
-
-```
-
-</CodeGroup>
-
-
-
 Import the GenuinSDK module in your SceneDelegate/AppDelegate.
 
 <CodeGroup>
@@ -229,6 +192,29 @@ class ViewController: UIViewController {
 }
 
 ```
+
+**Note**: Our SDK is well optimized for `iOS version 15.0` and above, but if you are using `iOS version 13` or `14` then put this `if #available(iOS 15.0, *)` condition while importing the GenuinSDK. Refer to the below code block
+
+<CodeGroup>
+
+```swift 
+
+// Below is an Example Code
+
+if #available(iOS 15.0, *) {
+    // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+    if let vc = GenuinSDK.shared.getHomeScreen() {
+        vc.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 3)
+        self.viewControllers = [vc]
+        self.selectedIndex = 0
+    }
+}
+
+```
+
+</CodeGroup>
+
 
 ## Carousel Embed
 
