@@ -331,11 +331,11 @@ override func viewDidAppear(_ animated: Bool) {
 }
 ```
 
-## Handling Notifications/Push Notifications
+## Handling Push Notifications
 
-### Firebase Setup
+### Using Firebase
 
-1. Create an app in your firebase console ( add appId , bundle id , APNS key ) 
+1. Create an app in your firebase console by following [these steps](https://firebase.google.com/docs/cloud-messaging/ios/client) 
 
 2. Download the `GoogleService-Info.plist` file and add it in xcode project
 
@@ -359,7 +359,7 @@ pod 'FirebaseMessaging', '~> 10.24.0'
 
 ```swift Swift
 
-import FirebaseMessaging // If you are using firebase then only import this library
+import FirebaseMessaging
 import GenuinSDK
 
 ```
@@ -375,7 +375,7 @@ AppDelegate
 
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 	//Assign APNS token and notify sdk
-        Messaging.messaging().apnsToken = deviceToken // If you are not using firebase then remove this code of line
+        Messaging.messaging().apnsToken = deviceToken 
         GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: true) //pass isFCMIntegrated == false if you don’t use firebase push notifcation
 
     }
@@ -397,8 +397,6 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
         guard let _ = (scene as? UIWindowScene) else { return }
 	//Register the notification
         registerForNotification()
-
-// If you are using firebase then only use the below code
 	 //configure firebase
         FirebaseApp.configure() 
 	 //set delegate , extend current class with MessagingDelegate
@@ -487,7 +485,161 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 	     //Check sdk will handle the notification or not 
             guard GenuinSDK.shared.willHandleNotification(userInfo: userInfo) else { return }
             
-            Messaging.messaging().appDidReceiveMessage(userInfo)  // If you are not using firebase then remove this code of line
+            Messaging.messaging().appDidReceiveMessage(userInfo)
+            //notify sdk
+            GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+            //handle notification redirection
+            if let rootVC = window?.rootViewController as? UIViewController{
+                GenuinSDK.shared.handleNotifications(viewController: rootVC)
+            }
+        }
+    }
+
+
+```
+
+</CodeGroup>
+
+8. To configure notification UI
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        let userInfo = notification.request.content.userInfo
+        print("\(userInfo)")
+        //mention design type for notification 
+        completionHandler([.list, .badge, .sound])
+    }
+
+```
+</CodeGroup>
+
+9. If you want to handle the notification when app is opened then follow the below code
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        let userInfo = notification.request.content.userInfo
+        
+        GenuinSDK.shared.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+        if let rootVC = window?.rootViewController as? UIViewController{
+            GenuinSDK.shared.handleNotifications(viewController: rootVC)
+        }
+        
+        //mention design type for notification 
+        completionHandler([.list, .badge, .sound])
+    }
+
+
+```
+
+</CodeGroup>
+
+**Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function
+
+### Without Firebase
+
+4. To enable the push notifications functionality then enable the Push Notifications in your target. To do so, `Select the target > Signing & Capabilities > Add Capability of Push Notification`
+
+5. Import
+
+<CodeGroup>
+
+```swift Swift
+
+import GenuinSDK
+
+```
+
+</CodeGroup>
+
+
+AppDelegate
+
+<CodeGroup>
+
+```swift AppDelegate.swift
+
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+	//Assign APNS token and notify sdk
+        GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: false) 
+
+    }
+
+```
+
+</CodeGroup>
+
+
+SceneDelegate
+
+Initialize
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let _ = (scene as? UIWindowScene) else { return }
+	//Register the notification
+        registerForNotification()
+    }
+
+```
+
+</CodeGroup>
+
+5. Place this code to take the user permission for Push Notification
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func registerForNotification(){
+	//Take permission and register remote notification
+        let current = UNUserNotificationCenter.current()
+        current.getNotificationSettings(completionHandler: { (settings) in
+            if settings.authorizationStatus == .notDetermined{
+                self.requestForNotificationPermission()
+            }else if settings.authorizationStatus == .authorized {
+                UNUserNotificationCenter.current().delegate = self
+                DispatchQueue.main.async{
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        })
+    }
+    
+    private func requestForNotificationPermission(){
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
+            print(granted)
+            
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+
+```
+
+</CodeGroup>
+
+7. To Handle the Push Notification Redirection whenever the user taps, follow the below code
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+	 //Get userinfo
+        if let userInfo = response.notification.request.content.userInfo as? [String: AnyObject]{
+	     //Check sdk will handle the notification or not 
+            guard GenuinSDK.shared.willHandleNotification(userInfo: userInfo) else { return }
             //notify sdk
             GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
             //handle notification redirection
