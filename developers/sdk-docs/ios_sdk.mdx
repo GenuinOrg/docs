@@ -37,7 +37,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.15"
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.16"
 
 end
 
@@ -63,7 +63,7 @@ platform :ios, '13.0'
 target 'YourProject' do
   use_frameworks!
 
-pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.15"
+pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.0.16"
 
 end
 
@@ -278,23 +278,33 @@ To handle deep links in your app use the following methods.
 <CodeGroup>
 
 ```swift SceneDelegate.swift
+
 func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-    GenuinSDK.shared.scene(scene, continue: userActivity)
-    if let rootVC = window?.rootViewController as? UIViewController {
-        GenuinSDK.shared.handleDeeplink(viewController: rootVC)
-    }
-}
+        //redirect if genuin SDK handles the deeplink
+        if let dlURL = userActivity.webpageURL , GenuinSDK.shared.willHandleDeepLink(url: dlURL){
+
+            GenuinSDK.shared.scene(scene, continue: userActivity)
+            if let rootVC = window?.rootViewController as? UIViewController{
+                GenuinSDK.shared.handleDeeplink(viewController: rootVC)
+            }
+            
+        }
+   }
 
 ```
 
 ```swift AppDelegate.swift
+
 func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
-    let _ = GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
-    if let rootVC = window?.rootViewController as? UIViewController {
-        GenuinSDK.shared.handleDeeplink(viewController: rootVC)
-    }
-    return true
-}
+        //redirect if genuin SDK handles the deeplink
+        if let dlURL = userActivity.webpageURL , GenuinSDK.shared.willHandleDeepLink(url: dlURL){
+            let _ = GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
+            if let rootVC = window?.rootViewController as? UIViewController {
+                GenuinSDK.shared.handleDeeplink(viewController: rootVC)
+            }
+            return true
+      }
+ }
 
 ```
 
@@ -479,21 +489,22 @@ func registerForNotification(){
 ```swift SceneDelegate.swift
 
 func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-
-	 //Get userinfo
+        
         if let userInfo = response.notification.request.content.userInfo as? [String: AnyObject]{
-	     //Check sdk will handle the notification or not 
-            guard GenuinSDK.shared.willHandleNotification(userInfo: userInfo) else { return }
-            
+            //notify firebase
             Messaging.messaging().appDidReceiveMessage(userInfo)
-            //notify sdk
-            GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
-            //handle notification redirection
-            if let rootVC = window?.rootViewController as? UIViewController{
-                GenuinSDK.shared.handleNotifications(viewController: rootVC)
+
+            //check if genuin will handle notification
+            if GenuinSDK.shared.willHandleNotification(userInfo: userInfo){
+                //notify to redirect
+                GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+                //notification notification
+                if let rootVC = window?.rootViewController as? UIViewController{
+                    GenuinSDK.shared.handleNotifications(viewController: rootVC)
+                }
             }
         }
-    }
+  }
 
 
 ```
@@ -635,19 +646,19 @@ func registerForNotification(){
 ```swift SceneDelegate.swift
 
 func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-
-	 //Get userinfo
+        
         if let userInfo = response.notification.request.content.userInfo as? [String: AnyObject]{
-	     //Check sdk will handle the notification or not 
-            guard GenuinSDK.shared.willHandleNotification(userInfo: userInfo) else { return }
-            //notify sdk
-            GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
-            //handle notification redirection
-            if let rootVC = window?.rootViewController as? UIViewController{
-                GenuinSDK.shared.handleNotifications(viewController: rootVC)
+            //check if genuin will handle notification
+            if GenuinSDK.shared.willHandleNotification(userInfo: userInfo){
+                //notify to redirect
+                GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+                //notification notification
+                if let rootVC = window?.rootViewController as? UIViewController{
+                    GenuinSDK.shared.handleNotifications(viewController: rootVC)
+                }
             }
         }
-    }
+  }
 
 
 ```
