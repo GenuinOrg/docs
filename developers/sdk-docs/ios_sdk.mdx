@@ -376,7 +376,8 @@ AppDelegate
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 	//Assign APNS token and notify sdk
         Messaging.messaging().apnsToken = deviceToken // If you are not using firebase then remove this code of line
-        GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: true)
+        GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: true) //pass isFCMIntegrated == false if you don’t use firebase push notifcation
+
     }
 
 ```
