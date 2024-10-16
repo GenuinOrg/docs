@@ -302,7 +302,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
             if let rootVC = window?.rootViewController as? UIViewController {
                 GenuinSDK.shared.handleDeeplink(viewController: rootVC)
             }
-      }
+        }
       return true
  }
 
@@ -310,7 +310,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 
 </CodeGroup>
 
-**Note**: `GenuinSDK.shared.willHandleDeepLink(url: dlURL)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
+**Note**: `GenuinSDK.shared.willHandleDeepLink(url: dlURL)` function will check whether `GenuinSDK` will handle the given deeplink or not. You can use it according to your deeplink redirection flow.
 
 ### If you are using `SceneDelegate` method follow the instructions:
 
@@ -455,7 +455,6 @@ func registerForNotification(){
 
 </CodeGroup>
 
-**Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
 
 8. Extend `MessagingDelegate` and Add follwing method:
 
@@ -516,6 +515,8 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 
 </CodeGroup>
 
+**Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
+
 10. To configure notification UI
 
 <CodeGroup>
@@ -557,7 +558,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 
 **Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function
 
-### Without Firebase
+### Using APNS
 
 1. To enable the push notifications functionality then enable the Push Notifications in your target. To do so, `Select the target > Signing & Capabilities > Add Capability of Push Notification`
 
