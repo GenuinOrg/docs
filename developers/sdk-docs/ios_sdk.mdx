@@ -302,13 +302,15 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
             if let rootVC = window?.rootViewController as? UIViewController {
                 GenuinSDK.shared.handleDeeplink(viewController: rootVC)
             }
-            return true
       }
+      return true
  }
 
 ```
 
 </CodeGroup>
+
+**Note**: `GenuinSDK.shared.willHandleDeepLink(url: dlURL)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
 
 ### If you are using `SceneDelegate` method follow the instructions:
 
@@ -386,7 +388,7 @@ AppDelegate
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 	//Assign APNS token and notify sdk
         Messaging.messaging().apnsToken = deviceToken 
-        GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: true) //pass isFCMIntegrated == false if you don’t use firebase push notifcation
+        GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: true) 
 
     }
 
@@ -394,10 +396,11 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 
 </CodeGroup>
 
+**Note**: Pass `true` value in `isFCMIntegrated` parameter, as we are using the Firebase
+
+6. Initialize
 
 SceneDelegate
-
-Initialize
 
 <CodeGroup>
 
@@ -417,7 +420,7 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
 
 </CodeGroup>
 
-5. Place this code to take the user permission for Push Notification
+7. Place this code to take the user permission for Push Notification
 
 <CodeGroup>
 
@@ -452,7 +455,9 @@ func registerForNotification(){
 
 </CodeGroup>
 
-6. Extend `MessagingDelegate` and Add follwing method:
+**Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
+
+8. Extend `MessagingDelegate` and Add follwing method:
 
 <CodeGroup>
 
@@ -482,7 +487,7 @@ func registerForNotification(){
 </CodeGroup>
 
 
-7. To Handle the Push Notification Redirection whenever the user taps, follow the below code
+9. To Handle the Push Notification Redirection whenever the user taps, follow the below code
 
 <CodeGroup>
 
@@ -511,7 +516,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 
 </CodeGroup>
 
-8. To configure notification UI
+10. To configure notification UI
 
 <CodeGroup>
 
@@ -527,7 +532,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 ```
 </CodeGroup>
 
-9. If you want to handle the notification when app is opened then follow the below code
+11. If you want to handle the notification when app is opened then follow the below code
 
 <CodeGroup>
 
@@ -584,6 +589,8 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 ```
 
 </CodeGroup>
+
+**Note**: Pass `false` value in `isFCMIntegrated` parameter, as we are not using the Firebase
 
 
 SceneDelegate
@@ -664,6 +671,8 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 ```
 
 </CodeGroup>
+
+**Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
 
 5. To configure notification UI
 
