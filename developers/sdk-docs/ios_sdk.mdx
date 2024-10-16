@@ -357,9 +357,9 @@ pod 'FirebaseMessaging', '~> 10.24.0'
 
 <CodeGroup>
 
-```swift SceneDelegate.swift
+```swift Swift
 
-import FirebaseMessaging
+import FirebaseMessaging // If you are using firebase then only import this library
 import GenuinSDK
 
 ```
@@ -375,7 +375,7 @@ AppDelegate
 
 func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 	//Assign APNS token and notify sdk
-        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().apnsToken = deviceToken // If you are not using firebase then remove this code of line
         GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: true)
     }
 
@@ -396,11 +396,12 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
         guard let _ = (scene as? UIWindowScene) else { return }
 	//Register the notification
         registerForNotification()
-	 //configure firebase
-        FirebaseApp.configure()
-	 //set delegate , extend current class with MessagingDelegate
 
-        Messaging.messaging().delegate = self
+// If you are using firebase then only use the below code
+	 //configure firebase
+        FirebaseApp.configure() 
+	 //set delegate , extend current class with MessagingDelegate
+        Messaging.messaging().delegate = self   
     }
 
 ```
@@ -485,7 +486,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 	     //Check sdk will handle the notification or not 
             guard GenuinSDK.shared.willHandleNotification(userInfo: userInfo) else { return }
             
-            Messaging.messaging().appDidReceiveMessage(userInfo)
+            Messaging.messaging().appDidReceiveMessage(userInfo)  // If you are not using firebase then remove this code of line
             //notify sdk
             GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
             //handle notification redirection
