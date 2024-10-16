@@ -543,9 +543,9 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 
 ### Without Firebase
 
-4. To enable the push notifications functionality then enable the Push Notifications in your target. To do so, `Select the target > Signing & Capabilities > Add Capability of Push Notification`
+1. To enable the push notifications functionality then enable the Push Notifications in your target. To do so, `Select the target > Signing & Capabilities > Add Capability of Push Notification`
 
-5. Import
+2. Import
 
 <CodeGroup>
 
@@ -593,7 +593,7 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
 
 </CodeGroup>
 
-5. Place this code to take the user permission for Push Notification
+3. Place this code to take the user permission for Push Notification
 
 <CodeGroup>
 
@@ -628,7 +628,7 @@ func registerForNotification(){
 
 </CodeGroup>
 
-7. To Handle the Push Notification Redirection whenever the user taps, follow the below code
+4. To Handle the Push Notification Redirection whenever the user taps, follow the below code
 
 <CodeGroup>
 
@@ -654,7 +654,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 
 </CodeGroup>
 
-8. To configure notification UI
+5. To configure notification UI
 
 <CodeGroup>
 
@@ -670,7 +670,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 ```
 </CodeGroup>
 
-9. If you want to handle the notification when app is opened then follow the below code
+6. If you want to handle the notification when app is opened then follow the below code
 
 <CodeGroup>
 
