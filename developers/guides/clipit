@@ -1,3 +1,7 @@
+---
+title: "Clip IT"
+---
+
 Got a long video and you want to cut out the clips to post it on your social media account. Genuin’s ClipIt feature is here to help you out. Here is how it will work
 
 Navigate to the **Engage Engine > Import Videos > Clip It section**.
@@ -5,7 +9,7 @@ Navigate to the **Engage Engine > Import Videos > Clip It section**.
 Here you can add a link of video to create short clips out of it. OR You can upload the video from **Computer**, **Google drive**, **Dropbox**, or **s3 Bucket**.
 
   
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfx-vdNAbgNcgzo5JFJB89eCj7cSO6enzPfuvdobBb0nPz6o4hBA1yy0Ojdcnrp2oCWfcU8jcnj_qu8wh27WD0s2FCPsGI1dKT4ZIr_lFCUA-rtOuV7su4UNWu7GaeJQjFN4m36DqLT0tLomjUiO6FUKi_P?key=0b2aGwyXLkTrgscCBgr0Yw)
+<img height="200" src="/visual-aids/developers/guides/clipit/Clipit.png" />
   
 
 > **Note**: The duration of video shall be less than 30 minutes or 2gb in size.
@@ -29,9 +33,9 @@ Checkmark **Add Caption** feature to add the cation to the generated clip from y
   
   
 
-Video Link - [Refer](https://github.com/GenuinOrg/docs/blob/main/visual-aids/Title%20and%20Caption.mp4)
-
-  
+<video width="320" height="240" controls>
+  <source src="/visual-aids/Title and Caption.mp4" type="video/mp4">
+</video>
   
 
 ## Add Background Music
