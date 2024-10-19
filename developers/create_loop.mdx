@@ -3,10 +3,10 @@ title: 'Create Group'
 ---
 
 
-The **Create Loop** API enables quick setup of collaborative spaces called Loops, where collection of videos organized around a specific theme or topic.
+The **Create Group** API enables quick setup of collaborative spaces called Groups, where collection of videos organized around a specific theme or topic.
 
 
-**URL**  :  `/api/thirdparty/conversation/create to /api/thirdparty/group/create`
+**URL**  :  `/api/thirdparty/group/create`
 
 **Method**  :  `POST`
 
@@ -77,7 +77,7 @@ The **Create Loop** API enables quick setup of collaborative spaces called Loops
 
 ## Success Response
 
-**Condition**: If Everything is okay and loop is created. 
+**Condition**: If Everything is okay and group is created. 
 
 **Code**: `200`
 
@@ -156,11 +156,11 @@ The **Create Loop** API enables quick setup of collaborative spaces called Loops
         }
     }
 ```
-**Note**: `chat_id` is the unique identifier for a Loop, and you can obtain the URL from the `share_url`.
+**Note**: `chat_id` is the unique identifier for a Group, and you can obtain the URL from the `share_url`.
 
 ## Bad Request
 
-**Condition**: If the request contains errors or invalid data, resulting in the loop not being created.
+**Condition**: If the request contains errors or invalid data, resulting in the group not being created.
 
 **Code**: `400`
 
