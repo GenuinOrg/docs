@@ -1,8 +1,12 @@
+---
+title: 'Create Group'
+---
+
 
 The **Create Loop** API enables quick setup of collaborative spaces called Loops, where collection of videos organized around a specific theme or topic.
 
 
-**URL**  :  `/api/thirdparty/conversation/create`
+**URL**  :  `/api/thirdparty/conversation/create to /api/thirdparty/group/create`
 
 **Method**  :  `POST`
 
@@ -16,33 +20,59 @@ The **Create Loop** API enables quick setup of collaborative spaces called Loops
 
 ```json
 {
-    "type": 4,
-    "settings": {"discoverable": true},
-    "recorded_video": {
-        "video_name": "7ac2d6a1-b4c3-4660-920ee-3eesweedf_e1w7r3effwee78.mp4",
-        "thumbnail_name": "d549b688-ff23-40e1-ae7es6ede9-5wdewb_1wrqweqee8.jpg",
-        "link": "",
-        "size": "5M",
-        "resolution": "360x640",
-        "duration": "31",
-        "aspect_ratio": "9:16",
-        "is_ai_generated": true,
-        "description_text": "Rhythm dand eBelues (R&B) is 3a popular African-American music genre with soulful vocaeationships, freedom, economics, aspirations, and sex.",
-        "description_data": "[Rhythm and Bl3ues (R&B) is a popular African-American music genre with soulful vocals, caedies, and a strong rhythm section. Its lyrics focus on themes of triumphs and failures in relationships, freedom, economics, aspirations, and sex.]"
-    },
-    "group": {
-        "name": "Rhythm and scdas",
-        "description": "A genre of epopular 3African-American music that originated in the 1940s as urbane, ",
-        "tags": "dwed",
-        "dp": "dwdedw.png"
-    },
-    "community_id": "1254012b-35e1-407e-92df-d222d1c1bbbf",
-    "is_ai_generated": true,
-    "actions": [
-        {"action_id": 3, "access_type_id": 5},
-        {"action_id": 5, "access_type_id": 10}
-    ]
-}
+        "type": 4,
+        "chat_id": "456e7890-b12c-4c23-89ef-126314214567",
+        "recorded_video": {
+            "message_id": "789e1234-f12d-4c67-a256-126314214555",
+            "video_name": "abcd1234-5678-90ef-1112-234567890111_video.mp4",
+            "thumbnail_name": "abcd1234-5678-90ef-1112-234567890111_thumb.jpg",
+            "video_path": "trends_videos/2024/5/6/creative",
+            "thumbnail_path": "trends_thumbnail/2024/5/6/creative",
+            "is_ai_generated_video": true,
+            "is_ai_generated_thumbnail": true,
+            "link": "",
+            "size": "5MB",
+            "duration": 5,
+            "aspect_ratio": "720x1280",
+            "resolution": "1080p",
+            "description_text": "Hello, this is @user and I love community XYZ",
+            "description_data": "[\"Hello\",{\"user_id\":\"345e1234-5678-90ef-2345-678912341234\"},\"and I love community\",{\"community_id\":\"def45678-abcd-ef12-3456-1234abcdef56\"}]",
+            "meta_data": {
+                "topic": "Open Discussion"
+            }
+        },
+        "community_id": "f2a05adb-93ce-4a19-b003-3523fa745667",
+        "actions": [
+            {
+                "action_id": 3,
+                "access_type_id": 5
+            },
+            {
+                "action_id": 5,
+                "access_type_id": 9
+            }
+        ],
+        "group": {
+            "name": "Tech Conversations",
+            "description": "A platform for discussing the latest in technology and innovation.",
+            "tags": "technology",
+            "dp": "group_dp.png",
+            "topics": [1, 2],
+            "members": [
+                {
+                    "phone_number": "919876543210"
+                },
+                {
+                    "user_id": "abcd1234-5678-90ef-1112-234567890111"
+                }
+            ]
+        },
+        "settings": {
+            "discoverable": false
+        },
+        "template_id": 2,
+        "is_ai_generated": false
+    }
 ```
 
 ## Success Response
@@ -54,24 +84,77 @@ The **Create Loop** API enables quick setup of collaborative spaces called Loops
 **Content**
 ```json
 {
-    "code": 200,
-    "message": "Conversation has been created successfully.",
-    "data": {
-        "chat_id": "3c29b316-f59e-4b15-b2d2-2c35d8ed83d7",
-        "group_id": "e4177c16-8b13-4ec5-b42b-790e6d90aadb",
-        "video_share_url": "https://dhruvpatel.com/video/rhythm-dand-e-belues-r-b-is-3-a-popular-african-ui27?community=1c6afe6e9b000e0e&loop=1cbd6ff481001405",
-        "conversation_id": "9841911d-9df0-4a41-8268-86a676d4a5a0",
-        "video_url": "https://media.qa.begenuin.com/temp_video/7ac2d6a1-b4c3-4660-920ee-3eesweedf_e1w7r3effwee78.mp4",
-        "thumbnail_url": "https://media.qa.begenuin.com/uploads/thumbnails/d549b688-ff23-40e1-ae7es6ede9-5wdewb_1wrqweqee8.jpg",
-        "share_url": "https://dhruvpatel.com/loop/rhythm-and-scdas-txj2?community=1c6afe6e9b000e0e",
-        "members": [
-            {
-                "member_id": "bd053996-1ade-4c59-9a27-7d4bf9424534",
-                "phone": "6723355661233"
+        "code": 200,
+        "message": "Group has been created successfully.",
+        "data": {
+            "chat_id": "456e7890-b12c-4c23-89ef-126314214567",
+            "type": 4,
+            "settings": {
+                "discoverable": true
+            },
+            "share_url": "https://app.qa.begenuin.com/group/rhythm-and-tech-conversations-ap55?community=456e7890abcdef",
+            "is_welcome_loop": false,
+            "group": {
+                "group_id": "f67c89d0-9abc-4abc-bdef-56789abcf456",
+                "group_name": "Tech Conversations",
+                "group_description": "A platform for discussing the latest in technology and innovation.",
+                "color_code": "#FF5733",
+                "text_color_code": "#C70039",
+                "dp": "https://media.qa.begenuin.com/uploads/profile_images/tech/conversation.png",
+                "dp_s": "https://media.qa.begenuin.com/uploads/profile_images/tech/conversation_s.png",
+                "dp_m": "https://media.qa.begenuin.com/uploads/profile_images/tech/conversation_m.png",
+                "dp_l": "https://media.qa.begenuin.com/uploads/profile_images/tech/conversation_l.png",
+                "no_of_members": 1,
+                "members": [
+                    {
+                        "member_id": "abcd1234-5678-90ef-1112-234567890111",
+                        "name": null,
+                        "username": "tech_leader",
+                        "is_avatar": true,
+                        "is_brand_system_user": false,
+                        "status": 1,
+                        "role": 1,
+                        "profile_image": "alien",
+                        "profile_image_s": "",
+                        "profile_image_m": "",
+                        "profile_image_l": ""
+                    }
+                ]
+            },
+            "latest_message_at": "1727169211000",
+            "unread_message_count": 0,
+            "latest_messages": [
+                {
+                    "owner": {
+                        "member_id": "345e6789-12ab-4567-8def-90abcdef1234",
+                        "username": "tech_leader"
+                    },
+                    "media_url": "https://media.qa.begenuin.com/temp_video/tech_discussion_video.mp4",
+                    "thumbnail_url": "https://media.qa.begenuin.com/uploads/thumbnails/tech_thumb.jpg",
+                    "thumbnail_url_s": "",
+                    "thumbnail_url_l": "",
+                    "media_url_m3u8": null,
+                    "message_id": "234e5678-abcd-4e56-90ef-abcdef123456",
+                    "message_at": "1727169211000",
+                    "share_url": "https://app.qa.begenuin.com/video/tech-discussion-0jy0?community=abcdef123456&group=abcdef7890"
+                }
+            ],
+            "brand_id": null,
+            "community": {
+                "community_id": "f2a05adb-93ce-4a19-b003-3523fa745667",
+                "handle": "tech_community",
+                "name": "Tech World",
+                "description": "A hub for all things technology. #TechWorld #TechCommunity",
+                "color_code": "#FF5733",
+                "text_color_code": "#C70039",
+                "dp": "https://media.qa.begenuin.com/uploads/profile_images/community/tech_community.png",
+                "dp_s": "https://media.qa.begenuin.com/uploads/profile_images/community/s/tech_community.png",
+                "dp_m": "https://media.qa.begenuin.com/uploads/profile_images/community/m/tech_community.png",
+                "dp_l": "https://media.qa.begenuin.com/uploads/profile_images/community/l/tech_community.png",
+                "share_url": "https://app.qa.begenuin.com/community/tech_community"
             }
-        ]
+        }
     }
-}
 ```
 **Note**: `chat_id` is the unique identifier for a Loop, and you can obtain the URL from the `share_url`.
 
