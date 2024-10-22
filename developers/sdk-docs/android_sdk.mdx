@@ -68,13 +68,13 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.0@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.1.1@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.0@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.1.1@aar') {
   transitive = true
 }
 ```
@@ -248,6 +248,10 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 </CodeGroup>
 
+7. Want to override our default loader.
+
+We are using lottie animation for our loader. You can put your custom lottie animation loader with the name `loader_mix.json` in the `res/raw` folder. Make sure you use the same name as provided.
+
 
 ### Note
 
@@ -331,6 +335,10 @@ carouselEmbedView.apply {
 
 4. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
+5 **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+
+**Note**: For using this parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the Handling deep link part in your main app in which you want to redirect this video to.
+
 ### Manage carousel videos auto-play as per Activity/Fragment lifecycle
 
 <CodeGroup>
@@ -349,3 +357,45 @@ override fun onPause() {
 
 ```
 </CodeGroup>
+
+## Handling Deep Link
+
+**Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to handle the deep link. 
+
+**Prerequisite**:
+
+    1. Make sure you have white labelled your community by following these [steps](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community).
+
+    2. Follow the steps given in the below URL to integrate deeplink in your app
+   https://developer.android.com/studio/write/app-link-indexing
+   Note : Here host will be your "YOUR_WHITE-LABELLED_DOMAIN"
+
+    3. After completing deeplink setup, your `assetlinks.json` file should look like below
+
+<CodeGroup>
+
+```kotlin assetlinks.json
+
+[{"target":{"package_name":"YOUR_PACKAGE_NAME","sha256_cert_fingerprints":["YOUR_KEYSTORE'S_SHA256_FINGERPRINTS"],"namespace":"android_app"},"relation":["delegate_permission/common.handle_all_urls"]}]
+
+```
+
+</CodeGroup>
+
+    4. Host `assetlinks.json` file on the white labeled domain at https://YOUR_WHITE-LABELLED_DOMAIN/.well-known/assetlinks.json
+
+**To Handle Our Deep Link In Your App**
+
+You can call the below method immediately after receiving deeplink or you can wait until your app's home screen is loaded.
+
+<CodeGroup>
+
+```kotlin YourCustomActivity.kt
+
+GenuinSDK.handleDeepLink(context = "YOUR_CONTEXT", intent = "YOUR_DEEPLINK_ACTIVITY_INTNET")
+
+```
+</CodeGroup>
+
+**Note**: Need to call this function everytime your app receives any deeplink. This method will handle deeplink if its our deeplink otherwise it will ignore that.
+
