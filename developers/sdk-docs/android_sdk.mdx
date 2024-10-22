@@ -335,9 +335,9 @@ carouselEmbedView.apply {
 
 4. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
-5 **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+5. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
 
-**Note**: For using this parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the Handling deep link part in your main app in which you want to redirect this video to.
+**Note**: For using this parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to.
 
 ### Manage carousel videos auto-play as per Activity/Fragment lifecycle
 
@@ -368,7 +368,8 @@ override fun onPause() {
 
     2. Follow the steps given in the below URL to integrate deeplink in your app
    https://developer.android.com/studio/write/app-link-indexing
-   Note : Here host will be your "YOUR_WHITE-LABELLED_DOMAIN"
+  
+    **Note** : Here host will be your "YOUR_WHITE-LABELLED_DOMAIN"
 
     3. After completing deeplink setup, your `assetlinks.json` file should look like below
 
@@ -382,7 +383,7 @@ override fun onPause() {
 
 </CodeGroup>
 
-    4. Host `assetlinks.json` file on the white labeled domain at https://YOUR_WHITE-LABELLED_DOMAIN/.well-known/assetlinks.json
+    4. Host `assetlinks.json` file on the white labeled domain at `https://YOUR_WHITE-LABELLED_DOMAIN/.well-known/assetlinks.json`
 
 **To Handle Our Deep Link In Your App**
 
