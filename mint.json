@@ -183,6 +183,7 @@
      {
       "group": "Engage Engine",
       "pages": [
+        "developers/guides/upload",
         "developers/guides/clipit"
       ]
     },
