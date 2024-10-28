@@ -16,13 +16,9 @@
     }
   },
   "primaryTab": {
-    "name": "Knowledge Base"
+    "name": "Retail Media"
   },
   "tabs": [
-    {
-      "name": "Retail Media",
-      "url": "retail-media"
-    },
     {
       "name": "Commerce Media",
       "url": "commerce-media"
