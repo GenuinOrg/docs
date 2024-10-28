@@ -30,53 +30,6 @@
 ],
   "navigation": [
     {
-      "group": "Getting Started",
-      "pages": [
-        "knowledge-base/introduction",
-        "knowledge-base/ecosystem_overview",
-        "knowledge-base/glossary"
-      ]
-    },
-    {
-      "group": "For Brands",
-      "pages": [
-        "brands/overview",
-        "brands/why_genuin",
-        "brands/getting_started",
-        "brands/manage",
-        "brands/moderate",
-        "brands/settings",
-        "brands/brand_embedding",
-        "brands/market_your_community",
-        "brands/segments",
-        "brands/dashboard",
-        "brands/engage_engine",
-        "brands/marketplace",
-        "brands/best_practices_for_brands",
-        "brands/genuin_wallet",
-        "brands/genuin_credits",
-        "brands/partner_with_us"
-      ]
-    },
-    {
-      "group": "For Community Builders",
-      "pages": [
-        "community-builder/overview_cb",
-        "community-builder/community_builder_roles",
-        "community-builder/privacy_management",
-        "community-builder/managing_multiple_communitie",
-        "community-builder/grow_your_community",
-        "community-builder/ambassador_program"
-      ]
-    },
-    {
-      "group": "Platforms",
-      "pages": [
-        "platforms/for_brands",
-        "platforms/for_CBs"
-      ]
-    },
-    {
       "group": "Overview",
       "pages": [
         "retail-media/overview/what_is_a_retail_media_network",
