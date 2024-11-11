@@ -160,9 +160,10 @@
           "pages": [
             "developers/add_collaborator",
             "developers/add_moderator",
-            "developers/add_member"
+            "developers/add_member",
           ]
         }
+        "developers/genuin_log_view_structure"
       ]
     }
   ]
