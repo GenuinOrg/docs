@@ -127,7 +127,8 @@
         "developers/guides/ios_app_for_community_builders",
         "developers/guides/ios_sdk_for_brands",
         "developers/guides/embed",
-        "developers/guides/ad_creatives"
+        "developers/guides/ad_creatives",
+        "developers/genuin_log_view_structure"
       ]
     },
      {
@@ -159,10 +160,9 @@
           "pages": [
             "developers/add_collaborator",
             "developers/add_moderator",
-            "developers/add_member",
+            "developers/add_member"
           ]
-        },
-        "developers/genuin_log_view_structure"
+        }
       ]
     }
   ]
