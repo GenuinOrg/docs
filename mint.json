@@ -145,7 +145,8 @@
         "developers/sdk-docs/ios_sdk",
         "developers/sdk-docs/android_sdk",
         "developers/sdk-docs/web_sdk",
-        "developers/sdk-docs/react_native_sdk"
+        "developers/sdk-docs/react_native_sdk",
+        "developers/genuin_log_view_structure"
       ]
     },
     {
