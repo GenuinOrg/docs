@@ -150,6 +150,7 @@
     {
        "group": "API Doc",
       "pages": [
+        "developers/gitkeep",
         "developers/authentication",
         "developers/create_community",
         "developers/create_loop",
