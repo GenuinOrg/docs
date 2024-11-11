@@ -81,14 +81,15 @@
         "commerce-media/overview/what_is_a_commerce_media_network",
         "commerce-media/overview/take_back_control",
         "commerce-media/overview/benefits_of_adding_community_to_your_website_or_app",
-        "commerce-media/overview/example_use_case_for_commerce_media_networks",
-        "commerce-media/plan/gitkeep"
+        "commerce-media/overview/example_use_case_for_commerce_media_networks"
+      
       ]
     },
     {
       "group": "Plan",
       "pages": [
         "commerce-media/plan/intro_to_the_brand_control_center",
+        "commerce-media/plan/gitkeep",
         "commerce-media/plan/sign_up_and_login",
         "commerce-media/plan/create_your_brand_profile",
         "commerce-media/plan/create_a_community",
