@@ -150,7 +150,7 @@
     {
        "group": "API Doc",
       "pages": [
-        "developers/genuin_log_view_structure",
+        "developers/genuin",
         "developers/authentication",
         "developers/create_community",
         "developers/create_loop",
