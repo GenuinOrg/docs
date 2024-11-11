@@ -145,13 +145,13 @@
         "developers/sdk-docs/ios_sdk",
         "developers/sdk-docs/android_sdk",
         "developers/sdk-docs/web_sdk",
-        "developers/sdk-docs/react_native_sdk"
+        "developers/sdk-docs/react_native_sdk",
+        "developers/sdk-docs/genuin"
       ]
     },
     {
        "group": "API Doc",
       "pages": [
-        "developers/genuin",
         "developers/gitkeep",
         "developers/authentication",
         "developers/create_community",
