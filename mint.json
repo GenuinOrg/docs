@@ -127,8 +127,7 @@
         "developers/guides/ios_app_for_community_builders",
         "developers/guides/ios_sdk_for_brands",
         "developers/guides/embed",
-        "developers/guides/ad_creatives",
-        "developers/genuin_log_view_structure"
+        "developers/guides/ad_creatives"
       ]
     },
      {
@@ -145,13 +144,13 @@
         "developers/sdk-docs/ios_sdk",
         "developers/sdk-docs/android_sdk",
         "developers/sdk-docs/web_sdk",
-        "developers/sdk-docs/react_native_sdk",
-        "developers/sdk-docs/ios_sdk"
+        "developers/sdk-docs/react_native_sdk"
       ]
     },
     {
        "group": "API Doc",
       "pages": [
+        "developers/genuin_log_view_structure",
         "developers/authentication",
         "developers/create_community",
         "developers/create_loop",
