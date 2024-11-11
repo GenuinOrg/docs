@@ -150,7 +150,7 @@
     {
        "group": "API Doc",
       "pages": [
-        "developers/genuin",
+        "developers/step-by-step-guide-to-pulling-app-user-event-data",
         "developers/authentication",
         "developers/create_community",
         "developers/create_loop",
