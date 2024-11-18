@@ -10,7 +10,9 @@ description: 'Genuin iOS SDK comprises features such as brand feed, communities,
 | iOS      | 13.0                      | Swift    | Portrait               | iPhone                 |
 
 
-## Required Permissions (to be added in info.plist file of brand’s application)
+## Required Permissions 
+
+Required Permissions to be added in info.plist file of your application
 
 | Permission | Usage |                                                               
 | ---------- | ----- |
@@ -83,7 +85,7 @@ end
 
 </CodeGroup>
 
-### Example
+**Example**
 
 Import the GenuinSDK module in your SceneDelegate/AppDelegate.
 
@@ -128,7 +130,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 </CodeGroup>
 
-### If you are using `SceneDelegate` method follow the instructions:
+**If you are using `SceneDelegate` method follow the instructions:**
 
 1. Ensure you are using the `UISceneDelegate` in your app.
 2. In your `SceneDelegate.swift` file, implement the `scene(_:willConnectTo:options:)` method.
@@ -136,7 +138,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 4. Call `GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)` with your API key and the configured options.
 5. Ensure that `GenuinSDK.shared.scene(scene, willConnectTo: session, options: connectionOptions)` is called to notify the SDK of the scene connection.
 
-### If you are using `AppDelegate` method follow the instructions:
+**If you are using `AppDelegate` method follow the instructions:**
 
 1. In your `AppDelegate.swift`, implement the `application(_:didFinishLaunchingWithOptions:)` method.
 2. Set up the shared configuration and initialize the SDK with your API key.
@@ -378,7 +380,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 
 **Note**: `GenuinSDK.shared.willHandleDeepLink(url: dlURL)` function will check whether `GenuinSDK` will handle the given deeplink or not. You can use it according to your deeplink redirection flow.
 
-### If you are using `SceneDelegate` method follow the instructions:
+**If you are using `SceneDelegate` method follow the instructions:**
 
 
 1. In `SceneDelegate.swift`, implement the `scene(_:continue:)` method.
@@ -390,7 +392,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 `GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
 Accordingly`.
 
-### If you are using `AppDelegate` method follow the instructions:
+**If you are using `AppDelegate` method follow the instructions:**
 
 1. In `AppDelegate.swift`, implement the `application(_:continue:restorationHandler:)` method.
 2. Call `GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)` to let the SDK process the user activity.
