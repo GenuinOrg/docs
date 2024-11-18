@@ -37,7 +37,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.0"
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.2"
 
 end
 
@@ -63,7 +63,7 @@ platform :ios, '13.0'
 target 'YourProject' do
   use_frameworks!
 
-pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.0"
+pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.2"
 
 end
 
@@ -290,11 +290,14 @@ To configure the `EmbedConfiguration` based on your need you can change the belo
 
 To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
 
+**Note**: You don't need to call the below method if you have implemented the Embed With SSO already.
+
 <CodeGroup>
 
  GenuinSDK.shared.ssoLogin(ssoToken: "<YOUR_SSO_TOKEN>")
 
 </CodeGroup>
+
 
 ## Handle SSO Logout in SDK
 
