@@ -26,7 +26,7 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 **Warning**: If you use the above code then possible it may lead to the functionality failure in some cases. 
 
-1. Add repo details in project level gradle
+**1. Add repo details in project level gradle**
 
 <CodeGroup>
 
@@ -61,24 +61,24 @@ allprojects {
 </CodeGroup>
 
 
-2. Add dependency in app level gradle
+**2. Add dependency in app level gradle**
 
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.1.1@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.3@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.1.1@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.3@aar') {
   transitive = true
 }
 ```
 </CodeGroup>
 
-3. Initialize SDK in your Application class
+**3. Initialize SDK in your Application class**
 
 <CodeGroup>
 
@@ -93,7 +93,7 @@ class YourApplication : GenuInApplication() {
 ```
 </CodeGroup>
 
-4. Load SDK in seperate activity
+**4. Load SDK in seperate activity**
 
 <CodeGroup>
 
@@ -105,7 +105,7 @@ GenuinSDK.loadSDK(context)
 </CodeGroup>
                                 
 
-5. Load SDK in your custom activity
+**5. Load SDK in your custom activity**
 
 Put below code in `activity_custom.xml` file
 
@@ -165,9 +165,9 @@ android:windowSoftInputMode="adjustPan"
 </CodeGroup>
 
 
-6. Load SDK with bottom navigation and fragment
+**6. Load SDK with bottom navigation and fragment**
 
-### To integrate SDK with **bottomNavigationView**, add below code in _res/navigation/mobile_navigation.xml_
+To integrate SDK with **bottomNavigationView**, add below code in _res/navigation/mobile_navigation.xml_
 
 <CodeGroup>
 
@@ -189,7 +189,7 @@ android:windowSoftInputMode="adjustPan"
 ```
 </CodeGroup>
 
-### To integrate SDK in your activity
+To integrate SDK in your activity
 
 <CodeGroup>
 
@@ -255,12 +255,12 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 </CodeGroup>
 
-7. Want to override our default loader.
+**7. Want to override our default loader.**
 
 We are using lottie animation for our loader. You can put your custom lottie animation loader with the name `loader_mix.json` in the `res/raw` folder. Make sure you use the same name as provided.
 
 
-### Note
+**Note**
 
 1. In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"`
 2. If you are having/managing your own Application class which extends `Application()`, change its super-class to `GenuInApplication()` from `Application()` , and in the AndroidManifest.xml add `tools:replace="android:name"` to the `<application>` tag.
@@ -408,7 +408,7 @@ To configure the `EmbedParams` based on your need you can pass the below values.
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
 
-### Manage carousel videos auto-play as per Activity/Fragment lifecycle
+### Manage carousel videos auto-play 
 
 <CodeGroup>
 
@@ -499,6 +499,28 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+
+## Handle SSO Login Explicitly in SDK
+
+To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
+
+**Note**: You don't need to call the below method if you have implemented the Embed With SSO already.
+
+<CodeGroup>
+
+GenuinSDK.ssoLogin(context = "YOUR_CONTEXT", ssoToken = "YOUR_SSO_TOKEN")
+
+</CodeGroup>
+
+## Handle SSO Logout in SDK
+
+Whenever user logs out from your application call the below method. 
+
+<CodeGroup>
+
+GenuinSDK.ssoLogout(context = "YOUR_CONTEXT")
+
+</CodeGroup>
 
 
 ## Handling Deep Link
