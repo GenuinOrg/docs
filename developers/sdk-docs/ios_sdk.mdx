@@ -216,11 +216,11 @@ if #available(iOS 15.0, *) {
 </CodeGroup>
 
 
-## Carousel Embed
+## Embed
 
 **Note**: Make sure you have followed the installation steps in order to implement the Carousel Embed
 
-
+### Carousel Embed
 
 <CodeGroup>
 
@@ -253,8 +253,58 @@ To configure the `EmbedConfiguration` based on your need you can change the belo
 
 3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
+### Full Screen Embed
+
+<CodeGroup>
+
+```swift ViewController.swift (With SSO)
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbedFeed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, ssoToken: <YOUR_SSO_TOKEN>, embedConfiguration: embedConfiguration)
+```
+
+```swift ViewController.swift (Without SSO)
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbedFeed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, embedConfiguration: embedConfiguration)
+```
+
+</CodeGroup>
+
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
 
+To configure the `EmbedConfiguration` based on your need you can change the below values.
+
+1. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+2. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work.
+
+3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+## Handle SSO Login Explicitly in SDK
+
+To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
+
+<CodeGroup>
+
+ GenuinSDK.shared.ssoLogin(ssoToken: "<YOUR_SSO_TOKEN>")
+
+</CodeGroup>
+
+## Handle SSO Logout in SDK
+
+Whenever user logs out from your application call the below method. 
+
+<CodeGroup>
+
+GenuinSDK.shared.ssoLogout()
+
+</CodeGroup>
 
 ## Handling Deep Link
 
