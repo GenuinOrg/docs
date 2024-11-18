@@ -286,21 +286,46 @@ We are using lottie animation for our loader. You can put your custom lottie ani
 </LinearLayout>
 
 ```
+</CodeGroup>
 
+**Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear.
 
-```kotlin EmbedActivity.kt
+<CodeGroup>
+
+```kotlin EmbedActivity.kt (With SSO)
 
 carouselEmbedView.apply {
-            setEmbedParams(embedId = "YOUR_EMBED_ID", uniqueId = "UNIQUE_ID", interactionDeepLink = "YOUR_DEEPLINK")
-                .setActivity(activityContext).load()
+            setEmbedParams(
+               embedId = "YOUR_EMBED_ID", 
+               uniqueId="UNIQUE_ID",
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+               isShowProfileEnabled = false
+            )
+            setActivity(activityContext)
+            setSSOToken("YOUR_SSO_TOKEN")
+            load()
+        }```
+
+```kotlin EmbedActivity.kt (Without SSO)
+
+carouselEmbedView.apply {
+            setEmbedParams(
+               embedId = "YOUR_EMBED_ID", 
+               uniqueId="UNIQUE_ID",
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+               isShowProfileEnabled = false
+            )
+            setActivity(activityContext)
+            load()
         }
+
 ```
 
 </CodeGroup>
 
 ### Load Carousel Embed Programmatically
-
-
 
 <CodeGroup>
 
@@ -312,9 +337,15 @@ carouselEmbedView.apply {
      android:layout_height="300dp">           
 </LinearLayout>
 ```
+</CodeGroup>
+
+**Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear.
 
 
-```kotlin EmbedActivity.kt
+<CodeGroup>
+
+
+```kotlin EmbedActivity.kt (With SSO)
 val carouselEmbedView = CarouselEmbedView(context)
 llCarouselContainer.addView(carouselEmbedView)
 
@@ -322,24 +353,51 @@ carouselEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
-               interactionDeepLink = "YOUR_DEEPLINK"
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+               isShowProfileEnabled = false
+            )
+            setActivity(activityContext)
+            setSSOToken("YOUR_SSO_TOKEN")
+            load()
+        }
+```
+
+```kotlin EmbedActivity.kt (Without SSO)
+
+val carouselEmbedView = CarouselEmbedView(context)
+llCarouselContainer.addView(carouselEmbedView)
+
+carouselEmbedView.apply {
+            setEmbedParams(
+               embedId = "YOUR_EMBED_ID", 
+               uniqueId="UNIQUE_ID",
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+               isShowProfileEnabled = false
             )
             setActivity(activityContext)
             load()
         }
+
 ```
+
 </CodeGroup>
 
-**Note**:
-1. Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear.
+**Note**: To initialise the Embed you need to add your activity context `(setActivity(activityContext))` in which you want the embed. To auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN"`(setSSOToken("YOUR_SSO_TOKEN"))` in order to implement Embed with SSO in your app.
 
-2. **embedId** = The Embed Id that you want to load
+To configure the `EmbedParams` based on your need you can pass the below values.
 
-3. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
 
-4. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+1. **embedId** = The Embed Id that you want to load
 
-5. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
+
+3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+
+5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
 **Note**: For using this parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to.
 
