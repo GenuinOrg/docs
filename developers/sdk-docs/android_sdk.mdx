@@ -155,7 +155,7 @@ class CustomActivity : AppCompatActivity() {
 </CodeGroup>
 
 
-> **Note**: In your custom activity, set soft input mode to `adjustPan` for better performance 
+<Note>**Note**: In your custom activity, set soft input mode to `adjustPan` for better performance </Note>
 
 <CodeGroup>
 
@@ -259,12 +259,12 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 We are using lottie animation for our loader. You can put your custom lottie animation loader with the name `loader_mix.json` in the `res/raw` folder. Make sure you use the same name as provided.
 
-
-> **Note**
-> 
-> 1. In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"`
-> 2. If you are having/managing your own Application class which extends `Application()`, change its super-class to `GenuInApplication()` from `Application()` , and in the AndroidManifest.xml add `tools:replace="android:name"` to the `<application>` tag.
-
+<Note>
+ **Note**
+ 
+ 1. In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"`
+ 2. If you are having/managing your own Application class which extends `Application()`, change its super-class to `GenuInApplication()` from `Application()` , and in the AndroidManifest.xml add `tools:replace="android:name"` to the `<application>` tag.
+</Note>
 
 
 ## Embed
