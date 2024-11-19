@@ -394,7 +394,8 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 2. Notify the SDK of the continued scene via `GenuinSDK.shared.scene(scene, continue: userActivity)`.
 3. Handle deep links using the root view controller by calling `GenuinSDK.shared.handleDeeplink(viewController: rootVC)`.
 
-<Note> **NOTE**: To handle redirection of the deeplink , it is mandatory to call 
+<Note>
+**NOTE**: To handle redirection of the deeplink , it is mandatory to call 
 `GenuinSDK.shared.scene(scene, continue: userActivity)` OR 
 `GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
 Accordingly`.
