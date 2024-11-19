@@ -196,7 +196,7 @@ class ViewController: UIViewController {
 
 ```
 
-**Note**: Our SDK is well optimized for `iOS version 15.0` and above, but if you are using `iOS version 13` or `14` then put this `if #available(iOS 15.0, *)` condition while importing the GenuinSDK. Refer to the below code block
+> **Note**: Our SDK is well optimized for `iOS version 15.0` and above, but if you are using `iOS version 13` or `14` then put this `if #available(iOS 15.0, *)` condition while importing the GenuinSDK. Refer to the below code block
 
 <CodeGroup>
 
@@ -221,7 +221,7 @@ if #available(iOS 15.0, *) {
 
 ## Embed
 
-**Note**: Make sure you have followed the installation steps in order to implement the Carousel Embed
+> **Note**: Make sure you have followed the installation steps in order to implement the Carousel Embed
 
 ### Carousel Embed
 
@@ -245,7 +245,7 @@ GenuinSDK.shared.initializeEmbed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_
 
 </CodeGroup>
 
-**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
 
 To configure the `EmbedConfiguration` based on your need you can change the below values.
@@ -278,7 +278,7 @@ GenuinSDK.shared.initializeEmbedFeed(embedId: "YOUR_EMBED_ID", containerView: <Y
 
 </CodeGroup>
 
-**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
 
 To configure the `EmbedConfiguration` based on your need you can change the below values.
@@ -293,7 +293,7 @@ To configure the `EmbedConfiguration` based on your need you can change the belo
 
 To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
 
-**Note**: You don't need to call the below method if you have implemented the Embed With SSO already.
+> **Note**: You don't need to call the below method if you have implemented the Embed With SSO already.
 
 <CodeGroup>
 
@@ -318,7 +318,7 @@ GenuinSDK.shared.ssoLogout()
 
 ## Handling Deep Link
 
-**Note**: Make sure you have followed the installation steps in order to handle the deep links 
+> **Note**: Make sure you have followed the installation steps in order to handle the deep links 
 
 **Prerequisite**:
 
@@ -383,7 +383,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 
 </CodeGroup>
 
-**Note**: `GenuinSDK.shared.willHandleDeepLink(url: dlURL)` function will check whether `GenuinSDK` will handle the given deeplink or not. You can use it according to your deeplink redirection flow.
+> **Note**: `GenuinSDK.shared.willHandleDeepLink(url: dlURL)` function will check whether `GenuinSDK` will handle the given deeplink or not. You can use it according to your deeplink redirection flow.
 
 ### Instructions for `SceneDelegate`:
 
@@ -391,7 +391,7 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 2. Notify the SDK of the continued scene via `GenuinSDK.shared.scene(scene, continue: userActivity)`.
 3. Handle deep links using the root view controller by calling `GenuinSDK.shared.handleDeeplink(viewController: rootVC)`.
 
-**NOTE**: To handle redirection of the deeplink , it is mandatory to call 
+> **NOTE**: To handle redirection of the deeplink , it is mandatory to call 
 `GenuinSDK.shared.scene(scene, continue: userActivity)` OR 
 `GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
 Accordingly`.
@@ -403,10 +403,10 @@ Accordingly`.
 3. Use `GenuinSDK.shared.handleDeeplink(viewController: rootVC)` to manage the deep link using the app's root view controller.
 
 
-**Note**: 
-1. To handle the Deeplink from another controller call the `GenuinSDK.shared.handleDeeplink(viewController: vc)` function from specific controller
-
-2. If you are following the `SceneDelegate` method then calling this `GenuinSDK.shared.handleDeeplink(viewController: self)` function is mandatory
+> **Note**: 
+> 1. To handle the Deeplink from another controller call the `GenuinSDK.shared.handleDeeplink(viewController: vc)` function from specific controller
+> 
+> 2. If you are following the `SceneDelegate` method then calling this `GenuinSDK.shared.handleDeeplink(viewController: self)` function is mandatory
 ```swift
 
 override func viewDidAppear(_ animated: Bool) {
@@ -468,7 +468,7 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 
 </CodeGroup>
 
-**Note**: Pass `true` value in `isFCMIntegrated` parameter, as we are using the Firebase
+> **Note**: Pass `true` value in `isFCMIntegrated` parameter, as we are using the Firebase
 
 6. Initialize
 
@@ -587,7 +587,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 
 </CodeGroup>
 
-**Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
+> **Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
 
 10. To configure notification UI
 
@@ -628,7 +628,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 
 </CodeGroup>
 
-**Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function
+> **Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function
 
 ### Using APNS
 
@@ -663,7 +663,7 @@ func application(_ application: UIApplication, didRegisterForRemoteNotifications
 
 </CodeGroup>
 
-**Note**: Pass `false` value in `isFCMIntegrated` parameter, as we are not using the Firebase
+> **Note**: Pass `false` value in `isFCMIntegrated` parameter, as we are not using the Firebase
 
 
 SceneDelegate
@@ -745,7 +745,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive respo
 
 </CodeGroup>
 
-**Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
+> **Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow.
 
 5. To configure notification UI
 
@@ -786,7 +786,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 
 </CodeGroup>
 
-**Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function
+> **Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function
 
 
 
