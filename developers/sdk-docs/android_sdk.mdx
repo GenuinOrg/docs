@@ -11,7 +11,8 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 ## Installation
 
-> **Note**: Currently minimum SDK version of our SDK is 24 but if you want to use our SDK in version below 24, use the below code snippet in the App level manifest file. 
+<Note> **Note**: Currently minimum SDK version of our SDK is 24 but if you want to use our SDK in version below 24, use the below code snippet in the App level manifest file. 
+</Note>
 
 <CodeGroup>
 
@@ -269,7 +270,7 @@ We are using lottie animation for our loader. You can put your custom lottie ani
 
 ## Embed
 
-> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to implement the Carousel Embed
+<Note> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to implement the Carousel Embed </Note>
 
 ### Carousel Embed
 
@@ -293,7 +294,7 @@ We are using lottie animation for our loader. You can put your custom lottie ani
 ```
 </CodeGroup>
 
-> **Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear.
+<Note> **Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear. </Note>
 
 <CodeGroup>
 
@@ -345,7 +346,7 @@ carouselEmbedView.apply {
 ```
 </CodeGroup>
 
-> **Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear.
+<Note> **Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear. </Note>
 
 
 <CodeGroup>
@@ -390,7 +391,7 @@ carouselEmbedView.apply {
 
 </CodeGroup>
 
-> **Note**: To initialise the Embed you need to add your activity context `(setActivity(activityContext))` in which you want the embed. To auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN"`(setSSOToken("YOUR_SSO_TOKEN"))` in order to implement Embed with SSO in your app.
+<Note> **Note**: To initialise the Embed you need to add your activity context `(setActivity(activityContext))` in which you want the embed. To auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN"`(setSSOToken("YOUR_SSO_TOKEN"))` in order to implement Embed with SSO in your app. </Note>
 
 To configure the `EmbedParams` based on your need you can pass the below values.
 
@@ -403,7 +404,7 @@ To configure the `EmbedParams` based on your need you can pass the below values.
 
 4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
 
-> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to.
+<Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
 
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
@@ -494,7 +495,7 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
 4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
 
-> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to.
+<Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
 
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
@@ -504,7 +505,7 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
 To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
 
-> **Note**: You don't need to call the below method if you have implemented the Embed With SSO already.
+<Note> **Note**: You don't need to call the below method if you have implemented the Embed With SSO already. </Note>
 
 <CodeGroup>
 
@@ -525,7 +526,7 @@ GenuinSDK.ssoLogout(context = "YOUR_CONTEXT")
 
 ## Handling Deep Link
 
-> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to handle the deep link. 
+<Note> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to handle the deep link. </Note> 
 
 **Prerequisite**:
 
@@ -534,7 +535,7 @@ GenuinSDK.ssoLogout(context = "YOUR_CONTEXT")
     2. Follow the steps given in the below URL to integrate deeplink in your app
    https://developer.android.com/studio/write/app-link-indexing
   
-  >  **Note** : Here host will be your "YOUR_WHITE-LABELLED_DOMAIN"
+  <Note>  **Note** : Here host will be your "YOUR_WHITE-LABELLED_DOMAIN" </Note>
 
     3. After completing deeplink setup, your `assetlinks.json` file should look like below
 
@@ -563,5 +564,5 @@ GenuinSDK.handleDeepLink(context = "YOUR_CONTEXT", intent = "YOUR_DEEPLINK_ACTIV
 ```
 </CodeGroup>
 
-> **Note**: Need to call this function everytime your app receives any deeplink. This method will handle deeplink if its our deeplink otherwise it will ignore that.
+<Note> **Note**: Need to call this function everytime your app receives any deeplink. This method will handle deeplink if its our deeplink otherwise it will ignore that. </Note>
 
