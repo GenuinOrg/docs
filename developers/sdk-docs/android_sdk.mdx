@@ -565,3 +565,99 @@ GenuinSDK.handleDeepLink(context = "YOUR_CONTEXT", intent = "YOUR_DEEPLINK_ACTIV
 
 <Note> **Note**: Need to call this function everytime your app receives any deeplink. This method will handle deeplink if its our deeplink otherwise it will ignore that. </Note>
 
+## Handling Push Notifications
+
+<Note> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to handle the push notifications. </Note> 
+
+
+**Prerequisite**
+
+1. Create an app in your firebase using [these steps](https://firebase.google.com/docs/android/setup) 
+
+2. Download the `google-services.jsonfile` and add it into your app.
+
+3. Integrate firebase into your app by following [these steps](https://firebase.google.com/docs/cloud-messaging/android/client)
+
+**Get firebase token and register it with Genuin SDK**
+
+<CodeGroup>
+
+```kotlin 
+
+private fun getFirebaseToken(){
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task: Task<String> ->
+                if (!task.isSuccessful) {
+                    return@addOnCompleteListener
+                }
+                // Get new FCM registration token
+                val token = task.result
+                // Register token with Genuin SDK
+                GenuinSDK.registerFCMToken("YOUR_CONTEXT", token)
+            }
+    }
+
+```
+
+</CodeGroup>
+
+**Handle foreground notifications (When your app is in foreground)**
+
+<CodeGroup>
+
+```kotlin `MyFirebaseMessagingService.kt`
+
+class MyFirebaseMessagingService : FirebaseMessagingService() {
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
+        val data: Map<String, String> = remoteMessage.getData()
+        if (GenuinSDK.willHandleForegroundNotification(data)) {
+            val message = remoteMessage.notification?.body ?: ""
+            GenuinSDK.handleForegroundNotification(
+                context = this,
+                data = data,
+                message = message,
+                smallNotificationIcon = R.drawable.ic_small_notifications // Your app's notification small icon
+            )
+        } else {
+            // Handle other push notifications for your app
+        }
+    }
+
+    /**
+     * There are two scenarios when onNewToken is called:
+     * 1) When a new token is generated on initial app startup
+     * 2) Whenever an existing token is changed
+     * Under #2, there are three scenarios when the existing token is changed:
+     * A) App is restored to a new device
+     * B) User uninstalls/reinstall the app
+     * C) User clears app data
+     */
+    override fun onNewToken(s: String) {
+        super.onNewToken(s)
+        GenuinSDK.registerFCMToken(this, s)
+    }
+
+}
+
+```
+
+</CodeGroup>
+
+**Handle notifications while app is running in background or closed**
+
+You will get the notification payload in your launcher activity.
+
+<CodeBlock>
+
+```kotlin YourLauncherActivity.kt
+
+if (GenuinSDK.willHandleNotification(intent)) {
+     GenuinSDK.handleBackgroundNotifications(context = "YOUR_CONTEXT", intent)
+}
+
+```
+
+</CodeBlock>
+
+
