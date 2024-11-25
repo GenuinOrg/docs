@@ -644,9 +644,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 </CodeGroup>
 
+<Note>
+
+**Note**: GenuinSDK.willHandleForegroundNotification(data: Map<String, String>) function will check whether GenuinSDK will handle the given notification or not when app is in foreground.
+
+
+</Note>
+
 **Handle notifications while app is running in background or closed**
 
-You will get the notification payload in your launcher activity.
+- You will get the notification payload in your launcher activity.
 
 <CodeBlock>
 
@@ -659,5 +666,11 @@ if (GenuinSDK.willHandleNotification(intent)) {
 ```
 
 </CodeBlock>
+
+<Note>
+
+**Note**: GenuinSDK.willHandleNotification(intent: Intent) function will check whether GenuinSDK will handle the given notification or not.
+
+</Note>
 
 
