@@ -13,9 +13,10 @@ To embed your Brand community into your website, follow the steps below:
 3. Adjust the height and width of the embed container as per your design requirements.
    You can specify these dimensions within the code block itself.
 
-## Code-block for Brand Community Embedding:
+## Code-block to Embed Community:
+<CodeGroup>
 
-```html
+```html Embed Without SSO
 <div
 id="gen-sdk"
 style="max-width: 1080px; height: 720px; display: flex;"
@@ -25,13 +26,36 @@ style="max-width: 1080px; height: 720px; display: flex;"
 	// Callback function that can be used to initiate the SDK
 	window.onGenuinReady = (genuin) => {
 	genuin.initialize({
-			embed: 1,
-			brand_id: 'panova',
-			hide_navbar: 0,
+			embed_id: 'Your Embed ID',
+			api_key: 'Your API Key',
 		})
 	}
 </script>
 ```
+
+```html Embed With SSO
+
+<div
+id="gen-sdk"
+style="max-width: 1080px; height: 720px; display: flex;"
+></div>
+<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+<script>
+	// Callback function that can be used to initiate the SDK
+	window.onGenuinReady = (genuin) => {
+	genuin.initialize({
+			embed_id: 'Your Embed ID',
+			api_key: 'Your API Key',
+			token: 'Your Authentication Token'
+		})
+	}
+</script>
+
+```
+
+</CodeGroup>
+
+
 
 | **Setting** | **Description** | **Default** |
 | ----------- | --------------- | ----------- |
