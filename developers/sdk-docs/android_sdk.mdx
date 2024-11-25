@@ -613,7 +613,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val data: Map<String, String> = remoteMessage.getData()
         if (GenuinSDK.willHandleForegroundNotification(data)) {
             val message = remoteMessage.notification?.body ?: ""
-            GenuinSDK.handleForegroundNotification(
+            GenuinSDK.handleForegroundNotifications(
                 context = this,
                 data = data,
                 message = message,
@@ -648,7 +648,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 **Handle notifications while app is running in background or closed**
 
-- You will get the notification payload in your launcher activity.
+- Whenever user clicks on notifications, you will get the notification payload in your launcher activity.
 
 <CodeBlock>
 
