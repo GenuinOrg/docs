@@ -48,3 +48,48 @@ Collected data will be stored in CSV file in the following columns .
 | **context_ip**                       | TEXT       | Records the IP address associated with the context.                                               | 54.229.216.152                                                      |
 | **context_library_name**             | TEXT       | Specifies the name of the library used in the context.                                            | RudderLabs JavaScript SDK                                           |
 | **context_library_version**          | TEXT       | Indicates the version of the library used.                                                        | 1.21.0                                                              |
+| **context_locale**                   | TEXT       | Defines the locale or language setting.                                                           | en-US                                                               |
+| **context_name_value_pairs_ip**      | TEXT       | Stores key-value pairs related to the device's IP address.                                         | 49.36.66.255                                                        |
+| **context_network_bluetooth** | TEXT | Indicates whether Bluetooth is enabled on the device | 0,1, true, false | 
+| **context_network_carrier** | TEXT | Identifies the mobile network carrier being used by the device | Tello | 
+| **context_network_cellular** | TEXT | Indicates if the device is connected via a cellular network | 0,1, true, false | 
+| **context_network_wifi** | TEXT | Specifies if the device is connected to Wi-Fi | 0,1, true, false |
+| **context_os_name** | TEXT | Identifies the operating system running on the device, such as iOS, Android, or Windows | iOS |
+| **context_os_version** | TEXT | Provides the version of the operating system installed on the device | 17.5.1 | 
+| **context_request_ip** | TEXT | Captures the IP address of the device | 54.229.216.152 | 
+| **context_screen_density** | NUMERIC | Represents the screen density in pixels per inch (PPI), such as "450," used to determine the resolution quality of the display. | 450 |
+| **context_screen_height** | NUMERIC | Indicates the height of the screen in pixels, such as "926," used to describe the vertical resolution of the display. | 926 | 
+| **context_screen_width** | NUMERIC | Specifies the width of the screen in pixels, such as "428," used to describe the horizontal resolution of the display. | 428 | 
+| **context_session_id** | NUMERIC | Contains a unique identifier for the session, such as "1722634939," used to track and reference a specific user session. | 1722634939 | 
+| **context_session_start** | NUMERIC | Represents the timestamp indicating when the user session began | 1 |
+| **context_source_id** | TEXT | Context origin ID, which can be tied to user, loop, or community. identity based on the event and entity. | 2Rb3KPhDmXZe0FIVDW6pSZe0hDr |
+| **context_source_type** | TEXT | Specifies the type of source generating the context, such as "Javascript," indicating that the context is derived from a JavaScript environment. | Javascript | 
+| **context_timezone** | TEXT | Records the timezone setting, such as "Europe/Rome," used to determine the local time and time-related calculations for the context. | Europe/Rome |
+| **context_traits_anonymous_id** | TEXT | A unique identifier assigned to a user that does not reveal their personal information, allowing for anonymous tracking and targeting without compromising user privacy. | 3f423f7e-69f2-40b0-9a23-adb0fa89e1d9 | 
+| **context_traits_birthday** | TEXT | The user's date of birth, which can be used for age-based targeting and personalization | 12/09/1988 | 
+| **context_traits_id** | TEXT | A unique identifier for the user, which helps in tracking user interactions across different sessions and devices, enhancing personalization and ad delivery. | 925d52d3-c031-4fb8-8d1a-bc1afa9f6108 | 
+| **context_traits_ip** | TEXT | An identifier associated with the user's IP address, useful for tracking geographic locations | 49.36.66.255 |
+| **context_traits_ip_address** | TEXT | The actual IP address of the user, which can help in geolocation targeting | 49.36.66.255 | 
+| **context_traits_phone** | TEXT | The user's phone number, which can be used for personalized communication | 6723355661176 |
+| **context_traits_user_id** | TEXT | A unique identifier specifically assigned to the user within the system, facilitating user tracking, personalized experiences, and data management across various platforms. | 475fcd84-be1f-44e6-aa48-8f5a58c570bb |
+| **context_traits_username** | TEXT | The chosen username of the user, which can be utilized for personalization, user engagement, and interaction within the Genuin ecosystem. | mattia |
+| **context_user_agent** | TEXT | Contains information about the user's device and browser | Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/21F90 [FBAN/FBIOS;FBAV/470.0.0.43.103;FBBV/616253809;FBDV/iPhone16,2;FBMD/iPhone;FBSN/iOS;FBSV/17.5.1;FBSS/3;FBID/phone;FBLC/en_US;FBOP/5;FBRV/617330632] | 
+| **conv_type** | TEXT | Specifies the type of conversation or interaction, which can include various formats | loop,Reaction, spark, dm | 
+| **conversations** | TEXT | Indicates whether the conversation is going on or not between users/group | on | 
+| **conversations_expiration** | TEXT | Indicates whether the conversation is going to expire or not | on | 
+| **country_code** | TEXT | Represents the country code, such as "+91," used to identify the country associated with the data or interaction. | +91 | 
+| **description** | TEXT | Provides a detailed description of the community. | A fashion-forward community where trendsetters share and explore the latest in casual clothing. Discuss everyday wear essentials like jeans & tshirts. | 
+| **description_added** | TEXT | Contains the first description of Community, Loop, or Video | Can we talk abt this plsss? #skincare | | device_id | TEXT | Stores a unique identifier for the device, such as "F1A4C37E-A3A8-4D5D-B0F9-8F65ED755B09," used to track and reference specific devices. | F1A4C37E-A3A8-4D5D-B0F9-8F65ED755B09 | | device_uuid | TEXT | Contains a universally unique identifier for the device, such as "FF3B05E0-690B-4528-AF1D-6FF6A4A71C6D," used to uniquely identify and track devices. | FF3B05E0-690B-4528-AF1D-6FF6A4A71C6D | 
+| **display_picture** | TEXT | Indicates whether there is a profile picture or not | yes, no | 
+| **duration** | NUMERIC | Represents the total length of a media file, such as a video or audio clip, measured in seconds. | 1755 | 
+| **duration_selected** | NUMERIC | Representing final video length in seconds. | 60 | 
+| **email** | TEXT | Stores the email address, such as "nguyentbinh.ag@gmail.com," used for communication or identification. | nguyentbinh.ag@gmail.com | 
+| **error** | TEXT | Describes the general error message encountered, such as "Uh-oh. Something's wrong. Close the app, then try again," to provide a brief explanation of the issue. | Uh-oh. Something''s wrong. Close the app, then try again. | 
+| **error_log** | TEXT | Contains detailed information about the error, such as "No response for media file in 1.6016s," used for debugging or troubleshooting purposes. | No response for media file in 1.6016s | 
+| **error_response** | TEXT | Provides a structured response for the error, used to capture specific error codes and messages for handling errors programmatically. | {"code":"1099","message":"An unexpected error occurred processing the request","data":{}} | 
+| **event** | TEXT | Records the type of event, such as "video_third_quartile," used to track specific actions or milestones related to video playback | video_third_quartile | 
+| **event_id** | TEXT | Contains a unique identifier for the event, such as "4358f0e5-3b8c-453d-86d9-5ef5fb82d512," used to reference and track specific events within the system. | 4358f0e5-3b8c-453d-86d9-5ef5fb82d512 | 
+| **event_record_screen** | TEXT | Specifies the screen or interface where the event capture was initiated. | community_create_basic | 
+| **event_target_screen** | TEXT | Identifies the screen or interface that the user navigated to as a result of the event | none | 
+| **event_text** | TEXT | Original value of event | Application Backgrounded | 
+| **exe_time** | NUMERIC | Represents the execution time of any performed operation | 1100 | 
