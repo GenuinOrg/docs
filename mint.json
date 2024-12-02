@@ -130,7 +130,8 @@
         "developers/guides/ios_sdk_for_brands",
         "developers/guides/embed",
         "developers/guides/ad_creatives",
-        "developers/guides/change_logs"
+        "developers/guides/change_logs", 
+        "developers/guides/s3_fields"
       ]
     },
      {
@@ -147,8 +148,7 @@
         "developers/sdk-docs/ios_sdk",
         "developers/sdk-docs/android_sdk",
         "developers/sdk-docs/web_sdk",
-        "developers/sdk-docs/react_native_sdk",
-        "developers/sdk-docs/genuin"
+        "developers/sdk-docs/react_native_sdk"
       ]
     },
     {
