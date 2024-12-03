@@ -18,10 +18,7 @@
   "feedback": {
     "thumbsRating": true,
     "suggestEdit": true,
-    "raiseIssue": {
-      "enabled": true,
-      "url": "https://github.com/GenuinOrg/docs/tree/main/issues"
-    }
+    "raiseIssue": true
   },
   "primaryTab": {
     "name": "Retail Media"
