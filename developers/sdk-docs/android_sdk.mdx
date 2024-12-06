@@ -395,9 +395,9 @@ carouselEmbedView.apply {
 To configure the `EmbedParams` based on your need you can pass the below values.
 
 
-1. **embedId** = The Embed Id that you want to load
+1. **embedId** = The Embed Id that you want to load.
 
-2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
+2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
 
 3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
@@ -486,13 +486,13 @@ class FullEmbedActivity : AppCompatActivity() {
 
 We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
-1. **embedId** = The Embed Id that you want to load
+1. **embedId** = The Embed Id that you want to load.
 
-2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide distinct uniqueId for the same embedId in multiple/same screen.
+2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
 
 3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
-4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
 
 <Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
 
@@ -563,7 +563,7 @@ GenuinSDK.handleDeepLink(context = "YOUR_CONTEXT", intent = "YOUR_DEEPLINK_ACTIV
 ```
 </CodeGroup>
 
-<Note> **Note**: Need to call this function everytime your app receives any deeplink. This method will handle deeplink if its our deeplink otherwise it will ignore that. </Note>
+<Note> **Note**: Need to call this function everytime your app receives any deeplink. This method will handle deeplink if it is our's otherwise it will ignore that. </Note>
 
 ## Handling Push Notifications
 
