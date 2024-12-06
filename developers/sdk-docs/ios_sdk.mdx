@@ -13,7 +13,7 @@ description: 'Genuin iOS SDK comprises features such as brand feed, communities,
 
 ## Required Permissions 
 
-Required Permissions to be added in info.plist file of your application
+Required Permissions to be added in `info.plist` file of your application
 
 | Permission | Usage |                                                               
 | ---------- | ----- |
@@ -86,9 +86,9 @@ end
 
 </CodeGroup>
 
-### Example
+** Example
 
-Import the GenuinSDK module in your SceneDelegate/AppDelegate.
+Import the GenuinSDK module in your `SceneDelegate/AppDelegate`.
 
 <CodeGroup>
 
@@ -146,7 +146,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 3. Call `GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)` with your API key and the configured options.
 4. Return `true` to indicate successful launch configuration.
 
-Then you can display the home feed view controller. For example, to use it in your UITabBarController:
+Then you can display the home feed view controller. For example, to use it in your `UITabBarController`:
 
 <CodeGroup>
 
@@ -169,7 +169,7 @@ class TabBarController: UITabBarController {
 
 </CodeGroup>
 
-To present feed from your UIViewController by click on UIButton:
+To present feed from your UIViewController by clicking on UIButton:
 
 
 ``` swift ViewController.swift
@@ -221,7 +221,7 @@ if #available(iOS 15.0, *) {
 
 ## Embed
 
-<Note> **Note**: Make sure you have followed the installation steps in order to implement the Carousel Embed. </Note> 
+<Note> **Note**: Make sure you have followed the [installation steps](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#installation) in order to implement the Carousel Embed. </Note> 
 
 ### Carousel Embed
 
