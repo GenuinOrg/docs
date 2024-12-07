@@ -128,23 +128,7 @@
         "commerce-media/Promote/best_practices_multi_touchpoint_activation_examples"
       ]
     },
-    {
-      "group": "Guides",
-      "pages": [
-        "developers/guides/ios_sdk_for_brands",
-        "developers/guides/embed",
-        "developers/guides/ad_creatives",
-        "developers/guides/change_logs" 
-      ]
-    },
      {
-      "group": "Engage Engine",
-      "pages": [
-        "developers/guides/upload",
-        "developers/guides/clipit"
-      ]
-    },
-    {
       "group": "SDK Doc",
       "pages": [
         "developers/sdk-docs/integration_methods",
@@ -169,6 +153,22 @@
             "developers/add_member"
           ]
         }
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "developers/guides/ios_sdk_for_brands",
+        "developers/guides/embed",
+        "developers/guides/ad_creatives",
+        "developers/guides/change_logs" 
+      ]
+    },
+     {
+      "group": "Engage Engine",
+      "pages": [
+        "developers/guides/upload",
+        "developers/guides/clipit"
       ]
     }
   ]
