@@ -292,6 +292,39 @@ To configure the `EmbedConfiguration` based on your need you can change the belo
 
 3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
+
+### Standard Wall Embed
+
+<CodeGroup>
+
+```swift StandardWallFeedViewController.swift 
+import GenuinSDK
+
+class StandardWallFeedViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        let embedConfiguration = EmbedConfiguration()
+        embedConfiguration.isShowProfileEnabled = true
+        
+        GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, embedConfiguration: embedConfiguration)
+        
+    }
+
+}```
+</CodeGroup>
+
+<Note>
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. 
+
+</Note>
+
+To configure the `EmbedConfiguration` based on your need you can change the below values.
+
+1. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
 ## Handle SSO Login Explicitly in SDK
 
 To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
