@@ -66,13 +66,13 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.5.1@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.6.1@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.5.1@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.6.1@aar') {
   transitive = true
 }
 ```
@@ -501,6 +501,70 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+
+
+### Standard Wall Embed
+
+Put below code in `activity_standard_wall_embed.xml` file
+
+<CodeGroup>
+
+```Kotlin activity_standard_wall_embed.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+```
+</CodeGroup>
+
+Put below code in `StandardWallEmbedActivity.kt` file
+
+<CodeGroup>
+
+```Kotlin StandardWallEmbedActivity.kt
+
+import com.begenuin.sdk.ui.fragment.FeedEmbedFragment
+
+class StandardWallEmbedActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_standard_wall_embed)
+
+        val feedEmbedFragment = FeedEmbedFragment.newInstance(
+               embedId = "YOUR_EMBED_ID", 
+               uniqueId="UNIQUE_ID",
+               isShowProfileEnabled = true
+            )
+        feedEmbedFragment.let {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.frameLayout, it)
+                .addToBackStack("EmbedStandardWallFeed").commit()
+        }
+    }
+}
+
+
+```
+</CodeGroup>
+
+We need to pass below arguments in order to cofigure `StandardWallEmbed`.
+
+1. **embedId** = The Embed Id that you want to load.
+
+2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
+
+3. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
 
 ## Handle SSO Login Explicitly in SDK
 
