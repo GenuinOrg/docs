@@ -280,7 +280,7 @@ GenuinSDK.shared.initializeEmbedFeed(embedId: "YOUR_EMBED_ID", containerView: <Y
 </CodeGroup>
 
 <Note>
-**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the above function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
 </Note>
 
@@ -309,7 +309,7 @@ class StandardWallFeedViewController: UIViewController {
         let embedConfiguration = EmbedConfiguration()
         embedConfiguration.isShowProfileEnabled = true
         
-        GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, embedConfiguration: embedConfiguration)
+        GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView: self.view, viewConroller: self, embedConfiguration: embedConfiguration)
         
     }
 
@@ -319,7 +319,7 @@ class StandardWallFeedViewController: UIViewController {
 </CodeGroup>
 
 <Note>
-**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. 
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID` while calling the above function. 
 
 </Note>
 
