@@ -84,36 +84,28 @@ Sponsored communities, groups and posts. Genuin collects engagement data on cont
 
 AdExchange gets context of the ad space from the IAB defined {{macros}} such that the programmatic advertising gets personalised to the end consumers. Custom {{macros}} list (supported by IAB) is as follows. All these are configurable by demand partners and advertisers.
 
-
-
-3.  ## User Experience Personalization:
-    
-
-Feed personalization is driven by three key factors:
-
-1.  Recency of Content: Fresh, up-to-date material surfaces first.
-    
-2.  User Interest: Content aligns with what users have explicitly or implicitly indicated they care about.
-    
-3.  Popularity: Content that garners higher engagement from the community naturally rises, reflecting collective interests rather than personal data trails.
-    
-
-# How Advertisers Benefit Without Intrusion?
-
-A key point is that Genuin itself does not perform the ad targeting. Instead, it enables advertisers through AdExchanges with {{macros}} - metadata or contextual signals that can be leveraged by downstream Demand-Side Platforms (DSPs) and Supply-Side Platforms (SSPs). This approach allows:
-
--   Type 1 Access: Advertisers gain access in relevant brand communities and groups focused on topics, keywords, or contexts that match the advertiser’s desired audience segments.
-    
--   Type 2 Access: Advertisers can utilize {{macros}} defined by IAB through AdExchanges to programmatically run ads targeting context or topically engaged communities, ensuring relevance without relying on invasive personal identifiers.
-    
-
-# No Need for Additional User Data Sharing
-
-Critically, the brand does not need to share any historical or fresh user-level data with Genuin or advertisers beyond what’s already captured in the zero-party data ecosystem. Instead, Genuin continuously provides raw engagement data back to the brand. This ensures a two-way, privacy-respecting relationship where the brand maintains control and ownership over user data, while still empowering advertisers to deliver meaningful, context-rich messaging.
-
-# Building a Privacy-Safe Revenue Model
-
-By focusing on zero-party data and context rather than intrusive tracking, brands can foster vibrant communities, encourage engagement, and drive media revenue streams. At the same time, users can feel confident that their data is respected, their privacy is maintained, and that they are part of a genuine value exchange.
-
-In short, zero-party data powered by Genuin’s SDK framework offers brands a path to build trustworthy communities - ones that thrive on authenticity, user empowerment, and contextual relevance, rather than shadowy data practices that erode consumer confidence.
+| iAB                     | Description                                                              | Values                                                                                              | Value type      |
+|--------------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|-----------------|
+| Content Album            | Album to which the content belongs                                       | group_name                                                                                         | string          |
+| Content Keywords         | Comma separated list of keywords describing the content                 | search_query                                                                                       | string          |
+| Content Production quality | Product quality based on IAB standards                                | 0 - Unknown; 1 - Professionally Produced; 3 - User Generated (UGC)                                 | integer         |
+| Content Episode          | Episode number                                                          | video_name                                                                                         | integer         |
+| Content Livestream       | 0 = not live, 1 = content is live                                        | video_stream_type                                                                                  | integer         |
+| Content Context          | Type of content                                                         | 1 - Video (i.e., video file or stream such as Internet TV broadcasts)                              | integer         |
+| Content URL              | Url of content                                                          | video_url                                                                                          | string          |
+| Content Kwarray          | Array of keywords                                                       | video_keywords                                                                                     | string array    |
+| Content Media Rating     | Media rating per IQG guidelines                                         | 1 - All Audiences; 2 - Everyone Over Age 12; 3 - Mature Audiences                                  | integer         |
+| Content Artist           | Artist credited with the content                                        | user_name                                                                                          | string          |
+| Content Producer Domain  | Highest level domain of the content producer                            | White label domain e.g (iheartmedia.begenuin.com)                                                  | string          |
+| Content Genre            | Genre that best describes the content                                   | video_description                                                                                  | string          |
+| Content Series           | Content series                                                          | group_name                                                                                         | string          |
+| Content Title            | Content Title                                                           | video_title                                                                                        | string          |
+| Content Producer Category | Array of IAB content categories that describe the content producer     | community_category                                                                                 | string          |
+| Content Language         | Content language using ISO-639-1-alpha-2.                               | video_lng                                                                                          | string          |
+| Content Producer Name    | Content producer or originator name                                     | community_name                                                                                     | string          |
+| Content Season           | Content season                                                          | group_name                                                                                         | string          |
+| Content Lang             | Content language using IETF BCP 47.                                     | video_lng                                                                                          | string          |
+| Content Embeddable       | Indicator of whether the content is embeddable                          | 1 - For embed; 0 - white label or SDK                                                              | integer         |
+| Content Channel Name     | Channel the content is on                                               | brand_name                                                                                         | string          |
+| Content Length           | Length of content in seconds                                            | video_length                                                                                       | integer         |
 
