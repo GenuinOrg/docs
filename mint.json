@@ -170,12 +170,6 @@
         "developers/guides/upload",
         "developers/guides/clipit"
       ]
-    },
-    {
-      "group": "FAQs",
-      "pages": [
-        "developers/guides/zero_party_data"
-      ]
     }
   ]
 }
