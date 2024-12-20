@@ -170,6 +170,12 @@
         "developers/guides/upload",
         "developers/guides/clipit"
       ]
+    },
+     {
+      "group": "FAQs",
+      "pages": [
+        "commerce-media/Promote/zero_party_data"
+      ]
     }
   ]
 }
