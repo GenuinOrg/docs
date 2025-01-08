@@ -1,0 +1,876 @@
+---
+Title: Flutter SDk
+---
+
+Flutter SDK comprises features such as brand feed, communities, and groups.
+
+## Requirements
+
+| Platform | Minimum SDK Version | Language | Supported Orientations | Supported Destinations |
+| -------- | ------------------- | -------- | ---------------------- | ---------------------- |
+| Android  | 24                  | Java/Kotlin    | Portrait               | Mobile                 |
+| iOS      | 13.0                      | Swift    | Portrait               | iPhone                 |
+
+## Android
+
+### Installation
+
+Follow the below steps to install the Flutter SDK in Android.
+
+Step 1: In `android/build.gradle`:
+
+<CodeGroup>
+
+```swift android/build.gradle
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        // Add jitpack
+        maven {
+            setUrl("https://jitpack.io")
+        }
+    }
+}
+
+```
+
+</CodeGroup>
+
+Step 2: In `android/app/build.gradle`:
+
+<CodeGroup>
+
+```swift android/app/build.gradle
+
+android {
+    defaultConfig {
+        minSdk = 24
+    }
+}
+
+```
+
+</CodeGroup>
+
+Step 3: In `android/app/src/main/AndroidManifest.xml:`:
+
+```swift android/app/src/main/AndroidManifest.xml
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- 1. Remove android:name attribute
+         2. Add tools:replace="android:label" -->
+    <application android:label="genuin_sdk_example" android:icon="@mipmap/ic_launcher"
+        tools:replace="android:label">
+
+        <!-- 1. If you want handle deeplink change launch mode to singleTask
+             2. Remove android:taskAffinity="" -->
+        <activity android:name=".MainActivity" android:exported="true"
+            android:launchMode="singleTask" android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+
+```
+
+</CodeGroup>
+
+Step 4: Change Theme in `android/app/src/main/res/values/styles.xml`:
+
+Our SDK is using `Material` components so in order to use our sdk you need to use material theme as shown in below example
+
+<CodeGroup>
+
+```swift android/app/src/main/res/values/styles.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
+    <style name="LaunchTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <!-- Show a splash screen on the activity. Automatically removed when
+             the Flutter engine draws its first frame -->
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <!-- Theme applied to the Android Window as soon as the process has started.
+         This theme determines the color of the Android Window while your
+         Flutter UI initializes, as well as behind your Flutter UI while its
+         running.
+
+         This Theme is only used starting with V2 of Flutter's Android embedding. -->
+    <style name="NormalTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>
+
+```
+
+</CodeGroup>
+
+
+Step 5: Create `android/app/proguard-rules.pro`, add the following lines:
+
+<CodeGroup>
+
+```swift android/app/build.gradle
+
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+-keep class com.bumptech.glide.**{*;}
+-keep public class * {
+    public *;
+    protected *;
+}
+
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
+
+# Retrofit does reflection on method and parameter annotations.
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+
+# Retain service method parameters when optimizing.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# Ignore JSR 305 annotations for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn java.lang.reflect.AnnotatedType
+-dontwarn com.google.api.client.http.GenericUrl
+-dontwarn com.google.api.client.http.HttpHeaders
+-dontwarn com.google.api.client.http.HttpRequest
+-dontwarn com.google.api.client.http.HttpRequestFactory
+-dontwarn com.google.api.client.http.HttpResponse
+-dontwarn com.google.api.client.http.HttpTransport
+-dontwarn com.google.api.client.http.javanet.NetHttpTransport$Builder
+-dontwarn com.google.api.client.http.javanet.NetHttpTransport
+-dontwarn com.squareup.picasso.Picasso
+-dontwarn com.squareup.picasso.RequestCreator
+-dontwarn java.awt.image.BufferedImage
+-dontwarn javax.imageio.ImageIO
+-dontwarn org.joda.time.Instant
+-dontwarn org.junit.Assert
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticMDCBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder
+
+# With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
+# and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
+
+
+##---------------Begin: proguard configuration for Gson  ----------
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-dontwarn sun.misc.**
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.begenuin.begenuin.data.model.** { <fields>; }
+-keep class com.begenuin.begenuin.vo.** { <fields>; }
+
+
+# RenderScript
+-keepclasseswithmembernames class * {
+native <methods>;
+}
+-keep class androidx.renderscript.** { *; }
+
+-keepattributes *Annotation*
+
+-keep class com.giphy.sdk.core.models.** { *; }
+-keep class com.giphy.sdk.ui.views.** { *; }
+
+-keep public class * implements java.lang.reflect.Type
+
+-keep class com.google.mediapipe.solutioncore.** {*;}
+-keep class com.google.protobuf.** {*;}
+
+-dontwarn com.begenuin.sdk.BR
+-dontwarn com.google.android.play.core.splitcompat.SplitCompatApplication
+-dontwarn com.google.android.play.core.splitinstall.SplitInstallManager
+-dontwarn com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+-dontwarn com.google.android.play.core.splitinstall.SplitInstallRequest$Builder
+-dontwarn com.google.android.play.core.splitinstall.SplitInstallRequest
+-dontwarn com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
+-dontwarn com.google.android.play.core.tasks.OnFailureListener
+-dontwarn com.google.android.play.core.tasks.OnSuccessListener
+-dontwarn com.google.android.play.core.tasks.Task
+-dontwarn com.google.mediapipe.proto.CalculatorProfileProto$CalculatorProfile
+-dontwarn com.google.mediapipe.proto.GraphTemplateProto$CalculatorGraphTemplate
+-dontwarn javax.lang.model.AnnotatedConstruct
+-dontwarn javax.lang.model.SourceVersion
+-dontwarn javax.lang.model.element.AnnotationMirror
+-dontwarn javax.lang.model.element.AnnotationValue
+-dontwarn javax.lang.model.element.AnnotationValueVisitor
+-dontwarn javax.lang.model.element.Element
+-dontwarn javax.lang.model.element.ElementKind
+-dontwarn javax.lang.model.element.ElementVisitor
+-dontwarn javax.lang.model.element.ExecutableElement
+-dontwarn javax.lang.model.element.Name
+-dontwarn javax.lang.model.element.NestingKind
+-dontwarn javax.lang.model.element.PackageElement
+-dontwarn javax.lang.model.element.QualifiedNameable
+-dontwarn javax.lang.model.element.TypeElement
+-dontwarn javax.lang.model.element.TypeParameterElement
+-dontwarn javax.lang.model.element.VariableElement
+-dontwarn javax.lang.model.type.ArrayType
+-dontwarn javax.lang.model.type.DeclaredType
+-dontwarn javax.lang.model.type.ErrorType
+-dontwarn javax.lang.model.type.ExecutableType
+-dontwarn javax.lang.model.type.IntersectionType
+-dontwarn javax.lang.model.type.NoType
+-dontwarn javax.lang.model.type.NullType
+-dontwarn javax.lang.model.type.PrimitiveType
+-dontwarn javax.lang.model.type.TypeKind
+-dontwarn javax.lang.model.type.TypeMirror
+-dontwarn javax.lang.model.type.TypeVariable
+-dontwarn javax.lang.model.type.TypeVisitor
+-dontwarn javax.lang.model.type.WildcardType
+-dontwarn javax.lang.model.util.AbstractElementVisitor8
+-dontwarn javax.lang.model.util.ElementFilter
+-dontwarn javax.lang.model.util.Elements
+-dontwarn javax.lang.model.util.SimpleAnnotationValueVisitor8
+-dontwarn javax.lang.model.util.SimpleElementVisitor8
+-dontwarn javax.lang.model.util.SimpleTypeVisitor8
+-dontwarn javax.lang.model.util.Types
+-dontwarn javax.tools.Diagnostic$Kind
+-dontwarn javax.tools.JavaFileObject$Kind
+-dontwarn javax.tools.JavaFileObject
+-dontwarn javax.tools.SimpleJavaFileObject
+```
+
+</CodeGroup>
+
+Want to override our default loader?
+
+- We are using `lottie` animation for our loader. You can put your custom `lottie animation` loader with the name `loader_mix.json` in the `android/app/src/main/res/raw` folder. Make sure you use the same name as provided.
+
+### Quick Start
+
+**1. Initialize SDK**
+
+<CodeGroup>
+
+```swift
+
+import android.content.Intent
+import android.os.Bundle
+import com.begenuin.genuin_sdk.GenuinSdkPlugin
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+// Here we need to use FlutterFragmentActivity instead of FlutterActivity
+class MainActivity : FlutterFragmentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        GenuinSdkPlugin.initSDK(this@MainActivity, "YOUR_API_KEY")
+    }
+}
+
+```
+
+</CodeGroup>
+
+**2. Handling Deep Link**
+
+In `android/app/src/main/AndroidManifest.xml`:
+
+<CodeGroup>
+
+```swift
+
+<activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTask"
+    android:theme="@style/LaunchTheme"
+    android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+    android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
+    <meta-data android:name="io.flutter.embedding.android.NormalTheme"
+        android:resource="@style/NormalTheme" />
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data android:host="YOUR_WHITE-LABELLED_DOMAIN" android:scheme="https" />
+    </intent-filter>
+</activity>
+
+```
+</CodeGroup>
+
+<CodeGroup>
+
+```swift
+
+import android.content.Intent
+import android.os.Bundle
+import com.begenuin.genuin_sdk.GenuinSdkPlugin
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+class MainActivity : FlutterFragmentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        GenuinSdkPlugin.initSDK(this@MainActivity, "YOUR_API_KEY")
+        handleDeepLink(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleDeepLink(intent)
+    }
+
+    private fun handleDeepLink(intent: Intent?) {
+        intent?.data?.let {
+            GenuinSdkPlugin.handleDeepLink(this@MainActivity, intent)
+        }
+    }
+}
+
+```
+
+</CodeGroup>
+
+## iOS
+
+### iOS Configuration
+
+**1. In ios/Podfile:**
+
+<CodeGroup>
+
+```kotlin ios/Podfile
+
+# Uncomment this line to define a global platform for your project
+platform :ios, '13.0'
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    if target.name == 'Giphy'
+      `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
+    end
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+    end
+  end
+end
+
+```
+
+</CodeGroup>
+
+### Quick Start
+
+**1. Initialize SDK**
+
+<CodeGroup>
+
+```kotlin 
+
+import Flutter
+import UIKit
+import genuin_sdk
+
+@main
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    GenuinSdkPlugin.initialize(apiKey: "YOUR_API_KEY", loaderName: "YOUR_LOTTIE_LOADER_NAME")
+    //We are using lottie animation for our loader. You can put your custom lottie animation loader in your app's resources. update the "YOUR_LOTTIE_LOADER_NAME" with your loader name while initialize sdk.
+
+      GeneratedPluginRegistrant.register(with: self)
+      //UINavigationController is required for the redirection purpose in native component
+      if let flutterViewController: FlutterViewController = window?.rootViewController as? FlutterViewController {
+          let navigationController = UINavigationController(rootViewController: flutterViewController)
+          navigationController.setNavigationBarHidden(true, animated: false)
+          window?.rootViewController = navigationController
+          window?.makeKeyAndVisible()
+      }
+      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+}
+
+```
+
+</CodeGroup>
+
+**2. Handling Deep Link**
+
+In `AppDelegate.swift`:
+
+<CodeGroup>
+
+```swift AppDelegate.swift
+
+import Flutter
+import UIKit
+import genuin_sdk
+
+@main
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+      GenuinSdkPlugin.initialize(apiKey: "YOUR_API_KEY", loaderName: "YOUR_LOTTIE_LOADER_NAME")
+      GeneratedPluginRegistrant.register(with: self)
+      if let flutterViewController: FlutterViewController = window?.rootViewController as? FlutterViewController {
+          let navigationController = UINavigationController(rootViewController: flutterViewController)
+          navigationController.setNavigationBarHidden(true, animated: false)
+          window?.rootViewController = navigationController
+          window?.makeKeyAndVisible()
+      }
+      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
+        let result = GenuinSdkPlugin.flutterapplication(application, continue: userActivity, restorationHandler: restorationHandler)
+        if GenuinSdkPlugin.handleDeepLink(dlURL: userActivity.webpageURL, controller: window?.rootViewController) {
+            return true
+        }
+        return result
+    }
+}
+
+```
+</CodeGroup>
+
+**3. Handling Push Notification**
+
+In `AppDelegate.swift`:
+
+<CodeGroup>
+
+
+```kotlin
+
+import Flutter
+import UIKit
+import genuin_sdk
+
+@main
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+      GenuinSdkPlugin.initialize(apiKey: "YOUR_API_KEY", loaderName: "YOUR_LOTTIE_LOADER_NAME")
+      UNUserNotificationCenter.current().delegate = self
+      GeneratedPluginRegistrant.register(with: self)
+      if let flutterViewController: FlutterViewController = window?.rootViewController as? FlutterViewController {
+          let navigationController = UINavigationController(rootViewController: flutterViewController)
+          navigationController.setNavigationBarHidden(true, animated: false)
+          window?.rootViewController = navigationController
+          window?.makeKeyAndVisible()
+      }
+      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("\(userInfo )")
+        completionHandler(.newData)
+    }
+    override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        let userInfo = notification.request.content.userInfo
+        print("\(userInfo)")
+        //removed banner to show in app notification
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner, .list, .badge, .sound])
+        } else {
+            // Fallback on earlier versions
+            completionHandler([])
+        }
+    }
+}
+
+```
+
+</CodeGroup>
+
+
+
+## Flutter
+
+**1. Load Feed View**
+
+<CodeGroup>
+
+```
+
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: const Text('Genuin SDK Example'),
+      ),
+      body: GenuinFeedView(),
+    ),
+  );
+}
+
+
+```
+
+</CodeGroup>
+
+**2. Load Carousel Embed View**
+
+<CodeGroup>
+
+```
+
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: const Text('Genuin SDK Example'),
+      ),
+      body: SizedBox(
+        height: 400, // here you can give height as per your need.
+        width: MediaQuery
+            .of(context)
+            .size
+            .width, // here you can give width as per your need.
+        child: const GenuinCarouselEmbedView(
+          embedId: "YOUR_EMBED_ID",
+          uniqueId: "UNIQUE_ID",
+          ssoToken: "YOUR_SSO_TOKEN",
+          isShowProfileEnabled: false,
+          isDirectDeepLinkEnabled: false,
+        ),
+      ),
+    ),
+  );
+}
+
+```
+
+</CodeGroup>
+
+To configure the EmbedParams based on your need you can pass the below values.
+
+**embedId** = The Embed Id that you want to load.
+
+**uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
+
+**ssoToken** = This is an optional parameter. To auto login in the SDK, you shall pass “YOUR_SSO_TOKEN” in order to implement Embed with SSO in your app.
+
+**interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+**isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter “interactionDeepLink” will be ignored. If not passed then the regular flow will work.
+
+**Note**: For using isDirectDeepLinkEnabled parameter, you must have white labelled your domain first and also integrated the Handling deep link part in your main app in which you want to redirect this video to.
+
+**isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+**3. Load Full Screen/Standard Wall Embed View**
+
+<CodeGroup>
+
+```
+
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: const Text('Genuin SDK Example'),
+      ),
+      body: SizedBox(
+        height: MediaQuery
+            .of(context)
+            .size
+            .height, // here you can give height as per your need.
+        width: MediaQuery
+            .of(context)
+            .size
+            .width, // here you can give width as per your need.
+        child: const GenuinFeedEmbedView(
+          embedId: "YOUR_EMBED_ID",
+          uniqueId: "UNIQUE_ID",
+          ssoToken: "YOUR_SSO_TOKEN",
+          isShowProfileEnabled: false,
+          isDirectDeepLinkEnabled: false,
+        ),
+      ),
+    ),
+  );
+}
+
+```
+
+</CodeGroup>
+
+To configure the EmbedParams based on your need you can pass the below values.
+
+**embedId** = The Embed Id that you want to load.
+
+**uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
+
+**ssoToken** = This is an optional parameter. To auto login in the SDK, you shall pass “YOUR_SSO_TOKEN” in order to implement Embed with SSO in your app.
+
+**interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+**isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter “interactionDeepLink” will be ignored. If not passed then the regular flow will work.
+
+**Note**: For using isDirectDeepLinkEnabled parameter, you must have white labelled your domain first and also integrated the Handling deep link part in your main app in which you want to redirect this video to.
+
+**isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+**4. Handling Push Notifications**
+
+**Prerequisite**:
+
+Create firebase project and integrate into your app by following https://firebase.google.com/docs/flutter/setup 
+
+Step 1: Create `firebase_options.dart` in lib folder and add below details in that file.
+
+<CodeGroup>
+
+```
+
+import 'package:firebase_core/firebase_core.dart';
+
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform {
+    if (Platform.isAndroid) {
+      return const FirebaseOptions(
+        apiKey: 'YOUR-ANDROID-API-KEY',
+        appId: 'YOUR-ANDROID-APP-ID',
+        messagingSenderId: 'YOUR-SENDER-ID',
+        projectId: 'YOUR-PROJECT-ID',
+        storageBucket: 'YOUR-STORAGE-BUCKET',
+      );
+    }else{
+      return const FirebaseOptions(
+        apiKey: 'YOUR-IOS-API-KEY',
+        appId: 'YOUR-IOS-APP-ID',
+        messagingSenderId: 'YOUR-SENDER-ID',
+        projectId: 'YOUR-PROJECT-ID',
+        storageBucket: 'YOUR-STORAGE-BUCKET',
+      );
+    }
+  }
+}
+
+```
+
+</CodeGroup>
+
+**2. Handling background/foreground notifications**
+
+**Note**: Here for Android you need to provide small notification icon as "icon" key for foreground notifications. This icon needs to be in your flutter as well as android folder.
+
+<CodeGroup>
+
+```
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:genuin_sdk/genuin_sdk.dart';
+import 'firebase_options.dart';
+
+// This method will be called when app is in background and push received
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
+
+final _genuinSdkPlugin = GenuinSdk();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    name: 'YOUR_FIREBASE_PROJECT_NAME',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  final messaging = FirebaseMessaging.instance;
+
+  // Asking push notification permission
+  final settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  // If permission is granted than get firebase token and register it with Genuin SDK
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    String? token = await messaging.getToken();
+    if (token != null) {
+      await _genuinSdkPlugin.registerFCMToken(token);
+    }
+  }
+
+  // Check for initial notification that opened the app
+  RemoteMessage? initialMessage =
+  await FirebaseMessaging.instance.getInitialMessage();
+  if (initialMessage != null) {
+    // Handle navigation or actions
+    final notificationData = {
+      'title': initialMessage.notification?.title,
+      'body': initialMessage.notification?.body,
+      'data': initialMessage.data,
+    };
+    var willHandleNotification = await _genuinSdkPlugin
+        .willHandleBackgroundNotifications(notificationData);
+    if (willHandleNotification == true) {
+      _genuinSdkPlugin.handleBackgroundNotifications(notificationData);
+    } else {
+      // Your notification handling
+    }
+  }
+
+  // This method will be called when app is in foreground and push received
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    if (kDebugMode) {
+      print('Handling a foreground message: ${message.messageId}');
+      print('Message data: ${message.data}');
+      print('Message notification: ${message.notification?.title}');
+      print('Message notification: ${message.notification?.body}');
+    }
+
+    final notificationData = {
+      'title': message.notification?.title,
+      'body': message.notification?.body,
+      'data': message.data,
+      'icon': 'mipmap/ic_notification'
+      // OR 'icon':'drawable/ic_notification'[if image put under drawable folder]
+    };
+    var willHandleNotification = await _genuinSdkPlugin
+        .willHandleForegroundNotifications(notificationData);
+    if (willHandleNotification == true) {
+      _genuinSdkPlugin.handleForegroundNotifications(notificationData);
+    } else {
+      // Your notification handling
+    }
+  });
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  //This method will be called when user clicked on notification[Push notification is received when app is in background/killed]
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    final notificationData = {
+      'title': message.notification?.title,
+      'body': message.notification?.body,
+      'data': message.data,
+    };
+    var willHandleNotification = await _genuinSdkPlugin
+        .willHandleBackgroundNotifications(notificationData);
+    if (willHandleNotification == true) {
+      _genuinSdkPlugin.handleBackgroundNotifications(notificationData);
+    } else {
+      // Your notification handling
+    }
+  });
+
+  runApp(const MyApp());
+}
+
+```
+
+</CodeGroup>
+
+Step 5. Handle SSO Login Explicitly in SDK
+
+To Auto Login in the SDK, You need to call below method, whenever user is log in to your application.
+
+Note: You don’t need to call the below method if you have implemented the Embed With SSO already.
+
+<CodeGroup>
+
+```
+
+import 'package:genuin_sdk/genuin_sdk.dart';
+
+final _genuinSdkPlugin = GenuinSdk();
+await _genuinSdkPlugin.ssoLogin("YOUR_SSO_TOKEN");
+
+```
+
+</CodeGroup>
+
+**Step 6. Handle SSO Logout in SDK**
+
+Whenever user logs out from your application call the below method.
+
+<CodeGroup>
+
+```
+
+import 'package:genuin_sdk/genuin_sdk.dart';
+
+final _genuinSdkPlugin = GenuinSdk();
+await _genuinSdkPlugin.ssoLogout();
+
+```
+
+</CodeGroup>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
