@@ -1,5 +1,5 @@
 ---
-Title: Flutter SDk
+Title: 'Flutter SDk'
 ---
 
 Flutter SDK comprises features such as brand feed, communities, and groups.
@@ -15,9 +15,9 @@ Flutter SDK comprises features such as brand feed, communities, and groups.
 
 ### Installation
 
-Follow the below steps to install the Flutter SDK in Android.
+Follow the below steps and place the codes in mentioned files to install the Flutter SDK in Android.
 
-Step 1: In `android/build.gradle`:
+**Step 1**: In `android/build.gradle`:
 
 <CodeGroup>
 
@@ -38,7 +38,7 @@ allprojects {
 
 </CodeGroup>
 
-Step 2: In `android/app/build.gradle`:
+**Step 2**: In `android/app/build.gradle`:
 
 <CodeGroup>
 
@@ -54,7 +54,7 @@ android {
 
 </CodeGroup>
 
-Step 3: In `android/app/src/main/AndroidManifest.xml:`:
+**Step 3**: In `android/app/src/main/AndroidManifest.xml:`:
 
 <CodeGroup>
 
@@ -87,7 +87,7 @@ Step 3: In `android/app/src/main/AndroidManifest.xml:`:
 
 </CodeGroup>
 
-Step 4: Change Theme in `android/app/src/main/res/values/styles.xml`:
+**Step 4**: Change Theme in `android/app/src/main/res/values/styles.xml`:
 
 Our SDK is using `Material` components so in order to use our sdk you need to use material theme as shown in below example
 
@@ -118,8 +118,7 @@ Our SDK is using `Material` components so in order to use our sdk you need to us
 
 </CodeGroup>
 
-
-Step 5: Create `android/app/proguard-rules.pro`, add the following lines:
+**Step 5**: Create `android/app/proguard-rules.pro`, add the following lines:
 
 <CodeGroup>
 
@@ -279,9 +278,13 @@ native <methods>;
 
 </CodeGroup>
 
+<Tip>
+
 Want to override our default loader?
 
 - We are using `lottie` animation for our loader. You can put your custom `lottie animation` loader with the name `loader_mix.json` in the `android/app/src/main/res/raw` folder. Make sure you use the same name as provided.
+
+</Tip>
 
 ### Quick Start
 
@@ -311,7 +314,7 @@ class MainActivity : FlutterFragmentActivity() {
 
 **2. Handling Deep Link**
 
-In `android/app/src/main/AndroidManifest.xml`:
+To handle deep link place the below code in `android/app/src/main/AndroidManifest.xml` file:
 
 <CodeGroup>
 
@@ -340,6 +343,8 @@ In `android/app/src/main/AndroidManifest.xml`:
 ```
 
 </CodeGroup>
+
+Place the below code in `android/app/src/main/yourpackage/MainActivity.kt` file:
 
 <CodeGroup>
 
@@ -377,6 +382,8 @@ class MainActivity : FlutterFragmentActivity() {
 ## iOS
 
 ### iOS Configuration
+
+Follow the below steps and place the codes in mentioned files to install the Flutter SDK in iOS.
 
 **1. In ios/Podfile:**
 
@@ -443,7 +450,7 @@ import genuin_sdk
 
 **2. Handling Deep Link**
 
-In `AppDelegate.swift`:
+To handle deeplink place the belwo in `AppDelegate.swift` file:
 
 <CodeGroup>
 
@@ -485,7 +492,7 @@ import genuin_sdk
 
 **3. Handling Push Notification**
 
-In `AppDelegate.swift`:
+To handle the push notification place the below code In `AppDelegate.swift` file:
 
 <CodeGroup>
 
@@ -543,7 +550,7 @@ import genuin_sdk
 
 <CodeGroup>
 
-```
+```dart
 
 @override
 Widget build(BuildContext context) {
@@ -566,7 +573,7 @@ Widget build(BuildContext context) {
 
 <CodeGroup>
 
-```
+```dart
 
 @override
 Widget build(BuildContext context) {
@@ -617,7 +624,7 @@ To configure the EmbedParams based on your need you can pass the below values.
 
 <CodeGroup>
 
-```
+```dart
 
 @override
 Widget build(BuildContext context) {
@@ -677,7 +684,7 @@ Step 1: Create `firebase_options.dart` in lib folder and add below details in th
 
 <CodeGroup>
 
-```
+```dart
 
 import 'package:firebase_core/firebase_core.dart';
 
@@ -713,7 +720,7 @@ class DefaultFirebaseOptions {
 
 <CodeGroup>
 
-```
+```dart
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -831,7 +838,7 @@ Note: You don’t need to call the below method if you have implemented the Embe
 
 <CodeGroup>
 
-```
+```dart
 
 import 'package:genuin_sdk/genuin_sdk.dart';
 
@@ -848,7 +855,7 @@ Whenever user logs out from your application call the below method.
 
 <CodeGroup>
 
-```
+```dart
 
 import 'package:genuin_sdk/genuin_sdk.dart';
 
@@ -858,23 +865,4 @@ await _genuinSdkPlugin.ssoLogout();
 ```
 
 </CodeGroup>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
