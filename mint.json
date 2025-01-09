@@ -161,8 +161,7 @@
         "developers/guides/ios_sdk_for_brands",
         "developers/guides/embed",
         "developers/guides/ad_creatives",
-        "developers/guides/change_logs",
-        "developers/guides/moderation"
+        "developers/guides/change_logs"
       ]
     },
      {
@@ -175,7 +174,8 @@
     {
       "group": "FAQs",
       "pages": [
-        "developers/zero_party_data"
+        "developers/zero_party_data",
+        "developers/guides/moderation"
       ]
     }
   ]
