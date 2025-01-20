@@ -1,5 +1,5 @@
 ---
-Title: 'Flutter SDK'
+title: 'Flutter SDK'
 ---
 
 Flutter SDK comprises features such as brand feed, communities, and groups.
@@ -452,7 +452,7 @@ import genuin_sdk
 
 **2. Handling Deep Link**
 
-To handle deeplink place the belwo in `AppDelegate.swift` file:
+To handle deeplink place the below in `AppDelegate.swift` file:
 
 <CodeGroup>
 
@@ -618,7 +618,11 @@ To configure the EmbedParams based on your need you can pass the below values.
 
 **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter “interactionDeepLink” will be ignored. If not passed then the regular flow will work.
 
+<Note>
+
 **Note**: For using isDirectDeepLinkEnabled parameter, you must have white labelled your domain first and also integrated the Handling deep link part in your main app in which you want to redirect this video to.
+
+</Note>
 
 **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
@@ -672,7 +676,11 @@ To configure the EmbedParams based on your need you can pass the below values.
 
 **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter “interactionDeepLink” will be ignored. If not passed then the regular flow will work.
 
+<Note>
+
 **Note**: For using isDirectDeepLinkEnabled parameter, you must have white labelled your domain first and also integrated the Handling deep link part in your main app in which you want to redirect this video to.
+
+</Note>
 
 **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
@@ -718,7 +726,11 @@ class DefaultFirebaseOptions {
 
 **2. Handling background/foreground notifications**
 
+<Note>
+
 **Note**: Here for Android you need to provide small notification icon as "icon" key for foreground notifications. This icon needs to be in your flutter as well as android folder.
+
+</Note>
 
 <CodeGroup>
 
@@ -832,11 +844,15 @@ Future<void> main() async {
 
 </CodeGroup>
 
-Step 5. Handle SSO Login Explicitly in SDK
+**Step 5**. Handle SSO Login Explicitly in SDK
 
 To Auto Login in the SDK, You need to call below method, whenever user is log in to your application.
 
-Note: You don’t need to call the below method if you have implemented the Embed With SSO already.
+<Note>
+
+**Note**: You don’t need to call the below method if you have implemented the Embed With SSO already.
+
+</Note>
 
 <CodeGroup>
 
