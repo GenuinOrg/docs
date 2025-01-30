@@ -66,31 +66,44 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.8@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.9.2@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.8@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.9.2@aar') {
   transitive = true
 }
 ```
 </CodeGroup>
 
-**3. Initialize SDK in your Application class**
+**3. Initialize SDK **
 
 <CodeGroup>
 
-```kotlin
+```kotlin YourApplication.kt
 
-class YourApplication : GenuInApplication() {
+class YourApplication : Application() {
   override fun onCreate() {
     GenuinSDK.initSDK(this, "YOUR_API_KEY")
   }
 }
 
 ```
+
+```kotlin YourActivity.kt
+
+class YourActivity : AppCompatActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        GenuinSDK.initSDK(application, "YOUR_API_KEY")
+    }
+}
+
+```
+
 </CodeGroup>
 
 **4. Load SDK in seperate activity**
@@ -259,12 +272,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 We are using lottie animation for our loader. You can put your custom lottie animation loader with the name `loader_mix.json` in the `res/raw` folder. Make sure you use the same name as provided.
 
-<Note>
- **Note**
- 
- 1. In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"`
- 2. If you are having/managing your own Application class which extends `Application()`, change its super-class to `GenuInApplication()` from `Application()` , and in the AndroidManifest.xml add `tools:replace="android:name"` to the `<application>` tag.
-</Note>
+<Note> **Note**: In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"` </Note>
 
 
 ## Embed
