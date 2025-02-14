@@ -3,27 +3,6 @@ title: 'React Native SDK'
 description: 'The genuin-react-native SDK is designed to seamlessly integrate the features of the "Genuin" mobile application into your own React Native projects. Follow the instructions below to install and integrate the SDK into your application.'
 ---
 
-## How to Integrate
-
-To integrate the `genuin-react-native` SDK into your application, follow these steps:
-
-1. Import the Feed Component: In your `app.jsx` file, import the `Feed` component from the `genuin-react-native` SDK.
-2. Obtain Your API Key: Contact the Genuin team to obtain your unique `API_KEY`. This key is essential for authenticating your application with the Genuin service.
-3. Implement the `Feed` Component: Use the Feed component within your application, passing the `API_KEY` as a prop. Below is an example of how to implement this:
-
-<CodeGroup>
-
-```javascript javascript 
-import React from "react";
-import Feed from "genuin-react-native";
-
-export default function App() {
-  return <Feed apiKey="API_KEY" />;
-}
-```
-
-</CodeGroup>
-
 # Installation
 
 Run the below code to install the react native 
@@ -604,6 +583,30 @@ import genuin_sdk
 </CodeGroup>
 
 # Web
+
+### Integration
+
+
+## How to Integrate
+
+To integrate the `genuin-react-native` SDK into your application, follow these steps:
+
+1. Import the Feed Component: In your `app.jsx` file, import the `Feed` component from the `genuin-react-native` SDK.
+2. Obtain Your API Key: Contact the Genuin team to obtain your unique `API_KEY`. This key is essential for authenticating your application with the Genuin service.
+3. Implement the `Feed` Component: Use the Feed component within your application, passing the `API_KEY` as a prop. Below is an example of how to implement this:
+
+<CodeGroup>
+
+```javascript javascript 
+import React from "react";
+import Feed from "genuin-react-native";
+
+export default function App() {
+  return <Feed apiKey="API_KEY" />;
+}
+```
+
+</CodeGroup>
 
 **Carousel**
 
