@@ -25,7 +25,7 @@ To install the React Native in Android perform the below steps:
 
 <CodeGroup>
 
-```kotlin
+```kotlin build.gradle
 
 android {
     defaultConfig {
@@ -41,7 +41,7 @@ android {
 
 <CodeGroup>
 
-```kotlin
+```kotlin AndroidManifest.xml
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools">
@@ -90,7 +90,7 @@ Our SDK is using Material components so in order to use our sdk you need to use 
 
 <CodeGroup>
 
-```
+```kotlin styles.xml
 
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -111,7 +111,7 @@ Our SDK is using Material components so in order to use our sdk you need to use 
 
 <CodeGroup>
 
-```kotlin
+```kotlin proguard-rules.pro
 
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
@@ -326,7 +326,7 @@ To handle deep link place the below code in `android/app/src/main/AndroidManifes
 
 <CodeGroup>
 
-```kotlin
+```kotlin AndroidManifest.xml
 
 <activity
     android:name=".MainActivity"
@@ -410,7 +410,7 @@ To handle the push notification place the below code In `android/app/build.gradl
 
 <CodeGroup>
 
-```kotlin
+```kotlin build.gradle
 
 buildscript {
     dependencies {
@@ -430,7 +430,7 @@ buildscript {
 
 <CodeGroup>
 
-```kotlin
+```swift ios/Podfile
 
 # Uncomment this line to define a global platform for your project
 platform :ios, '13.0'
@@ -495,7 +495,7 @@ To handle deeplink place the below in `AppDelegate.swift` file:
 
 <CodeGroup>
 
-```swift
+```swift AppDelegate.swift
 
 import Flutter
 import UIKit
@@ -537,7 +537,7 @@ To handle the push notification place the below code In `AppDelegate.swift` file
 
 <CodeGroup>
 
-```swift
+```swift AppDelegate.swift
 
 import Flutter
 import UIKit
