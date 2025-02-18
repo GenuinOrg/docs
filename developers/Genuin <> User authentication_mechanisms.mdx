@@ -1,0 +1,151 @@
+---
+
+title: 'Genuin <> User Authentication Mechanisms'
+
+---
+
+# User Authentication Mechanisms
+
+User authentication is a crucial aspect of integrating Genuin SDK into mobile and web applications. The three primary authentication mechanisms provided by Genuin SDK are **SSO (Single Sign-On)**, **Auto Login**, and **Bypass Login**. Implementation for both **mobile and web applications** are explained to help determine the best authentication flow for integration.
+
+  
+
+## 1. Overview
+
+### 1.1 Single Sign-On (SSO)
+
+-   Single Sign-On enables users to authenticate once and gain access to your multiple O&O properties without repeatedly entering credentials.
+    
+-   **Implementation Steps**:
+    
+    -   If OAuth is being used, the **SSO configuration** must be set up in the [BCC](http://brands.begenuin.com).
+    
+    -   See here how to [“Configure SSO in the Brand Control Center (BCC)”](https://resources.begenuin.com/developers/configuring_sso_in_brand_control_center).
+    
+
+### 1.2 Auto Login
+
+-   Auto Login allows authentication using your existing authentication infrastructure.
+    
+-   If authentication is already managed independently in your ecosystem, an authentication endpoint can be provided to enable seamless verification of users within Genuin SDK.
+    
+-   **Implementation Steps**:
+    
+
+    -   Provide an **authentication API endpoint**.
+    
+    -   Genuin SDK verifies the user's identity through this endpoint before allowing access.
+    
+    -   See here [“How Genuin Auto Login Works?”](https://resources.begenuin.com/developers/genuin_auto_login)
+    
+
+### 1.3 Bypass Login
+
+-   If there is no **login/signup** infrastructure into your ecosystem, then Genuin provides a **white-label login/signup popup**.
+    
+-   **Use Case**: When managing authentication independently is not required, but still want to authenticate users for engagement.
+    
+-   **Implementation Steps**:
+    
+
+    -   The Genuin SDK presents a **white-label login/signup popup**.
+    
+    -   Genuin acts as a **data processor**, returning all user authentication data to the **data warehouse**.
+    
+    -   If authentication is not required at all, authentication entry points can be disabled upon request.
+    
+
+  
+
+## 2. Mobile App Authentication Flow
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcE7iMdAbra9uzO0r7GeJr0OO6eYci46fRPv-93Kk2oj5jRv2z4ZP8k0AUuQO0UFRnhbQY4SfytIaJicIsQLEQlXKPxaPodFCHc0iSjXOlNd1yaWO3CIYsBOLisn9JDNHOhatPT?key=owG3Vt0uKk6H2jhe8HJdkG1k)
+
+### 2.1 Authentication Flow for “Apps with Login/Signup” System
+
+  
+
+1.  **Case 01** - Your own login/signup
+    
+
+    a.  If your app allows users to explore content without logging in or signing up, you have the option to require them to do so before they can engage with the community (e.g., by commenting on or sparking a video).
+    
+    b.  Genuin will provide a callback to your app so that you can prompt the user to log in or sign up.
+    
+
+2.  **Case 02** - Login with SSO
+    
+
+    a.  If your app requires users to log in or sign up before they can access any content, then you will need to implement a mandatory login process.
+    
+    b.  If you are using OAuth as the authorization protocol, you can configure SSO in the Brand Control Center.
+    
+    c.  Here is [How to Configure SSO in the Brand Control Center (BCC)](https://resources.begenuin.com/developers/configuring_sso_in_brand_control_center)
+    
+
+3.  **Case 03** - Auto Login
+    
+
+    a.  If your app requires users to log in or sign up before they can access any content, then you will need to implement a mandatory login process.
+    
+    b.  If you are not using OAuth, you will need to pass your user authentication token to the Genuin SDK as part of the auto-login process.
+    
+    c.  Here is [How Genuin Auto-Login Works?](https://resources.begenuin.com/developers/genuin_auto_login)
+    
+
+### 2.2 Authentication Flow for “Apps Without Login/Signup” System (Bypass Login)
+
+-   If authentication is required, the Genuin SDK will present a **white-label login/signup popup**.
+    
+-   Genuin will act as a data processor and will provide your user data via your **data warehouse** back into your ecosystem.
+    
+-   If authentication is not required, the login/signup entry points can be disabled within the SDK upon request.
+    
+
+  
+
+## 3. Web App Authentication Flow
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdAZdRLSzJWfqSPJGqyrDKeRp0qu5z1Q2xp091aqzCnn864HebUDn6hwMlFrDYR5RcuhMR2vNLhISMch5PYlrtg3-gWmjAo1_e_ybhO6ht4jXaSTYK2ISRL2Jd92cHRJdpgYxhqYw?key=owG3Vt0uKk6H2jhe8HJdkG1k)
+
+<Note>
+
+**Note**: No separate authentication configuration is required for the web app, if SSO is already configured under BCC provided you are using OAuth authorization protocol.
+
+</Note>
+
+  
+
+### 3.1 Authentication Flow for “Web App with Login/Signup” System
+
+  
+
+1.  Case 01 - Your own login/signup
+    
+
+    a.  If your web app allows users to explore content without logging in or signing up, you have the option to require them to do so before they can engage with the community (e.g., by commenting on or sparking a video).
+    
+    b.  Genuin will provide a **callback** to your web app so that you can prompt the user to log in or sign up.
+    
+
+2.  Case 02 - Auto Login
+    
+
+    a.  If your app requires users to log in or sign up before they can access any content, then you will need to implement a mandatory login process.
+    
+    b.  Then you will need to pass your user authentication token to the Genuin SDK as part of the auto-login process.
+    
+    c.  Here is [How Genuin Auto-Login Works?](https://resources.begenuin.com/developers/genuin_auto_login)
+    
+
+### 3.2 Authentication Flow for “Web App with Login/Signup” System (Bypass Login)
+
+-   If the web app does not have a login/signup system and still user authentication is required, a **white-label login/signup popup** will be presented by the Genuin Web SDK.
+    
+-   Genuin will act as a data processor and will provide your user data via your **data warehouse** back into your ecosystem.
+    
+-   If authentication is not needed, login/signup entry points can be disabled in the SDK upon request.
