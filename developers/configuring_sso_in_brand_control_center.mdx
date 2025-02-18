@@ -48,15 +48,15 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
   - Yes, OIDC is configured as a discovery endpoint.
  
-     - **Step-01**: Turn the radio button to “Yes” under BCC.
+    **Step-01**: Turn the radio button to “Yes” under BCC.
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe6rtkDjWOnhalNYbUQ46iHmGQ7wWI2q0yzF66UPuU4CzTo3zGYPvX8vF9uG1A6jlqV6XIMTe8DkR4yqOba4NN9oAGG_2BlwxxlX_bLIUNoBetsnNqbkN6rlIPPSy1r2ToE3hldUA?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-      - **Step-02**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth
+    **Step-02**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe5dnSGt45Wc3YFtaBZ7cwF7JMr5eC_k2ULGB9KHHYPdLYIz85UFcUCL0SA9PY1d1g7WlbSn10TT5-pc_IgQp5naAymgu0rrh_zqYHRlzxRjunZOUK_ZzhNjS-xYtdhR-hOkjYB?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-      - **Step-03**: Get your OpenID Configuration URL (URL used to automatically fetch OpenID Connect configurations) and enter it into the form under OIDC Discovery Endpoint field in BCC.
+    **Step-03**: Get your OpenID Configuration URL (URL used to automatically fetch OpenID Connect configurations) and enter it into the form under OIDC Discovery Endpoint field in BCC.
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXffPeDRXPui8MmkwR-ifJQBEJDOudKyEacDgam4MNkmTTEt3MNSCjogRyv-aTLl6XSpZW_mb7zw_YBD3PjTrOLzWHEX2nZrf5iKzLJTFQlILnCT7kr-D6VdVgNcesK-GdeKn5F1sg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
@@ -66,11 +66,11 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
 </Note>
 
-      - **Step-04 (optional)**: If your method type is POST and you want to know the source from which O&O properties of yours the end user is coming, then you can add extra body params that you had configured at your end. For eg: “source” - you will get the hostname from where the user is coming from, “os” - what is the operating system of the user i.e. android or iOS.
+    **Step-04 (optional)**: If your method type is POST and you want to know the source from which O&O properties of yours the end user is coming, then you can add extra body params that you had configured at your end. For eg: “source” - you will get the hostname from where the user is coming from, “os” - what is the operating system of the user i.e. android or iOS.
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTG9K57OqdIlx0d1xO5YZg2CrkYxOhRDWw3FpXSmkj0HI30ZoTRIKOSAwyQqwiZXJijkZqr4qAyPgdnUFxky1MOaRzqDqoMGFPbsyGNxTKN9b_hG4WUX6vxVeWrWiGJSS6e8ULeQ?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-      - **Step-05**: Set up the Scopes (permissions or action levels required during authorization) under BCC form in order to provide the permissions for the user info. you want to get accessed by Genuin. By default required scopes will be “openid”,”profile”,”email”.
+    **Step-05**: Set up the Scopes (permissions or action levels required during authorization) under BCC form in order to provide the permissions for the user info. you want to get accessed by Genuin. By default required scopes will be “openid”,”profile”,”email”.
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfgGAEYoem8YYvwmki6X62xPUO38dUIEE-T-HBcrvUcwQU6ewPYN0LDBg-Qm-GVUgUVK0A2AV-iCqDWNAJsD6aOvxvLFEoyRsLFhVq2YlPJ_Wu_-jDppYLxkcEMi1h4kEBoKO4cgg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
@@ -80,18 +80,17 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
 - No, OIDC is not configured as a discovery
 
-    - **Step-01**: Turn the radio button to “No”
+    **Step-01**: Turn the radio button to “No”
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe9AVlgeVtDpuQ69UJTurnm792QIv5Jqk9gfuytYe2cwql7Knc4xICChu3Ef8w4uZCCwr2i32pdA5wM4l0ZzhQvIZsv6S6qH9vrc-ar5I-GsZtB0h4gewyFE58xL-6BEh9sda-fdA?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
 
-    - **Step-02**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth
+    **Step-02**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe5dnSGt45Wc3YFtaBZ7cwF7JMr5eC_k2ULGB9KHHYPdLYIz85UFcUCL0SA9PY1d1g7WlbSn10TT5-pc_IgQp5naAymgu0rrh_zqYHRlzxRjunZOUK_ZzhNjS-xYtdhR-hOkjYB?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
 
-
-     - **Step-03**: Get your OAuth Authorization URL (URL used to authorize the user for access to your application) and enter it into the form under Authorization Endpoint field in BCC.
+    **Step-03**: Get your OAuth Authorization URL (URL used to authorize the user for access to your application) and enter it into the form under Authorization Endpoint field in BCC.
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeEZi0z26kGfmbIAXs6GLLMdaE1VNr2ODF-rVEltnAZBQItg4v6eOMk8Jra6G7DoyF8EHRNigEm93LG9lnAMnZrZxTdW0R6w3tJ8PKEV-V30jvMEIC4k-2ZgPQKHw1sSf_n2yVr?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
@@ -107,7 +106,7 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
   
   </Tip>
 
-     - **Step-04**: Get your OAuth Token URL (URL used to retrieve the authentication token after authorization) and enter it into the form under the Token Endpoint field in BCC.
+    **Step-04**: Get your OAuth Token URL (URL used to retrieve the authentication token after authorization) and enter it into the form under the Token Endpoint field in BCC.
 
   [](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdud-ol_ZP0XwFkk9zXdeLXXmyEu6BMJnj3nCTuRKyNcBG0gImTWH2bJvjYcDjULE-MipXdWEeCm4JCXrEsxH7fRucTwajZ2U9oWEZjfrWWEC8grFfCO3w_Wuxo0Vov2L_pg7SkHA?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
@@ -123,17 +122,17 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
   
   </Tip>
 
-     - **Step-05**: Get your **OAuth User Info URL** (URL used to retrieve the authentication token after authorization) and enter it into the form under the **User Info Endpoint** field in BCC.
+    **Step-05**: Get your **OAuth User Info URL** (URL used to retrieve the authentication token after authorization) and enter it into the form under the **User Info Endpoint** field in BCC.
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeTjhq9dlFa5qDUQ7B6Xn_NjXKgkO-2DDHMRGKZllG0bVUT0w84WDCV3tIKYByT8ThPFEH0uN3F5oGxUW1mU9DKS3KCaj9I6w8xf8TNqmjxbOGIC75Fsc7CV2rdWN3v8uqYFD6WBg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
 - User Info. Mapping :
 
-  - **Step-01**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth 
+    **Step-01**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth 
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe5dnSGt45Wc3YFtaBZ7cwF7JMr5eC_k2ULGB9KHHYPdLYIz85UFcUCL0SA9PY1d1g7WlbSn10TT5-pc_IgQp5naAymgu0rrh_zqYHRlzxRjunZOUK_ZzhNjS-xYtdhR-hOkjYB?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-  - **Step-02**: Get your OAuth Authorization URL and copy paste in the browser. Check under the “claims_supported” key to add the required values under BCC form for “userid”, “email”, “emailVerified” keys via the values under “claims_supported”.
+    **Step-02**: Get your OAuth Authorization URL and copy paste in the browser. Check under the “claims_supported” key to add the required values under BCC form for “userid”, “email”, “emailVerified” keys via the values under “claims_supported”.
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcE5dy2WbzZaGThXbsz0RfgHxN7bdU9MhDaGZPTKDQxjLC_S5glYyl_vI96uRo6DxnmW8qkjO2i2Ss7Lho9G_neGu71U0BrbZfk7WXvDD8aqV48RoLVsU2qXATCq1zenDebUUqc?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
