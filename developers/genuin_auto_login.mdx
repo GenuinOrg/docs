@@ -1,0 +1,156 @@
+---
+
+title: 'How Genuin Auto Login Works?'
+
+---
+
+
+# Genuin Auto Login  
+
+# Overview
+
+This outlines the authentication and content delivery flow between the user, your mobile application, the Genuin SDK, and associated backend services. The process ensures secure user authentication, seamless content delivery, and comprehensive analytics tracking.
+
+# System Components
+
+-   **User**: End-user of the mobile application
+    
+-   **YOUR Mobile App**: The client-side mobile application
+    
+-   **Genuin SDK**: Software Development Kit integrated into your mobile app
+    
+-   **Genuin Backend**: Core backend services handling authentication and content
+    
+-   **Device Middleware**: Interface between Genuin and your authentication system
+    
+-   **YOUR Auth API**: Your authentication service
+    
+-   **YOUR Data Warehouse**: Analytics and data storage system
+    
+
+  
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdMo-ye_FqNEzeLNcb6mqdH_MaH5fN5Mh6_qpPYYFwBC_2yBRalneDIk4GSX68Z-uBlopadYvj5kViUVZ7Gw44mY_UytFawDOyXvs3g2fUkfNnJaBhi_Xf7Z1HkVI263j47Q7dK6Q?key=ovTZdyiUhp1w8g5cNUK2UHpY)
+
+# Process Flow
+
+## Initial Login and SDK Initialization
+
+-   The user initiates the login process through your mobile application
+    
+-   The mobile app initializes the Genuin SDK with your user token
+    
+-   SDK establishes initial context with user information
+    
+
+  
+
+## Authentication Process
+
+-   Genuin SDK sends an authentication request to Genuin Backend
+    
+-   Device Middleware verifies your user token
+    
+-   The token is forwarded to your Auth API for verification
+    
+-   Auth API returns user details including:
+    
+
+  -   Member ID
+    
+  -   Email
+    
+  -   Name
+    
+
+-   User metadata is forwarded to Genuin Backend
+    
+
+  
+
+## User Profile Management
+
+The system handles both new and existing users:
+
+For new users:
+
+-   Creates new user profile in Genuin system
+    
+-   Registers user with your provided metadata
+    
+-   Generates new Genuin token
+    
+
+  
+
+For existing users:
+
+-   Refreshes existing user session
+    
+-   Generates updated Genuin token
+    
+
+  
+  
+
+## Content Delivery
+
+-   Genuin Backend returns authentication token to SDK
+    
+-   The authenticated session is established
+    
+-   Content data is streamed to SDK
+    
+-   SDK renders content in mobile app
+    
+-   Interactive content is displayed to a user
+    
+
+## User Interaction Handling
+
+1.  User interactions are captured by the mobile app
+    
+2.  Interactions are processed through Genuin SDK
+    
+3.  Event data is sent to Genuin Backend including:
+    
+
+  a.  User actions
+    
+  b.  Timestamps
+    
+  c.  Content IDs
+    
+
+## Analytics Integration
+
+Analytics data is pushed to your Data Warehouse (Mixpanel) including:
+
+-   User interaction metrics
+    
+-   Session data
+    
+-   Content engagement metrics
+    
+
+  
+
+## Error Handling
+
+The system includes robust error handling:
+
+1.  API errors are captured by Genuin Backend
+    
+2.  Error status is communicated to SDK
+    
+3.  User-friendly error messages are displayed in the mobile app
+    
+
+  
+
+# Security Considerations
+
+-   All authentication tokens are securely transmitted
+    
+-   User data is encrypted during the transfer
+    
+-   Session management follows security best practices
