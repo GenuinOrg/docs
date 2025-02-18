@@ -12,8 +12,9 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
 </Note>
 
+## SSO Configuration in BCC
 
-1. Accessing BCC Authentication Settings
+### 1. Accessing BCC Authentication Settings
 
 - Log in to the [BCC](https://brands.begenuin.com/) to access your brand account.
 
@@ -23,13 +24,15 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegJnrg7tiYgAJxyawX-1a5vp8BYwND9_X2aCfOU24qVg6586q46KGYYqaOVgqrje77l2ouGx3NpQ9-oSJm9h6V4oH8CJSxG5AQvYIiHTcHcmIGdXREYOpQU7rVehRdUm47Q-T8mw?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-2. Entering Required Details into BCC form for SSO Setup
+### 2. Entering Required Details into BCC form for SSO Setup
+
+#### Go to your Auth0 application:
 
 - Go to your Auth0 application (https://manage.auth0.com/) → Settings → Basic information in order to fill out the details required for SSO setup form in BCC.
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXesMje3BNaL4CE8JFTPg6XoGh_FBykcW1H49wBa_VRgdJUlRJ6bPSUe2RwZSBr5vMXcPwJsRHQSy3gaRkcnewJ1CyzkvkFoQBMkJ_dpGPFY0sZs52OQTZcEugPYd5Kq899EM0VecQ?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-- Primary Details :
+#### Primary Details :
 
 **Step-01**: Enter the CTA Display Name (The name displayed on the CTA button for SSO).'
 
@@ -44,7 +47,11 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
 **Step-04 (optional)**: Enter Third Party ID (to integrate 3rd party services)
 
+### Do you have an OpenID Connect (OIDC) discovery endpoint 
+
 - Do you have an OpenID Connect (OIDC) discovery endpoint configured with your application under Auth0?
+
+#### Yes
 
 --> Yes, OIDC is configured as a discovery endpoint.
  
@@ -77,6 +84,8 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
     - In order to see the list of permissions to set as scopes, copy paste the OpenID Configuration URL in the browser and you can check under the “scopes_supported” key.
 
     ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe17_rhycz92pMM3Z7m48INMQQnX_yuVF84iZkWUxWJ4ymKBZEESPF-3pN9OJ3rNY-Bq2WMFQSV57J-c1hpm-5FMG6rfSnxwkVAkovWRAHqqD9IuLjz0FepWbTch9e5gjkOnKhomw?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+#### No
 
 --> No, OIDC is not configured as a discovery
 
@@ -126,7 +135,7 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
   ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeTjhq9dlFa5qDUQ7B6Xn_NjXKgkO-2DDHMRGKZllG0bVUT0w84WDCV3tIKYByT8ThPFEH0uN3F5oGxUW1mU9DKS3KCaj9I6w8xf8TNqmjxbOGIC75Fsc7CV2rdWN3v8uqYFD6WBg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-- User Info. Mapping :
+### User Info. Mapping :
 
 **1**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth 
 
@@ -154,7 +163,7 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
 
  </Note>
 
-- Entering Callback URLs
+## Entering Callback URLs
 
   - Allowed Callback URLs are a list of specific URLs (provided by Genuin) where Auth0 will redirect a user after they successfully authenticate, essentially acting as the designated endpoint for your application to receive the authentication details following a login process.
   - It is necessary for your application to know how to continue the user on their journey.
@@ -162,7 +171,7 @@ Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
  
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd46OFYLpWVhdQbbwIY1OBELr2t2kToXcsBl0Na4tm7lh6HakUwp8Mi9zdfnOrV6tk0L-txwslN_9d3BhJqAOZKUkz2qhHqIgnUzbzTToqgETF6xW0ZdWhLRir1EHS2Q8_zJd_HcQ?key=_WFu_cNghZT4f-wgHd9iWEmJ)
 
-  - Enter the URLs comma-separated.
+  ### Enter the URLs comma-separated.
     - For QA Environment: (For Testing)
        - https://api.qa.begenuin.com/api/v4/thirdparty/callback
        - https://nodejs.qa.begenuin.com/api/v4/thirdparty/callback
