@@ -178,7 +178,8 @@
         "developers/zero_party_data",
         "developers/guides/brand_safety", 
         "developers/configuring_sso_in_brand_control_center", 
-        "developers/genuin_auto_login"
+        "developers/genuin_auto_login",
+        "developers/Genuin <> User authentication_mechanisms"
       ]
     }
   ]
