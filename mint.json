@@ -179,11 +179,11 @@
     {
       "group": "FAQs",
       "pages": [
-        "developers/zero_party_data",
-        "developers/guides/brand_safety", 
         "faqs/genuin_user_authentication_mechanisms",
         "faqs/configuring_sso_in_brand_control_center", 
-        "faqs/genuin_auto_login"
+        "faqs/genuin_auto_login",
+        "faqs/zero_party_data",
+        "faqs/brand_safety"
       ]
     }
   ]
