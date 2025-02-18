@@ -1,0 +1,174 @@
+---
+
+title: 'Configuring SSO in Brand Control Center (BCC)'
+
+---
+
+To properly configure SSO in the Brand Control Center, follow these steps:
+
+<Note>
+
+Note : Current SSO configuration in BCC supports OAuth/OIDC Protocol.
+
+</Note>
+
+
+1. Accessing BCC Authentication Settings
+
+- Log in to the (BCC)[https://brands.begenuin.com/] to access your brand account.
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeb17gc_KQlwUeB6vXwY_EKrEPabhK4SoQcSsEoMXFN3ssBEqBPtLIqW8BbjK6tw_wE6Qy7eP6lUVza1z__OJhmVDqVknTh3dd3LmwEkdZXIH0v-JGtGYHm3xL042916kPNqhmM?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+- Navigate to the Setup Single Sign On (SSO) under Settings.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegJnrg7tiYgAJxyawX-1a5vp8BYwND9_X2aCfOU24qVg6586q46KGYYqaOVgqrje77l2ouGx3NpQ9-oSJm9h6V4oH8CJSxG5AQvYIiHTcHcmIGdXREYOpQU7rVehRdUm47Q-T8mw?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+2. Entering Required Details into BCC form for SSO Setup
+
+- Go to your Auth0 application (https://manage.auth0.com/) → Settings → Basic information in order to fill out the details required for SSO setup form in BCC.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXesMje3BNaL4CE8JFTPg6XoGh_FBykcW1H49wBa_VRgdJUlRJ6bPSUe2RwZSBr5vMXcPwJsRHQSy3gaRkcnewJ1CyzkvkFoQBMkJ_dpGPFY0sZs52OQTZcEugPYd5Kq899EM0VecQ?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+- Primary Details :
+   **Step-01**: Enter the CTA Display Name (The name displayed on the CTA button for SSO).
+   **Step-02**: Get your Client ID (The unique identifier for your application) from AuthO application settings and enter it into the form for SSO setup in BCC.
+ 
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeoXXtuukO3TUeFDaYWOFLTITU1BSiZzwV9Y9r412w_oYw3iD9xnn64XiXsKnJc4qsOodkc8003GoKgBu-XRXP0BmYio68Usyx_HoNcJrcdzkSaf-Mv0UPPVO0Te6KYd60wBmtfQA?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+   **Step-03**: Get your Client Secret (A string used to sign and validate ID Tokens for authentication flows and to gain access to select Auth0 API endpoints) from AuthO application settings and enter it into the form for SSO setup in BCC.
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe_DfDlXWRqr6LNXMA5Iins6Uu77n_JRkygUQ94KC5khEjAj5rTcL_jj047ZSE2pLQ63yV7670ZQ0MLF72R2CU_9I77d7uI--6JV-nMKlbPdBCpjG8MME9qgVEP6fNHqd_afs1FBg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+   **Step-04 (optional)**: Enter Third Party ID (to integrate 3rd party services)
+
+- Do you have an OpenID Connect (OIDC) discovery endpoint configured with your application under Auth0?
+
+  - Yes, OIDC is configured as a discovery endpoint.
+ 
+   **Step-01**: Turn the radio button to “Yes” under BCC.
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe6rtkDjWOnhalNYbUQ46iHmGQ7wWI2q0yzF66UPuU4CzTo3zGYPvX8vF9uG1A6jlqV6XIMTe8DkR4yqOba4NN9oAGG_2BlwxxlX_bLIUNoBetsnNqbkN6rlIPPSy1r2ToE3hldU
+
+   **Step-02**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe5dnSGt45Wc3YFtaBZ7cwF7JMr5eC_k2ULGB9KHHYPdLYIz85UFcUCL0SA9PY1d1g7WlbSn10TT5-pc_IgQp5naAymgu0rrh_zqYHRlzxRjunZOUK_ZzhNjS-xYtdhR-hOkjYB?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+   **Step-03**: Get your OpenID Configuration URL (URL used to automatically fetch OpenID Connect configurations) and enter it into the form under OIDC Discovery Endpoint field in BCC.
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXffPeDRXPui8MmkwR-ifJQBEJDOudKyEacDgam4MNkmTTEt3MNSCjogRyv-aTLl6XSpZW_mb7zw_YBD3PjTrOLzWHEX2nZrf5iKzLJTFQlILnCT7kr-D6VdVgNcesK-GdeKn5F1sg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+<Note>
+
+  **Note** : You can also add any extra static query params you want after the Open ID configuration URL.
+
+</Note>
+
+  **Step-04 (optional)**: If your method type is POST and you want to know the source from which O&O properties of yours the end user is coming, then you can add extra body params that you had configured at your end. For eg: “source” - you will get the hostname from where the user is coming from, “os” - what is the operating system of the user i.e. android or iOS.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTG9K57OqdIlx0d1xO5YZg2CrkYxOhRDWw3FpXSmkj0HI30ZoTRIKOSAwyQqwiZXJijkZqr4qAyPgdnUFxky1MOaRzqDqoMGFPbsyGNxTKN9b_hG4WUX6vxVeWrWiGJSS6e8ULeQ?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+  **Step-05**: Set up the Scopes (permissions or action levels required during authorization) under BCC form in order to provide the permissions for the user info. you want to get accessed by Genuin. By default required scopes will be “openid”,”profile”,”email”.
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfgGAEYoem8YYvwmki6X62xPUO38dUIEE-T-HBcrvUcwQU6ewPYN0LDBg-Qm-GVUgUVK0A2AV-iCqDWNAJsD6aOvxvLFEoyRsLFhVq2YlPJ_Wu_-jDppYLxkcEMi1h4kEBoKO4cgg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+    - In order to see the list of permissions to set as scopes, copy paste the OpenID Configuration URL in the browser and you can check under the “scopes_supported” key.
+
+    ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe17_rhycz92pMM3Z7m48INMQQnX_yuVF84iZkWUxWJ4ymKBZEESPF-3pN9OJ3rNY-Bq2WMFQSV57J-c1hpm-5FMG6rfSnxwkVAkovWRAHqqD9IuLjz0FepWbTch9e5gjkOnKhomw?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+- No, OIDC is not configured as a discovery
+
+  **Step-01**: Turn the radio button to “No”
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe9AVlgeVtDpuQ69UJTurnm792QIv5Jqk9gfuytYe2cwql7Knc4xICChu3Ef8w4uZCCwr2i32pdA5wM4l0ZzhQvIZsv6S6qH9vrc-ar5I-GsZtB0h4gewyFE58xL-6BEh9sda-fdA?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+  **Step-02**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe5dnSGt45Wc3YFtaBZ7cwF7JMr5eC_k2ULGB9KHHYPdLYIz85UFcUCL0SA9PY1d1g7WlbSn10TT5-pc_IgQp5naAymgu0rrh_zqYHRlzxRjunZOUK_ZzhNjS-xYtdhR-hOkjYB?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+
+  **Step-03**: Get your OAuth Authorization URL (URL used to authorize the user for access to your application) and enter it into the form under Authorization Endpoint field in BCC.
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeEZi0z26kGfmbIAXs6GLLMdaE1VNr2ODF-rVEltnAZBQItg4v6eOMk8Jra6G7DoyF8EHRNigEm93LG9lnAMnZrZxTdW0R6w3tJ8PKEV-V30jvMEIC4k-2ZgPQKHw1sSf_n2yVr?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+  <Note>
+
+**Note** : You can also add any extra static query params you want after the OAuth Authorization URL. For e.g. : “o2v=2”
+
+  </Note>
+
+  <Tip>
+
+**Optional**: You can add extra Authorization Endpoint Query Params (dynamic params). For e.g. : state
+  
+  </Tip>
+
+  **Step-04**: Get your OAuth Token URL (URL used to retrieve the authentication token after authorization) and enter it into the form under the Token Endpoint field in BCC.
+
+  [](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdud-ol_ZP0XwFkk9zXdeLXXmyEu6BMJnj3nCTuRKyNcBG0gImTWH2bJvjYcDjULE-MipXdWEeCm4JCXrEsxH7fRucTwajZ2U9oWEZjfrWWEC8grFfCO3w_Wuxo0Vov2L_pg7SkHA?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+  <Note>
+
+  **Note** : You can also add any extra static query params you want after the OAuth Token URL.
+    
+  </Note>
+
+  <Tip>
+
+**Optional**: You can add extra Token Endpoint Body Params (dynamic params). For e.g. : “callbackurl”
+  
+  </Tip>
+
+  **Step-05**: Get your **OAuth User Info URL** (URL used to retrieve the authentication token after authorization) and enter it into the form under the **User Info Endpoint** field in BCC.
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeTjhq9dlFa5qDUQ7B6Xn_NjXKgkO-2DDHMRGKZllG0bVUT0w84WDCV3tIKYByT8ThPFEH0uN3F5oGxUW1mU9DKS3KCaj9I6w8xf8TNqmjxbOGIC75Fsc7CV2rdWN3v8uqYFD6WBg?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+- User Info. Mapping :
+
+  - **Step-01**: Go to your Auth0 application (https://manage.auth0.com/) → Settings → Advanced Settings → Endpoints → Oauth 
+
+  ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe5dnSGt45Wc3YFtaBZ7cwF7JMr5eC_k2ULGB9KHHYPdLYIz85UFcUCL0SA9PY1d1g7WlbSn10TT5-pc_IgQp5naAymgu0rrh_zqYHRlzxRjunZOUK_ZzhNjS-xYtdhR-hOkjYB?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+  - **Step-02**: Get your OAuth Authorization URL and copy paste in the browser. Check under the “claims_supported” key to add the required values under BCC form for “userid”, “email”, “emailVerified” keys via the values under “claims_supported”.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcE5dy2WbzZaGThXbsz0RfgHxN7bdU9MhDaGZPTKDQxjLC_S5glYyl_vI96uRo6DxnmW8qkjO2i2Ss7Lho9G_neGu71U0BrbZfk7WXvDD8aqV48RoLVsU2qXATCq1zenDebUUqc?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+
+  - You can also add multiple key-value pairs for user info mapping. Other keys supported under BCC SSO Setup form are as follows;
+    - Age
+    - Bio
+    - Birthdate
+    - Country code
+    - Gender
+    - Is mobile verified
+    - Mobile
+
+ ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXddquwIYaUORysg2kDJ1M8fIkCcBoOwha5xQTpyVBmg2RhbsAwy6YKDGvXgzxFkdlTmTtJldcl7GNmoft3yQpgbNXxkaPamO3URB9wFKsDGzOK8dd-vmRGxIiFJ17QLDJL43wOWyQ?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+ <Note>
+
+**Note** : If you have a nested key under the response for your user info. you can also add the “value” as for e.g. : “data.data.id” (based on your nested json for user info.)
+
+ </Note>
+
+- Entering Callback URLs
+
+  - Allowed Callback URLs are a list of specific URLs (provided by Genuin) where Auth0 will redirect a user after they successfully authenticate, essentially acting as the designated endpoint for your application to receive the authentication details following a login process.
+  - It is necessary for your application to know how to continue the user on their journey.
+  - Go to your Auth0 application (https://manage.auth0.com/) → Settings → Application URLs → Allowed Callback URLs
+ 
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd46OFYLpWVhdQbbwIY1OBELr2t2kToXcsBl0Na4tm7lh6HakUwp8Mi9zdfnOrV6tk0L-txwslN_9d3BhJqAOZKUkz2qhHqIgnUzbzTToqgETF6xW0ZdWhLRir1EHS2Q8_zJd_HcQ?key=_WFu_cNghZT4f-wgHd9iWEmJ)
+
+  - Enter the URLs comma-separated.
+    - For QA Environment: (For Testing)
+       - https://api.qa.begenuin.com/api/v4/thirdparty/callback
+       - https://nodejs.qa.begenuin.com/api/v4/thirdparty/callback
+     
+    - For Production Environment:
+       - https://api.begenuin.com/api/v4/thirdparty/callback
+       - https://nodejs.prod.begenuin.com/api/v4/thirdparty/callback
+
+- Save and Test
+  
+  - After filling the form for SSO Setup under BCC and the allowed callback urls under Auth0, save and test the user journey for login/signup.
+
+ Once the **SSO integration** is completed in BCC, the Genuin SDK will automatically authenticate users without requiring them to enter credentials again.
