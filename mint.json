@@ -177,7 +177,8 @@
       "pages": [
         "developers/zero_party_data",
         "developers/guides/brand_safety", 
-        "developers/configuring_sso_in_brand_control_center"
+        "developers/configuring_sso_in_brand_control_center", 
+        "developers/genuin_auto_login"
       ]
     }
   ]
