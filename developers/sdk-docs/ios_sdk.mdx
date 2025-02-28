@@ -325,6 +325,7 @@ class StandardWallFeedViewController: UIViewController {
 </CodeGroup>
 
 <Note>
+
 **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID` while calling the above function. 
 
 </Note>
@@ -346,6 +347,93 @@ To Auto Login in the SDK, You need to call below method, whenever user is log in
 ```
 
 </CodeGroup>
+
+
+**Handle SSO Login in Embed**
+
+<CodeGroup>
+
+```swift with embed
+
+ GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "johndoe@gmail.com", params: ["name" :"John Doe", "nickname" : "john", "mobile" :"919797979797"], embedConfiguration: embedConfiguration)
+
+```
+
+```swift withtout embed
+
+GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" :"John Doe", "nickname" : "john"]
+
+```
+
+</CodeGroup>
+
+Below are the optional parameters:
+
+1. **mobile** - This is an option string parameter. Pass this parameter for `signup/login`.
+2. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+3. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+4. profile_image: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. (edited) 
+
+<Note>
+
+**Note**: `mobile` parameter will be first priority if it is passed along with email for `login/signup`.  
+
+</Note>
+
+
+
+
+1. **email** - This is an optional string parameter. Pass this parameter in the function if you want to pass it as a token. 
+2. **nickname** - This is an optional string parameter. if nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+3. **profile_image** - currently not implemented from backend
+4. **mobile** - This is an option string parameter. Pass this parameter for signup/login. This will be first priority instead of email.
+
+## Custom Login 
+
+If you want to handle login process as per your requirement then follow the below steps:
+
+**Step 1**: Assign Delegate while initializing Genuin SDK
+
+<CodeGroup>
+
+```swift
+
+GenuinSDK.shared.delegate = self ( YOUR_CONTROLLER )
+
+```
+
+</CodeGroup>
+
+**Step 2**: Extend GenuinDelegate & Present your own controller on provided base controller
+
+<CodeGroup>
+
+```swift
+
+extension YOUR_CONTROLLER : GenuinDelegate{
+  func presentLoginViewController(baseViewController : UIViewController) {
+    guard let loginVC = GET AND ASSIGN YOUR CONTROLLER
+    baseViewController.present(loginVC, animated: true)
+  }
+}
+
+```
+
+</CodeGroup>
+
+**Step 3**: Must call below login service from Genuin, to keep user logged in, in Genuin SDK.
+
+<CodeGroup>
+
+```swift
+
+GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" : "FULL_NAME", "nickname" : "USER_NAME"])
+
+```
+
+</CodeGroup>
+
+ 
 
 
 ## Handle SSO Logout in SDK
@@ -399,14 +487,13 @@ To handle deep links in your app use the following methods.
 func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         //redirect if genuin SDK handles the deeplink
         if let dlURL = userActivity.webpageURL , GenuinSDK.shared.willHandleDeepLink(url: dlURL){
-
-            GenuinSDK.shared.scene(scene, continue: userActivity)
+            
+            GenuinSDK.initDeeplinkWith(url: dlURL)
             if let rootVC = window?.rootViewController as? UIViewController{
                 GenuinSDK.shared.handleDeeplink(viewController: rootVC)
             }
-            
         }
-   }
+    }
 
 ```
 
@@ -415,7 +502,7 @@ func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
 func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
         //redirect if genuin SDK handles the deeplink
         if let dlURL = userActivity.webpageURL , GenuinSDK.shared.willHandleDeepLink(url: dlURL){
-            let _ = GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
+            GenuinSDK.initDeeplinkWith(url: dlURL)
             if let rootVC = window?.rootViewController as? UIViewController {
                 GenuinSDK.shared.handleDeeplink(viewController: rootVC)
             }
@@ -434,19 +521,19 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 ### Instructions for `SceneDelegate`:
 
 1. In `SceneDelegate.swift`, implement the `scene(_:continue:)` method.
-2. Notify the SDK of the continued scene via `GenuinSDK.shared.scene(scene, continue: userActivity)`.
+2. Notify the SDK of the continued scene via `GenuinSDK.initDeeplinkWith(url: dlURL)`.
 3. Handle deep links using the root view controller by calling `GenuinSDK.shared.handleDeeplink(viewController: rootVC)`.
 
 <Note>
-**NOTE**: To handle redirection of the deeplink , it is mandatory to call 
-`GenuinSDK.shared.scene(scene, continue: userActivity)` OR 
-`GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
-Accordingly`.
+
+**NOTE**: To handle redirection of the deeplink , it is mandatory to call `GenuinSDK.initDeeplinkWith(url: dlURL)`
+
 </Note>
+
 ### Instructions for `AppDelegate`:
 
 1. In `AppDelegate.swift`, implement the `application(_:continue:restorationHandler:)` method.
-2. Call `GenuinSDK.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)` to let the SDK process the user activity.
+2. Notify the SDK of the continued scene via `GenuinSDK.initDeeplinkWith(url: dlURL)`.
 3. Use `GenuinSDK.shared.handleDeeplink(viewController: rootVC)` to manage the deep link using the app's root view controller.
 
 <Note>
