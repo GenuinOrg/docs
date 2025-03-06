@@ -309,6 +309,13 @@ We are using lottie animation for our loader. You can put your custom lottie ani
 
 ```kotlin EmbedActivity.kt (With SSO)
 
+//This is Optional
+val params = HashMap<String, Any>()
+params["name"] = "John Doe"
+params["email] = "john.doe@begenuin.com"
+params["nickname"] = "john"
+params["mobile"] = "1XXXXXXXXXX"
+
 carouselEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
@@ -319,6 +326,7 @@ carouselEmbedView.apply {
             )
             setActivity(activityContext)
             setSSOToken("YOUR_SSO_TOKEN")
+            setParams(params)
             load()
         }
 ```
@@ -365,6 +373,13 @@ carouselEmbedView.apply {
 val carouselEmbedView = CarouselEmbedView(context)
 llCarouselContainer.addView(carouselEmbedView)
 
+//This is Optional
+val params = HashMap<String, Any>()
+params["name"] = "John Doe"
+params["email] = "john.doe@begenuin.com"
+params["nickname"] = "john"
+params["mobile"] = "1XXXXXXXXXX"
+
 carouselEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
@@ -375,6 +390,7 @@ carouselEmbedView.apply {
             )
             setActivity(activityContext)
             setSSOToken("YOUR_SSO_TOKEN")
+            setParams(params)
             load()
         }
 ```
@@ -416,6 +432,14 @@ To configure the `EmbedParams` based on your need you can pass the below values.
 <Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
 
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+**Add user specific params while performing sso login (Optional)**
+
+**name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
+**mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+**email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+**nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+**profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
 
 
 **3. Manage carousel videos auto-play** 
@@ -474,13 +498,21 @@ class FullEmbedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_embed)
 
+        //This is Optional
+        val params = HashMap<String, Any>()
+        params["name"] = "John Doe"
+        params["email] = "john.doe@begenuin.com"
+        params["nickname"] = "john"
+        params["mobile"] = "1XXXXXXXXXX"
+
         val feedEmbedFragment = FeedEmbedFragment.newInstance(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
                interactionDeepLink = "YOUR_DEEPLINK",
                isDirectDeepLinkEnabled = false,
                isShowProfileEnabled = false,
-               ssoToken = "YOUR_SSO_TOKEN"
+               ssoToken = "YOUR_SSO_TOKEN",
+               params = params
             )
         feedEmbedFragment.let {
             supportFragmentManager.beginTransaction()
@@ -509,6 +541,13 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+
+7. Add user specific params while performing sso login (Optional)
+    a.**name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
+    b.**mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+    c.**email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+    d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+    e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
 
 
 ### Standard Wall Embed
@@ -548,11 +587,23 @@ class StandardWallEmbedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_standard_wall_embed)
 
+        //This is Optional
+        val params = HashMap<String, Any>()
+        params["name"] = "John Doe"
+        params["email] = "john.doe@begenuin.com"
+        params["nickname"] = "john"
+        params["mobile"] = "1XXXXXXXXXX"
+
         val feedEmbedFragment = FeedEmbedFragment.newInstance(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
-               isShowProfileEnabled = true
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+               isShowProfileEnabled = false,
+               ssoToken = "YOUR_SSO_TOKEN",
+               params = params
             )
+
         feedEmbedFragment.let {
             supportFragmentManager.beginTransaction()
                 .add(R.id.frameLayout, it)
@@ -572,6 +623,21 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
 
 3. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+
+<Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
+
+5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+
+7. Add user specific params while performing sso login (Optional)
+    a.**name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
+    b.**mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+    c.**email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+    d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+    e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
 
 
 ## Handle SSO Login Explicitly in SDK
