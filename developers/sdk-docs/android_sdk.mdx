@@ -590,6 +590,29 @@ GenuinSDK.ssoLogin(context = "YOUR_CONTEXT", ssoToken = "YOUR_SSO_TOKEN")
 
 Below are the optional parameters you can add with the function:
 
+<CodeGroup>
+
+```kotlin 
+
+val params = HashMap<String, Any>()
+
+params["name"] = "John Doe"
+params["email] = "john.doe@begenuin.com"
+params["nickname"] = "john"
+params["mobile"] = "1XXXXXXXXXX"
+
+GenuinSDK.ssoLogin(
+    context = "YOUR_CONTEXT", 
+    ssoToken = "YOUR_SSO_TOKEN",
+    params = params //This is optional
+)
+
+```
+
+</CodeGroup>
+
+**Add user specific params while performing sso login (Optional)**
+
 1. **name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
 2. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
 3. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
