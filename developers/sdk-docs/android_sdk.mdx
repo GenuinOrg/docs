@@ -586,6 +586,32 @@ GenuinSDK.ssoLogin(context = "YOUR_CONTEXT", ssoToken = "YOUR_SSO_TOKEN")
 
 </CodeGroup>
 
+## Custom Login
+
+If you want to handle login process as per your requirement then follow the below steps:
+
+<CodeGroup>
+
+```kotlin YourActivity.kt
+
+GenuinSDK.registerInterface(object : GenuinInterface {
+            override fun onLogin(context: Activity) {
+                /*
+                    This callback will be triggered when user attempts to login
+                    within one of the Genuin embeds. Application login process
+                    should be initiated here.
+
+                    When your application's auth process is successfully completed,
+                    call GenuinSDK.ssoLogin(context, "ssoToken") to automatically
+                    manage SDK login.
+                */
+            }
+})
+
+```
+
+</CodeGroup>
+
 ## Handle SSO Logout in SDK
 
 Whenever user logs out from your application call the below method. 
