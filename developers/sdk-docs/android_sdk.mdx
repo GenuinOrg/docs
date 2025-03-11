@@ -66,19 +66,119 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.11@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.12@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.11@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.12@aar') {
   transitive = true
 }
 ```
 </CodeGroup>
 
-**3. Initialize SDK**
+**3. Add permissions to AndroidManifest.xml**
+
+Mandatory Permissions
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+```
+
+</CodeGroup>
+
+Following permissions are optional and can be added as per feature requirements:
+
+- To allow user to **Create Video Content**, **Camera** and **Mic** permissions are needed:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-feature
+    android:name="android.hardware.camera"
+    android:required="false" />
+
+```
+
+</CodeGroup>
+
+- To allow user to **Upload Content** from their gallery
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+//API level > 32
+<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
+//API level <= 32
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" 
+        android:maxSdkVersion="32"/>
+
+```
+
+</CodeGroup>
+
+- To allow user to add their **Contacts as Members** in **Communities** and **Groups**:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+
+```
+
+</CodeGroup>
+
+- To allow user to receive **Push Notifications**:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+```
+
+</CodeGroup>
+
+- To enhance creation of **AI Powered Communities**:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+```
+
+</CodeGroup>
+
+- To enhance the Ad experience of the user:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
+```
+
+</CodeGroup>
+
+**4. Initialize SDK**
 
 <CodeGroup>
 
@@ -106,7 +206,7 @@ class YourActivity : AppCompatActivity() {
 
 </CodeGroup>
 
-**4. Load SDK in seperate activity**
+**5. Load SDK in seperate activity**
 
 <CodeGroup>
 
@@ -118,7 +218,7 @@ GenuinSDK.loadSDK(context)
 </CodeGroup>
                                 
 
-**5. Load SDK in your custom activity**
+**6. Load SDK in your custom activity**
 
 Put below code in `activity_custom.xml` file
 
@@ -178,7 +278,7 @@ android:windowSoftInputMode="adjustPan"
 </CodeGroup>
 
 
-**6. Load SDK with bottom navigation and fragment**
+**7. Load SDK with bottom navigation and fragment**
 
 Add below code in `res/navigation/mobile_navigation.xml`
 
@@ -268,7 +368,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 </CodeGroup>
 
-**7. Want to override our default loader.**
+**8. Want to override our default loader.**
 
 We are using lottie animation for our loader. You can put your custom lottie animation loader with the name `loader_mix.json` in the `res/raw` folder. Make sure you use the same name as provided.
 
