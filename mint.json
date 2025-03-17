@@ -173,7 +173,8 @@
       "group": "Engage Engine",
       "pages": [
         "developers/guides/upload",
-        "developers/guides/clipit"
+        "developers/guides/clipit",
+        "developers/gitkeep2"
       ]
     },
     {
