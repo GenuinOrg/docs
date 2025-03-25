@@ -66,13 +66,13 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.12@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.12.3@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.12@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.12.3@aar') {
   transitive = true
 }
 ```
@@ -416,6 +416,14 @@ params["email"] = "john.doe@begenuin.com"
 params["nickname"] = "john"
 params["mobile"] = "1XXXXXXXXXX"
 
+//This is Optional
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = pageContext
+val geoJson = JSONObject()
+geoJson.put("lat", XXXX.XXX)
+geoJson.put("long", XXXX.XXX)
+contextualParams["geo"] = geoJson.toString()
+
 carouselEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
@@ -426,12 +434,21 @@ carouselEmbedView.apply {
             )
             setActivity(activityContext)
             setSSOToken("YOUR_SSO_TOKEN")
-            setParams(params)
+            setParams(params) // User specific params
+            setContextualParams(contextualParams) // Contextual params
             load()
         }
 ```
 
 ```kotlin EmbedActivity.kt (Without SSO)
+
+//This is Optional
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = pageContext
+val geoJson = JSONObject()
+geoJson.put("lat", XXXX.XXX)
+geoJson.put("long", XXXX.XXX)
+contextualParams["geo"] = geoJson.toString()
 
 carouselEmbedView.apply {
             setEmbedParams(
@@ -442,6 +459,7 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
+            setContextualParams(contextualParams) // Contextual params
             load()
         }
 
@@ -480,6 +498,14 @@ params["email"] = "john.doe@begenuin.com"
 params["nickname"] = "john"
 params["mobile"] = "1XXXXXXXXXX"
 
+//This is Optional
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = pageContext
+val geoJson = JSONObject()
+geoJson.put("lat", XXXX.XXX)
+geoJson.put("long", XXXX.XXX)
+contextualParams["geo"] = geoJson.toString()
+
 carouselEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
@@ -490,12 +516,21 @@ carouselEmbedView.apply {
             )
             setActivity(activityContext)
             setSSOToken("YOUR_SSO_TOKEN")
-            setParams(params)
+            setParams(params) // User specific params
+            setContextualParams(contextualParams) // Contextual params
             load()
         }
 ```
 
 ```kotlin EmbedActivity.kt (Without SSO)
+
+//This is Optional
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = pageContext
+val geoJson = JSONObject()
+geoJson.put("lat", XXXX.XXX)
+geoJson.put("long", XXXX.XXX)
+contextualParams["geo"] = geoJson.toString()
 
 val carouselEmbedView = CarouselEmbedView(context)
 llCarouselContainer.addView(carouselEmbedView)
@@ -509,6 +544,7 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
+            setContextualParams(contextualParams) // Contextual params
             load()
         }
 
@@ -533,7 +569,7 @@ To configure the `EmbedParams` based on your need you can pass the below values.
 
 5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
 
-**Add user specific params while performing sso login (Optional)**
+**Add user specific parameters (Optional)**
 
   a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
@@ -544,6 +580,14 @@ To configure the `EmbedParams` based on your need you can pass the below values.
   d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
 
   e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
+
+**Add contextual parameters (Optional)**
+
+    a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+    
+    b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+    c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
 
 
 **3. Manage carousel videos auto-play** 
@@ -609,6 +653,14 @@ class FullEmbedActivity : AppCompatActivity() {
         params["nickname"] = "john"
         params["mobile"] = "1XXXXXXXXXX"
 
+        //This is Optional
+        val contextualParams = HashMap<String, Any>()
+        contextualParams["page_context"] = pageContext
+        val geoJson = JSONObject()
+        geoJson.put("lat", XXXX.XXX)
+        geoJson.put("long", XXXX.XXX)
+        contextualParams["geo"] = geoJson.toString()
+
         val feedEmbedFragment = FeedEmbedFragment.newInstance(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
@@ -616,7 +668,8 @@ class FullEmbedActivity : AppCompatActivity() {
                isDirectDeepLinkEnabled = false,
                isShowProfileEnabled = false,
                ssoToken = "YOUR_SSO_TOKEN",
-               params = params
+               params = params // User specific params,
+               contextualParams = contextualParams
             )
         feedEmbedFragment.let {
             supportFragmentManager.beginTransaction()
@@ -646,17 +699,25 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
-7. Add user specific params while performing sso login (Optional)
+7. Add user specific parameters (Optional)
 
-  a.**name** - This is an optional string parameter. Pass this parameter for `signup/login`.
+  a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
-  b.**mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+  b. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
-  c.**email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+  c. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
   d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
 
   e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
+
+8. Add contextual parameters (Optional)
+
+  a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+
+  b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+  c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
 
 
 ### Standard Wall Embed
@@ -703,6 +764,15 @@ class StandardWallEmbedActivity : AppCompatActivity() {
         params["nickname"] = "john"
         params["mobile"] = "1XXXXXXXXXX"
 
+        //This is Optional
+        val contextualParams = HashMap<String, Any>()
+        contextualParams["page_context"] = pageContext
+        val geoJson = JSONObject()
+        geoJson.put("lat", XXXX.XXX)
+        geoJson.put("long", XXXX.XXX)
+        contextualParams["geo"] = geoJson.toString()
+
+
         val feedEmbedFragment = FeedEmbedFragment.newInstance(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
@@ -710,7 +780,8 @@ class StandardWallEmbedActivity : AppCompatActivity() {
                isDirectDeepLinkEnabled = false,
                isShowProfileEnabled = false,
                ssoToken = "YOUR_SSO_TOKEN",
-               params = params
+               params = params, // User specific params
+               contextualParams = contextualParams // Contextual params
             )
 
         feedEmbedFragment.let {
@@ -741,7 +812,7 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
-7. Add user specific params while performing sso login (Optional)
+7. Add user specific parameters (Optional)
     
   a.**name** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
@@ -752,6 +823,14 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
   d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
 
   e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
+
+8. Add contextual parameters (Optional)
+
+  a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+
+  b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+  c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
 
 
 ## Handle SSO Login Explicitly in SDK
@@ -797,7 +876,7 @@ GenuinSDK.ssoLogin(
 
 </CodeGroup>
 
-**Add user specific params while performing sso login (Optional)**
+**Add user specific parameters (Optional)**
 
 1. **name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
 2. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
