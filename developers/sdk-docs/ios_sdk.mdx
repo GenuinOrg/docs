@@ -17,11 +17,11 @@ Permissions to be added in `info.plist` file of your application
 
 | Permission | Usage | Used Where |                                                               
 | ---------- | ----- | ---------- |
-| Camera (NSCameraUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Create Video Content, Camera, Mic |
-| Microphone (NSMicrophoneUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Mic |
-| Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.| Upload Content from their gallery | 
+| Camera (NSCameraUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Video Comment |
+| Microphone (NSMicrophoneUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Voice Comment |
+| Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.| Post, Profile, Banner | 
 | Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio |
-| Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Contacts as Members in Communities and Groups |
+| Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Add Members in Communities and Groups |
 | Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location |
 
 <Note>
@@ -271,13 +271,6 @@ GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID"
 
 <Note> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app. </Note>
 
-To configure the `EmbedConfiguration` based on your need you can change the below values.
-
-1. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
-
-2. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work.
-
-3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
 ### Full Screen Embed
 
@@ -315,14 +308,6 @@ GenuinSDK.shared.initializeEmbedFeed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE
 **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the above function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
 </Note>
-
-To configure the `EmbedConfiguration` based on your need you can change the below values.
-
-1. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
-
-2. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work.
-
-3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
 
 
 ### Standard Wall Embed
@@ -362,9 +347,48 @@ GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView:
 
 </Note>
 
+### Additional Information
+
 To configure the `EmbedConfiguration` based on your need you can change the below values.
 
 1. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+2. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work.
+
+3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+### Optional Parameters
+
+Below are the optional parameters for the `params` key:
+
+1. **name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
+
+2. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+3. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+4. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+
+5. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK.
+
+### Contextual Parameters
+
+Below are the optional parameters for the `contextualParams` key:
+
+
+1. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+
+2. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+3. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
+<Note>
+
+**Note**: `lat` and `long` both parameters shall be passed in order to implement the contextual feed based on the location.  
+
+</Note>
+
+
 
 ## Handle SSO Login Explicitly in SDK
 
@@ -404,32 +428,6 @@ GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN") { status in
 ```
 
 </CodeGroup>
-
-### Optional Parameters
-
-Below are the optional parameters for the `params` key:
-
-1. **name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
-2. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
-3. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
-4. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
-5. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK.
-
-### Contextual Parameters
-
-Below are the optional parameters for the `contextualParams` key:
-
-
-1. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
-2. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
-3. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
-
-<Note>
-
-**Note**: `lat` and `long` both parameters shall be passed in order to implement the contextual feed based on the location.  
-
-</Note>
-
 
 ## Custom Login 
 
