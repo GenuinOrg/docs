@@ -11,18 +11,24 @@ description: 'Genuin iOS SDK comprises features such as brand feed, communities,
 | iOS      | 13.0                      | Swift    | Portrait               | iPhone                 |
 
 
-## Required Permissions 
+## Permissions (Optional) 
 
-Required Permissions to be added in `info.plist` file of your application
+Permissions to be added in `info.plist` file of your application
 
-| Permission | Usage |                                                               
-| ---------- | ----- |
-| Camera (NSCameraUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.|
-| Microphone (NSMicrophoneUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.|
-| Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.|
-| Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.|
-| Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.|
-| Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.|
+| Permission | Usage | Used Where |                                                               
+| ---------- | ----- | ---------- |
+| Camera (NSCameraUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Create Video Content, Camera, Mic |
+| Microphone (NSMicrophoneUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Mic |
+| Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.| Upload Content from their gallery | 
+| Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio |
+| Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Contacts as Members in Communities and Groups |
+| Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location |
+
+<Note>
+
+If any permission is not given then that particular feature will not be accessible in your app.
+
+</Note>
 
 ## Installation
 
@@ -40,7 +46,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.12"
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.12.4"
 
 end
 
@@ -66,7 +72,7 @@ platform :ios, '13.0'
 target 'YourProject' do
   use_frameworks!
 
-pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.12"
+pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.12.4"
 
 end
 
@@ -355,13 +361,19 @@ To Auto Login in the SDK, You need to call below method, whenever user is log in
 
 ```swift with embed
 
- GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "johndoe@gmail.com", params: ["name" :"John Doe", "nickname" : "john", "mobile" :"919797979797"], embedConfiguration: embedConfiguration)
-
+GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "johndoe@gmail.com", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
 ```
 
 ```swift withtout embed
 
-GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" :"John Doe", "nickname" : "john"]
+GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": 235.34 }])
+```
+
+```swift with completion handler
+
+GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com") { status in
+}
+// Where status of login = true or false 
 
 ```
 
@@ -369,17 +381,26 @@ GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" :"John 
 
 ### Optional Parameters
 
-Below are the optional parameters:
+Below are the optional parameters for the `params` key:
 
 1. **name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
-2. **mobile** - This is an option string parameter. Pass this parameter for `signup/login`.
+2. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
 3. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
 4. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
 5. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK.
 
+### Contextual Parameters
+
+Below are the optional parameters for the `contextualParams` key:
+
+
+1. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+2. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+3. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
 <Note>
 
-**Note**: `mobile` parameter will be first priority if it is passed along with email for `login/signup`.  
+**Note**: `lat` and `long` both parameters shall be passed in order to implement the contextual feed based on the location.  
 
 </Note>
 
@@ -423,7 +444,7 @@ extension YOUR_CONTROLLER : GenuinDelegate{
 
 ```swift Swift
 
-GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" : "FULL_NAME", "nickname" : "USER_NAME"])
+GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" : "FULL_NAME", "nickname" : "USER_NAME"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }])
 
 ```
 
@@ -440,6 +461,14 @@ Whenever user logs out from your application call the below method.
 
 ``` swift ViewController.swift
 GenuinSDK.shared.ssoLogout()
+```
+
+```swift with completion handler
+
+GenuinSDK.shared.ssoLogout { status in
+}
+// Where status of logout = true or false
+
 ```
 
 </CodeGroup>
