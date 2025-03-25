@@ -257,6 +257,16 @@ embedConfiguration.isDirectDeepLinkEnabled = false
 GenuinSDK.shared.initializeEmbed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, embedConfiguration: embedConfiguration)
 ```
 
+```swift ViewController.swift (With Contextual Parameters) 
+
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+
+```
+
 </CodeGroup>
 
 <Note> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app. </Note>
@@ -287,6 +297,16 @@ embedConfiguration.isShowProfileEnabled = false
 embedConfiguration.isDirectDeepLinkEnabled = false
 
 GenuinSDK.shared.initializeEmbedFeed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, embedConfiguration: embedConfiguration)
+```
+
+```swift ViewController.swift (With Contextual Parameters) 
+
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbedFeed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+
 ```
 
 </CodeGroup>
@@ -328,6 +348,12 @@ class StandardWallFeedViewController: UIViewController {
 }
 ```
 
+```
+
+GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView: self.view, viewConroller: self, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+
+```
+
 </CodeGroup>
 
 <Note>
@@ -361,17 +387,17 @@ To Auto Login in the SDK, You need to call below method, whenever user is log in
 
 ```swift with embed
 
-GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "johndoe@gmail.com", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
 ```
 
 ```swift withtout embed
 
-GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": 235.34 }])
+GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME"])
 ```
 
 ```swift with completion handler
 
-GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com") { status in
+GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN") { status in
 }
 // Where status of login = true or false 
 
@@ -444,7 +470,7 @@ extension YOUR_CONTROLLER : GenuinDelegate{
 
 ```swift Swift
 
-GenuinSDK.shared.ssoLogin(ssoToken: "example@gmail.com", params: ["name" : "FULL_NAME", "nickname" : "USER_NAME"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }])
+GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN", params: ["name" : "FULL_NAME", "nickname" : "USER_NAME"])
 
 ```
 
