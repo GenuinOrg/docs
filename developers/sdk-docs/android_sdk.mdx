@@ -762,7 +762,13 @@ To Auto Login in the SDK, You need to call below method, whenever user is log in
 
 <CodeGroup>
 
+
+```kotlin YourClass.kt
+
 GenuinSDK.ssoLogin(context = "YOUR_CONTEXT", ssoToken = "YOUR_SSO_TOKEN")
+
+```
+
 
 </CodeGroup>
 
@@ -798,6 +804,36 @@ GenuinSDK.ssoLogin(
 3. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
 4. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
 5. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
+
+### Optional Callback
+
+```kotlin YourClass.kt
+
+GenuinSDK.ssoLogin(
+    context = "YOUR_CONTEXT", 
+    ssoToken = "YOUR_SSO_TOKEN",
+    params = "YOUR_OPTIONAL_PARAMS",
+    onComplete = {
+        isSuccess: Boolean ->
+        //Manage callback for Login Completion
+    }
+)
+
+```
+
+```kotlin YourClass.java
+
+GenuinSDK.INSTANCE.ssoLogin(
+        "CONTEXT",
+        "SSO-TOKEN",
+        "OPTIONAL-PARAMETERS",
+        (isSuccess) -> {
+            //Manage callback for Login Completion
+            return Unit.INSTANCE;
+        }
+);
+
+```
 
 
 ## Custom Login
@@ -835,6 +871,32 @@ Whenever user logs out from your application call the below method.
 GenuinSDK.ssoLogout(context = "YOUR_CONTEXT")
 
 </CodeGroup>
+
+### Optional Callback
+
+```kotlin YourClass.kt
+
+GenuinSDK.ssoLogout(
+    context = "YOUR_CONTEXT",
+    onComplete = {
+        isSuccess: Boolean ->
+        //Manage callback for Logout Completion
+    }
+)
+
+```
+
+```kotlin YourClass.java
+
+GenuinSDK.INSTANCE.ssoLogout(
+        "CONTEXT",
+        (isSuccess) -> {
+            //Manage callback for Logout Completion
+            return Unit.INSTANCE;
+        }
+);
+
+```
 
 
 ## Handling Deep Link
