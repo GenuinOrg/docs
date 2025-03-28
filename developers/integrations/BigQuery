@@ -6,7 +6,7 @@ Big query offers access to structured **data storage**, **analytics** which is c
 **Step 1**: Open your google cloud account, create a service account and click on **Edit** permission.
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfmAcCmt2AuNSzB5OPNWrYD6ND21pei3vQ4BhIlZ-4rGHfQWjaQVV-blzoa7B2fnzoN_Xr4x4-nzEaIFqzVDe5V4HZ-DBvGm4UJKaE7AnQxB7j2jRlTgWvR-pNZRC6y803k9NmYdg?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/image 1.png" />
 
   
 **Step 2**: Assign the role.
@@ -14,7 +14,7 @@ Big query offers access to structured **data storage**, **analytics** which is c
 -   **2.1**: Role = BigQuery Data Editor
      
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdLa2_9j3k3vVWK--V1BASsqdHsdBnaSFOWo7vN2H-Asje-xBbkZQzCSnQUCGqxJJCn3kZLEW9RpKzndTX1tL8GLeUpjhh4SD4auM7zp34n_p4E-QJdno0rKDJ56V3EVBATGS8G6w?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 2.png" />
 
   
 **Step 3**: Set the condition as shown in the image.
@@ -24,7 +24,7 @@ Big query offers access to structured **data storage**, **analytics** which is c
 -   **3.2**: Set **Condition 2** as **Name** > **Starts with** > **projects/<project_name>/<data_set_name>**
     
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfov9Xi08W3cToXh43Cdzpm6B8rtQp1vAZNJfRPwyWPmqlOTZjMLTwbnAub1FLEO4Jfol556OFPzfTmYbS5FFlRuXoPvD-_J7ezLaHoID1sXBQ1mJAjm5p56_aH90lvwkLousvV6g?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 3.png" />
   
   
 
@@ -38,7 +38,7 @@ Following are the steps to connect your **BigQuery** account with BCC (Brand Con
 
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdlgo2J8sCdf-8hsdBIqxknHeSMbF4oXr8Sw9shnyUINlaToqRUyxd6taysKJtRMMXnrFVRSP2nYuKQoLywr7kjc14fIJWDb1HNJjT1UVmRdbf-ThuOONuVVz9vOKwSTpb41WyM9g?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 4.png" />
 
   
 
@@ -52,14 +52,14 @@ Insert the **Dataset ID** (`project_name.dataset_name`) and set the **frequency*
 
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd967EQJHP_PhQxXHTdOTmszyjvF5MPlCkhOkC7mPpf6QI578qS96J1PKoTb3bzbVrDoJaU-4pk1Qy2nRNlk6_e6u34-vUJ96QHzwMxGK-CWYVEPZ3IvkQDjscibLM59CdO9b1x?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 5.png" />
 
   
 
 -   **For Service**
     
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdXMTYGaOXl0Foc-PbS6TeV5cNPymFWjWAVJ01FuphqkpgcqvybOXAiY57381a4i_BWXQU7wCOVQ6Au3KQPejtJ85cnQpex7DUHCuIh5RzipfzfDy_vEw68ZZojl-EwWlc3_tm61g?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 6.png" />
 
   
 
@@ -69,11 +69,11 @@ Insert the **Dataset ID** (`project_name.dataset_name`) and set the **frequency*
 
 After uploading all the details click on the **Connect** button to connect the **BigQuery** account.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfeAP_SMGr1wu6FrUf-3woCz-dKHr2qTUcj3QK3mt0fkpuqHoHtpPV_q42jf81b4D1pUvYd9Qx3Q-penItJLeDmvv0XXiAwmd79KSphu9HEoROXPrBMj5zRy1atboGQ3lLm8fda?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 7.png" />
 
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdh6j1UroLFa_NLLc7M-3UDX3y7wy5HxPDNQTaFcKu39BAkA2Yf5bXlRstRmi7XpOGmMYRWbykY2zCHIROHdOnUclRvxx_Xj23SO9NAJ-UwOQdyj5Jn9rb2mqofhhpzeR5mH1HRpA?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 8.png" />
 
   
 
@@ -81,12 +81,11 @@ After uploading all the details click on the **Connect** button to connect the *
 
 Once the connection is successfully built then a table named “**genuin_data**” will be created under your dataset.  
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfQcq4UFgidCogvvXFV8lJCwxgGTwV3AD7V4ExDz8eacdcfV6ANKsDRCsERCcQe2D-w-NlhD2rqfbRa3KfnCOFvhdffWgIPTOAkSwYZneU_U7ss_FuIzDQik7gQqh-3fU7S29_gDw?key=NJAxIqXiZeNiZiAibwOlOvRw)
-
+<img height="200" src="/visual-aids/developers/integrations/Image 9.png" />
 
 All of the data will be passed based on the below structure.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfuKH4e75YxulPX6lbmB7cCue4JeF-Oueyl48blQh81i0rxKEuCSh8XHbCFM8DycO5l2Vv6OiCH51cmrLf1qgCBJB-FPCBCcFFolVFVMPmP27DYZe4vA5ee-gpXGLAeiyXNdgGdMQ?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 10.png" />
 
   
 **Disconnection**  
@@ -94,18 +93,18 @@ All of the data will be passed based on the below structure.
 Once the **BigQuery** account is connected then you can also **Disconnect** it.
 
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfz2eAd3tq6YXCcpWBwBwIuEDUa96UlKkRw0qNlj4TytjcackHaXQkKjEcjvGrIMnKGtqxZHWRqpKHPhLelDpGWadNMMYJRyC-dwdrqD7lWpC5_7eDAwsh-oo8TT63poWkYkznf1Q?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 11.png" />
  
 
 Confirm the **Disconnection** request as shown in the below screenshot.  
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfobkVmWO5EcFu6VEI-o922a32Zxh8PbnK3rEfjgMQmURRgtzaYKwV8AAe-0tUkd27IolKcgpVvHGpl-04zadFN10bPEyk8XFNjpXfRkdk3ew6dAPO3bFv_sK5VT9werM4DRwhYsA?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 12.png" />
 
 
 Once the connection is successfully disconnected then a toast message will be visible.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdzqVWbSBHejzhazz2iOiDisJkfrq6Ey5fIfsaEpxCyIsPWmob2Nz76lgq2IQlqVAisIPrCnqQngoI4NwhJtEp_HmzpRbP24j2zcZH67Dj-0uXFrHu5QewBmSN73eC6CqaNLT1m?key=NJAxIqXiZeNiZiAibwOlOvRw)
+<img height="200" src="/visual-aids/developers/integrations/Image 13.png" />
 
   
 
