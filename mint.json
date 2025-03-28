@@ -177,6 +177,12 @@
       ]
     },
     {
+      "group": "Integration",
+      "pages": [
+        "developers/integrations/bigquery"
+      ]
+    },
+    {
       "group": "FAQs",
       "pages": [
         "faqs/genuin_user_authentication_mechanisms",
