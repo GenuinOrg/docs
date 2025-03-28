@@ -178,7 +178,7 @@
     },
     {
       "group": "Integration",
-      "pages": [
+      "page": [
         "developers/integrations/bigquery"
       ]
     },
