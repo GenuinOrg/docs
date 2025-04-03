@@ -17,38 +17,51 @@ To embed your Brand community into your website, follow the steps below:
 <CodeGroup>
 
 ```html Embed Without SSO
-<div
-id="gen-sdk"
-style="max-width: 1080px; height: 720px; display: flex;"
-></div>
+
+<!-- Container for embedding the Genuin community widget without Single Sign-On (SSO) -->
+<div id="gen-sdk" style="max-width: 1080px; height: 720px; display: flex;"></div>
+<!-- SDK JavaScript module -->
 <script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
 <script>
-	// Callback function that can be used to initiate the SDK
+	// Callback function to automatically initialize the Genuin SDK when ready
 	window.onGenuinReady = (genuin) => {
-	genuin.initialize({
+		genuin.initialize({
 			embed_id: 'Your Embed ID',
 			api_key: 'Your API Key',
 		})
 	}
+
+	// Alternative manual initialization without waiting for SDK callback
+	window.genuin.init({
+		embed_id: 'Your Embed ID',
+		api_key: 'Your API Key',
+	})
 </script>
+
 ```
 
 ```html Embed With SSO
 
-<div
-id="gen-sdk"
-style="max-width: 1080px; height: 720px; display: flex;"
-></div>
+<!-- Container for embedding the Genuin community widget with Single Sign-On (SSO) -->
+<div id="gen-sdk" style="max-width: 1080px; height: 720px; display: flex;"></div>
+<!-- SDK JavaScript module -->
 <script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
 <script>
-	// Callback function that can be used to initiate the SDK
+	// Callback function to automatically initialize the Genuin SDK with SSO when ready
 	window.onGenuinReady = (genuin) => {
-	genuin.initialize({
+		genuin.initialize({
 			embed_id: 'Your Embed ID',
 			api_key: 'Your API Key',
 			token: 'Your Authentication Token'
 		})
 	}
+
+	// Alternative manual initialization with SSO without waiting for SDK callback
+	window.genuin.init({
+		embed_id: 'Your Embed ID',
+		api_key: 'Your API Key',
+		token: 'Your Authentication Token'
+	})
 </script>
 
 ```
