@@ -1,0 +1,177 @@
+---
+title: Subdomain WhiteLabel Solution
+description: Learn how to set up your brand community under your own domain with a white label solution, including DNS setup steps and SEO benefits.
+---
+
+# Introduction
+
+This guide will outline the process of setting up a white label solution for your brand's community using Genuin's platform. With this solution, you can seamlessly integrate your community under your own domain, providing a customized experience for your users.
+
+  
+
+# Prerequisites
+
+Genuin will provide you with the established community under the subdomain URL - sephora.begenuin.com.
+
+  
+
+# Steps for setting up Whitelabel
+
+To set up a white label solution for your brand's community, follow these steps to configure the DNS settings considering you want to map "community.sephora.com" to "sephora.begenuin.com":
+
+  
+
+1.  ### Login to Your DNS Provider: Access the control panel or dashboard of your DNS hosting provider. This could be services like GoDaddy, Namecheap, AWS Route 53, or any other DNS provider you are using.
+    
+
+  
+
+GoDaddy
+
+1.  Sign in to your GoDaddy Domain Control Center. (You might be prompted to log in).
+    
+2.  Select your domain to access the Domain Settings page.
+    
+3.  Scroll down to the Additional Settings and select Manage DNS.
+    
+4.  In the Records section, select Add or Edit to modify your CNAME record.
+    
+5.  Enter the details provided by Genuin for the CNAME record and save the changes.
+    
+
+Namecheap
+
+1.  Log in to your Namecheap account.
+    
+2.  Select Domain List from the left sidebar and click on the Manage button next to your domain.
+    
+3.  Navigate to the Advanced DNS tab.
+    
+4.  Find the Host Records section and click on Add New Record.
+    
+5.  Choose CNAME Record from the drop-down menu and enter the details provided by Genuin.
+    
+6.  Click on the checkmark to save the record.
+    
+
+Bluehost
+
+1.  Log into your Bluehost control panel.
+    
+2.  Click on Domains from the navigation menu at the top.
+    
+3.  Select the domain you wish to manage, and click on the DNS Zone Editor.
+    
+4.  Scroll down to the CNAME section and click on Add Record.
+    
+5.  Enter the record details as provided by Genuin and save.
+    
+
+  
+
+HostGator
+
+1.  Log in to your HostGator cPanel.
+    
+2.  In the Domains section, click on Zone Editor.
+    
+3.  Click on Manage next to the domain you want to configure.
+    
+4.  Click on +CNAME Record to add a new record.
+    
+5.  Enter the necessary details for the CNAME record and click on Add Record.
+    
+
+Google Domains
+
+1.  Sign in to Google Domains.
+    
+2.  Select your domain.
+    
+3.  Open the menu (if it's not already open) by clicking on the domain name.
+    
+4.  Click on DNS in the left-hand menu.
+    
+5.  Scroll to the Custom resource records section and add your CNAME record accordingly.
+    
+
+AWS Route 53
+
+1.  Sign in to the AWS Management Console and open the Route 53 console.
+    
+2.  In the navigation pane, choose Hosted zones
+    
+3.  Choose the name of the domain that you want to update
+    
+4.  Choose Create Record Set.
+    
+5.  Specify the CNAME settings provided by Genuin.
+    
+
+Cloudflare
+
+1.  Log in to your Cloudflare account and select your domain.
+    
+2.  Go to the DNS settings tab.
+    
+3.  Click on Add record.
+    
+4.  Choose CNAME from the type dropdown, enter the details as instructed by Genuin, and save the record.
+    
+
+DreamHost
+
+1.  Log into your DreamHost web panel.
+    
+2.  Navigate to the (Panel > 'Domains' > 'Manage Domains') page.
+    
+3.  Click the DNS link under the domain you wish to edit.
+    
+4.  Add a CNAME record with the details provided by Genuin.
+    
+
+  
+
+  
+
+2.  ### Locate DNS Settings or DNS Management: Find the section in your provider's interface where you can manage DNS records. This is usually labeled as "DNS Management," "DNS Settings," or something similar.
+    
+3.  ### Locate the CNAME Record Option: Look for an option to add or edit CNAME records. It might be named "CNAME Record," "Alias," or "Canonical Name." Different providers may use slightly different terminology.
+    
+
+  
+
+4.  ### Add a New CNAME Record: Select the option to add a new CNAME record. You will typically need to provide the following information:  
+      
+    Name or Host: Enter the subdomain you want to map, for example, "community."  
+    Value or Points To: Enter the domain you want to point to, in this case, "ted.begenuin.com."
+    
+
+  
+
+5.  ### Save Changes: After entering the necessary information, save the changes. There might be a "Save," "Update," or "Apply" button. Confirm the changes to update your DNS settings.
+    
+
+  
+
+6.  ### Propagation Time: Keep in mind that DNS changes may take some time to propagate across the internet. It could take a few minutes to several hours. During this period, some users may still be directed to the old server.
+    
+
+  
+
+7.  ### Verify Configuration: After the changes have propagated, you can verify the configuration by entering "community.carlistmy.com" in a web browser. It should now point to the server specified in the CNAME record.
+    
+
+  
+
+# Benefits of white label solution
+
+Understand how hosting the community under your domain enhances your brand's online presence and benefits SEO through improved Google indexing.
+
+By adopting the white label solution, your brand's community will be hosted under your own domain (e.g., "community.ted.com"), rather than a subdomain provided by Genuin.
+
+  
+
+How does it help in Google Indexing?
+
+Hosting your community under your own domain can positively impact its visibility on search engines like Google. When all community content resides under your brand's domain, it consolidates the authority and relevance of your website in the eyes of search engines. As a result, your community content is more likely to rank higher in search engine results pages (SERPs), leading to increased organic traffic and better discoverability for your brand.
