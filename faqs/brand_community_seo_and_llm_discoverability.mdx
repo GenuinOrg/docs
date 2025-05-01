@@ -73,7 +73,7 @@ Also a strong Domain Authority (DA) and a robust backlinking strategy will signi
 
 -   **Question**: Is all content in the communities helping SEO/crawlable, or only certain types of videos (i.e. just User Generated Content - UGC)?
     
--   **Answer**: All content within the communities is crawlable. After [white labeling the brand](https://docs.google.com/document/d/1b9wqRenWrspee5SSs8rBFQAlx29qh3JIqa2cRSAWj6s/edit?usp=sharing) will submit the sitemap of community, group, post, and profile pages to search consoles viz. Google,Bing, Brave and DuckDuckGo for crawling, provided that the robots.txt is configured correctly.
+-   **Answer**: All content within the communities is crawlable. After [white labeling the brand](https://resources.begenuin.com/faqs/subdomain_whitelabel_solution) will submit the sitemap of community, group, post, and profile pages to search consoles viz. Google,Bing, Brave and DuckDuckGo for crawling, provided that the robots.txt is configured correctly.
     
 
 ### Detailed steps for sitemap submission to major search consoles:
@@ -255,10 +255,14 @@ The following robots.txt directives can be used to manage OpenAI's access to you
 
 Example robots.txt configuration:
 
+```
+
 **User-agent**: *  
 **Disallow**: /private/  
 **User-agent**: GPTBot  
 **Allow**: /
+
+```
 
 This configuration blocks all user agents from the /private/ directory, but allows the GPTBot to access the rest of the site, where GPTBot will use the data to feed their foundational AI models.
 
@@ -284,10 +288,13 @@ These robots.txt directives can control how Perplexity interacts with your site:
 
 Example robots.txt for Perplexity:
 
+```
 **User-agent**: *  
 **Disallow**: /admin/  
 **User-agent**: PerplexityBot  
 **Allow**: /
+```
+
 
 In this example, all bots are blocked from the /admin/ section, while PerplexityBot is allowed to crawl the rest of the website.
 
@@ -299,7 +306,7 @@ To provide LLM-friendly content, as per industry standards adding an /llms.txt m
     
 -   **Discover websites using llms.txt**:  [llms.txt directory](https://directory.llmstxt.cloud/)
     
--   **Additional References**:
+**Additional References**:
     
 
 -   [LLMs.txt Explained | TDS Archive](https://medium.com/data-science/llms-txt-414d5121bcb3)
