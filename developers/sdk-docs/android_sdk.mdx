@@ -74,13 +74,13 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.15@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.15.1@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.15@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.15.1@aar') {
   transitive = true
 }
 ```
@@ -194,7 +194,8 @@ Following permissions are optional and can be added in `AndroidManifest.xml` fil
 
 class YourApplication : Application() {
   override fun onCreate() {
-    GenuinSDK.initSDK(this, "YOUR_API_KEY")
+    GenuinSDK.initSDK(this, "YOUR_API_KEY") // For Production Environment
+    GenuinSDK.initSDK(this, "YOUR_API_KEY", genuinEnv = GenuinEnv.QA) // Add this line if you want to test in QA Environment
   }
 }
 
@@ -206,7 +207,8 @@ class YourActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        GenuinSDK.initSDK(application, "YOUR_API_KEY")
+        GenuinSDK.initSDK(application, "YOUR_API_KEY") // For Production Environment
+        GenuinSDK.initSDK(this, "YOUR_API_KEY", genuinEnv = GenuinEnv.QA) // Add this line if you want to test in QA Environment
     }
 }
 
