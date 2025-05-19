@@ -46,7 +46,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.15"
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.15.1"
 
 end
 
@@ -72,7 +72,7 @@ platform :ios, '13.0'
 target 'YourProject' do
   use_frameworks!
 
-pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.15"
+pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.15.1"
 
 end
 
@@ -109,6 +109,7 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
     let configuration = GenuinConfiguration.shared
     configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
     //configuration.showNavigationBar = true - In order to show the navigation bar add this line
+    // configuration.environment = .qa //To set the SDK environment - Add this line to test your app in QA environment - by default it will be .prod.
 
 
     // Initialize the SDK with your API key and configuration
@@ -128,6 +129,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     let configuration = GenuinConfiguration.shared
     configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
     //configuration.showNavigationBar = true - In order to show the navigation bar add this line
+    // configuration.environment = .qa //To set the SDK environment - Add this line to test your app in QA environment - by default it will be .prod.
 
    // Initialize the SDK with your API key and configuration
     GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
