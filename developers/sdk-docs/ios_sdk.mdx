@@ -112,7 +112,7 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
     configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
 
     // For QA Environment
-    // configuration.environment = .qa 
+    configuration.environment = .qa 
 
     // Initialize the SDK with your API key and configuration
     GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
@@ -134,7 +134,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
 
     // For QA Environment 
-    // configuration.environment = .qa 
+    configuration.environment = .qa 
 
    // Initialize the SDK with your API key and configuration
     GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
