@@ -107,10 +107,12 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
 
     // Initialize the SDK configuration 
     let configuration = GenuinConfiguration.shared
-    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
-    
-    // configuration.environment = .qa //To set the SDK environment - Add this line to test your app in QA environment - by default it will be .prod.
 
+    // For Production environment (Default)
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+
+    // For QA Environment
+    // configuration.environment = .qa 
 
     // Initialize the SDK with your API key and configuration
     GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
@@ -127,9 +129,12 @@ import GenuinSDK
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Initialize the SDK configuration
     let configuration = GenuinConfiguration.shared
+
+    // For Production Environment
     configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
-    
-    // configuration.environment = .qa //To set the SDK environment - Add this line to test your app in QA environment - by default it will be .prod.
+
+    // For QA Environment 
+    // configuration.environment = .qa 
 
    // Initialize the SDK with your API key and configuration
     GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
