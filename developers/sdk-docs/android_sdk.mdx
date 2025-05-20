@@ -194,10 +194,10 @@ Following permissions are optional and can be added in `AndroidManifest.xml` fil
 
 class YourApplication : Application() {
   override fun onCreate() {
-    GenuinSDK.initSDK(this, "YOUR_API_KEY") // For Production Environment
-    GenuinSDK.initSDK(this, "YOUR_API_KEY", genuinEnv = GenuinEnv.QA) // Add this line if you want to test in QA Environment
-  }
-}
+    // For Prod Environment
+    GenuinSDK.initSDK(this, "YOUR_API_KEY")
+    // For QA Environment
+    GenuinSDK.initSDK(this, "YOUR_API_KEY", genuinEnv = GenuinEnv.QA)
 
 ```
 
@@ -206,9 +206,11 @@ class YourApplication : Application() {
 class YourActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // For Prod Environment
+        GenuinSDK.initSDK(application, "YOUR_API_KEY")
+        // For QA Environment
+        GenuinSDK.initSDK(application, "YOUR_API_KEY", genuinEnv = GenuinEnv.QA)
 
-        GenuinSDK.initSDK(application, "YOUR_API_KEY") // For Production Environment
-        GenuinSDK.initSDK(this, "YOUR_API_KEY", genuinEnv = GenuinEnv.QA) // Add this line if you want to test in QA Environment
     }
 }
 
