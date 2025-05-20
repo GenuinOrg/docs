@@ -108,7 +108,7 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
     // Initialize the SDK configuration 
     let configuration = GenuinConfiguration.shared
     configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
-    //configuration.showNavigationBar = true - In order to show the navigation bar add this line
+    
     // configuration.environment = .qa //To set the SDK environment - Add this line to test your app in QA environment - by default it will be .prod.
 
 
@@ -128,7 +128,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     // Initialize the SDK configuration
     let configuration = GenuinConfiguration.shared
     configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
-    //configuration.showNavigationBar = true - In order to show the navigation bar add this line
+    
     // configuration.environment = .qa //To set the SDK environment - Add this line to test your app in QA environment - by default it will be .prod.
 
    // Initialize the SDK with your API key and configuration
