@@ -23,6 +23,7 @@ Permissions to be added in `info.plist` file of your application
 | Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio |
 | Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Add Members in Communities and Groups |
 | Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location |
+| NSUserTrackingUsageDescription | This is the message which informs users that why the app is asking for permission. | Monetization |
 
 <Note>
 
@@ -236,6 +237,84 @@ if #available(iOS 15.0, *) {
 ```
 
 </CodeGroup>
+
+## Monetization
+
+To enable Monetization use following code snippet to get **advertisingIdentifier** by **AppTrackingTranspancy**
+
+<CodeGroup>
+
+```swift For SceneDelegate
+
+import AppTrackingTransparency
+import AdSupport //Import only if you want to use advertisingIdentifier
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+   func sceneDidBecomeActive(_ scene: UIScene) {
+        // Called when the scene has moved from an inactive state to an active state.
+        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        DispatchQueue.main.async {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .notDetermined:
+                    break
+                case .restricted:
+                    break
+                case .denied:
+                    break
+                case .authorized:
+                    // If you want to check the current advertisingIdentifier
+                    print("advertisingIdentifier: ", ASIdentifierManager.shared().advertisingIdentifier.uuidString)
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+
+}
+
+```
+
+```swift For AppDelegate
+
+import AppTrackingTransparency
+import AdSupport //Import only if you want to use advertisingIdentifier
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        DispatchQueue.main.async {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .notDetermined:
+                    break
+                case .restricted:
+                    break
+                case .denied:
+                    break
+                case .authorized:
+                    // If you want to check the current advertisingIdentifier
+                    print("advertisingIdentifier: ", ASIdentifierManager.shared().advertisingIdentifier.uuidString)
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+
+}
+
+```
+
+</CodeGroup>
+
+Also if you enable monetization then you need to update App Privacy in AppStoreConnect
+
+<img height="200" src="/visual-aids/developers/guides/ios_sdk/Product Page Preview.png" />
 
 
 ## Embed
