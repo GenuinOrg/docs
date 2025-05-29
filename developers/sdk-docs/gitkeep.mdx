@@ -432,22 +432,64 @@ buildscript {
 
 ```swift ios/Podfile
 
-# Uncomment this line to define a global platform for your project
-platform :ios, '13.0'
+ENV['USE_FRAMEWORKS'] = 'dynamic'
 
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    flutter_additional_ios_build_settings(target)
-    if target.name == 'Giphy'
-      `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
-    end
-    target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
-      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-    end
-  end
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, min_ios_version_supported
+prepare_react_native_project!
+
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
 end
 
+target 'YourApp' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
+
+  pre_install do |installer|
+      installer.pod_targets.each do |pod|
+        if pod.name.eql?('RNReanimated')
+          def pod.build_type
+          Pod::BuildType.static_library
+        end
+      end
+    end
+  end
+
+  post_install do |installer|
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
+    )
+
+    installer.pods_project.targets.each do |target|
+      if target.name == 'Giphy'
+        `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
+      end
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1'
+        config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+      end
+    end
+
+  end
+end
 ```
   
 </CodeGroup>
@@ -460,71 +502,156 @@ end
 
 ```swift
 
-import Flutter
 import UIKit
-import genuin_sdk
+import React
+import React_RCTAppDelegate
+import ReactAppDependencyProvider
+import Firebase
 
 @main
-@objc class AppDelegate: FlutterAppDelegate {
-  override func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-  ) -> Bool {
-    GenuinSdkPlugin.initialize(apiKey: "YOUR_API_KEY", loaderName: "YOUR_LOTTIE_LOADER_NAME")
-    //We are using lottie animation for our loader. You can put your custom lottie animation loader in your app's resources. update the "YOUR_LOTTIE_LOADER_NAME" with your loader name while initialize sdk.
+class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate {
 
-      GeneratedPluginRegistrant.register(with: self)
-      //UINavigationController is required for the redirection purpose in native component
-      if let flutterViewController: FlutterViewController = window?.rootViewController as? FlutterViewController {
-          let navigationController = UINavigationController(rootViewController: flutterViewController)
-          navigationController.setNavigationBarHidden(true, animated: false)
-          window?.rootViewController = navigationController
-          window?.makeKeyAndVisible()
-      }
-      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    self.moduleName = "YourApp"
+    self.dependencyProvider = RCTAppDependencyProvider()
+
+    if FirebaseApp.app() == nil {
+      FirebaseApp.configure()
+    }
+
+    UNUserNotificationCenter.current().delegate = self
+
+    UIApplication.shared.registerForRemoteNotifications()
+
+    // You can add your custom initial props in the dictionary below.
+    // They will be passed down to the ViewController used by React Native.
+    self.initialProps = [:]
+    GenuinModuleObjCWrapper.initSDK("YOUR_API_KEY", loaderName: "YOUR_LOTTIE_LOADER_NAME", showNavigationBar: nil)
+    addNavVC()
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
-}
 
+  func addNavVC(){
+    DispatchQueue.main.async {
+      if let rootVC = self.window.rootViewController {
+        self.window.rootViewController = nil
+        let navVC = GenuinModuleObjCWrapper.getGenuinNavigationController(rootVC)
+        navVC?.setNavigationBarHidden(true, animated: true);
+        self.window.rootViewController = navVC
+        self.window.makeKeyAndVisible()
+      }
+    }
+  }
+
+  override func sourceURL(for bridge: RCTBridge) -> URL? {
+    self.bundleURL()
+  }
+
+  override func bundleURL() -> URL? {
+#if DEBUG
+    RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
+#else
+    Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+#endif
+  }
+
+}
 ```
   
 </CodeGroup>
+
+If your project has AppDelegate.swift file create the following wrapper classes in Objective-C in order to communicate with genuin's react-native module,
+
+1. `GenuinModuleObjCWrapper.h`
+
+```swift
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface GenuinModuleObjCWrapper : NSObject
++ (void)initSDK:(NSString *_Nullable)apiKey loaderName:(NSString *_Nullable)loaderName showNavigationBar:(BOOL *_Nullable)showNavigationBar;
++ (BOOL)application:(UIApplication *_Nullable)application continueUserActivity:(NSUserActivity *_Nullable)userActivity restorationHandler:(void (^_Nullable)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler;
++ (BOOL)handleDeepLink:(NSURL * _Nullable)dlURL controller:(UIViewController * _Nullable)controller;
++ (void)handleForegroundNotification:(NSDictionary *)notificationData;
++ (UINavigationController*_Nullable)getGenuinNavigationController:(UIViewController*)viewController;
+@end
+
+NS_ASSUME_NONNULL_END
+
+```
+
+2. `GenuinModuleObjCWrapper.mm`
+
+```swift
+
+#import "GenuinModuleObjCWrapper.h"
+#import "GenuinSDKPlugin.h"
+
+@implementation GenuinModuleObjCWrapper
++ (void)initSDK:(NSString *_Nullable)apiKey loaderName:(NSString *_Nullable)loaderName showNavigationBar:(BOOL *_Nullable)showNavigationBar {
+  [GenuinSDKPlugin initSDK:apiKey loaderName:loaderName showNavigationBar:showNavigationBar];
+}
+
++ (BOOL)application:(UIApplication *_Nullable)application continueUserActivity:(NSUserActivity *_Nullable)userActivity restorationHandler:(void (^_Nullable)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
+  return [GenuinSDKPlugin application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
+}
+
++ (BOOL)handleDeepLink:(NSURL * _Nullable)dlURL controller:(UIViewController * _Nullable)controller {
+  return [GenuinSDKPlugin handleDeepLink:dlURL controller:controller];
+}
+
++ (void)handleForegroundNotification:(NSDictionary *)notificationData {
+  [GenuinSDKPlugin handleForegroundNotification:notificationData];
+}
+
++ (UINavigationController*_Nullable)getGenuinNavigationController:(UIViewController*)viewController {
+  return [GenuinSDKPlugin getGenuinNavigationController: viewController];
+}
+
+@end
+
+```
+
+3. `YourApp-Bridging-Header.h`
+
+```swift
+
+#import "GenuinModuleObjCWrapper.h"
+
+```
 
 **2. Handling Deep Link**
 
 To handle deeplink place the below in `AppDelegate.swift` file:
 
+Prerequisite step : [Link](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#handling-deep-link)
+
+In `AppDelegate.swift`:
+
 <CodeGroup>
 
 ```swift AppDelegate.swift
 
-import Flutter
 import UIKit
-import genuin_sdk
+import React
+import React_RCTAppDelegate
+import ReactAppDependencyProvider
+import Firebase
 
 @main
-@objc class AppDelegate: FlutterAppDelegate {
-  override func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-  ) -> Bool {
-      GenuinSdkPlugin.initialize(apiKey: "YOUR_API_KEY", loaderName: "YOUR_LOTTIE_LOADER_NAME")
-      GeneratedPluginRegistrant.register(with: self)
-      if let flutterViewController: FlutterViewController = window?.rootViewController as? FlutterViewController {
-          let navigationController = UINavigationController(rootViewController: flutterViewController)
-          navigationController.setNavigationBarHidden(true, animated: false)
-          window?.rootViewController = navigationController
-          window?.makeKeyAndVisible()
-      }
-      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-  }
+class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate {
 
   override func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
-        let result = GenuinSdkPlugin.flutterapplication(application, continue: userActivity, restorationHandler: restorationHandler)
-        if GenuinSdkPlugin.handleDeepLink(dlURL: userActivity.webpageURL, controller: window?.rootViewController) {
-            return true
-        }
-        return result
+    let result = GenuinModuleObjCWrapper.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    if GenuinModuleObjCWrapper.handleDeepLink(userActivity.webpageURL, controller: window.rootViewController) {
+        return true
     }
+    return result
+  }
+
 }
 
 ```
@@ -539,43 +666,40 @@ To handle the push notification place the below code In `AppDelegate.swift` file
 
 ```swift AppDelegate.swift
 
-import Flutter
 import UIKit
-import genuin_sdk
+import React
+import React_RCTAppDelegate
+import ReactAppDependencyProvider
+import Firebase
 
 @main
-@objc class AppDelegate: FlutterAppDelegate {
-  override func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-  ) -> Bool {
-      GenuinSdkPlugin.initialize(apiKey: "YOUR_API_KEY", loaderName: "YOUR_LOTTIE_LOADER_NAME")
-      UNUserNotificationCenter.current().delegate = self
-      GeneratedPluginRegistrant.register(with: self)
-      if let flutterViewController: FlutterViewController = window?.rootViewController as? FlutterViewController {
-          let navigationController = UINavigationController(rootViewController: flutterViewController)
-          navigationController.setNavigationBarHidden(true, animated: false)
-          window?.rootViewController = navigationController
-          window?.makeKeyAndVisible()
-      }
-      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+class AppDelegate: RCTAppDelegate, UNUserNotificationCenterDelegate {
+
+  override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    Messaging.messaging().apnsToken = deviceToken
+    print("deviceToken", deviceToken)
   }
 
   override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("\(userInfo )")
-        completionHandler(.newData)
+      print("\(userInfo )")
+      completionHandler(.newData)
+  }
+
+  override func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: any Error) {
+  }
+
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    completionHandler([.list, .banner, .badge, .sound])
+  }
+
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    if response.notification.request.trigger == nil {
+      let notificationData = ["data": response.notification.request.content.userInfo]
+        GenuinModuleObjCWrapper.handleForegroundNotification(notificationData)
     }
-    override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
-        let userInfo = notification.request.content.userInfo
-        print("\(userInfo)")
-        //removed banner to show in app notification
-        if #available(iOS 14.0, *) {
-            completionHandler([.banner, .list, .badge, .sound])
-        } else {
-            // Fallback on earlier versions
-            completionHandler([])
-        }
-    }
+    completionHandler()
+  }
+
 }
 
 ```
