@@ -23,7 +23,7 @@ Permissions to be added in `info.plist` file of your application
 | Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio |
 | Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Add Members in Communities and Groups |
 | Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location |
-| NSUserTrackingUsageDescription | This is the message which informs users that why the app is asking for permission. | Monetization |
+| Tracking (NSUserTrackingUsageDescription) | This is the message which informs users that why the app is asking for permission. | Monetization |
 
 <Note>
 
@@ -315,6 +315,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 Also if you enable monetization then you need to update App Privacy in AppStoreConnect
 
 <img height="200" src="/visual-aids/developers/guides/ios_sdk/Product Page Preview.png" />
+
+<Note>
+**Need to declare in App Store Connect that your app is using Advertising Data**
+
+Steps:
+- **Log in** to your App Store Connect.
+- **Select the app** you are working on.
+- Go to App **Privacy > Data Collection**.
+- Find the Usage Data section and select the **Advertising Data**.
+- Click on **Save/Publish**.
+- Now Setup Advertising Data by selecting (Third-Party Advertising, Analytics, Product Personalization, App Functionality, Other Purposes)
+- Click on **Next** and give the answers as asked.
+- Click on **save**.
+</Note>
 
 
 ## Embed
