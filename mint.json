@@ -140,8 +140,7 @@
         "developers/sdk-docs/android_sdk",
         "developers/sdk-docs/web_sdk",
         "developers/sdk-docs/react_native_sdk",
-        "developers/sdk-docs/flutter_sdk",
-        "developers/sdk-docs/gitkeep"
+        "developers/sdk-docs/flutter_sdk"
       ]
     },
     {
