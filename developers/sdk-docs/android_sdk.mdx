@@ -174,33 +174,6 @@ Following permissions are optional and can be added in `AndroidManifest.xml` fil
 
 </CodeGroup>
 
-- To enable the **Monetization** add the below code:
-
-<CodeGroup>
-
-```kotlin AndroidManifest.xml
-
-<uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-
-```
-
-</CodeGroup>
-
-<Note>
-**Need to declare in Google play console that your app is using Advertising ID**
-
-Steps:
-- **Log in** to your Google Play Console.
-- **Select the app** you are working on.
-- Go to **Policy** and **programs > App content**.
-- Find the **Advertising ID** section and click on **Manage**.
-- Select "**yes**" that your app is using  Advertising ID
-- After answering the questions, submit your declaration.
-</Note>
-
-
-
-
 **4. Initialize SDK**
 
 <CodeGroup>
@@ -403,6 +376,32 @@ override fun onCreate(savedInstanceState: Bundle?) {
 We are using lottie animation for our loader. You can put your custom lottie animation loader with the name `loader_mix.json` in the `res/raw` folder. Make sure you use the same name as provided.
 
 <Note> **Note**: In AndroidManifest.xml, in the `<application>` tag, set `android:allowBackup="false"` </Note>
+
+## Monetization
+
+- To enable the **Monetization** add the below code:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
+```
+
+</CodeGroup>
+
+<Note>
+**Need to declare in Google play console that your app is using Advertising ID**
+
+Steps:
+- **Log in** to your Google Play Console.
+- **Select the app** you are working on.
+- Go to **Policy** and **programs > App content**.
+- Find the **Advertising ID** section and click on **Manage**.
+- Select "**yes**" that your app is using  Advertising ID
+- After answering the questions, submit your declaration.
+</Note>
 
 
 ## Embed
