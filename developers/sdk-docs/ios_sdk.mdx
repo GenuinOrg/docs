@@ -23,7 +23,7 @@ Permissions to be added in `info.plist` file of your application
 | Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio |
 | Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Add Members in Communities and Groups |
 | Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location |
-| Tracking (NSUserTrackingUsageDescription) | This is the message which informs users that why the app is asking for permission. | Monetization |
+| Tracking (NSUserTrackingUsageDescription) | Your data will be used to analyse ads we run! | Monetization |
 
 <Note>
 
@@ -240,7 +240,9 @@ if #available(iOS 15.0, *) {
 
 ## Monetization
 
-To enable Monetization use following code snippet to get **advertisingIdentifier** by **AppTrackingTranspancy**
+To enable Monetization use following code snippet to get **advertisingIdentifier** by **AppTrackingTranspancy**. You need to add NSUserTrackingUsageDescription in Info.plist as described [here](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#permissions-optional).
+
+
 
 <CodeGroup>
 
