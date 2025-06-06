@@ -39,6 +39,7 @@ To embed your Brand community into your website, follow the steps below:
   }
 
   // Alternative manual initialization without waiting for SDK callback
+  // Use This initialization methods if you are using frontend library/framework e.g. React.
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
@@ -66,6 +67,7 @@ To embed your Brand community into your website, follow the steps below:
   }
 
   // Alternative manual initialization with SSO without waiting for SDK callback
+  // Use This initialization methods if you are using frontend library/framework e.g. React.
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
@@ -109,6 +111,7 @@ setup.
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
 <script>
+  // Use This initialization methods if you are using frontend library/framework e.g. React.
   window.genuin.init({})
 
   // Alternative manual initialization with Multi Embeds for SDK callback
@@ -119,8 +122,10 @@ setup.
 ```
 
 ```html Embed With Contextual Feed
-- Only include the parameters necessary to retrieve a contextual feed. ## For
-Multi Embeds
+- Only include the parameters necessary to retrieve a contextual feed. 
+
+## For Multi Embeds
+
 <!-- Example of multiple embeds with contextual feeds.Use your own embed_id and api_key, and ensure each embed_id is unique. Be careful to assign a unique id to each HTML element, as shown below. -->
 
 <!-- Containers for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
@@ -154,6 +159,7 @@ Multi Embeds
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
 <script>
+  // Use This initialization methods if you are using frontend library/framework e.g. React.
   window.genuin.init({})
 
   // Alternative manual initialization with Multi Embeds for SDK callback
@@ -195,6 +201,7 @@ Multi Embeds
        }
 
   // Alternative manual initialization with Multi Embeds for SDK callback
+  // Use This initialization methods if you are using frontend library/framework e.g. React.
         window.genuin.init({
            embed_id: 'Your Embed Id',
            api_key: 'Your Api key',
@@ -216,6 +223,8 @@ Multi Embeds
 | embed_id     | The id which you want to embed in your web SDK                                 |
 | api_key      | Unique API key which will be used to authenticate the embed                    |
 | token        | Your SSO Token which will be used for authenticate                             |
-| page_context | Your Website Content Using which we render our Embeds Feed Based On it         |
+| page_context | The content or context of your webpage, used to render relevant embed feeds.   |
+|              | This can include comma-separated keywords or search parameters (e.g., "AI",    |
+|              | "tech news", etc.).                                                            |
 | lat          | Lalitude of Location which will be used to retrive the feed based on Location  |
 | long         | Longitude of location which will be used to retrive the feed based on Location |
