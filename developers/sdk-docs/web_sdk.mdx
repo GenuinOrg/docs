@@ -66,6 +66,44 @@ To embed your Brand community into your website, follow the steps below:
 
 ```
 
+```html Embed With Multi Embeds
+
+## Prerequisites
+
+Before implementing the multi-embed setup, ensure you have:
+
+- Valid Genuin API credentials
+- Unique embed IDs for each widget instance
+- Access to the Genuin SDK
+
+## Implementation
+
+### HTML Structure
+
+The multi-embed approach requires separate containers for each widget instance. Each container must have unique identifiers and proper data attributes.
+- Ensure each container has a unique `id` attribute
+
+<!-- First Container -->
+<div data-embed-id="Your Embed Id" data-api-key="Your Api Key" id="gen-sdk-1" class="gen-sdk-class" style="width: 100%; height: 100vh"></div>
+
+<!-- Second Container -->
+<div data-embed-id="Your Embed Id" data-api-key="Your Api Key" id="gen-sdk-2" class="gen-sdk-class" style="width: 100%; height: 100vh"></div>
+
+<!-- SDK JavaScript module -->
+<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+
+<!-- Use Any of the below initialization methods with Multi Embeds -->
+<script>
+      	window.genuin.init({})
+
+	// Alternative manual initialization with SSO without waiting for SDK callback
+	window.onGenuinReady = (genuin) => {
+            genuin.initialize({
+    	})}
+</script>
+
+```
+
 </CodeGroup>
 
 
