@@ -82,6 +82,9 @@ Before implementing the multi-embed setup, ensure you have:
 
 The multi-embed approach requires separate containers for each widget instance. Each container must have unique identifiers and proper data attributes.
 - Ensure each container has a unique `id` attribute
+- <b>Note:</b> The multi-embed approach also works for single embeds, so you can use it for both cases if you prefer a unified setup.
+
+<!-- Containers for embedding the Genuin community widget with Multi Embeds -->
 
 <!-- First Container -->
 <div data-embed-id="Your Embed Id" data-api-key="Your Api Key" id="gen-sdk-1" class="gen-sdk-class" style="width: 100%; height: 100vh"></div>
@@ -104,6 +107,76 @@ The multi-embed approach requires separate containers for each widget instance. 
 
 ```
 
+```html Embed With Contextual Feed
+
+- Only include the parameters necessary to retrieve a contextual feed.
+
+## For Multi Embeds
+<!-- Example of multiple embeds with contextual feeds.Use your own embed_id and api_key, and ensure each embed_id is unique. Be careful to assign a unique id to each HTML element, as shown below. -->
+
+<!-- Containers for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
+
+<!-- First Container -->
+<div data-embed-id="Your Embed Id" data-api-key="Your Api Key" data-page-context="context of page" data-lat="latitute of location" data-long="longitude of location" data-url="your_website_url" id="unique identifier" class="gen-sdk-class" style="width: 100%; height: 100vh"></div>
+
+<!-- Second Container -->
+<div data-embed-id="Your Embed Id" data-api-key="Your Api Key" data-page-context="context of page" data-lat="latitute of location" data-long="longitude of location" data-url="your_website_url" id="unique identifier" class="gen-sdk-class" style="width: 100%; height: 100vh"></div>
+
+<!-- SDK JavaScript module -->
+<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+
+<!-- Use Any of the below initialization methods with Multi Embeds -->
+<script>
+      	window.genuin.init({})
+
+	// Alternative manual initialization with Multi Embeds for SDK callback
+	window.onGenuinReady = (genuin) => {
+            genuin.initialize({
+    	})}
+</script>
+
+## For Single Embeds
+
+<!-- One embeds with contextual feed , use your embed_id and api_key, and embed_id must be unique-->
+
+<!-- Container for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
+
+<div id="gen-sdk" class="gen-sdk-class" style="width: 100%; height: 100vh"></div>
+
+<!-- SDK JavaScript module -->
+<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+
+ <!-- Use Any of the below initialization methods -->
+    <script>
+      	window.onGenuinReady = (genuin) => {
+        genuin.initialize({
+          embed_id: 'Your Embed Id',
+          api_key: 'Your Api key',
+          contextualParams: {
+            page_context: 'Context of Page',
+            geo: {
+              lat: latitue of location in number , e.g. 50.432,
+              long: longitude of location in number , e.g. 122.4194,
+            }
+          }
+        })
+      }
+
+	// Alternative manual initialization with Multi Embeds for SDK callback
+       window.genuin.init({
+          embed_id: 'Your Embed Id',
+          api_key: 'Your Api key',
+          contextualParams: {
+            page_context: 'Context of Page',
+            geo: {
+             lat: latitue of location in number , e.g. 50.432,
+            long: longitude of location in number , e.g. 122.4194,
+            }
+          }
+     })
+    </script>
+```
+
 </CodeGroup>
 
 
@@ -112,4 +185,7 @@ The multi-embed approach requires separate containers for each widget instance. 
 | ----------- | --------------- |
 | embed_id | The id which you want to embed in your web SDK |
 | api_key | Unique API key which will be used to authenticate the embed  | 
-| token | Your SSO Token which will be used for authenticate | 
+| token | Your SSO Token which will be used for authenticate |
+| page_context | Your Website Content Using which we render our Embeds Feed Based On it |
+| lat | Lalitude of Location which will be used to retrive the feed based on Location | 
+| long | Longitude of location which will be used to retrive the feed based on Location |
