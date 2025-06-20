@@ -74,13 +74,13 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.16@aar"){
+implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.17@aar"){
         isTransitive=true
     }
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.16@aar') {
+implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.17@aar') {
   transitive = true
 }
 ```
@@ -424,9 +424,17 @@ Steps:
       android:layout_height="300dp">
 
       <com.begenuin.sdk.ui.customview.embed.CarouselEmbedView
-      android:id="@+id/carouselEmbedView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+        android:id="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:interTileSpacing="12dp"
+        app:leftInset="12dp"
+        app:topInset="12dp"
+        app:rightInset="12dp"
+        app:bottomInset="12dp"
+        app:tileCornerRadius="12dp"
+        />
 </LinearLayout>
 
 ```
@@ -464,6 +472,15 @@ carouselEmbedView.apply {
             setActivity(activityContext)
             setSSOToken("YOUR_SSO_TOKEN")
             setParams(params) // User specific params
+            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
             setContextualParams(contextualParams) // Contextual params
             load()
         }
@@ -488,6 +505,15 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
+            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
             setContextualParams(contextualParams) // Contextual params
             load()
         }
@@ -544,6 +570,15 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
+            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
             setSSOToken("YOUR_SSO_TOKEN")
             setParams(params) // User specific params
             setContextualParams(contextualParams) // Contextual params
@@ -573,6 +608,15 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
+            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
             setContextualParams(contextualParams) // Contextual params
             load()
         }
@@ -580,6 +624,32 @@ carouselEmbedView.apply {
 ```
 
 </CodeGroup>
+
+
+#### Vertical Carousel Embed
+
+To implement vertical carousel, you can use `setScrollDirection(CarouselScrollDirection.VERTICAL)` and other configurations will be same as above.
+
+<CodeGroup>
+
+```kotlin VerticalEmbedActivity.kt
+
+// Example Code Snippet
+
+carouselEmbedView.apply {
+            setEmbedParams(
+               embedId = "YOUR_EMBED_ID", 
+               uniqueId="UNIQUE_ID",
+            )
+            setActivity(activityContext)
+            setScrollDirection(CarouselScrollDirection.VERTICAL)
+            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
+            load()
+        }
+
+```
+</CodeGroup>
+
 
 <Note> **Note**: To initialise the Embed you need to add your activity context `(setActivity(activityContext))` in which you want the embed. To auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN"`(setSSOToken("YOUR_SSO_TOKEN"))` in order to implement Embed with SSO in your app. </Note>
 
@@ -617,6 +687,21 @@ To configure the `EmbedParams` based on your need you can pass the below values.
     b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
 
     c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
+**Add design configurations (Optional)**
+
+  a. **interTileSpacing** - spacing between the carousel's view items. It's default value is `8dp`
+
+  b. **carouselInset** - edge insets for carousel's view. It's default value is `top: 8dp, left: 16dp, bottom: 0dp, right: 16dp`
+
+  c. **scrollDirection** - direction of carousel scroll. It's default value is `CarouselScrollDirection.HORIZONTAL`
+
+  d. **aspectRatio** - define aspect ratio of carousel's view items. It's default value is `CarouselTileAspectRatio.RATIO_9_16`
+
+  e. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
+
+
+<img height="200" src="/visual-aids/developers/guides/Carousel%20Spacing%20-%20Android.png" />
 
 
 **3. Manage carousel videos auto-play** 
@@ -728,7 +813,7 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
-7. Add user specific parameters (Optional)
+**Add user specific parameters (Optional)**
 
   a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
@@ -740,7 +825,7 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
   e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
 
-8. Add contextual parameters (Optional)
+**Add contextual parameters (Optional)**
 
   a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
 
@@ -841,7 +926,7 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
-7. Add user specific parameters (Optional)
+**Add user specific parameters (Optional)**
     
   a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
@@ -853,7 +938,7 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 
   e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
 
-8. Add contextual parameters (Optional)
+**Add contextual parameters (Optional)**
 
   a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
 

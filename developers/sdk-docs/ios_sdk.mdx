@@ -385,7 +385,7 @@ let genuinCarouselConfiguration = GenuinCarouselConfiguration()
 genuinCarouselConfiguration.interTileSpacing = 16.0
 genuinCarouselConfiguration.scrollDirection = .vertical //default value is .horizontal as described above.
 genuinCarouselConfiguration.tileCornerRadius = 16.0
-genuinCarouselConfiguration.aspectRatio = .ratio1x1
+genuinCarouselConfiguration.aspectRatio = .ratio4x5
 
 let embedConfiguration = EmbedConfiguration()
 embedConfiguration.genuinCarouselConfiguration = genuinCarouselConfiguration //here you can pass the GenuinCarouselConfiguration
@@ -486,17 +486,15 @@ To configure the `EmbedConfiguration` based on your need you can change the belo
 
 4. **genuinCarouselConfiguration** = This is an optional parameter. You can pass `GenuinCarouselConfiguration` object in this parameter. If `GenuinCarouselConfiguration` is provided then the carousel design will change accordingly. The default values are listed below, which you can pass in `GenuinCarouselConfiguration` object.
 
-<CodeGroup>
+	-  `interTileSpacing` - spacing between the carousel's collection view items. It's default value is `8.0`
+	- `carouselInset` - edge insets for carousel's collection view. It's default value is `UIEdgeInsets(top: 8.0, left: 16.0, bottom: 0.0, right: 16.0)`
+	- `scrollDirection` - direction of carousel scroll. It's default value is `.horizontal`
+	- `aspectRatio` - define aspect ratio of carousel's collection view items. It's default value is `.ratio9x16`
+	- `tileCornerRadius` - cornerRadius for the carousel's collection view items. It's default value is `8.0`
 
-``` 
-interTileSpacing: Double = 8.0
-carouselInset: UIEdgeInsets = UIEdgeInsets(top: 8.0, left: 16.0, bottom: 0.0, right: 16.0)
-scrollDirection: CarouselScrollDirection = .horizontal
-aspectRatio: CarouselTileAspectRatio = .ratio9x16
-tileCornerRadius: Double = 8.0
-```
 
-</CodeGroup>
+<img height="200" src="/visual-aids/developers/guides/Additional%20Information%20-%20iOS.png" />
+
 
 Below are the optional parameters for the `params` key:
 
@@ -687,16 +685,35 @@ To handle deep links in your app use the following methods.
 
 ```swift SceneDelegate.swift
 
-func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        //redirect if genuin SDK handles the deeplink
-        if let dlURL = userActivity.webpageURL , GenuinSDK.shared.willHandleDeepLink(url: dlURL){
-            
-            GenuinSDK.initDeeplinkWith(url: dlURL)
-            if let rootVC = window?.rootViewController as? UIViewController{
-                GenuinSDK.shared.handleDeeplink(viewController: rootVC)
-            }
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+  var window: UIWindow?
+
+  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    guard let _ = (scene as? UIWindowScene) else { return }
+    handleGenuinDeeplink(deeplinkURL: connectionOptions.userActivities.first?.webpageURL)
+  }
+
+  func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    //redirect if genuin SDK handles the deeplink
+    handleGenuinDeeplink(deeplinkURL: userActivity.webpageURL)
+  }
+
+  func handleGenuinDeeplink(deeplinkURL: URL?) {
+    if let dlURL = deeplinkURL, GenuinSDK.shared.willHandleDeepLink(url: dlURL){
+       
+      GenuinSDK.initDeeplinkWith(url: dlURL)
+      if let rootVC = window?.rootViewController as? UIViewController{
+        DispatchQueue.main.async {
+          GenuinSDK.shared.handleDeeplink(viewController: rootVC)
         }
+      }
     }
+  }
+}
 
 ```
 
