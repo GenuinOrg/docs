@@ -97,7 +97,7 @@ To embed your Brand community into your website, follow the steps below:
 The multi-embed approach requires separate containers for each widget instance. Each container
 must have unique identifiers and proper data attributes.
 
-<b>Note:</b>
+<br><b>Note:</b>
 1. Ensure each container has a unique `id` attribute 2. The multi-embed approach
 also works for single embeds, so you can use it for both cases if you prefer a unified
 setup.{" "}
@@ -254,6 +254,8 @@ Only include the parameters necessary to retrieve a contextual feed.
 </CodeGroup>
 
 ### Angular Structure
+
+The following code snippet has been developed using Angular version 16.
 
 <CodeGroup>
   <CodeBlock title="Embed Without AutoLogin" language="typescript">
@@ -652,6 +654,25 @@ export class AppModule {}
 
   </CodeBlock>
 </CodeGroup>
+
+## Customisation
+
+### Font Family
+
+#### To apply your application's custom font styles to the Genuin Web SDK, add the following <style> block inside the <head> tag
+
+<br>
+<b>Note:</b> {" "} Please ensure that your custom font is correctly loaded on the page. If the specified font is not available, the SDK will automatically fall back to the default system font.
+
+`
+
+<style>
+  .gen-sdk-class * {
+    font-family: 'Your Font Style' !important;
+  }
+</style>
+
+`
 
 | **Setting**  | **Description**                                                                                                                                                              |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
