@@ -19,53 +19,62 @@ To embed your Brand community into your website, follow the steps below:
 ## Code-block to Embed Community:
 
 <CodeGroup>
-  <CodeBlock title="HTML">
-
-  <CodeGroup>
-    <CodeBlock title="Embed Without AutoLogin">
-{`<div
+ <CodeBlock title="html">
+<CodeGroup>
+   <CodeBlock title="Embed Without AutoLogin">
+      <div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;"></div>
-<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+<!-- SDK JavaScript module -->
+<script
+  type="module"
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
 <script>
+  // Callback function to automatically initialize the Genuin SDK when ready
   window.onGenuinReady = (genuin) => {
     genuin.initialize({
       embed_id: 'Your Embed ID',
       api_key: 'Your API Key',
-    });
-  };
+    })
+  }
 
+  // Alternative manual initialization without waiting for SDK callback
+  // Use This initialization methods if you are using frontend library/framework e.g. React.
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
-  });
-</script>`}
-    </CodeBlock>
-
-    <CodeBlock title="Embed With AutoLogin">
-{`<div
+  })
+</script>
+</CodeBlock>
+<CodeBlock title="Embed With AutoLogin">
+<div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;"></div>
-<script type="module" src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+<!-- SDK JavaScript module -->
+<script
+  type="module"
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
 <script>
+  // Callback function to automatically initialize the Genuin SDK with SSO when ready
   window.onGenuinReady = (genuin) => {
     genuin.initialize({
       embed_id: 'Your Embed ID',
       api_key: 'Your API Key',
       token: 'Your Authentication Token',
-    });
-  };
+    })
+  }
 
+  // Alternative manual initialization with SSO without waiting for SDK callback
+  // Use This initialization methods if you are using frontend library/framework e.g. React.
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
     token: 'Your Authentication Token',
-  });
-</script>`}
-    </CodeBlock>
-  </CodeGroup>
-
-  </CodeBlock>
+  })
+</script>
+</CodeBlock>
+<CodeGroup>
+ </CodeBlock>
 </CodeGroup>
 
 ## Embed With Multi Embeds
