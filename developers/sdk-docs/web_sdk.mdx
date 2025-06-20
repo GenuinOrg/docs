@@ -1,6 +1,6 @@
 ---
-title: 'Web SDK'
-description: 'Genuin Web SDK comprises features such as brand feed, communities, and groups.'
+title: "Web SDK"
+description: "Genuin Web SDK comprises features such as brand feed, communities, and groups."
 ---
 
 ## Prerequisites
@@ -16,19 +16,25 @@ To embed your Brand community into your website, follow the steps below:
 3. Adjust the height and width of the embed container as per your design requirements.
    You can specify these dimensions within the code block itself.
 
+## Implementation
+
+### HTML Structure
+
 ## Code-block to Embed Community:
 
 <CodeGroup>
-
-```html Embed Without AutoLogin
-<!-- Container for embedding the Genuin community widget without AutoLogin -->
-<div
+  <CodeBlock title="Embed Without AutoLogin" language="html">
+{`<div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;"></div>
+
 <!-- SDK JavaScript module -->
+
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
+
 <script>
   // Callback function to automatically initialize the Genuin SDK when ready
   window.onGenuinReady = (genuin) => {
@@ -38,24 +44,27 @@ To embed your Brand community into your website, follow the steps below:
     })
   }
 
-  // Alternative manual initialization without waiting for SDK callback
-  // Use This initialization methods if you are using frontend library/framework e.g. React.
+  // Alternative manual initialization (for frameworks like React)
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
   })
-</script>
-```
+</script>`}
 
-```html Embed With AutoLogin
-<!-- Container for embedding the Genuin community widget with AutoLogin -->
-<div
+  </CodeBlock>
+
+  <CodeBlock title="Embed With AutoLogin" language="html">
+{`<div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;"></div>
+
 <!-- SDK JavaScript module -->
+
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
+
 <script>
   // Callback function to automatically initialize the Genuin SDK with SSO when ready
   window.onGenuinReady = (genuin) => {
@@ -66,40 +75,36 @@ To embed your Brand community into your website, follow the steps below:
     })
   }
 
-  // Alternative manual initialization with SSO without waiting for SDK callback
-  // Use This initialization methods if you are using frontend library/framework e.g. React.
+  // Alternative manual initialization (for frameworks like React)
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
     token: 'Your Authentication Token',
   })
-</script>
-```
+</script>`}
 
+  </CodeBlock>
 </CodeGroup>
 
-## Embed With Multi Embeds
+### Embed With Multi Embeds
 
-### Prerequisites Before implementing the multi-embed setup, ensure you have: 
+#### Prerequisites Before implementing the multi-embed setup, ensure you have:
 
-1. Valid Genuin API credentials 
+1. Valid Genuin API credentials
 2. Unique embed IDs for each widget instance
-3. Access to the Genuin SDK 
+3. Access to the Genuin SDK
 
-### Implementation 
-#### HTML Structure 
 The multi-embed approach requires separate containers for each widget instance. Each container
-must have unique identifiers and proper data attributes. 
-<b>Note:</b> 
-1. Ensure each container has a unique `id` attribute 
-2. The multi-embed approach also works
-for single embeds, so you can use it for both cases if you prefer a unified
-setup. 
+must have unique identifiers and proper data attributes.
+
+<br><b>Note:</b>
+1. Ensure each container has a unique `id` attribute 2. The multi-embed approach
+also works for single embeds, so you can use it for both cases if you prefer a unified
+setup.{" "}
 
 <CodeGroup>
 
 ```html Embed With Multi Embeds
-
 <!-- Containers for embedding the Genuin community widget with Multi Embeds -->
 
 <!-- First Container -->
@@ -108,7 +113,8 @@ setup.
   data-api-key="Your Api Key"
   id="gen-sdk-1"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- Second Container -->
 <div
@@ -116,39 +122,41 @@ setup.
   data-api-key="Your Api Key"
   id="gen-sdk-2"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- SDK JavaScript module -->
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
 <script>
   // Use This initialization methods if you are using frontend library/framework e.g. React.
-  window.genuin.init({})
+  window.genuin.init({});
 
   // Alternative manual initialization with Multi Embeds for SDK callback
   window.onGenuinReady = (genuin) => {
-    genuin.initialize({})
-  }
+    genuin.initialize({});
+  };
 </script>
 ```
 
 </CodeGroup>
 
-## Embed With Contextual Feed
+### Embed With Contextual Feed
+
 Only include the parameters necessary to retrieve a contextual feed.
 
 <CodeGroup>
-
 ```html Embed with Multiple Embeds
-
 <!-- Example of multiple embeds with contextual feeds.Use your own embed_id and api_key, and ensure each embed_id is unique. Be careful to assign a unique id to each HTML element, as shown below. -->
 
 <!-- Containers for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
 
 <!-- First Container -->
+
 <div
   data-embed-id="Your Embed Id"
   data-api-key="Your Api Key"
@@ -157,9 +165,11 @@ Only include the parameters necessary to retrieve a contextual feed.
   data-long="longitude of location"
   id="unique identifier"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- Second Container -->
+
 <div
   data-embed-id="Your Embed Id"
   data-api-key="Your Api Key"
@@ -168,29 +178,31 @@ Only include the parameters necessary to retrieve a contextual feed.
   data-long="longitude of location"
   id="unique identifier"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- SDK JavaScript module -->
+
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
+
 <script>
   // Use This initialization methods if you are using frontend library/framework e.g. React.
-  window.genuin.init({})
+  window.genuin.init({});
 
   // Alternative manual initialization with Multi Embeds for SDK callback
   window.onGenuinReady = (genuin) => {
-    genuin.initialize({})
-  }
+    genuin.initialize({});
+  };
 </script>
 
-```
-
+````
 
 ```html Embed with Single Embeds
-
 <!-- One embeds with contextual feed , use your embed_id and api_key, and embed_id must be unique-->
 
 <!-- Container for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
@@ -198,12 +210,14 @@ Only include the parameters necessary to retrieve a contextual feed.
 <div
   id="gen-sdk"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- SDK JavaScript module -->
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <!-- Use Any of the below initialization methods -->
 <script>
@@ -214,7 +228,7 @@ Only include the parameters necessary to retrieve a contextual feed.
            contextualParams: {
              page_context: 'Context of Page',
              geo: {
-               lat: latitue of location in number , e.g. 50.432,
+               lat: latitude of location in number , e.g. 50.432,
                long: longitude of location in number , e.g. 122.4194,
              }
            }
@@ -229,21 +243,442 @@ Only include the parameters necessary to retrieve a contextual feed.
            contextualParams: {
              page_context: 'Context of Page',
              geo: {
-              lat: latitue of location in number , e.g. 50.432,
+              lat: latitude of location in number , e.g. 50.432,
              long: longitude of location in number , e.g. 122.4194,
              }
            }
       })
 </script>
-```
+````
 
 </CodeGroup>
 
-| **Setting**  | **Description**                                                                |
-| ------------ | ------------------------------------------------------------------------------ |
-| embed_id     | The id which you want to embed in your web SDK                                 |
-| api_key      | Unique API key which will be used to authenticate the embed                    |
-| token        | Your SSO Token which will be used for authenticate                             |
-| page_context | The content or context of your webpage, used to render relevant embed feeds. This can include comma-separated keywords or search parameters (e.g., "AI",   "tech news", etc.). |
-| lat          | Lalitude of Location which will be used to retrive the feed based on Location  |
-| long         | Longitude of location which will be used to retrive the feed based on Location |
+### Angular Structure
+
+The following code snippet has been developed using Angular version 16.
+
+<CodeGroup>
+  <CodeBlock title="Embed Without AutoLogin" language="typescript">
+{`// src/app/genuin-sdk.component.ts
+import {
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
+
+@Component({
+selector: 'genuin-sdk',
+standalone: true,
+template: \`
+
+<div
+      id="gen-sdk"
+      class="gen-sdk-class"
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
+\`,
+encapsulation: ViewEncapsulation.None,
+})
+export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
+private scriptElement: HTMLScriptElement | null = null;
+private genuinInitialized = false;
+
+ngAfterViewInit() {
+(window as any).onGenuinReady = (genuin: any) => {
+if (!this.genuinInitialized) {
+genuin.initialize({
+embed_id: 'Your Embed ID',
+api_key: 'Your API Key',
+});
+this.genuinInitialized = true;
+}
+};
+
+    this.scriptElement = document.createElement('script');
+    this.scriptElement.src = 'https://media.begenuin.com/sdk/gen_sdk.min.js';
+    this.scriptElement.async = true;
+    document.body.appendChild(this.scriptElement);
+
+}
+
+ngOnDestroy() {
+if (this.scriptElement) {
+document.body.removeChild(this.scriptElement);
+}
+delete (window as any).onGenuinReady;
+}
+}
+
+// src/app/app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { GenuinSdkComponent } from './genuin-sdk.component';
+
+@NgModule({
+declarations: [AppComponent],
+imports: [BrowserModule, GenuinSdkComponent],
+providers: [],
+bootstrap: [AppComponent],
+})
+export class AppModule {}
+`}
+
+  </CodeBlock>
+
+  <CodeBlock title="Embed With AutoLogin" language="typescript">
+{`// src/app/genuin-sdk.component.ts
+import {
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
+
+@Component({
+selector: 'genuin-sdk',
+standalone: true,
+template: \`
+
+<div
+      id="gen-sdk"
+      class="gen-sdk-class"
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
+\`,
+encapsulation: ViewEncapsulation.None,
+})
+export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
+private scriptElement: HTMLScriptElement | null = null;
+private genuinInitialized = false;
+
+ngAfterViewInit() {
+(window as any).onGenuinReady = (genuin: any) => {
+if (!this.genuinInitialized) {
+genuin.initialize({
+embed_id: 'Your Embed ID',
+api_key: 'Your API Key',
+token: 'Your Authentication Token'
+});
+this.genuinInitialized = true;
+}
+};
+
+    this.scriptElement = document.createElement('script');
+    this.scriptElement.src = 'https://media.begenuin.com/sdk/gen_sdk.min.js';
+    this.scriptElement.async = true;
+    document.body.appendChild(this.scriptElement);
+
+}
+
+ngOnDestroy() {
+if (this.scriptElement) {
+document.body.removeChild(this.scriptElement);
+}
+delete (window as any).onGenuinReady;
+}
+}
+
+// src/app/app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { GenuinSdkComponent } from './genuin-sdk.component';
+
+@NgModule({
+declarations: [AppComponent],
+imports: [BrowserModule, GenuinSdkComponent],
+providers: [],
+bootstrap: [AppComponent],
+})
+export class AppModule {}
+`}
+
+  </CodeBlock>
+</CodeGroup>
+
+### Embed With Multi Embeds
+
+#### Prerequisites Before implementing the multi-embed setup, ensure you have:
+
+1. Valid Genuin API credentials
+2. Unique embed IDs for each widget instance
+3. Access to the Genuin SDK
+
+The multi-embed approach requires separate containers for each widget instance. Each container
+must have unique identifiers and proper data attributes.
+
+<b>Note:</b>
+1. Ensure each container has a unique `id` attribute 2. The multi-embed approach
+also works for single embeds, so you can use it for both cases if you prefer a unified
+setup.{" "}
+
+<CodeGroup>
+  <CodeBlock title="Embed With Multi Embeds" language="typescript">
+{`// src/app/genuin-sdk.component.ts
+import {
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
+
+@Component({
+selector: 'genuin-sdk',
+standalone: true,
+template: \`
+
+<div
+      id="gen-sdk-1"
+      class="gen-sdk-class"
+      data-embed-id="Your Embed Id"
+      data-api-key="Your Api Key"
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
+<div
+      id="gen-sdk-2"
+      class="gen-sdk-class"
+      data-embed-id="Your Embed Id"
+      data-api-key="Your Api Key"
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
+\`,
+encapsulation: ViewEncapsulation.None,
+})
+export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
+private scriptElement: HTMLScriptElement | null = null;
+private genuinInitialized = false;
+
+ngAfterViewInit() {
+(window as any).onGenuinReady = (genuin: any) => {
+if (!this.genuinInitialized) {
+genuin.initialize({});
+this.genuinInitialized = true;
+}
+};
+
+    this.scriptElement = document.createElement('script');
+    this.scriptElement.src = 'https://media.begenuin.com/sdk/gen_sdk.min.js';
+    this.scriptElement.async = true;
+    document.body.appendChild(this.scriptElement);
+
+}
+
+ngOnDestroy() {
+if (this.scriptElement) {
+document.body.removeChild(this.scriptElement);
+}
+delete (window as any).onGenuinReady;
+}
+}
+
+// src/app/app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { GenuinSdkComponent } from './genuin-sdk.component';
+
+@NgModule({
+declarations: [AppComponent],
+imports: [BrowserModule, GenuinSdkComponent],
+providers: [],
+bootstrap: [AppComponent],
+})
+export class AppModule {}
+`}
+
+  </CodeBlock>
+</CodeGroup>
+
+### Embed With Contextual Feed
+
+#### Only include the parameters necessary to retrieve a contextual feed.
+
+<CodeGroup>
+  <CodeBlock title="Embed With Multi Embeds" language="typescript">
+{`// src/app/genuin-sdk.component.ts
+import {
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
+
+@Component({
+selector: 'genuin-sdk',
+standalone: true,
+template: \`
+
+<div
+      id="gen-sdk-1"
+      class="gen-sdk-class"
+      data-embed-id="Your Embed Id"
+      data-api-key="Your Api Key"
+      data-page-context="context of page"
+      data-lat="latitute of location"
+      data-long="longitude of location"
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
+<div
+      id="gen-sdk-2"
+      class="gen-sdk-class"
+      data-embed-id="Your Embed Id"
+      data-api-key="Your Api Key"
+      data-page-context="context of page"
+      data-lat="latitute of location"
+      data-long="longitude of location"
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
+\`,
+encapsulation: ViewEncapsulation.None,
+})
+export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
+private scriptElement: HTMLScriptElement | null = null;
+private genuinInitialized = false;
+
+ngAfterViewInit() {
+(window as any).onGenuinReady = (genuin: any) => {
+if (!this.genuinInitialized) {
+genuin.initialize({});
+this.genuinInitialized = true;
+}
+};
+
+    this.scriptElement = document.createElement('script');
+    this.scriptElement.src = 'https://media.begenuin.com/sdk/gen_sdk.min.js';
+    this.scriptElement.async = true;
+    document.body.appendChild(this.scriptElement);
+
+}
+
+ngOnDestroy() {
+if (this.scriptElement) {
+document.body.removeChild(this.scriptElement);
+}
+delete (window as any).onGenuinReady;
+}
+}
+
+// src/app/app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { GenuinSdkComponent } from './genuin-sdk.component';
+
+@NgModule({
+declarations: [AppComponent],
+imports: [BrowserModule, GenuinSdkComponent],
+providers: [],
+bootstrap: [AppComponent],
+})
+export class AppModule {}
+`}
+
+  </CodeBlock>
+
+    <CodeBlock title="Single Embeds" language="typescript">
+
+{`// src/app/genuin-sdk.component.ts
+import {
+Component,
+AfterViewInit,
+OnDestroy,
+ViewEncapsulation,
+} from '@angular/core';
+
+@Component({
+selector: 'genuin-sdk',
+standalone: true,
+template: \`
+
+<div
+      id="gen-sdk-1"
+      class="gen-sdk-class"
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
+\`,
+encapsulation: ViewEncapsulation.None,
+})
+export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
+private scriptElement: HTMLScriptElement | null = null;
+private genuinInitialized = false;
+
+ngAfterViewInit() {
+(window as any).onGenuinReady = (genuin: any) => {
+if (!this.genuinInitialized) {
+genuin.initialize({
+embed_id: 'Your Embed Id',
+api_key: 'Your Api key',
+contextualParams: {
+page_context: 'Context of Page',
+geo: {
+lat: latitude of location in number , e.g. 50.432,
+long: longitude of location in number , e.g. 122.4194,
+}
+}
+});
+this.genuinInitialized = true;
+}
+};
+
+    this.scriptElement = document.createElement('script');
+    this.scriptElement.src = 'https://media.begenuin.com/sdk/gen_sdk.min.js';
+    this.scriptElement.async = true;
+    document.body.appendChild(this.scriptElement);
+
+}
+
+ngOnDestroy() {
+if (this.scriptElement) {
+document.body.removeChild(this.scriptElement);
+}
+delete (window as any).onGenuinReady;
+}
+}
+
+// src/app/app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { GenuinSdkComponent } from './genuin-sdk.component';
+
+@NgModule({
+declarations: [AppComponent],
+imports: [BrowserModule, GenuinSdkComponent],
+providers: [],
+bootstrap: [AppComponent],
+})
+export class AppModule {}
+`}
+
+  </CodeBlock>
+</CodeGroup>
+
+## Customisation
+
+### Font Family
+
+#### To apply your application's custom font styles to the Genuin Web SDK, add the following <style> block inside the <head> tag
+
+<br>
+<b>Note:</b> {" "} Please ensure that your custom font is correctly loaded on the page. If the specified font is not available, the SDK will automatically fall back to the default system font.
+
+`
+
+<style>
+  .gen-sdk-class * {
+    font-family: 'Your Font Style' !important;
+  }
+</style>
+
+`
+
+| **Setting**  | **Description**                                                                                                                                                              |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| embed_id     | The id which you want to embed in your web SDK                                                                                                                               |
+| api_key      | Unique API key which will be used to authenticate the embed                                                                                                                  |
+| token        | Your SSO Token which will be used for authenticate                                                                                                                           |
+| page_context | The content or context of your webpage, used to render relevant embed feeds. This can include comma-separated keywords or search parameters (e.g., "AI", "tech news", etc.). |
+| lat          | Lalitude of Location which will be used to retrieve the feed based on Location                                                                                               |
+| long         | Longitude of location which will be used to retrieve the feed based on Location                                                                                              |
