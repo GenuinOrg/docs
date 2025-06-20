@@ -628,7 +628,7 @@ carouselEmbedView.apply {
 
 #### Vertical Carousel Embed
 
-To implement vertical carousel, you can use `setScrollDirection(CarouselScrollDirection.VERTICAL)` and other configuration will be same as above.
+To implement vertical carousel, you can use `setScrollDirection(CarouselScrollDirection.VERTICAL)` and other configurations will be same as above.
 
 <CodeGroup>
 
@@ -687,6 +687,18 @@ To configure the `EmbedParams` based on your need you can pass the below values.
     b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
 
     c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
+**Add design configurations (Optional)**
+
+  a. **interTileSpacing** - spacing between the carousel's view items. It's default value is `8dp`
+
+  b. **carouselInset** - edge insets for carousel's view. It's default value is `top: 8dp, left: 16dp, bottom: 0dp, right: 16dp`
+
+  c. **scrollDirection** - direction of carousel scroll. It's default value is `CarouselScrollDirection.HORIZONTAL`
+
+  d. **aspectRatio** - define aspect ratio of carousel's view items. It's default value is `CarouselTileAspectRatio.RATIO_9_16`
+
+  e. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
 
 
 **3. Manage carousel videos auto-play** 
@@ -798,7 +810,7 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
-7. Add user specific parameters (Optional)
+**Add user specific parameters (Optional)**
 
   a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
@@ -810,25 +822,13 @@ We need to pass below arguments in order to cofigure `FullScreenEmbed`.
 
   e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
 
-8. Add contextual parameters (Optional)
+**Add contextual parameters (Optional)**
 
   a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
 
   b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
 
   c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
-
-9. Add design configurations (Optional)
-
-  a. **interTileSpacing** - spacing between the carousel's view items. It's default value is `8dp`
-
-  b. **carouselInset** - edge insets for carousel's collection view. It's default value is `top: 8dp, left: 16dp, bottom: 0dp, right: 16dp`
-
-  c. **scrollDirection** - direction of carousel scroll. It's default value is `CarouselScrollDirection.HORIZONTAL`
-
-  d. **aspectRatio** - define aspect ratio of carousel's view items. It's default value is `CarouselTileAspectRatio.RATIO_9_16`
-
-  e. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
 
 
 ### Standard Wall Embed
@@ -923,7 +923,7 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 
 6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
 
-7. Add user specific parameters (Optional)
+**Add user specific parameters (Optional)**
     
   a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
 
@@ -935,7 +935,7 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 
   e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
 
-8. Add contextual parameters (Optional)
+**Add contextual parameters (Optional)**
 
   a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
 
