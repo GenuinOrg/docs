@@ -1,6 +1,6 @@
 ---
-title: 'Web SDK'
-description: 'Genuin Web SDK comprises features such as brand feed, communities, and groups.'
+title: "Web SDK"
+description: "Genuin Web SDK comprises features such as brand feed, communities, and groups."
 ---
 
 ## Prerequisites
@@ -19,16 +19,16 @@ To embed your Brand community into your website, follow the steps below:
 ## Code-block to Embed Community:
 
 <CodeGroup>
- <CodeBlock title="html">
-<CodeGroup>
-   <CodeBlock title="Embed Without AutoLogin">
-      ```html <div
+  <CodeBlock title="Embed Without AutoLogin" language="html">
+{`<div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;"></div>
+
 <!-- SDK JavaScript module -->
 <script
   type="module"
   src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+
 <script>
   // Callback function to automatically initialize the Genuin SDK when ready
   window.onGenuinReady = (genuin) => {
@@ -38,22 +38,24 @@ To embed your Brand community into your website, follow the steps below:
     })
   }
 
-  // Alternative manual initialization without waiting for SDK callback
-  // Use This initialization methods if you are using frontend library/framework e.g. React.
+  // Alternative manual initialization (for frameworks like React)
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
   })
-</script>```
-</CodeBlock>
-<CodeBlock title="Embed With AutoLogin">
-```html <div
+</script>`}
+  </CodeBlock>
+
+  <CodeBlock title="Embed With AutoLogin" language="html">
+{`<div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;"></div>
+
 <!-- SDK JavaScript module -->
 <script
   type="module"
   src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+
 <script>
   // Callback function to automatically initialize the Genuin SDK with SSO when ready
   window.onGenuinReady = (genuin) => {
@@ -64,41 +66,40 @@ To embed your Brand community into your website, follow the steps below:
     })
   }
 
-  // Alternative manual initialization with SSO without waiting for SDK callback
-  // Use This initialization methods if you are using frontend library/framework e.g. React.
+  // Alternative manual initialization (for frameworks like React)
   window.genuin.init({
     embed_id: 'Your Embed ID',
     api_key: 'Your API Key',
     token: 'Your Authentication Token',
   })
-</script>```
-</CodeBlock>
-<CodeGroup>
- </CodeBlock>
+</script>`}
+  </CodeBlock>
 </CodeGroup>
+
 
 ## Embed With Multi Embeds
 
-### Prerequisites Before implementing the multi-embed setup, ensure you have: 
+### Prerequisites Before implementing the multi-embed setup, ensure you have:
 
-1. Valid Genuin API credentials 
+1. Valid Genuin API credentials
 2. Unique embed IDs for each widget instance
-3. Access to the Genuin SDK 
+3. Access to the Genuin SDK
 
-### Implementation 
-#### HTML Structure 
+### Implementation
+
+#### HTML Structure
+
 The multi-embed approach requires separate containers for each widget instance. Each container
-must have unique identifiers and proper data attributes. 
-<b>Note:</b> 
-1. Ensure each container has a unique `id` attribute 
-2. The multi-embed approach also works
-for single embeds, so you can use it for both cases if you prefer a unified
-setup. 
+must have unique identifiers and proper data attributes.
+
+<b>Note:</b>
+1. Ensure each container has a unique `id` attribute 2. The multi-embed approach
+also works for single embeds, so you can use it for both cases if you prefer a unified
+setup.{" "}
 
 <CodeGroup>
 
 ```html Embed With Multi Embeds
-
 <!-- Containers for embedding the Genuin community widget with Multi Embeds -->
 
 <!-- First Container -->
@@ -107,7 +108,8 @@ setup.
   data-api-key="Your Api Key"
   id="gen-sdk-1"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- Second Container -->
 <div
@@ -115,34 +117,36 @@ setup.
   data-api-key="Your Api Key"
   id="gen-sdk-2"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- SDK JavaScript module -->
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
 <script>
   // Use This initialization methods if you are using frontend library/framework e.g. React.
-  window.genuin.init({})
+  window.genuin.init({});
 
   // Alternative manual initialization with Multi Embeds for SDK callback
   window.onGenuinReady = (genuin) => {
-    genuin.initialize({})
-  }
+    genuin.initialize({});
+  };
 </script>
 ```
 
 </CodeGroup>
 
 ## Embed With Contextual Feed
+
 Only include the parameters necessary to retrieve a contextual feed.
 
 <CodeGroup>
 
 ```html Embed with Multiple Embeds
-
 <!-- Example of multiple embeds with contextual feeds.Use your own embed_id and api_key, and ensure each embed_id is unique. Be careful to assign a unique id to each HTML element, as shown below. -->
 
 <!-- Containers for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
@@ -156,7 +160,8 @@ Only include the parameters necessary to retrieve a contextual feed.
   data-long="longitude of location"
   id="unique identifier"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- Second Container -->
 <div
@@ -167,29 +172,28 @@ Only include the parameters necessary to retrieve a contextual feed.
   data-long="longitude of location"
   id="unique identifier"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- SDK JavaScript module -->
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
 <script>
   // Use This initialization methods if you are using frontend library/framework e.g. React.
-  window.genuin.init({})
+  window.genuin.init({});
 
   // Alternative manual initialization with Multi Embeds for SDK callback
   window.onGenuinReady = (genuin) => {
-    genuin.initialize({})
-  }
+    genuin.initialize({});
+  };
 </script>
-
 ```
 
-
 ```html Embed with Single Embeds
-
 <!-- One embeds with contextual feed , use your embed_id and api_key, and embed_id must be unique-->
 
 <!-- Container for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
@@ -197,12 +201,14 @@ Only include the parameters necessary to retrieve a contextual feed.
 <div
   id="gen-sdk"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh"></div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- SDK JavaScript module -->
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js"></script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <!-- Use Any of the below initialization methods -->
 <script>
@@ -238,11 +244,11 @@ Only include the parameters necessary to retrieve a contextual feed.
 
 </CodeGroup>
 
-| **Setting**  | **Description**                                                                |
-| ------------ | ------------------------------------------------------------------------------ |
-| embed_id     | The id which you want to embed in your web SDK                                 |
-| api_key      | Unique API key which will be used to authenticate the embed                    |
-| token        | Your SSO Token which will be used for authenticate                             |
-| page_context | The content or context of your webpage, used to render relevant embed feeds. This can include comma-separated keywords or search parameters (e.g., "AI",   "tech news", etc.). |
-| lat          | Lalitude of Location which will be used to retrive the feed based on Location  |
-| long         | Longitude of location which will be used to retrive the feed based on Location |
+| **Setting**  | **Description**                                                                                                                                                              |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| embed_id     | The id which you want to embed in your web SDK                                                                                                                               |
+| api_key      | Unique API key which will be used to authenticate the embed                                                                                                                  |
+| token        | Your SSO Token which will be used for authenticate                                                                                                                           |
+| page_context | The content or context of your webpage, used to render relevant embed feeds. This can include comma-separated keywords or search parameters (e.g., "AI", "tech news", etc.). |
+| lat          | Lalitude of Location which will be used to retrive the feed based on Location                                                                                                |
+| long         | Longitude of location which will be used to retrive the feed based on Location                                                                                               |
