@@ -150,13 +150,13 @@ setup.{" "}
 Only include the parameters necessary to retrieve a contextual feed.
 
 <CodeGroup>
-
 ```html Embed with Multiple Embeds
 <!-- Example of multiple embeds with contextual feeds.Use your own embed_id and api_key, and ensure each embed_id is unique. Be careful to assign a unique id to each HTML element, as shown below. -->
 
 <!-- Containers for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
 
 <!-- First Container -->
+
 <div
   data-embed-id="Your Embed Id"
   data-api-key="Your Api Key"
@@ -169,6 +169,7 @@ Only include the parameters necessary to retrieve a contextual feed.
 ></div>
 
 <!-- Second Container -->
+
 <div
   data-embed-id="Your Embed Id"
   data-api-key="Your Api Key"
@@ -181,12 +182,14 @@ Only include the parameters necessary to retrieve a contextual feed.
 ></div>
 
 <!-- SDK JavaScript module -->
+
 <script
   type="module"
   src="https://media.begenuin.com/sdk/gen_sdk.min.js"
 ></script>
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
+
 <script>
   // Use This initialization methods if you are using frontend library/framework e.g. React.
   window.genuin.init({});
@@ -196,7 +199,8 @@ Only include the parameters necessary to retrieve a contextual feed.
     genuin.initialize({});
   };
 </script>
-```
+
+````
 
 ```html Embed with Single Embeds
 <!-- One embeds with contextual feed , use your embed_id and api_key, and embed_id must be unique-->
@@ -224,7 +228,7 @@ Only include the parameters necessary to retrieve a contextual feed.
            contextualParams: {
              page_context: 'Context of Page',
              geo: {
-               lat: latitue of location in number , e.g. 50.432,
+               lat: latitude of location in number , e.g. 50.432,
                long: longitude of location in number , e.g. 122.4194,
              }
            }
@@ -239,13 +243,13 @@ Only include the parameters necessary to retrieve a contextual feed.
            contextualParams: {
              page_context: 'Context of Page',
              geo: {
-              lat: latitue of location in number , e.g. 50.432,
+              lat: latitude of location in number , e.g. 50.432,
              long: longitude of location in number , e.g. 122.4194,
              }
            }
       })
 </script>
-```
+````
 
 </CodeGroup>
 
@@ -265,6 +269,7 @@ import {
 selector: 'genuin-sdk',
 standalone: true,
 template: \`
+
 <div
       id="gen-sdk"
       class="gen-sdk-class"
@@ -333,6 +338,7 @@ import {
 selector: 'genuin-sdk',
 standalone: true,
 template: \`
+
 <div
       id="gen-sdk"
       class="gen-sdk-class"
@@ -420,6 +426,7 @@ import {
 selector: 'genuin-sdk',
 standalone: true,
 template: \`
+
 <div
       id="gen-sdk-1"
       class="gen-sdk-class"
@@ -500,6 +507,7 @@ import {
 selector: 'genuin-sdk',
 standalone: true,
 template: \`
+
 <div
       id="gen-sdk-1"
       class="gen-sdk-class"
@@ -567,8 +575,7 @@ export class AppModule {}
 
   </CodeBlock>
 
-
-    <CodeBlock title="Singl Embeds" language="typescript">
+    <CodeBlock title="Single Embeds" language="typescript">
 
 {`// src/app/genuin-sdk.component.ts
 import {
@@ -582,6 +589,7 @@ ViewEncapsulation,
 selector: 'genuin-sdk',
 standalone: true,
 template: \`
+
 <div
       id="gen-sdk-1"
       class="gen-sdk-class"
@@ -603,7 +611,7 @@ api_key: 'Your Api key',
 contextualParams: {
 page_context: 'Context of Page',
 geo: {
-lat: latitue of location in number , e.g. 50.432,
+lat: latitude of location in number , e.g. 50.432,
 long: longitude of location in number , e.g. 122.4194,
 }
 }
@@ -651,5 +659,5 @@ export class AppModule {}
 | api_key      | Unique API key which will be used to authenticate the embed                                                                                                                  |
 | token        | Your SSO Token which will be used for authenticate                                                                                                                           |
 | page_context | The content or context of your webpage, used to render relevant embed feeds. This can include comma-separated keywords or search parameters (e.g., "AI", "tech news", etc.). |
-| lat          | Lalitude of Location which will be used to retrive the feed based on Location                                                                                                |
-| long         | Longitude of location which will be used to retrive the feed based on Location                                                                                               |
+| lat          | Lalitude of Location which will be used to retrieve the feed based on Location                                                                                               |
+| long         | Longitude of location which will be used to retrieve the feed based on Location                                                                                              |
