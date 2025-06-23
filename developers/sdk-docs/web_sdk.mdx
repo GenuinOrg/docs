@@ -24,7 +24,6 @@ To embed your Brand community into your website, follow the steps below:
 
 <CodeGroup>
   <CodeBlock title="Embed Without AutoLogin" language="html">
-```html
 <div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;">
@@ -51,11 +50,9 @@ To embed your Brand community into your website, follow the steps below:
     api_key: 'Your API Key',
   })
 </script>
-```
   </CodeBlock>
 
   <CodeBlock title="Embed With AutoLogin" language="html">
-```html
 <div
   id="gen-sdk"
   style="max-width: 1080px; height: 720px; display: flex;">
@@ -84,7 +81,6 @@ To embed your Brand community into your website, follow the steps below:
     token: 'Your Authentication Token',
   })
 </script>
-```
   </CodeBlock>
 </CodeGroup>
 
@@ -108,7 +104,6 @@ must have unique identifiers and proper data attributes.
 
 <CodeGroup>
   <CodeBlock title="Embed With Multi Embeds" language="html">
-```html
 <!-- Containers for embedding the Genuin community widget with Multi Embeds -->
 
 <!-- First Container -->
@@ -145,7 +140,6 @@ must have unique identifiers and proper data attributes.
     genuin.initialize({});
   };
 </script>
-```
   </CodeBlock>
 </CodeGroup>
 
@@ -155,7 +149,6 @@ Only include the parameters necessary to retrieve a contextual feed.
 
 <CodeGroup>
   <CodeBlock title="Embed with Multiple Embeds" language="html">
-```html
 <!-- Example of multiple embeds with contextual feeds.Use your own embed_id and api_key, and ensure each embed_id is unique. Be careful to assign a unique id to each HTML element, as shown below. -->
 
 <!-- Containers for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
@@ -200,11 +193,9 @@ Only include the parameters necessary to retrieve a contextual feed.
     genuin.initialize({});
   };
 </script>
-```
   </CodeBlock>
 
   <CodeBlock title="Embed with Single Embeds" language="html">
-```html
 <!-- One embeds with contextual feed , use your embed_id and api_key, and embed_id must be unique-->
 
 <!-- Container for embedding the Genuin community widget with Multi Embeds Empowering Contextual Feeds -->
@@ -250,7 +241,6 @@ Only include the parameters necessary to retrieve a contextual feed.
     }
   })
 </script>
-```
   </CodeBlock>
 </CodeGroup>
 
@@ -260,7 +250,6 @@ The following code snippet has been developed using Angular version 16.
 
 <CodeGroup>
   <CodeBlock title="Embed Without AutoLogin" language="typescript">
-```typescript
 // src/app/genuin-sdk.component.ts
 import {
   Component,
@@ -323,11 +312,9 @@ import { GenuinSdkComponent } from './genuin-sdk.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-```
   </CodeBlock>
 
   <CodeBlock title="Embed With AutoLogin" language="typescript">
-```typescript
 // src/app/genuin-sdk.component.ts
 import {
   Component,
@@ -391,7 +378,6 @@ import { GenuinSdkComponent } from './genuin-sdk.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-```
   </CodeBlock>
 </CodeGroup>
 
@@ -413,7 +399,6 @@ must have unique identifiers and proper data attributes.
 
 <CodeGroup>
   <CodeBlock title="Embed With Multi Embeds" language="typescript">
-```typescript
 // src/app/genuin-sdk.component.ts
 import {
   Component,
@@ -482,7 +467,6 @@ import { GenuinSdkComponent } from './genuin-sdk.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-```
   </CodeBlock>
 </CodeGroup>
 
@@ -492,7 +476,6 @@ Only include the parameters necessary to retrieve a contextual feed.
 
 <CodeGroup>
   <CodeBlock title="Embed With Multi Embeds" language="typescript">
-```typescript
 // src/app/genuin-sdk.component.ts
 import {
   Component,
@@ -567,11 +550,9 @@ import { GenuinSdkComponent } from './genuin-sdk.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-```
   </CodeBlock>
 
   <CodeBlock title="Single Embeds" language="typescript">
-```typescript
 // src/app/genuin-sdk.component.ts
 import {
   Component,
@@ -641,7 +622,6 @@ import { GenuinSdkComponent } from './genuin-sdk.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-```
   </CodeBlock>
 </CodeGroup>
 
