@@ -20,7 +20,7 @@ To embed your Brand community into your website, follow the steps below:
 
 ### HTML Structure
 
-## Code-block to Embed Community:
+### Code-block to Embed Community:
 
 <CodeGroup>
   <CodeBlock title="Embed Without AutoLogin" language="html">
@@ -90,7 +90,8 @@ To embed your Brand community into your website, follow the steps below:
 
 ### Embed With Multi Embeds
 
-#### Prerequisites Before implementing the multi-embed setup, ensure you have:
+#### Prerequisites 
+Before implementing the multi-embed setup, ensure you have:
 
 1. Valid Genuin API credentials
 2. Unique embed IDs for each widget instance
@@ -99,7 +100,9 @@ To embed your Brand community into your website, follow the steps below:
 The multi-embed approach requires separate containers for each widget instance. Each container
 must have unique identifiers and proper data attributes.
 
-<br><b>Note:</b>
+<br />
+
+**Note:**
 1. Ensure each container has a unique `id` attribute 
 2. The multi-embed approach also works for single embeds, so you can use it for both cases if you prefer a unified setup.
 
@@ -392,9 +395,10 @@ export class AppModule {}
   </CodeBlock>
 </CodeGroup>
 
-### Embed With Multi Embeds
+### Embed With Multi Embeds (Angular)
 
-#### Prerequisites Before implementing the multi-embed setup, ensure you have:
+#### Prerequisites 
+Before implementing the multi-embed setup, ensure you have:
 
 1. Valid Genuin API credentials
 2. Unique embed IDs for each widget instance
@@ -403,7 +407,7 @@ export class AppModule {}
 The multi-embed approach requires separate containers for each widget instance. Each container
 must have unique identifiers and proper data attributes.
 
-<b>Note:</b>
+**Note:**
 1. Ensure each container has a unique `id` attribute 
 2. The multi-embed approach also works for single embeds, so you can use it for both cases if you prefer a unified setup.
 
@@ -482,9 +486,9 @@ export class AppModule {}
   </CodeBlock>
 </CodeGroup>
 
-### Embed With Contextual Feed
+### Embed With Contextual Feed (Angular)
 
-#### Only include the parameters necessary to retrieve a contextual feed.
+Only include the parameters necessary to retrieve a contextual feed.
 
 <CodeGroup>
   <CodeBlock title="Embed With Multi Embeds" language="typescript">
@@ -645,10 +649,11 @@ export class AppModule {}
 
 ### Font Family
 
-#### To apply your application's custom font styles to the Genuin Web SDK, add the following <style> block inside the <head> tag
+To apply your application's custom font styles to the Genuin Web SDK, add the following style block inside the head tag:
 
-<br>
-<b>Note:</b> Please ensure that your custom font is correctly loaded on the page. If the specified font is not available, the SDK will automatically fall back to the default system font.
+<br />
+
+**Note:** Please ensure that your custom font is correctly loaded on the page. If the specified font is not available, the SDK will automatically fall back to the default system font.
 
 ```html
 <style>
@@ -657,6 +662,8 @@ export class AppModule {}
   }
 </style>
 ```
+
+## Configuration Parameters
 
 | **Setting**  | **Description**                                                                                                                                                              |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
