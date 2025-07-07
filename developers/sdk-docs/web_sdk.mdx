@@ -3,7 +3,7 @@ title: "Web SDK"
 description: "Genuin Web SDK comprises features such as brand feed, communities, and groups."
 ---
 
-## Prerequisites
+# Prerequisites
 
 Genuin will provide you with the established community under the subdomain URL - website.begenuin.com which you can manage under your brand control center login.
 
@@ -20,15 +20,15 @@ To embed your Brand community into your website, follow the steps below:
 
 ### HTML Structure
 
-### Single Embeds (html)
+#### Single Embeds (html)
 
 <CodeGroup>
 
 ```html Embed_Without_AutoLogin
 <div
   id="gen-sdk"
-  style="max-width: 1080px; height: 720px; display: flex;">
-</div>
+  style="max-width: 1080px; height: 720px; display: flex;"
+></div>
 
 <!-- SDK JavaScript module -->
 
@@ -41,55 +41,55 @@ To embed your Brand community into your website, follow the steps below:
   // Callback function to automatically initialize the Genuin SDK when ready
   window.onGenuinReady = (genuin) => {
     genuin.initialize({
-      embed_id: 'Your Embed ID',
-      api_key: 'Your API Key',
-    })
-  }
+      embed_id: "Your Embed ID",
+      api_key: "Your API Key",
+    });
+  };
 
   // Alternative manual initialization (for frameworks like React)
   window.genuin.init({
-    embed_id: 'Your Embed ID',
-    api_key: 'Your API Key',
-  })
+    embed_id: "Your Embed ID",
+    api_key: "Your API Key",
+  });
 </script>
 ```
 
 ```html Embed_With_AutoLogin
 <div
   id="gen-sdk"
-  style="max-width: 1080px; height: 720px; display: flex;">
-</div>
+  style="max-width: 1080px; height: 720px; display: flex;"
+></div>
 
 <!-- SDK JavaScript module -->
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js">
-</script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <script>
   // Callback function to automatically initialize the Genuin SDK with SSO when ready
   window.onGenuinReady = (genuin) => {
     genuin.initialize({
-      embed_id: 'Your Embed ID',
-      api_key: 'Your API Key',
-      token: 'Your Authentication Token',
-    })
-  }
+      embed_id: "Your Embed ID",
+      api_key: "Your API Key",
+      token: "Your Authentication Token",
+    });
+  };
 
   // Alternative manual initialization (for frameworks like React)
   window.genuin.init({
-    embed_id: 'Your Embed ID',
-    api_key: 'Your API Key',
-    token: 'Your Authentication Token',
-  })
+    embed_id: "Your Embed ID",
+    api_key: "Your API Key",
+    token: "Your Authentication Token",
+  });
 </script>
 ```
 
 </CodeGroup>
 
-### Embed With Multi Embeds (html)
+#### Embed With Multi Embeds (html)
 
-#### Prerequisites
+##### Prerequisites
 
 Before implementing the multi-embed setup, ensure you have:
 
@@ -154,7 +154,7 @@ must have unique identifiers and proper data attributes.
 
 </CodeGroup>
 
-### Embed With Contextual Feed (html)
+#### Embed With Contextual Feed (html)
 
 Only include the parameters necessary to retrieve a contextual feed.
 
@@ -174,8 +174,8 @@ Only include the parameters necessary to retrieve a contextual feed.
   data-long="longitude of location"
   id="unique identifier"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh">
-</div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- Second Container -->
 <div
@@ -186,14 +186,14 @@ Only include the parameters necessary to retrieve a contextual feed.
   data-long="longitude of location"
   id="unique identifier"
   class="gen-sdk-class"
-  style="width: 100%; height: 100vh">
-</div>
+  style="width: 100%; height: 100vh"
+></div>
 
 <!-- SDK JavaScript module -->
 <script
   type="module"
-  src="https://media.begenuin.com/sdk/gen_sdk.min.js">
-</script>
+  src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+></script>
 
 <!-- Use Any of the below initialization methods with Multi Embeds -->
 <script>
@@ -260,12 +260,14 @@ Only include the parameters necessary to retrieve a contextual feed.
 ### Angular Structure
 
 **Note** : If you prefer not to inject the script dynamically using JavaScript, you can also include it directly in your HTML using a script tag.
-<br/>
-However, before initializing or interacting with the embedded element, ensure the following: <br/>
-1. The script has finished loading successfully. <br/>
-2. The target DOM element is present on the page. <br/><br/>
 
-### Single Embeds (Angular)
+However, before initializing or interacting with the embedded element, ensure the
+following: <br />
+
+1. The script has finished loading successfully. <br />
+2. The target DOM element is present on the page. <br />
+
+#### Single Embeds (Angular)
 
 The following code snippet has been developed using Angular version 16.
 
@@ -404,9 +406,9 @@ export class AppModule {}
 
 </CodeGroup>
 
-### Embed With Multi Embeds (Angular)
+#### Embed With Multi Embeds (Angular)
 
-#### Prerequisites
+##### Prerequisites
 
 Before implementing the multi-embed setup, ensure you have:
 
@@ -431,10 +433,10 @@ import {
   AfterViewInit,
   OnDestroy,
   ViewEncapsulation,
-} from '@angular/core';
+} from "@angular/core";
 
 @Component({
-  selector: 'genuin-sdk',
+  selector: "genuin-sdk",
   standalone: true,
   template: `
     <div
@@ -442,15 +444,15 @@ import {
       class="gen-sdk-class"
       data-embed-id="Your Embed Id"
       data-api-key="Your Api Key"
-      style="width: 1080px; height: 800px; background: #efefef">
-    </div>
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
     <div
       id="gen-sdk-2"
       class="gen-sdk-class"
       data-embed-id="Your Embed Id"
       data-api-key="Your Api Key"
-      style="width: 1080px; height: 800px; background: #efefef">
-    </div>
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
@@ -466,8 +468,8 @@ export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
       }
     };
 
-    this.scriptElement = document.createElement('script');
-    this.scriptElement.src = 'https://media.begenuin.com/sdk/gen_sdk.min.js';
+    this.scriptElement = document.createElement("script");
+    this.scriptElement.src = "https://media.begenuin.com/sdk/gen_sdk.min.js";
     this.scriptElement.async = true;
     document.body.appendChild(this.scriptElement);
   }
@@ -481,10 +483,10 @@ export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
 }
 
 // src/app/app.module.ts
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { GenuinSdkComponent } from './genuin-sdk.component';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AppComponent } from "./app.component";
+import { GenuinSdkComponent } from "./genuin-sdk.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -497,7 +499,7 @@ export class AppModule {}
 
 </CodeGroup>
 
-### Embed With Contextual Feed (Angular)
+#### Embed With Contextual Feed (Angular)
 
 Only include the parameters necessary to retrieve a contextual feed.
 
@@ -510,10 +512,10 @@ import {
   AfterViewInit,
   OnDestroy,
   ViewEncapsulation,
-} from '@angular/core';
+} from "@angular/core";
 
 @Component({
-  selector: 'genuin-sdk',
+  selector: "genuin-sdk",
   standalone: true,
   template: `
     <div
@@ -524,8 +526,8 @@ import {
       data-page-context="e.g AI, LLM, Machine Learning, MLOPS, Robotics"
       data-lat="latitude of location"
       data-long="longitude of location"
-      style="width: 1080px; height: 800px; background: #efefef">
-    </div>
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
     <div
       id="gen-sdk-2"
       class="gen-sdk-class"
@@ -534,8 +536,8 @@ import {
       data-page-context="e.g AI, LLM, Machine Learning, MLOPS, Robotics"
       data-lat="latitude of location"
       data-long="longitude of location"
-      style="width: 1080px; height: 800px; background: #efefef">
-    </div>
+      style="width: 1080px; height: 800px; background: #efefef"
+    ></div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
@@ -551,8 +553,8 @@ export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
       }
     };
 
-    this.scriptElement = document.createElement('script');
-    this.scriptElement.src = 'https://media.begenuin.com/sdk/gen_sdk.min.js';
+    this.scriptElement = document.createElement("script");
+    this.scriptElement.src = "https://media.begenuin.com/sdk/gen_sdk.min.js";
     this.scriptElement.async = true;
     document.body.appendChild(this.scriptElement);
   }
@@ -566,10 +568,10 @@ export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
 }
 
 // src/app/app.module.ts
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { GenuinSdkComponent } from './genuin-sdk.component';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AppComponent } from "./app.component";
+import { GenuinSdkComponent } from "./genuin-sdk.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -657,12 +659,14 @@ export class AppModule {}
 ### React Structure
 
 **Note** : If you prefer not to inject the script dynamically using JavaScript, you can also include it directly in your HTML using a script tag.
-<br/>
-However, before initializing or interacting with the embedded element, ensure the following: <br/>
-1. The script has finished loading successfully. <br/>
-2. The target DOM element is present on the page. <br/><br/>
 
-### Single embeds (React)
+However, before initializing or interacting with the embedded element, ensure the
+following: <br />
+
+1. The script has finished loading successfully. <br />
+2. The target DOM element is present on the page. <br />
+
+#### Single embeds (React)
 
 <CodeGroup>
 
@@ -751,9 +755,9 @@ export default function App() {
 
 </CodeGroup>
 
-### Embed With Multi Embeds (React)
+#### Embed With Multi Embeds (React)
 
-#### Prerequisites
+##### Prerequisites
 
 Before implementing the multi-embed setup, ensure you have:
 
@@ -837,7 +841,7 @@ function SecondComponent() {
 
 </CodeGroup>
 
-### Embed With Contextual Feed (React)
+#### Embed With Contextual Feed (React)
 
 Only include the parameters necessary to retrieve a contextual feed.
 
@@ -913,22 +917,38 @@ function SecondComponent() {
 
 </CodeGroup>
 
-## Customisation
+### Customisation
 
-### Font Family
+#### Font Family
 
 To apply your application's custom font styles to the Genuin Web SDK, add the following style block inside the head tag:
-
-<br />
 
 **Note:** Please ensure that your custom font is correctly loaded on the page. If the specified font is not available, the SDK will automatically fall back to the default system font.
 
 ```html
 <style>
   .gen-sdk-class * {
-    font-family: "Your Font Style" !important;
+    font-family: "Your Font Style", inherit !important;
   }
 </style>
+```
+
+#### Auth Callback
+
+The SDK provides a mechanism to optionally override the default authentication behavior by exposing a `genuinAuth` callback on the global `window` object.
+<br />
+This is particularly useful when you want full control over how your application handles login or other auth-related actions — such as redirecting to a custom login page or integrating with an existing auth provider.
+
+```html
+window.genuinAuth = (data) => {
+  // You can trigger your own login mechanism
+ 
+  // Option 1: Use a custom redirect function
+  redirectToLogin();
+
+  // Option 2: Directly set the login URL
+  // window.location.href = `URL`;
+};
 ```
 
 ## Configuration Parameters
