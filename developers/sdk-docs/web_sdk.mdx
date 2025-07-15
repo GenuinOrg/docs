@@ -100,8 +100,6 @@ Before implementing the multi-embed setup, ensure you have:
 The multi-embed approach requires separate containers for each widget instance. Each container
 must have unique identifiers and proper data attributes.
 
-<br />
-
 **Note:**
 
 1. Ensure each container has a unique `id` attribute
@@ -917,6 +915,226 @@ function SecondComponent() {
 
 </CodeGroup>
 
+### NextJs Structure
+
+#### Single Embeds (NextJs)
+
+<CodeGroup>
+```typescript Embed_With_AutoLogin
+// app/GenuinSDK.tsx
+"use client";
+
+import Script from "next/script";
+import { useEffect } from "react";
+
+export default function GenuinSDK() {
+  useEffect(() => {
+    window.genuin.init({});
+  }, []);
+  return (
+    <>
+      <Script
+        src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+        strategy="beforeInteractive"
+      />
+      <div
+        id="gen-sdk"
+        className="gen-sdk-class"
+        data-embed-id="Your Embed Id"
+        style={{ width: "786px", height: "250px" }}
+        data-api-key="Your Api key"
+      />
+    </>
+  );
+}
+
+// app/page.tsx
+'use client';
+import GenuinSDK from './GenuinSDK';
+
+export default function Home() {
+  return (
+    <>
+      <GenuinSDK />
+    </>
+  );
+}
+```
+
+```typescript Embed_With_AutoLogin
+// app/GenuinSDK.tsx
+"use client";
+
+import Script from "next/script";
+import { useEffect } from "react";
+
+export default function GenuinSDK() {
+  useEffect(() => {
+    window.genuin.init({});
+  }, []);
+  return (
+    <>
+      <Script
+        src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+        strategy="beforeInteractive"
+      />
+      <div
+        id="gen-sdk"
+        className="gen-sdk-class"
+        data-embed-id="Your Embed Id"
+        style={{ width: "786px", height: "250px" }}
+        data-api-key="Your Api key"
+        data-token="Your Authentication Token"
+      />
+    </>
+  );
+}
+
+// app/page.tsx
+("use client");
+import GenuinSDK from "./GenuinSDK";
+
+export default function Home() {
+  return (
+    <>
+      <GenuinSDK />
+    </>
+  );
+}
+```
+
+</CodeGroup>
+
+#### Embed With Multi Embeds (NextJs)
+
+#### Prerequisites
+
+Before implementing the multi-embed setup, ensure you have:
+
+1. Valid Genuin API credentials
+2. Unique embed IDs for each widget instance
+3. Access to the Genuin SDK
+
+The multi-embed approach requires separate containers for each widget instance. Each container
+must have unique identifiers and proper data attributes.
+
+<br />
+
+**Note:**
+
+1. Ensure each container has a unique `id` attribute
+2. The multi-embed approach also works for single embeds, so you can use it for both cases if you prefer a unified setup.
+
+<CodeGroup>
+```typescript Embed_With_Multi_Embeds
+// app/GenuinSDK.tsx
+"use client";
+
+import Script from "next/script";
+import { useEffect } from "react";
+
+export default function GenuinSDK() {
+  useEffect(() => {
+    window.genuin.init({});
+  }, []);
+  return (
+    <>
+      <Script
+        src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+        strategy="beforeInteractive"
+      />
+      <div
+        id="gen-sdk-1"
+        className="gen-sdk-class"
+        data-embed-id="Your Embed Id"
+        style={{ width: "786px", height: "250px" }}
+        data-api-key="Your Api key"
+      />
+      <div
+        id="gen-sdk-2"
+        className="gen-sdk-class"
+        style={{ width: "786px", height: "250px" }}
+        data-embed-id="Your Embed Id"
+        data-api-key="Your Api key"
+      />
+    </>
+  );
+}
+
+// app/page.tsx
+"use client";
+import GenuinSDK from "./GenuinSDK";
+
+export default function Home() {
+  return (
+    <>
+      <GenuinSDK />
+    </>
+  );
+}
+```
+</CodeGroup>
+
+#### Embed With Contextual Feed (NextJs)
+
+Only include the parameters necessary to retrieve a contextual feed.
+
+<CodeGroup>
+```typescript Contextual_Feed
+// app/GenuinSDK.tsx
+"use client";
+
+import Script from "next/script";
+import { useEffect } from "react";
+
+export default function GenuinSDK() {
+  useEffect(() => {
+    window.genuin.init({});
+  }, []);
+  return (
+    <>
+      <Script
+        src="https://media.begenuin.com/sdk/gen_sdk.min.js"
+        strategy="beforeInteractive"
+      />
+      <div
+        id="gen-sdk-1"
+        className="gen-sdk-class"
+        data-embed-id="Your Embed Id"
+        style={{ width: "786px", height: "250px" }}
+        data-api-key="Your Api key"
+        data-page-context="e.g AI, LLM, Machine Learning, MLOPS, Robotics"
+        data-lat="latitude of location"
+        data-long="longitude of location"
+      />
+       <div
+        id="gen-sdk-2"
+        className="gen-sdk-class"
+        data-embed-id="Your Embed Id"
+        style={{ width: "786px", height: "250px" }}
+        data-api-key="Your Api key"
+        data-page-context="e.g AI, LLM, Machine Learning, MLOPS, Robotics"
+        data-lat="latitude of location"
+        data-long="longitude of location"
+      />
+    </>
+  );
+}
+
+// app/page.tsx
+"use client";
+import GenuinSDK from "./GenuinSDK";
+
+export default function Home() {
+  return (
+    <>
+      <GenuinSDK />
+    </>
+  );
+}
+```
+</CodeGroup>
+
 ### Customisation
 
 #### Font Family
@@ -936,13 +1154,13 @@ To apply your application's custom font styles to the Genuin Web SDK, add the fo
 #### Auth Callback
 
 The SDK provides a mechanism to optionally override the default authentication behavior by exposing a `genuinAuth` callback on the global `window` object.
-<br />
+
 This is particularly useful when you want full control over how your application handles login or other auth-related actions — such as redirecting to a custom login page or integrating with an existing auth provider.
 
 ```html
 window.genuinAuth = (data) => {
   // You can trigger your own login mechanism
- 
+
   // Option 1: Use a custom redirect function
   redirectToLogin();
 
