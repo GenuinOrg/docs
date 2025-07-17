@@ -73,6 +73,13 @@ To embed your Brand community into your website, follow the steps below:
       embed_id: "Your Embed ID",
       api_key: "Your API Key",
       token: "Your Authentication Token",
+      params: {
+        name: "Name",
+        mobile: "Contact Number",
+        email: "Email ID",
+        nickname: "Nickname",
+        profileImage: "Profile Image URL",
+      },
     });
   };
 
@@ -81,7 +88,18 @@ To embed your Brand community into your website, follow the steps below:
     embed_id: "Your Embed ID",
     api_key: "Your API Key",
     token: "Your Authentication Token",
+    params: {
+      name: "Name",
+      mobile: "Contact Number",
+      email: "Email ID",
+      nickname: "Nickname",
+      profileImage: "Profile Image URL",
+    },
   });
+
+  // Pass the token only if you want to enable SSO login.
+  // To bypass autologin, provide the token along with any additional required parameters.
+  // Include only the parameters necessary for your use case.
 </script>
 ```
 
@@ -368,6 +386,16 @@ export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
           embed_id: "Your Embed ID",
           api_key: "Your API Key",
           token: "Your Authentication Token",
+          params: {
+            name: "Name",
+            mobile: "Contact Number",
+            email: "Email ID",
+            nickname: "Nickname",
+            profileImage: "Profile Image URL",
+          },
+          // Pass the token only if you want to enable SSO login.
+          // To bypass autologin, provide the token along with any additional required parameters.
+          // Include only the parameters necessary for your use case.
         });
         this.genuinInitialized = true;
       }
@@ -727,7 +755,20 @@ export default function App() {
     script.async = true;
     script.onload = () => {
       if (window.genuin) {
-        window.genuin.init({});
+        window.genuin.init({
+          token: "Your Authentication Token",
+          params: {
+            name: "Name",
+            mobile: "Contact Number",
+            email: "Email ID",
+            nickname: "Nickname",
+            profileImage: "Profile Image URL",
+          },
+
+          // Pass the token only if you want to enable SSO login.
+          // To bypass autologin, provide the token along with any additional required parameters.
+          // Include only the parameters necessary for your use case.
+        });
       }
     };
 
@@ -745,7 +786,6 @@ export default function App() {
       style={{ width: "786px", height: "250px" }}
       data-embed-id="Your Embed ID"
       data-api-key="Your API Key"
-      data-token="Your Authentication Token"
     />
   );
 }
@@ -920,7 +960,7 @@ function SecondComponent() {
 #### Single Embeds (NextJs)
 
 <CodeGroup>
-```typescript Embed_With_AutoLogin
+```typescript Embed_Without_AutoLogin
 // app/GenuinSDK.tsx
 "use client";
 
@@ -970,7 +1010,20 @@ import { useEffect } from "react";
 
 export default function GenuinSDK() {
   useEffect(() => {
-    window.genuin.init({});
+    window.genuin.init({
+      token: "Your Authentication Token",
+      params: {
+        name: "Name",
+        mobile: "Contact Number",
+        email: "Email ID",
+        nickname: "Nickname",
+        profileImage: "Profile Image URL",
+      },
+
+      // Pass the token only if you want to enable SSO login.
+      // To bypass autologin, provide the token along with any additional required parameters.
+      // Include only the parameters necessary for your use case.
+    });
   }, []);
   return (
     <>
@@ -984,7 +1037,6 @@ export default function GenuinSDK() {
         data-embed-id="Your Embed Id"
         style={{ width: "786px", height: "250px" }}
         data-api-key="Your Api key"
-        data-token="Your Authentication Token"
       />
     </>
   );
@@ -1007,7 +1059,7 @@ export default function Home() {
 
 #### Embed With Multi Embeds (NextJs)
 
-#### Prerequisites
+##### Prerequisites
 
 Before implementing the multi-embed setup, ensure you have:
 
@@ -1107,7 +1159,7 @@ export default function GenuinSDK() {
         data-lat="latitude of location"
         data-long="longitude of location"
       />
-       <div
+      <div
         id="gen-sdk-2"
         className="gen-sdk-class"
         data-embed-id="Your Embed Id"
@@ -1158,15 +1210,9 @@ The SDK provides a mechanism to optionally override the default authentication b
 This is particularly useful when you want full control over how your application handles login or other auth-related actions — such as redirecting to a custom login page or integrating with an existing auth provider.
 
 ```html
-window.genuinAuth = (data) => {
-  // You can trigger your own login mechanism
-
-  // Option 1: Use a custom redirect function
-  redirectToLogin();
-
-  // Option 2: Directly set the login URL
-  // window.location.href = `URL`;
-};
+window.genuinAuth = (data) => { // You can trigger your own login mechanism //
+Option 1: Use a custom redirect function redirectToLogin(); // Option 2:
+Directly set the login URL // window.location.href = `URL`; };
 ```
 
 ## Configuration Parameters
@@ -1179,3 +1225,8 @@ window.genuinAuth = (data) => {
 | page_context | The content or context of your webpage, used to render relevant embed feeds. This can include comma-separated keywords or search parameters (e.g., "AI", "tech news", etc.). |
 | lat          | Latitude of Location which will be used to retrieve the feed based on Location                                                                                               |
 | long         | Longitude of location which will be used to retrieve the feed based on Location                                                                                              |
+| name         | Full name of the user for automatic login (SSO)                                                                                                                              |
+| mobile       | Mobile number or contact information of the user for authentication                                                                                                          |
+| email        | Email address of the user for authentication and communication                                                                                                               |
+| nickname     | Display nickname or username for the autologged user                                                                                                                         |
+| profileImage | URL of the user's profile image to personalize the embedded experience                                                                                                       |
