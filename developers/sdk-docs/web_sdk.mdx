@@ -1210,9 +1210,15 @@ The SDK provides a mechanism to optionally override the default authentication b
 This is particularly useful when you want full control over how your application handles login or other auth-related actions — such as redirecting to a custom login page or integrating with an existing auth provider.
 
 ```html
-window.genuinAuth = (data) => { // You can trigger your own login mechanism //
-Option 1: Use a custom redirect function redirectToLogin(); // Option 2:
-Directly set the login URL // window.location.href = `URL`; };
+window.genuinAuth = (data) => {
+  // You can trigger your own login mechanism
+
+  // Option 1: Use a custom redirect function
+  redirectToLogin();
+
+  // Option 2: Directly set the login URL
+  // window.location.href = `URL`;
+};
 ```
 
 ## Configuration Parameters
