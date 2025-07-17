@@ -67,7 +67,7 @@ To embed your Brand community into your website, follow the steps below:
 ></script>
 
 <script>
-  // Callback function to automatically initialize the Genuin SDK with SSO when ready
+  // Callback function to automatically initialize the Genuin SDK with AutoLogin when ready
   window.onGenuinReady = (genuin) => {
     genuin.initialize({
       embed_id: "Your Embed ID",
@@ -97,7 +97,8 @@ To embed your Brand community into your website, follow the steps below:
     },
   });
 
-  // Pass the token only if you want to enable SSO login.
+  // Pass the token only if you want to enable autologin functionality.
+  // The token value can be a unique identifier (such as a session token) or an email address, depending on your authentication flow.
   // To bypass autologin, provide the token along with any additional required parameters.
   // Include only the parameters necessary for your use case.
 </script>
@@ -393,7 +394,8 @@ export class GenuinSdkComponent implements AfterViewInit, OnDestroy {
             nickname: "Nickname",
             profileImage: "Profile Image URL",
           },
-          // Pass the token only if you want to enable SSO login.
+          // Pass the token only if you want to enable autologin functionality.
+          // The token value can be a unique identifier (such as a session token) or an email address, depending on your authentication flow.
           // To bypass autologin, provide the token along with any additional required parameters.
           // Include only the parameters necessary for your use case.
         });
@@ -765,7 +767,8 @@ export default function App() {
             profileImage: "Profile Image URL",
           },
 
-          // Pass the token only if you want to enable SSO login.
+          // Pass the token only if you want to enable autologin functionality.
+          // The token value can be a unique identifier (such as a session token) or an email address, depending on your authentication flow.
           // To bypass autologin, provide the token along with any additional required parameters.
           // Include only the parameters necessary for your use case.
         });
@@ -1019,8 +1022,8 @@ export default function GenuinSDK() {
         nickname: "Nickname",
         profileImage: "Profile Image URL",
       },
-
-      // Pass the token only if you want to enable SSO login.
+      // Pass the token only if you want to enable autologin functionality.
+      // The token value can be a unique identifier (such as a session token) or an email address, depending on your authentication flow.
       // To bypass autologin, provide the token along with any additional required parameters.
       // Include only the parameters necessary for your use case.
     });
@@ -1227,11 +1230,11 @@ window.genuinAuth = (data) => {
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | embed_id     | The id which you want to embed in your web SDK                                                                                                                               |
 | api_key      | Unique API key which will be used to authenticate the embed                                                                                                                  |
-| token        | Your SSO Token which will be used for authenticate                                                                                                                           |
+| token        | Your autologin Token which will be used for authenticate                                                                                                                     |
 | page_context | The content or context of your webpage, used to render relevant embed feeds. This can include comma-separated keywords or search parameters (e.g., "AI", "tech news", etc.). |
 | lat          | Latitude of Location which will be used to retrieve the feed based on Location                                                                                               |
 | long         | Longitude of location which will be used to retrieve the feed based on Location                                                                                              |
-| name         | Full name of the user for automatic login (SSO)                                                                                                                              |
+| name         | Full name of the user for automatic login (Autologin)                                                                                                                        |
 | mobile       | Mobile number or contact information of the user for authentication                                                                                                          |
 | email        | Email address of the user for authentication and communication                                                                                                               |
 | nickname     | Display nickname or username for the autologged user                                                                                                                         |
