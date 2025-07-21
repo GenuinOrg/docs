@@ -1215,11 +1215,35 @@ To apply your application's custom font styles to the Genuin Web SDK, add the fo
 
 You can use the video parameter during SDK initialization—alongside other parameters—to directly open a specific video page instead of loading the default feed.
 
-```html
+<CodeGroup>
+
+```html Single_Embeds
 window.genuin.init({
-  video : "VIDEO_SLUG e.g. introducing-slnsh-a-multi-season-collaboration"
+  video : "VIDEO_SLUG e.g. excerpt-from-preserving-the-vasa-httpsyoutubethbk"
 })
 ```
+
+```html Multi_Embeds
+  <div
+      data-embed-id="Your Embed ID"
+      data-api-key="Your API Key"
+      data-video-id="VIDEO_SLUG e.g. excerpt-from-preserving-the-vasa-httpsyoutubethbk"
+      id="gen-sdk-1"
+      class="gen-sdk-class"
+      style="width: 100%; height: 300px">
+  </div>
+  <div
+      data-embed-id="Your Embed ID"
+      data-api-key="Your API Key"
+      data-video-id="VIDEO_SLUG e.g. discover-how-strategic-capital-allocation-is"
+      id="gen-sdk-2"
+      class="gen-sdk-class"
+      style="width: 100%; height: 300px">
+  </div>
+```
+
+</CodeGroup>
+
 
 ### SDK API's
 
