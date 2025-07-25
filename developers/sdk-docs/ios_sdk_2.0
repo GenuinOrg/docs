@@ -1,0 +1,1169 @@
+---
+title: 'iOS SDK'
+description: 'Genuin iOS SDK comprises features such as brand feed, communities, and groups.'
+---
+
+
+## Requirements
+
+| Platform | Minimum Deployment Target | Language | Supported Orientations | Supported Destinations |
+| -------- | ------------------------- | -------- | ---------------------- | ---------------------- |
+| iOS      | 13.0                      | Swift    | Portrait               | iPhone                 |
+
+
+## Permissions (Optional) 
+
+Permissions to be added in `info.plist` file of your application
+
+| Permission | Usage | Used Where |                                                               
+| ---------- | ----- | ---------- |
+| Camera (NSCameraUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Video Comment |
+| Microphone (NSMicrophoneUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Voice Comment |
+| Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.| Post, Profile, Banner | 
+| Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio |
+| Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Add Members in Communities and Groups |
+| Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location |
+| Tracking (NSUserTrackingUsageDescription) | Your data will be used to analyse ads we run! | Monetization |
+
+<Note>
+
+If any permission is not given then that particular feature will not be accessible in your app.
+
+</Note>
+
+## Installation
+
+### Standard CocoaPods Install
+
+If your project doesn't have the CocoaPods setup then start with `pod init` which will create the Podfile, else do following changes in the pod file to install GenuinSDK.
+
+<CodeGroup>
+
+```swift Podfile.swift
+platform :ios, '13.0'
+
+target 'YourProject' do
+  use_frameworks!
+
+  # Pods for YourProject
+
+  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.17.1"
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+    end
+  end
+end
+```
+
+</CodeGroup>
+
+If you are using Xcode 16 then kindly refer the below podfile :
+
+<CodeGroup>
+
+```swift Podfile.swift
+platform :ios, '13.0'
+
+target 'YourProject' do
+  use_frameworks!
+
+pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.17.1"
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'Giphy'
+      `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
+    end
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+    end
+  end
+end
+
+```
+
+</CodeGroup>
+
+**Example**
+
+Import the GenuinSDK module in your `SceneDelegate/AppDelegate`.
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+import GenuinSDK
+
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Optional configuration and attaching the UIWindow to UIWindowScene
+    guard let _ = (scene as? UIWindowScene) else { return }
+
+    // Initialize the SDK configuration 
+    let configuration = GenuinConfiguration.shared
+
+    // For Production environment (Default)
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+
+    // For QA Environment
+    configuration.environment = .qa 
+
+    // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+
+    // Notify the SDK that the scene will connect
+    GenuinSDK.shared.scene(scene, willConnectTo: session, options: connectionOptions)
+}
+
+```
+
+```swift AppDelegate.swift
+import GenuinSDK
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Initialize the SDK configuration
+    let configuration = GenuinConfiguration.shared
+
+    // For Production Environment (Default)
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+
+    // For QA Environment 
+    configuration.environment = .qa 
+
+   // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+    return true
+}
+
+```
+</CodeGroup>
+
+<Note>
+
+To load your lottie animation accross the Genuin SDK, you can add it here `configuration.setCustomLoader("YOUR_LOADER", bundle: .main)`
+
+</Note>
+
+### Instructions for `SceneDelegate`:
+
+1. Ensure you are using the `UISceneDelegate` in your app.
+2. In your `SceneDelegate.swift` file, implement the `scene(_:willConnectTo:options:)` method.
+3. Use the shared configuration and set up any custom loaders or additional parameters.
+4. Call `GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)` with your API key and the configured options.
+5. Ensure that `GenuinSDK.shared.scene(scene, willConnectTo: session, options: connectionOptions)` is called to notify the SDK of the scene connection.
+
+### Instructions for `AppDelegate`:
+
+1. In your `AppDelegate.swift`, implement the `application(_:didFinishLaunchingWithOptions:)` method.
+2. Set up the shared configuration and initialize the SDK with your API key.
+3. Call `GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)` with your API key and the configured options.
+4. Return `true` to indicate successful launch configuration.
+
+Then you can display the home feed view controller. For example, to use it in your `UITabBarController`:
+
+<CodeGroup>
+
+```swift ViewController.swift
+import UIKit
+import GenuinSDK
+class TabBarController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if let homeFeedController = GenuinSDK.shared.getHomeScreen() {
+            homeFeedController.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 0)
+            self.viewControllers = [homeFeedController]
+        }
+    }
+}
+
+```
+
+</CodeGroup>
+
+To present feed from your UIViewController by clicking on UIButton:
+
+
+``` swift ViewController.swift
+
+import UIKit
+import GenuinSDK
+
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func openFeed() {
+        if let vc = GenuinSDK.shared.getHomeScreen() {
+            vc.navigationBar.isTranslucent = false
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+    }
+}
+
+```
+
+<Note>**Note**: Our SDK is well optimized for `iOS version 15.0` and above, but if you are using `iOS version 13` or `14` then put this `if #available(iOS 15.0, *)` condition while importing the GenuinSDK. Refer to the below code block </Note>
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+// Below is an Example Code
+
+if #available(iOS 15.0, *) {
+    // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+    if let vc = GenuinSDK.shared.getHomeScreen() {
+        vc.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 3)
+        self.viewControllers = [vc]
+        self.selectedIndex = 0
+    }
+}
+
+```
+
+</CodeGroup>
+
+## Monetization
+
+To enable Monetization use following code snippet to get **advertisingIdentifier** by **AppTrackingTranspancy**. You need to add `NSUserTrackingUsageDescription` in `Info.plist` as described [here](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#permissions-optional).
+
+
+
+<CodeGroup>
+
+```swift For SceneDelegate
+
+import AppTrackingTransparency
+import AdSupport //Import only if you want to use advertisingIdentifier
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+   func sceneDidBecomeActive(_ scene: UIScene) {
+        // Called when the scene has moved from an inactive state to an active state.
+        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        DispatchQueue.main.async {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .notDetermined:
+                    break
+                case .restricted:
+                    break
+                case .denied:
+                    break
+                case .authorized:
+                    // If you want to check the current advertisingIdentifier
+                    print("advertisingIdentifier: ", ASIdentifierManager.shared().advertisingIdentifier.uuidString)
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+
+}
+
+```
+
+```swift For AppDelegate
+
+import AppTrackingTransparency
+import AdSupport //Import only if you want to use advertisingIdentifier
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        DispatchQueue.main.async {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .notDetermined:
+                    break
+                case .restricted:
+                    break
+                case .denied:
+                    break
+                case .authorized:
+                    // If you want to check the current advertisingIdentifier
+                    print("advertisingIdentifier: ", ASIdentifierManager.shared().advertisingIdentifier.uuidString)
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+
+}
+
+```
+
+</CodeGroup>
+
+Also if you enable monetization then you need to update App Privacy in AppStoreConnect
+
+<Note>
+**Need to declare in App Store Connect that your app is using Advertising Data**
+
+Steps:
+- **Log in** to your App Store Connect.
+- **Select the app** you are working on.
+- Go to App **Privacy > Data Collection**.
+- Find the Usage Data section and select the **Advertising Data**.
+- Click on **Save/Publish**.
+- Now Setup Advertising Data by selecting (Third-Party Advertising, Analytics, Product Personalization, App Functionality, Other Purposes)
+- Click on **Next** and give the answers as asked.
+- Click on **save**.
+</Note>
+
+
+## Embed
+
+<Note> **Note**: Make sure you have followed the [installation steps](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#installation) in order to implement the Carousel Embed. </Note> 
+
+### Carousel Embed
+
+<Tip> Refer to [Carousel View](https://resources.begenuin.com/developers/guides/embed#mobile-view) in Mobile</Tip>
+
+<CodeGroup>
+
+```swift ViewController.swift (With SSO)
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, ssoToken: <YOUR_SSO_TOKEN>, embedConfiguration: embedConfiguration)
+```
+
+```swift ViewController.swift (Without SSO)
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, embedConfiguration: embedConfiguration)
+```
+
+```swift ViewController.swift (With Contextual Parameters) 
+
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+
+```
+
+</CodeGroup>
+
+<Note> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app. </Note>
+
+#### Vertical Carousel Embed
+
+In `EmbedConfiguration` there is new option called `genuinCarouselConfiguration` by using it we can change the configs of carousel design.
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+// Below is an Example Code
+
+let genuinCarouselConfiguration = GenuinCarouselConfiguration()
+genuinCarouselConfiguration.interTileSpacing = 16.0
+genuinCarouselConfiguration.scrollDirection = .vertical //default value is .horizontal as described above.
+genuinCarouselConfiguration.tileCornerRadius = 16.0
+genuinCarouselConfiguration.aspectRatio = .ratio4x5
+
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.genuinCarouselConfiguration = genuinCarouselConfiguration //here you can pass the GenuinCarouselConfiguration
+
+GenuinSDK.shared.initializeEmbed(embedId: "YOUR_KEY", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: self, embedConfiguration: embedConfiguration)
+
+```
+
+</CodeGroup>
+
+Check the additional information [here.](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#additional-information)
+
+
+### Full Screen Embed
+
+<CodeGroup>
+
+```swift ViewController.swift (With SSO)
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbedFeed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, ssoToken: <YOUR_SSO_TOKEN>, embedConfiguration: embedConfiguration)
+```
+
+```swift ViewController.swift (Without SSO)
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbedFeed(embedId: "YOUR_EMBED_ID", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: <YOUR_VIEW_CONTROLLER>, embedConfiguration: embedConfiguration)
+```
+
+```swift ViewController.swift (With Contextual Parameters) 
+
+let embedConfiguration = EmbedConfiguration()
+embedConfiguration.isShowProfileEnabled = false
+embedConfiguration.isDirectDeepLinkEnabled = false
+
+GenuinSDK.shared.initializeEmbedFeed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+
+```
+
+</CodeGroup>
+
+<Note>
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the above function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+
+</Note>
+
+
+### Standard Wall Embed
+
+<CodeGroup>
+
+```swift StandardWallFeedViewController.swift 
+import GenuinSDK
+
+class StandardWallFeedViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        let embedConfiguration = EmbedConfiguration()
+        embedConfiguration.isShowProfileEnabled = true
+        
+        GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView: self.view, viewConroller: self, embedConfiguration: embedConfiguration)
+        
+    }
+
+}
+```
+
+```
+
+GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView: self.view, viewConroller: self, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+
+```
+
+</CodeGroup>
+
+<Note>
+
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID` while calling the above function. 
+
+</Note>
+
+### Additional Information
+
+To configure the `EmbedConfiguration` based on your need you can change the below values.
+
+1. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+2. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work.
+
+3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+4. **genuinCarouselConfiguration** = This is an optional parameter. You can pass `GenuinCarouselConfiguration` object in this parameter. If `GenuinCarouselConfiguration` is provided then the carousel design will change accordingly. The default values are listed below, which you can pass in `GenuinCarouselConfiguration` object.
+
+	-  `interTileSpacing` - spacing between the carousel's collection view items. It's default value is `8.0`
+	- `carouselInset` - edge insets for carousel's collection view. It's default value is `UIEdgeInsets(top: 8.0, left: 16.0, bottom: 0.0, right: 16.0)`
+	- `scrollDirection` - direction of carousel scroll. It's default value is `.horizontal`
+	- `aspectRatio` - define aspect ratio of carousel's collection view items. It's default value is `.ratio9x16`
+	- `tileCornerRadius` - cornerRadius for the carousel's collection view items. It's default value is `8.0`
+
+
+<img height="200" src="/visual-aids/developers/guides/Additional%20Information%20-%20iOS.png" />
+
+
+Below are the optional parameters for the `params` key:
+
+1. **name** - This is an optional string parameter. Pass this parameter for '`signup/login`'.
+
+2. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+3. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+4. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+
+5. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK.
+
+
+Below are the optional parameters for the `contextualParams` key:
+
+
+1. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+
+2. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+3. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
+<Note>
+
+**Note**: `lat` and `long` both parameters shall be passed in order to implement the contextual feed based on the location.  
+
+</Note>
+
+**Example**
+
+<CodeGroup>
+
+```swift SSO Example
+
+GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NUMBER"], embedConfiguration: embedConfiguration)
+
+```
+
+```swift Contextual Example
+
+GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_TOKEN", contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+
+```
+
+</CodeGroup>
+
+## Handle Login : via AutoLogin Approach
+
+To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
+
+<Note> **Note**: You don't need to call the below method if you have implemented the Embed With SSO already. </Note>
+
+<CodeGroup>
+
+``` swift ViewController.swift
+ GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN")
+```
+
+</CodeGroup>
+
+
+**Handle AutoLogin in Embed**
+
+<CodeGroup>
+
+```swift with embed
+
+GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", containerView: YOUR_VIEW, viewConroller: YOUR_VIEW_CONTROLLER, ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: ["page_context": "CONTEXT_TEXT", "geo": { "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE }], embedConfiguration: embedConfiguration)
+```
+
+```swift withtout embed
+
+GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME"])
+```
+
+```swift with completion handler
+
+GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN") { status in
+}
+// Where status of login = true or false 
+
+```
+
+</CodeGroup>
+
+## Custom Login 
+
+If you want to handle login process as per your requirement then follow the below steps:
+
+**Step 1**: Assign Delegate while initializing Genuin SDK
+
+<CodeGroup>
+
+```swift Swift
+
+GenuinSDK.shared.delegate = self ( YOUR_CONTROLLER )
+
+```
+
+</CodeGroup>
+
+**Step 2**: Extend GenuinDelegate & Present your own controller on provided base controller
+
+<CodeGroup>
+
+```swift Swift
+
+extension YOUR_CONTROLLER : GenuinDelegate{
+  func presentLoginViewController(baseViewController : UIViewController) {
+    guard let loginVC = GET AND ASSIGN YOUR CONTROLLER
+    baseViewController.present(loginVC, animated: true)
+  }
+}
+
+```
+
+</CodeGroup>
+
+**Step 3**: Must call below login service from Genuin, to keep user logged in, in Genuin SDK.
+
+<CodeGroup>
+
+```swift Swift
+
+GenuinSDK.shared.ssoLogin(ssoToken: "YOUR_SSO_TOKEN", params: ["name" : "FULL_NAME", "nickname" : "USER_NAME"])
+
+```
+
+</CodeGroup>
+
+ 
+
+
+## Handle Logout : via AutoLogin Approach
+
+Whenever user logs out from your application call the below method. 
+
+<CodeGroup>
+
+``` swift ViewController.swift
+GenuinSDK.shared.ssoLogout()
+```
+
+```swift with completion handler
+
+GenuinSDK.shared.ssoLogout { status in
+}
+// Where status of logout = true or false
+
+```
+
+</CodeGroup>
+
+## Handling Deep Link
+
+<Note> **Note**: Make sure you have followed the installation steps in order to handle the deep links. </Note> 
+
+**Prerequisite**:
+
+1. Make sure you have white labelled your community by following these [steps](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) 
+
+2. Enable Associated Domains in Certificates, Identifiers & Profiles using your Apple Developer account at https://developer.apple.com/account/resources/identifiers/list
+
+3. Create apple-app-site-association (without extension) file with following settings:
+
+<CodeGroup>
+
+```json apple-app-site-association
+{"appclips":{"apps":["YOUR_TEAM_ID.APP_BUNDLE_ID.Clip"]},"applinks":{"apps":[],"details":[{"paths":["/*"],"appID":"YOUR_TEAM_ID.APP_BUNDLE_ID"}]}}
+```
+</CodeGroup>
+
+Once the file is created, host it on the white labeled domain at `https://YOUR_WHITE-LABELLED_DOMAIN/.well-known/apple-app-site-association`
+
+4. Add Associated Domains in capabilities if not already,
+<img height="200" src="/visual-aids/developers/guides/iOS Target Configuration.png" />
+
+Add applinks in domains, for Example:
+
+applinks: `YOUR_WHITE-LABELLED_DOMAIN`
+
+applinks: `www.YOUR_WHITE-LABELLED_DOMAIN`
+
+To handle deep links in your app use the following methods.
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+  var window: UIWindow?
+
+  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    guard let _ = (scene as? UIWindowScene) else { return }
+    handleGenuinDeeplink(deeplinkURL: connectionOptions.userActivities.first?.webpageURL)
+  }
+
+  func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    //redirect if genuin SDK handles the deeplink
+    handleGenuinDeeplink(deeplinkURL: userActivity.webpageURL)
+  }
+
+  func handleGenuinDeeplink(deeplinkURL: URL?) {
+    if let dlURL = deeplinkURL, GenuinSDK.shared.willHandleDeepLink(url: dlURL){
+       
+      GenuinSDK.initDeeplinkWith(url: dlURL)
+      if let rootVC = window?.rootViewController as? UIViewController{
+        DispatchQueue.main.async {
+          GenuinSDK.shared.handleDeeplink(viewController: rootVC)
+        }
+      }
+    }
+  }
+}
+
+```
+
+```swift AppDelegate.swift
+
+func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
+        //redirect if genuin SDK handles the deeplink
+        if let dlURL = userActivity.webpageURL , GenuinSDK.shared.willHandleDeepLink(url: dlURL){
+            GenuinSDK.initDeeplinkWith(url: dlURL)
+            if let rootVC = window?.rootViewController as? UIViewController {
+                GenuinSDK.shared.handleDeeplink(viewController: rootVC)
+            }
+        }
+      return true
+ }
+
+```
+
+</CodeGroup>
+
+<Note>
+**Note**: `GenuinSDK.shared.willHandleDeepLink(url: dlURL)` function will check whether `GenuinSDK` will handle the given deeplink or not. You can use it according to your deeplink redirection flow.
+</Note>
+
+### Instructions for `SceneDelegate`:
+
+1. In `SceneDelegate.swift`, implement the `scene(_:continue:)` method.
+2. Notify the SDK of the continued scene via `GenuinSDK.initDeeplinkWith(url: dlURL)`.
+3. Handle deep links using the root view controller by calling `GenuinSDK.shared.handleDeeplink(viewController: rootVC)`.
+
+<Note>
+
+**NOTE**: To handle redirection of the deeplink , it is mandatory to call `GenuinSDK.initDeeplinkWith(url: dlURL)`
+
+</Note>
+
+### Instructions for `AppDelegate`:
+
+1. In `AppDelegate.swift`, implement the `application(_:continue:restorationHandler:)` method.
+2. Notify the SDK of the continued scene via `GenuinSDK.initDeeplinkWith(url: dlURL)`.
+3. Use `GenuinSDK.shared.handleDeeplink(viewController: rootVC)` to manage the deep link using the app's root view controller.
+
+<Note>
+ **Note**: 
+ 1. To handle the Deeplink from another controller call the `GenuinSDK.shared.handleDeeplink(viewController: vc)` function from specific controller
+ 
+ 2. If you are following the `SceneDelegate` method then calling this `GenuinSDK.shared.handleDeeplink(viewController: self)` function is mandatory
+</Note>
+
+```swift
+
+override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    GenuinSDK.shared.handleDeeplink(viewController: self)
+}
+```
+
+## Handling Push Notifications
+
+### Using Firebase
+
+1. Create an app in your firebase console by following [these steps](https://firebase.google.com/docs/cloud-messaging/ios/client) 
+
+2. Download the `GoogleService-Info.plist` file and add it in xcode project
+
+3. Add pod in pod file  
+
+<CodeGroup>
+
+```swift podfile
+
+pod 'FirebaseMessaging', '~> 10.24.0'
+
+```
+
+</CodeGroup>
+
+4. To enable the push notifications functionality then enable the Push Notifications in your target. To do so, `Select the target > Signing & Capabilities > Add Capability of Push Notification`
+
+5. Import
+
+<CodeGroup>
+
+```swift Swift
+
+import FirebaseMessaging
+import GenuinSDK
+
+```
+
+</CodeGroup>
+
+
+AppDelegate
+
+<CodeGroup>
+
+```swift AppDelegate.swift
+
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+	//Assign APNS token and notify sdk
+        Messaging.messaging().apnsToken = deviceToken 
+        GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: true) 
+
+    }
+
+```
+
+</CodeGroup>
+
+<Note> **Note**: Pass `true` value in `isFCMIntegrated` parameter, as we are using the Firebase. </Note>
+
+6. Initialize
+
+SceneDelegate
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let _ = (scene as? UIWindowScene) else { return }
+	//Register the notification
+        registerForNotification()
+	 //configure firebase
+        FirebaseApp.configure() 
+	 //set delegate , extend current class with MessagingDelegate
+        Messaging.messaging().delegate = self   
+    }
+
+```
+
+</CodeGroup>
+
+7. Place this code to take the user permission for Push Notification
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func registerForNotification(){
+	//Take permission and register remote notification
+        let current = UNUserNotificationCenter.current()
+        current.getNotificationSettings(completionHandler: { (settings) in
+            if settings.authorizationStatus == .notDetermined{
+                self.requestForNotificationPermission()
+            }else if settings.authorizationStatus == .authorized {
+                UNUserNotificationCenter.current().delegate = self
+                DispatchQueue.main.async{
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        })
+    }
+    
+    private func requestForNotificationPermission(){
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
+            print(granted)
+            
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+
+```
+
+</CodeGroup>
+
+
+8. Extend `MessagingDelegate` and Add follwing method:
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+   func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        if let token = fcmToken {
+            //fetch and register token
+            getInstanceID()
+        }
+    }
+    
+    func getInstanceID(){
+        Messaging.messaging().token { token, error in
+           // Check for error. Otherwise do what you will with token here
+            if let error = error {
+                print("Error fetching remote instance ID: \(error)")
+            } else if let result = token {
+                print("Remote instance ID token: \(result)")
+                GenuinSDK.shared.registerFCMToken(token: result)
+            }
+        }
+    }
+
+```
+
+</CodeGroup>
+
+
+9. To Handle the Push Notification Redirection whenever the user taps, follow the below code
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        if let userInfo = response.notification.request.content.userInfo as? [String: AnyObject]{
+            //notify firebase
+            Messaging.messaging().appDidReceiveMessage(userInfo)
+
+            //check if genuin will handle notification
+            if GenuinSDK.shared.willHandleNotification(userInfo: userInfo){
+                //notify to redirect
+                GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+                //notification notification
+                if let rootVC = window?.rootViewController as? UIViewController{
+                    GenuinSDK.shared.handleNotifications(viewController: rootVC)
+                }
+            }
+        }
+  }
+
+
+```
+
+</CodeGroup>
+
+<Note> **Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow. </Note>
+
+10. To configure notification UI
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        let userInfo = notification.request.content.userInfo
+        print("\(userInfo)")
+        //mention design type for notification 
+        completionHandler([.list, .badge, .sound])
+    }
+
+```
+</CodeGroup>
+
+11. If you want to handle the notification when app is opened then follow the below code
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        let userInfo = notification.request.content.userInfo
+        
+        GenuinSDK.shared.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+        if let rootVC = window?.rootViewController as? UIViewController{
+            GenuinSDK.shared.handleNotifications(viewController: rootVC)
+        }
+        
+        //mention design type for notification 
+        completionHandler([.list, .badge, .sound])
+    }
+
+
+```
+
+</CodeGroup>
+
+<Note> 
+**Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function
+</Note>
+### Using APNS
+
+1. To enable the push notifications functionality then enable the Push Notifications in your target. To do so, `Select the target > Signing & Capabilities > Add Capability of Push Notification`
+
+2. Import
+
+<CodeGroup>
+
+```swift Swift
+
+import GenuinSDK
+
+```
+
+</CodeGroup>
+
+
+AppDelegate
+
+<CodeGroup>
+
+```swift AppDelegate.swift
+
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+	//Assign APNS token and notify sdk
+        GenuinSDK.shared.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken, isFCMIntegrated: false) 
+
+    }
+
+```
+
+</CodeGroup>
+
+<Note> **Note**: Pass `false` value in `isFCMIntegrated` parameter, as we are not using the Firebase. </Note>
+
+
+SceneDelegate
+
+Initialize
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let _ = (scene as? UIWindowScene) else { return }
+	//Register the notification
+        registerForNotification()
+    }
+
+```
+
+</CodeGroup>
+
+3. Place this code to take the user permission for Push Notification
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func registerForNotification(){
+	//Take permission and register remote notification
+        let current = UNUserNotificationCenter.current()
+        current.getNotificationSettings(completionHandler: { (settings) in
+            if settings.authorizationStatus == .notDetermined{
+                self.requestForNotificationPermission()
+            }else if settings.authorizationStatus == .authorized {
+                UNUserNotificationCenter.current().delegate = self
+                DispatchQueue.main.async{
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        })
+    }
+    
+    private func requestForNotificationPermission(){
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
+            print(granted)
+            
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+
+```
+
+</CodeGroup>
+
+4. To Handle the Push Notification Redirection whenever the user taps, follow the below code
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        if let userInfo = response.notification.request.content.userInfo as? [String: AnyObject]{
+            //check if genuin will handle notification
+            if GenuinSDK.shared.willHandleNotification(userInfo: userInfo){
+                //notify to redirect
+                GenuinSDK.shared.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+                //notification notification
+                if let rootVC = window?.rootViewController as? UIViewController{
+                    GenuinSDK.shared.handleNotifications(viewController: rootVC)
+                }
+            }
+        }
+  }
+
+
+```
+
+</CodeGroup>
+
+<Note> **Note**: `GenuinSDK.shared.willHandleNotification(userInfo: userInfo)` function will check whether `GenuinSDK` will handle the given notification or not. You can use it according to your notification redirection flow. </Note>
+
+5. To configure notification UI
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        let userInfo = notification.request.content.userInfo
+        print("\(userInfo)")
+        //mention design type for notification 
+        completionHandler([.list, .badge, .sound])
+    }
+
+```
+</CodeGroup>
+
+6. If you want to handle the notification when app is opened then follow the below code
+
+<CodeGroup>
+
+```swift SceneDelegate.swift
+
+func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        let userInfo = notification.request.content.userInfo
+        
+        GenuinSDK.shared.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+        if let rootVC = window?.rootViewController as? UIViewController{
+            GenuinSDK.shared.handleNotifications(viewController: rootVC)
+        }
+        
+        //mention design type for notification 
+        completionHandler([.list, .badge, .sound])
+    }
+
+
+```
+
+</CodeGroup>
+
+<Note> **Note**: To handle the notification from another controller call the `GenuinSDK.shared.handleNotifications(viewController: YOUR_VIEW_CONTROLLER)` function. </Note>
+
+
+## What’s next?
+
+<CardGroup cols={3}>
+  <Card title="Android SDK" icon="android" href="https://resources.begenuin.com/developers/sdk-docs/android_sdk">
+    Integrate Android SDK in Your ecosystem.
+  </Card>
+  <Card title="Web SDK" icon="desktop" href="https://resources.begenuin.com/developers/sdk-docs/web_sdk">
+    Integrate Web SDK in your ecosystem.
+  </Card>
+  <Card title="React Native SDK" icon="react" href="https://resources.begenuin.com/developers/sdk-docs/react_native_sdk">
+    Integrate React Native SDK in your ecosystem.
+  </Card>
+</CardGroup>
+
+## Support
+
+If you need any assistance or have any questions, feel free to email us at support@begenuin.com.
+
+
+
+
