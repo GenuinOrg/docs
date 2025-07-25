@@ -3,11 +3,18 @@ title: 'Android SDK 2.0'
 description: 'Genuin Android SDK comprises features such as brand feed, communities, and groups.'
 ---
 
+| SDK | Description | Dependency* |
+| -------- | ------------------- | -------- | 
+| Core  | Includes the core functionality of the Genuin Ecosystem: Embeds and User authentication. | com.begenuin:core:2.x.x |
+| UI  | Additional UI flows like comments, search, deep-links, notifications, group/community detail etc. | com.begenuin:ui:2.x.x |
+| Camera  | Camera flows for video content creation. | com.begenuin:camera:2.x.x |
+| AI  | Additional flows for AI assisted community/group creation. | com.begenuin:ai:2.x.x |
+
 ## Requirements
 
 | Platform | Minimum SDK Version | Language | Supported Orientations | Supported Destinations |
 | -------- | ------------------- | -------- | ---------------------- | ---------------------- |
-| Android  | 24                  | Java/Kotlin    | Portrait               | Mobile                 |
+| Android  | 24                  | Java/Kotlin    | Portrait               | Mobile           |
 
 ## Installation
 
@@ -15,14 +22,16 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 <CodeGroup>
 
-```kotlin
+```kotlin In AndroidManifext.xml
 
 <uses-sdk
-    tools:overrideLibrary="com.begenuin.sdk, com.google.mediapipe.tasks.vision, com.google.mediapipe.tasks.core, com.arthenica.ffmpegkit"/>
+tools:overrideLibrary="com.begenuin.core, ..." />
 
 ```
 
 </CodeGroup>
+
+Include the respective begenuin modules used as shown above.
 
 <Warning> **Warning**: If you use the above code then possible it may lead to the functionality failure in some cases. </Warning>
 
@@ -37,13 +46,6 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-    jcenter()
-    maven {
-      setUrl("https://jitpack.io")
-    }
-    maven {
-      setUrl("https://genuin-media.s3.us-east-1.amazonaws.com/android_assets/")
-    }
   }
 }
 
@@ -55,13 +57,6 @@ allprojects {
   repositories {
     google()
     mavenCentral()
-    jcenter()
-    maven {
-      setUrl("https://jitpack.io")
-    } 
-    maven {
-      setUrl("https://genuin-media.s3.us-east-1.amazonaws.com/android_assets/")
-    }
   }
 }
 
@@ -71,20 +66,97 @@ allprojects {
 
 **2. Add dependency in app level gradle**
 
+**a. For core SDK
+
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-implementation("org.bitbucket.genuindev:genuin_android_sdk:1.1.17.3@aar"){
-        isTransitive=true
-    }
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
 ```
 
 ```java Groovy-build.gradle
-implementation('org.bitbucket.genuindev:genuin_android_sdk:1.1.17.3@aar') {
-  transitive = true
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
 }
 ```
 </CodeGroup>
+
+**b. For UI SDK
+
+<CodeGroup>
+
+```kotlin Kotlin-build.gradle.kts
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
+implementation("com.begenuin:ui:$genuin_version")
+```
+
+```java Groovy-build.gradle
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
+implementation('com.begenuin:ui:$genuin_version')
+}
+```
+</CodeGroup>
+
+**c. For Camera SDK
+
+<CodeGroup>
+
+```kotlin Kotlin-build.gradle.kts
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
+implementation("com.begenuin:ui:$genuin_version")
+implementation("com.begenuin:camera:$genuin_version")
+```
+
+```java Groovy-build.gradle
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
+implementation('com.begenuin:ui:$genuin_version')
+implementation('com.begenuin:camera:$genuin_version')
+}
+```
+</CodeGroup>
+
+**d. For AI SDK
+
+<CodeGroup>
+
+```kotlin Kotlin-build.gradle.kts
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
+implementation("com.begenuin:ui:$genuin_version")
+implementation("com.begenuin:camera:$genuin_version")
+implementation("com.begenuin:ai:$genuin_version")
+```
+
+```java Groovy-build.gradle
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
+implementation('com.begenuin:ui:$genuin_version')
+implementation('com.begenuin:camera:$genuin_version')
+implementation('com.begenuin:ai:$genuin_version')
+}
+```
+</CodeGroup>
+
+Note: All modules must use a consistent version format — 2.x.x.
+
+**Dependency Hierarchy
+The modules follow a linear dependency structure, where each subsequent module depends on the ones before it in the chain:
+<CodeGroup>
+ai ← camera ← ui ← core
+</CodeGroup>
+
+**Module Usage Guidelines
+1. core - Can be used independently. This is the foundational module required by all others.
+2. ui - Depends on core. Must include core when using ui.
+3. camera - Depends on both core and ui. Must include both when integrating camera.
+4. ai - Depends on camera, ui, and core. All three must be included when using ai.
+
+Ensure you maintain the correct order and include all required dependencies when integrating any module beyond core.
 
 **3. Add permissions to AndroidManifest.xml**
 
@@ -103,6 +175,34 @@ Mandatory Permissions
 </CodeGroup>
 
 Following permissions are optional and can be added in `AndroidManifest.xml` file as per feature requirements:
+
+**a. Permissions for UI SDK
+
+- To allow user to add their **Contacts as Members** in **Communities** and **Groups**:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+
+```
+
+</CodeGroup>
+
+- To allow user to receive **Push Notifications**:
+
+<CodeGroup>
+
+```kotlin AndroidManifest.xml
+
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+```
+
+</CodeGroup>
+
+**b. Permissions for Camera SDK
 
 - To allow user to **Create Video Content**, **Camera** and **Mic** permissions are needed:
 
@@ -137,29 +237,7 @@ Following permissions are optional and can be added in `AndroidManifest.xml` fil
 
 </CodeGroup>
 
-- To allow user to add their **Contacts as Members** in **Communities** and **Groups**:
-
-<CodeGroup>
-
-```kotlin AndroidManifest.xml
-
-<uses-permission android:name="android.permission.READ_CONTACTS" />
-
-```
-
-</CodeGroup>
-
-- To allow user to receive **Push Notifications**:
-
-<CodeGroup>
-
-```kotlin AndroidManifest.xml
-
-<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-```
-
-</CodeGroup>
+**c. Permissions for AI SDK
 
 - To allow creation of **AI Powered Communities** based on the **User Location**:
 
@@ -404,7 +482,7 @@ Steps:
 </Note>
 
 
-## Embed
+## Embed in Kotlin
 
 <Note> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to implement the Carousel Embed </Note>
 
@@ -423,7 +501,7 @@ Steps:
       android:layout_width="match_parent"
       android:layout_height="300dp">
 
-      <com.begenuin.sdk.ui.customview.embed.CarouselEmbedView
+      <com.begenuin.core.ui.customview.embed.CarouselEmbedView
         android:id="@+id/carousel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -752,7 +830,7 @@ Put below code in `FullEmbedActivity.kt` file
 
 ```Kotlin FullEmbedActivity.kt
 
-import com.begenuin.sdk.ui.fragment.FeedEmbedFragment
+import com.begenuin.core.ui.fragment.FeedEmbedFragment
 
 class FullEmbedActivity : AppCompatActivity() {
 
@@ -863,7 +941,7 @@ Put below code in `StandardWallEmbedActivity.kt` file
 
 ```Kotlin StandardWallEmbedActivity.kt
 
-import com.begenuin.sdk.ui.fragment.FeedEmbedFragment
+import com.begenuin.core.ui.fragment.FeedEmbedFragment
 
 class StandardWallEmbedActivity : AppCompatActivity() {
 
@@ -945,6 +1023,374 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
   b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
 
   c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
+## Embed in Compose
+
+<Note> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to implement the Carousel Embed </Note>
+
+### Carousel Embed
+
+<Tip> Refer to [Carousel View](https://resources.begenuin.com/developers/guides/embed#mobile-view) in mobile. </Tip>
+
+<CodeGroup>
+
+```Basic Implementation
+
+@Composable
+fun CarouselComposeViewWrapper(
+    modifier: Modifier = Modifier,
+    embedId: String,
+){
+    val context = LocalContext.current
+    val activity = context as? Activity?: throw IllegalStateException("Context is not an Activity!")
+
+    AndroidView(
+        modifier = modifier,
+        factory = { viewContext ->
+            // Creates view
+            CarouselEmbedView(viewContext)
+                .setEmbedParams(
+                    embedId,
+                )
+                .setActivity(activity)
+                .load()
+        },
+    )
+}
+
+```
+```With Customization and SSO
+
+@Composable
+fun CarouselComposeViewWrapper(
+    modifier: Modifier = Modifier,
+    embedId: String,
+    uniqueId: String = "",
+    ssoToken: String = "",
+    isDirectDeepLinkEnabled: Boolean = false,
+    isShowProfileEnabled: Boolean = false,
+    aspectRatio: CarouselTileAspectRatio = CarouselTileAspectRatio.RATIO_9_16,
+    interTileSpacing: Int = 24,
+    tileCornerRadius: Int = 24,
+    scrollDirection: CarouselScrollDirection = CarouselScrollDirection.HORIZONTAL,
+    leftInsets: Int = 24,
+    topInsets: Int = 24,
+    rightInsets: Int = 24,
+    bottomInsets: Int = 24,
+    params: HashMap<String, Any>? = null,
+    contextualParams: HashMap<String, Any>? = null,
+) {
+
+    val context = LocalContext.current
+    val activity =
+        context as? Activity ?: throw IllegalStateException("Context is not an Activity!")
+
+    AndroidView(
+        modifier = modifier,
+        factory = { viewContext ->
+            // Creates view
+            CarouselEmbedView(viewContext)
+                .setEmbedParams(
+                    embedId = embedId,
+                    uniqueId = uniqueId,
+                    isShowProfileEnabled = isShowProfileEnabled,
+                    isDirectDeepLinkEnabled = isDirectDeepLinkEnabled
+                )
+                .setActivity(activity)
+                .setAspectRatio(aspectRatio)
+                .setInterTileSpacing(interTileSpacing) // values should be in pixels
+                .setInsets(
+                    left = leftInsets, // values should be in pixels
+                    top = topInsets, // values should be in pixels
+                    right = rightInsets, // values should be in pixels
+                    bottom = bottomInsets, // values should be in pixels
+                )
+                .setTileCornerRadius(tileCornerRadius)// values should be in pixels
+                .setSSOToken(ssoToken)
+                .setParams(params)
+                .setContextualParams(contextualParams)
+                .setScrollDirection(scrollDirection)
+                .load()
+        },
+    )
+}
+
+```
+</CodeGroup>
+
+<Note> **Note**: Carousel Container height must be fixed or match_parent. It can not be wrap_content else carousel embed will not appear. </Note>
+
+Example Usage
+
+<CodeGroup>
+
+```Basic Implementation
+
+CarouselComposeViewWrapper(
+        embedId = "YOUR_EMBED_ID",
+        modifier = Modifier.fillMaxWidth().height(400.dp) // Height can be dynamic
+    )
+```
+
+```With Customization and SSO
+
+//This is Optional
+    val params = HashMap<String, Any>()
+    params["name"] = "John Doe"
+    params["email"] = "john.doe@begenuin.com"
+    params["nickname"] = "john"
+    params["mobile"] = "1XXXXXXXXXX"
+
+    //This is Optional
+    val contextualParams = HashMap<String, Any>()
+    contextualParams["page_context"] = "YOUR_CONTEXT_VALUE"
+    val geoJson = JSONObject()
+    geoJson.put("lat", XXXX.XXX) // value in double
+    geoJson.put("long", XXXX.XXX) // value in double
+    contextualParams["geo"] = geoJson.toString()
+
+    CarouselComposeViewWrapper(
+        embedId = "YOUR_EMBED_ID",
+        uniqueId = "UNIQUE_ID",
+        ssoToken = "YOUR_SSO_TOKEN",
+        isShowProfileEnabled = false,
+        isDirectDeepLinkEnabled = false,
+        aspectRatio = CarouselTileAspectRatio.RATIO_4_5,
+        tileCornerRadius = 32,
+        leftInsets = 32,
+        topInsets = 32,
+        rightInsets = 32,
+        bottomInsets = 32,
+        params = params,
+        contextualParams = contextualParams,
+        modifier = Modifier.fillMaxWidth().height(400.dp)
+    )
+
+```
+
+</CodeGroup>
+
+
+<Note> **Note**: To auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN"`(setSSOToken("YOUR_SSO_TOKEN"))` in order to implement Embed with SSO in your app. </Note>
+
+To configure the `EmbedParams` based on your need you can pass the below values.
+
+
+1. **embedId** = The Embed Id that you want to load.
+
+2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
+
+3. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+
+<Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
+
+5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+**Add user specific parameters (Optional)**
+
+  a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  b. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  c. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+
+  e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
+
+**Add contextual parameters (Optional)**
+
+    a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+    
+    b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+    c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
+**Add design configurations (Optional)**
+
+  a. **interTileSpacing** - spacing between the carousel's view items. It's default value is `8dp`
+
+  b. **carouselInset** - edge insets for carousel's view. It's default value is `top: 8dp, left: 16dp, bottom: 0dp, right: 16dp`
+
+  c. **scrollDirection** - direction of carousel scroll. It's default value is `CarouselScrollDirection.HORIZONTAL`
+
+  d. **aspectRatio** - define aspect ratio of carousel's view items. It's default value is `CarouselTileAspectRatio.RATIO_9_16`
+
+  e. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
+
+
+<img height="200" src="/visual-aids/developers/guides/Carousel%20Spacing%20-%20Android.png" />
+
+
+### Standard Wall Embed
+
+To load standardwall the parent activity must be `FragmentActivity`
+
+<CodeGroup>
+
+```Basic Implementation
+
+@Composable
+fun StandardWallComposeFragmentWrapper(
+    modifier: Modifier = Modifier,
+    embedId: String,
+    ) {
+
+    val context = LocalContext.current
+    val activity = context as? FragmentActivity
+        ?: throw IllegalStateException("Context is not a FragmentActivity")
+
+    AndroidView(
+        factory = { ctx ->
+            FragmentContainerView(ctx).apply {
+                id = View.generateViewId()
+
+                // Load fragment just once
+                if (activity.supportFragmentManager.findFragmentById(id) == null) {
+                    activity.supportFragmentManager.beginTransaction()
+                        .replace(id, FeedEmbedFragment.newInstance(embedId = embedId))
+                        .commit()
+                }
+            }
+        },
+        modifier = modifier
+    )
+}
+
+```
+
+```With Customization and SSO
+
+@Composable
+fun StandardWallComposeFragmentWrapper(
+    modifier: Modifier = Modifier,
+    embedId: String,
+    uniqueId: String = "",
+    ssoToken: String = "",
+    isDirectDeepLinkEnabled: Boolean = false,
+    isShowProfileEnabled: Boolean = false,
+    params: HashMap<String, Any>? = null,
+    contextualParams: HashMap<String, Any>? = null,
+) {
+
+    val context = LocalContext.current
+    val activity = context as? FragmentActivity
+        ?: throw IllegalStateException("Context is not a FragmentActivity")
+
+    AndroidView(
+        factory = { ctx ->
+            FragmentContainerView(ctx).apply {
+                id = View.generateViewId()
+
+                // Load fragment just once
+                if (activity.supportFragmentManager.findFragmentById(id) == null) {
+
+                    val feedEmbedFragment = FeedEmbedFragment.newInstance(
+                        embedId = embedId,
+                        uniqueId = uniqueId,
+                        ssoToken = ssoToken,
+                        isDirectDeepLinkEnabled = isDirectDeepLinkEnabled,
+                        isShowProfileEnabled = isShowProfileEnabled,
+                        params = params,
+                        contextualParams = contextualParams
+                    )
+
+                    activity.supportFragmentManager.beginTransaction()
+                        .replace(id, feedEmbedFragment)
+                        .commit()
+                }
+            }
+        },
+        modifier = modifier
+    )
+
+}
+
+```
+</CodeGroup>
+
+Example usage
+
+<CodeGroup>
+
+```Basic Implementation
+
+StandardWallComposeFragmentWrapper(
+                            embedId = "YOUR_EMBED_ID",
+                            modifier = Modifier.fillMaxSize()
+                        )
+
+```
+
+```With Customization and SSO
+
+//This is Optional
+    val params = HashMap<String, Any>()
+    params["name"] = "John Doe"
+    params["email"] = "john.doe@begenuin.com"
+    params["nickname"] = "john"
+    params["mobile"] = "1XXXXXXXXXX"
+
+    //This is Optional
+    val contextualParams = HashMap<String, Any>()
+    contextualParams["page_context"] = "YOUR_CONTEXT_VALUE"
+    val geoJson = JSONObject()
+    geoJson.put("lat", XXXX.XXX) // value in double
+    geoJson.put("long", XXXX.XXX) // value in double
+    contextualParams["geo"] = geoJson.toString()
+
+    StandardWallComposeFragmentWrapper(
+        embedId = "YOUR_EMBED_ID",
+        uniqueId = "UNIQUE_ID",
+        ssoToken = "YOUR_SSO_TOKEN",
+        isShowProfileEnabled = false,
+        isDirectDeepLinkEnabled = false,
+        params = params,
+        contextualParams = contextualParams,
+        modifier = Modifier.fillMaxSize()
+    )
+
+```
+</CodeGroup>
+
+We need to pass below arguments in order to cofigure `StandardWallEmbed`.
+
+1. **embedId** = The Embed Id that you want to load.
+
+2. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same embed in multiple/same screen. We need to provide uniqueId for the same embedId in multiple/same screen.
+
+3. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+4. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+
+<Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
+
+5. **isShowProfileEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true and also if user is logged in than Profile picture will be visible in full screen view (right side top corner). On clicking the profile picture user will see the account settings and logout options.
+
+6. **ssoToken**: This is an optional parameter. To auto login in the SDK, you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+
+**Add user specific parameters (Optional)**
+    
+  a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  b. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  c. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+
+  e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
+
+**Add contextual parameters (Optional)**
+
+  a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+
+  b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+  c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
 
 
 ## Handle Login : via AutoLogin Approach
