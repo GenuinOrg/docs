@@ -66,7 +66,7 @@ allprojects {
 
 **2. Add dependency in app level gradle**
 
-**a. For core SDK
+**a. For core SDK**
 
 <CodeGroup>
 
@@ -78,11 +78,10 @@ implementation("com.begenuin:core:$genuin_version")
 ```java Groovy-build.gradle
 val genuin_version = "2.x.x"
 implementation('com.begenuin:core:$genuin_version')
-}
 ```
 </CodeGroup>
 
-**b. For UI SDK
+**b. For UI SDK**
 
 <CodeGroup>
 
@@ -96,11 +95,10 @@ implementation("com.begenuin:ui:$genuin_version")
 val genuin_version = "2.x.x"
 implementation('com.begenuin:core:$genuin_version')
 implementation('com.begenuin:ui:$genuin_version')
-}
 ```
 </CodeGroup>
 
-**c. For Camera SDK
+**c. For Camera SDK**
 
 <CodeGroup>
 
@@ -116,11 +114,10 @@ val genuin_version = "2.x.x"
 implementation('com.begenuin:core:$genuin_version')
 implementation('com.begenuin:ui:$genuin_version')
 implementation('com.begenuin:camera:$genuin_version')
-}
 ```
 </CodeGroup>
 
-**d. For AI SDK
+**d. For AI SDK**
 
 <CodeGroup>
 
@@ -138,19 +135,18 @@ implementation('com.begenuin:core:$genuin_version')
 implementation('com.begenuin:ui:$genuin_version')
 implementation('com.begenuin:camera:$genuin_version')
 implementation('com.begenuin:ai:$genuin_version')
-}
 ```
 </CodeGroup>
 
 Note: All modules must use a consistent version format — 2.x.x.
 
-**Dependency Hierarchy
+**Dependency Hierarchy**
 The modules follow a linear dependency structure, where each subsequent module depends on the ones before it in the chain:
 <CodeGroup>
 ai ← camera ← ui ← core
 </CodeGroup>
 
-**Module Usage Guidelines
+**Module Usage Guidelines**
 1. core - Can be used independently. This is the foundational module required by all others.
 2. ui - Depends on core. Must include core when using ui.
 3. camera - Depends on both core and ui. Must include both when integrating camera.
@@ -176,7 +172,7 @@ Mandatory Permissions
 
 Following permissions are optional and can be added in `AndroidManifest.xml` file as per feature requirements:
 
-**a. Permissions for UI SDK
+**a. Permissions for UI SDK**
 
 - To allow user to add their **Contacts as Members** in **Communities** and **Groups**:
 
@@ -202,7 +198,7 @@ Following permissions are optional and can be added in `AndroidManifest.xml` fil
 
 </CodeGroup>
 
-**b. Permissions for Camera SDK
+**b. Permissions for Camera SDK**
 
 - To allow user to **Create Video Content**, **Camera** and **Mic** permissions are needed:
 
@@ -237,7 +233,7 @@ Following permissions are optional and can be added in `AndroidManifest.xml` fil
 
 </CodeGroup>
 
-**c. Permissions for AI SDK
+**c. Permissions for AI SDK**
 
 - To allow creation of **AI Powered Communities** based on the **User Location**:
 
@@ -1040,7 +1036,8 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 fun CarouselComposeViewWrapper(
     modifier: Modifier = Modifier,
     embedId: String,
-){
+)
+{
     val context = LocalContext.current
     val activity = context as? Activity?: throw IllegalStateException("Context is not an Activity!")
 
@@ -1054,7 +1051,7 @@ fun CarouselComposeViewWrapper(
                 )
                 .setActivity(activity)
                 .load()
-        },
+        }
     )
 }
 
@@ -1079,7 +1076,8 @@ fun CarouselComposeViewWrapper(
     bottomInsets: Int = 24,
     params: HashMap<String, Any>? = null,
     contextualParams: HashMap<String, Any>? = null,
-) {
+) 
+{
 
     val context = LocalContext.current
     val activity =
@@ -1111,7 +1109,7 @@ fun CarouselComposeViewWrapper(
                 .setContextualParams(contextualParams)
                 .setScrollDirection(scrollDirection)
                 .load()
-        },
+        }
     )
 }
 
