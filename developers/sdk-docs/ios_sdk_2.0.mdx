@@ -169,6 +169,59 @@ To load your lottie animation accross the Genuin SDK, you can add it here `confi
 
 </Note>
 
+### Using Swift Package Manager (SPM)
+To add Genuin SDK to your iOS project via Swift Package Manager:
+
+**1. In Xcode, go to:**
+File > Swift Packages > Add Package Dependency
+
+When prompted, enter the Genuin SDK repository URL:
+
+<CodeGroup>
+
+```
+https://bitbucket.org/genuindev/genuin_sdk_ios
+```
+</CodeGroup>
+
+**2. When prompted, enter the Genuin SDK repository URL:**
+
+<CodeGroup>
+
+```
+https://bitbucket.org/genuindev/genuin_sdk_ios
+```
+</CodeGroup>
+
+**3. Choose the version:**
+
+<CodeGroup>
+
+```
+Version: 2.x.x
+```
+</CodeGroup>
+
+**Note:** Make sure all Genuin SDK modules are added with the same version (2.x.x) for compatibility.
+
+**Module Dependency Structure**
+The Genuin SDK is composed of multiple interdependent modules. These follow a linear dependency chain as outlined below:
+<CodeGroup>
+
+```
+ai ← camera ← ui ← core
+```
+</CodeGroup>
+
+**Integration Rules**
+1. core - Can be used independently. It is the foundation for all other modules.
+2. ui - Requires core. Must be added together.
+3. camera - Requires both core and ui.
+4. ai - Requires camera, ui, and core.
+
+Ensure modules are added in the correct order and with the same version to avoid conflicts during build and runtime.
+
+
 ### Instructions for `SceneDelegate`:
 
 1. Ensure you are using the `UISceneDelegate` in your app.
@@ -184,21 +237,60 @@ To load your lottie animation accross the Genuin SDK, you can add it here `confi
 3. Call `GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)` with your API key and the configured options.
 4. Return `true` to indicate successful launch configuration.
 
-Then you can display the home feed view controller. For example, to use it in your `UITabBarController`:
-
 <CodeGroup>
 
-```swift ViewController.swift
-import UIKit
-import GenuinSDK
-class TabBarController: UITabBarController {
+```In AppDelegate/SceneDelegate
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+import GenuinCore
+import GenuinUI
+import GenuinCamera
+import GenuinAI
 
-        if let homeFeedController = GenuinSDK.shared.getHomeScreen() {
-            homeFeedController.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 0)
-            self.viewControllers = [homeFeedController]
+
+let configuration = GenuinConfiguration()
+configuration.environment = .qa
+configuration.setCustomLoader("loader", bundle: .main)
+        
+GenuinUI.shared.initialize() //Initialize method is required if GenuinUI sdk is integrated
+GenuinCamera.shared.initialize() //Initialize method is required if GenuinCamera sdk is integrated
+GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is integrated
+
+GenuinSDK.shared.initialize(apiKey: AppConstants.API_KEY, configuration: configuration) 
+
+```
+
+</CodeGroup>
+
+####Swift UI
+In your SwiftUI’s App file initialize the GenuinSDK as follows:
+<CodeGroup>
+
+```
+import SwiftUI
+import GenuinCore
+import GenuinUI
+import GenuinAI
+import GenuinCamera
+
+@main
+struct GenuinSwiftUIApp: App {
+    
+    init() {
+        let configuration = GenuinConfiguration()
+
+        // For QA Environment
+        configuration.environment = .qa
+
+        configuration.setCustomLoader("YOUR_LOADER", bundle: Bundle.main)
+        GenuinUI.shared.initialize()
+        GenuinCamera.shared.initialize()
+        GenuinAI.shared.initialize()
+        GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
         }
     }
 }
@@ -207,54 +299,9 @@ class TabBarController: UITabBarController {
 
 </CodeGroup>
 
-To present feed from your UIViewController by clicking on UIButton:
-
-
-``` swift ViewController.swift
-
-import UIKit
-import GenuinSDK
-
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func openFeed() {
-        if let vc = GenuinSDK.shared.getHomeScreen() {
-            vc.navigationBar.isTranslucent = false
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }
-    }
-}
-
-```
 
 <Note>**Note**: Our SDK is well optimized for `iOS version 15.0` and above, but if you are using `iOS version 13` or `14` then put this `if #available(iOS 15.0, *)` condition while importing the GenuinSDK. Refer to the below code block </Note>
 
-<CodeGroup>
-
-```swift ViewController.swift
-
-// Below is an Example Code
-
-if #available(iOS 15.0, *) {
-    // Initialize the SDK with your API key and configuration
-    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
-    if let vc = GenuinSDK.shared.getHomeScreen() {
-        vc.tabBarItem = UITabBarItem(title: "Community", image: UIImage(systemName: "person.3"), tag: 3)
-        self.viewControllers = [vc]
-        self.selectedIndex = 0
-    }
-}
-
-```
-
-</CodeGroup>
 
 ## Monetization
 
@@ -353,7 +400,7 @@ Steps:
 
 <Note> **Note**: Make sure you have followed the [installation steps](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#installation) in order to implement the Carousel Embed. </Note> 
 
-### Carousel Embed
+### Carousel Embed with Swift
 
 <Tip> Refer to [Carousel View](https://resources.begenuin.com/developers/guides/embed#mobile-view) in Mobile</Tip>
 
@@ -491,6 +538,228 @@ GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView:
 **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID` while calling the above function. 
 
 </Note>
+
+### Carousel Embed with Swift UI
+
+<Tip> Refer to [Carousel View](https://resources.begenuin.com/developers/guides/embed#mobile-view) in Mobile</Tip>
+
+Genuin Carousel Embed View Wrapper
+
+<CodeGroup>
+
+```Basic Embed
+import SwiftUI
+import UIKit
+import GenuinCore
+
+struct GenuinCarouselViewWrapper: UIViewRepresentable {
+    var embedId: String
+    
+    func makeUIView(context: Context) -> UIView {
+        let container = UIView()
+        return container
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        DispatchQueue.main.async {
+            guard let parentVC = uiView.parentViewController else {
+                print("Could not get parent VC!")
+                return
+            }
+
+            let embedConfiguration = EmbedConfiguration()
+
+            GenuinSDK.shared.initializeEmbed(
+                embedId: embedId,
+                containerView: uiView,
+                viewConroller: parentVC,
+                embedConfiguration: embedConfiguration
+            )
+        }
+    }
+}
+
+```
+
+```With customization and SSO
+import SwiftUI
+import UIKit
+import GenuinCore
+
+struct GenuinCarouselContextViewWrapper: UIViewRepresentable {
+    var embedId: String
+    var uniqueId: String?
+    var ssoToken: String?
+    var params: [String : Any]?
+    var contextualParams: [String: Any]?
+    var embedConfiguration: EmbedConfiguration = EmbedConfiguration()
+    
+    func makeUIView(context: Context) -> UIView {
+        let container = UIView()
+        return container
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        DispatchQueue.main.async {
+            guard let parentVC = uiView.parentViewController else {
+                print("Could not get parent VC!")
+                return
+            }
+
+            GenuinSDK.shared.initializeEmbed(
+                embedId: embedId,
+                uniqueId: uniqueId,
+                containerView: uiView,
+                viewConroller: parentVC,
+                ssoToken: ssoToken,
+                params: params,
+                contextualParams: contextualParams,
+                embedConfiguration: embedConfiguration
+            )
+        }
+    }
+}
+
+```
+
+</CodeGroup>
+
+Example Usage
+
+<CodeGroup>
+
+```Basic Embed
+import SwiftUI
+
+struct CarouselView: View {
+    var body: some View {
+        VStack {
+            GenuinCarouselViewWrapper(embedId: "YOUR_EMBED_ID")
+                .frame(height: 200)
+            
+            Spacer()
+        }
+    }
+}
+
+#Preview {
+    CarouselView()
+}
+
+
+```
+```With customization and SSO
+import SwiftUI
+import UIKit
+import GenuinCore
+
+struct CarouselContextView: View {
+    @State private var contextualParams: [String: Any]? = nil
+    @State private var txtContext: String = ""
+    private var embedConfiguration: EmbedConfiguration = EmbedConfiguration()
+    
+    init() {
+        let genuinCarouselConfiguration = GenuinCarouselConfiguration()
+        genuinCarouselConfiguration.aspectRatio = .ratio4x5
+        embedConfiguration.genuinCarouselConfiguration = genuinCarouselConfiguration
+    }
+    
+    var body: some View {
+        VStack {
+            GenuinCarouselContextViewWrapper(embedId: "YOUR_EMBED_ID", uniqueId: "YOUR_UNIQUE_ID", ssoToken: "YOUR_SSO_TOKEN", params: ["name" :"FULL_NAME", "nickname" : "USER_NAME", "mobile" :"MOBILE_NO"], contextualParams: contextualParams, embedConfiguration: embedConfiguration)
+                .frame(height: 200)
+            
+            HStack {
+                TextField("Contextual Params", text: $txtContext)
+                    .textFieldStyle(.roundedBorder)
+                
+                Button("Assign Context") {
+                    contextualParams = ["page_context": txtContext, "geo" : [ "lat": LATITUDE_VALUE, "long": LONGITUDE_VALUE ]]
+                }
+            }
+            .padding()
+            
+            Spacer()
+        }
+    }
+}
+
+#Preview {
+    CarouselContextView()
+}
+
+
+```
+
+</CodeGroup>
+
+<Note> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app. </Note>
+
+
+
+<Note>
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the above function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
+
+</Note>
+
+
+### Standard Wall Embed
+
+Standard Wall View Wrapper
+
+<CodeGroup>
+
+```StandardWallView 
+import SwiftUI
+import GenuinCore
+
+struct GenuinSDKStandardWallNavigationControllerWrapper: UIViewControllerRepresentable {
+    var embedId: String
+    
+    func makeUIViewController(context: Context) -> UINavigationController {
+        // Return the UIKit UINavigationController from the SDK
+        let embedConfiguration = EmbedConfiguration()
+        
+        return GenuinSDK.shared.getStandardWallController(embedId: embedId, embedConfiguration: embedConfiguration) ?? UINavigationController()
+    }
+
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
+        // No update logic needed unless the SDK content needs to change dynamically
+    }
+}
+
+```
+
+</CodeGroup>
+
+Example Usage
+
+<CodeGroup>
+
+``` 
+import SwiftUI
+
+struct StandardWallView: View {
+    var body: some View {
+        GenuinSDKStandardWallNavigationControllerWrapper(embedId: "YOUR_EMBED_ID")
+            .edgesIgnoringSafeArea(.top)
+    }
+}
+
+#Preview {
+    StandardWallView()
+}
+
+```
+
+</CodeGroup>
+
+<Note>
+
+**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID` while calling the above function. 
+
+</Note>
+
 
 ### Additional Information
 
