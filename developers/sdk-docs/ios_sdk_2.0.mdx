@@ -1,5 +1,5 @@
 ---
-title: 'iOS SDK'
+title: 'iOS SDK 2.0'
 description: 'Genuin iOS SDK comprises features such as brand feed, communities, and groups.'
 ---
 
@@ -15,15 +15,15 @@ description: 'Genuin iOS SDK comprises features such as brand feed, communities,
 
 Permissions to be added in `info.plist` file of your application
 
-| Permission | Usage | Used Where |                                                               
-| ---------- | ----- | ---------- |
-| Camera (NSCameraUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Video Comment |
-| Microphone (NSMicrophoneUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Voice Comment |
-| Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.| Post, Profile, Banner | 
-| Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio |
-| Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Add Members in Communities and Groups |
-| Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location |
-| Tracking (NSUserTrackingUsageDescription) | Your data will be used to analyse ads we run! | Monetization |
+| Permission | Usage | Used Where | In SDK |                                                             
+| ---------- | ----- | ---------- | ---------- |
+| Camera (NSCameraUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Video Comment | GenuinCamera |
+| Microphone (NSMicrophoneUsageDescription) | Genuin needs permissions to open your camera and microphone. This allows Genuin to record videos that can be shared with other people.| Post, Voice Comment | GenuinCamera |
+| Photos (NSPhotoLibraryUsageDescription) | Genuin needs permissions to access your photo library. This allows Genuin to download videos to your phone and save it to your library.| Post, Profile, Banner | GenuinCore |
+| Speech Recognition (NSSpeechRecognitionUsageDescription) | The transcript of your recording will be displayed to you in the end for you to overlay it on the audio message.| To generate transcript from recorded audio | GenuinCamera |
+| Contacts (NSContactsUsageDescription) | Genuin requires to sync with your contacts and provide a better experience when you wish to share your posts with them.| Add Members in Communities and Groups | GenuinUI |
+| Location (NSLocationWhenInUseUsageDescription) | Your precise location will help us suggest your community details more accurately.| AI Powered Communities based on the User Location | GenuinCore |
+| Tracking (NSUserTrackingUsageDescription) | Your data will be used to analyse ads we run! | Monetization | GenuinCore |
 
 <Note>
 
@@ -33,13 +33,12 @@ If any permission is not given then that particular feature will not be accessib
 
 ## Installation
 
-### Standard CocoaPods Install
-
+### Using Cocoapods
 If your project doesn't have the CocoaPods setup then start with `pod init` which will create the Podfile, else do following changes in the pod file to install GenuinSDK.
 
 <CodeGroup>
 
-```swift Podfile.swift
+```In Poffile
 platform :ios, '13.0'
 
 target 'YourProject' do
@@ -47,7 +46,13 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-  pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.17.1"
+genuin_sdk_version = '2.x.x'
+
+pod "GenuinCore", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
+pod "GenuinUI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
+pod "GenuinCamera", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
+pod "GenuinAI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
+
 
 end
 
@@ -63,32 +68,45 @@ end
 
 </CodeGroup>
 
-If you are using Xcode 16 then kindly refer the below podfile :
+**a. For Core SDK:**
 
 <CodeGroup>
 
-```swift Podfile.swift
-platform :ios, '13.0'
+```In Podfile
+pod "GenuinCore", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
 
-target 'YourProject' do
-  use_frameworks!
+```
 
-pod "GenuinSDK", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => "1.1.17.1"
+</CodeGroup>
 
-end
+**b. For UI SDK:**
 
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    if target.name == 'Giphy'
-      `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
-    end
-    target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
-      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-    end
-  end
-end
+<CodeGroup>
 
+```In Podfile
+pod "GenuinUI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
+
+```
+
+</CodeGroup>
+
+**c. For Camera SDK:**
+
+<CodeGroup>
+
+```In Podfile
+pod "GenuinCamera", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
+
+```
+
+</CodeGroup>
+
+**d. For AI SDK:**
+
+<CodeGroup>
+
+```In Podfile
+pod "GenuinAI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
 ```
 
 </CodeGroup>
