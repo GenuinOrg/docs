@@ -3,6 +3,12 @@ title: 'iOS SDK 2.0'
 description: 'Genuin iOS SDK comprises features such as brand feed, communities, and groups.'
 ---
 
+| SDK | Description | Dependency* |
+| -------- | ------------------- | -------- | 
+| Core  | Includes the core functionality of the Genuin Ecosystem: Embeds and User authentication. | pod "GenuinCore", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
+| UI  | Additional UI flows like comments, search, deep-links, notifications, group/community detail etc. | pod "GenuinUI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
+| Camera  | Camera flows for video content creation. | pod "GenuinCamera", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
+| AI  | Additional flows for AI assisted community/group creation. | pod "GenuinAI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
 
 ## Requirements
 
@@ -32,6 +38,59 @@ If any permission is not given then that particular feature will not be accessib
 </Note>
 
 ## Installation
+
+### Using Swift Package Manager (SPM)
+To add Genuin SDK to your iOS project via Swift Package Manager:
+
+**1. In Xcode, go to:**
+File > Swift Packages > Add Package Dependency
+
+When prompted, enter the Genuin SDK repository URL:
+
+<CodeGroup>
+
+```
+https://bitbucket.org/genuindev/genuin_sdk_ios
+```
+</CodeGroup>
+
+**2. When prompted, enter the Genuin SDK repository URL:**
+
+<CodeGroup>
+
+```
+https://bitbucket.org/genuindev/genuin_sdk_ios
+```
+</CodeGroup>
+
+**3. Choose the version:**
+
+<CodeGroup>
+
+```
+Version: 2.x.x
+```
+</CodeGroup>
+
+**Note:** Make sure all Genuin SDK modules are added with the same version (2.x.x) for compatibility.
+
+**Module Dependency Structure**
+The Genuin SDK is composed of multiple interdependent modules. These follow a linear dependency chain as outlined below:
+<CodeGroup>
+
+```
+ai ← camera ← ui ← core
+```
+</CodeGroup>
+
+**Integration Rules**
+1. core - Can be used independently. It is the foundation for all other modules.
+2. ui - Requires core. Must be added together.
+3. camera - Requires both core and ui.
+4. ai - Requires camera, ui, and core.
+
+Ensure modules are added in the correct order and with the same version to avoid conflicts during build and runtime.
+
 
 ### Using Cocoapods
 If your project doesn't have the CocoaPods setup then start with `pod init` which will create the Podfile, else do following changes in the pod file to install GenuinSDK.
@@ -163,63 +222,25 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 </CodeGroup>
 
+Cocoapods (with all sdk initialize)
+
+<CodeGroup>
+
+```
+GenuinUI.shared.initialize() //Initialize method is required if GenuinUI sdk is integrated
+GenuinCamera.shared.initialize() //Initialize method is required if GenuinCamera sdk is integrated
+GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is integrated
+
+GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+
+```
+</CodeGroup>
+
 <Note>
 
 To load your lottie animation accross the Genuin SDK, you can add it here `configuration.setCustomLoader("YOUR_LOADER", bundle: .main)`
 
 </Note>
-
-### Using Swift Package Manager (SPM)
-To add Genuin SDK to your iOS project via Swift Package Manager:
-
-**1. In Xcode, go to:**
-File > Swift Packages > Add Package Dependency
-
-When prompted, enter the Genuin SDK repository URL:
-
-<CodeGroup>
-
-```
-https://bitbucket.org/genuindev/genuin_sdk_ios
-```
-</CodeGroup>
-
-**2. When prompted, enter the Genuin SDK repository URL:**
-
-<CodeGroup>
-
-```
-https://bitbucket.org/genuindev/genuin_sdk_ios
-```
-</CodeGroup>
-
-**3. Choose the version:**
-
-<CodeGroup>
-
-```
-Version: 2.x.x
-```
-</CodeGroup>
-
-**Note:** Make sure all Genuin SDK modules are added with the same version (2.x.x) for compatibility.
-
-**Module Dependency Structure**
-The Genuin SDK is composed of multiple interdependent modules. These follow a linear dependency chain as outlined below:
-<CodeGroup>
-
-```
-ai ← camera ← ui ← core
-```
-</CodeGroup>
-
-**Integration Rules**
-1. core - Can be used independently. It is the foundation for all other modules.
-2. ui - Requires core. Must be added together.
-3. camera - Requires both core and ui.
-4. ai - Requires camera, ui, and core.
-
-Ensure modules are added in the correct order and with the same version to avoid conflicts during build and runtime.
 
 
 ### Instructions for `SceneDelegate`:
@@ -239,29 +260,70 @@ Ensure modules are added in the correct order and with the same version to avoid
 
 <CodeGroup>
 
-```In AppDelegate/SceneDelegate
+```In SceneDelegate.swift
 
 import GenuinCore
 import GenuinUI
 import GenuinCamera
 import GenuinAI
 
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Optional configuration and attaching the UIWindow to UIWindowScene
+    guard let _ = (scene as? UIWindowScene) else { return }
 
-let configuration = GenuinConfiguration()
-configuration.environment = .qa
-configuration.setCustomLoader("loader", bundle: .main)
-        
+    // Initialize the SDK configuration 
+    let configuration = GenuinConfiguration.shared
+
+    // For Production environment (Default)
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+
+    // For QA Environment
+    configuration.environment = .qa 
+
 GenuinUI.shared.initialize() //Initialize method is required if GenuinUI sdk is integrated
 GenuinCamera.shared.initialize() //Initialize method is required if GenuinCamera sdk is integrated
 GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is integrated
 
-GenuinSDK.shared.initialize(apiKey: AppConstants.API_KEY, configuration: configuration) 
+
+    // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+} 
+
+```
+
+```In  AppDelegate.swift
+
+import GenuinCore
+import GenuinUI
+import GenuinCamera
+import GenuinAI
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Initialize the SDK configuration
+    let configuration = GenuinConfiguration.shared
+
+    // For Production Environment (Default)
+    configuration.setCustomLoader("YOUR_LOADER", bundle: .main)
+
+    // For QA Environment 
+    configuration.environment = .qa 
+
+GenuinUI.shared.initialize() //Initialize method is required if GenuinUI sdk is integrated
+GenuinCamera.shared.initialize() //Initialize method is required if GenuinCamera sdk is integrated
+GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is integrated
+
+
+   // Initialize the SDK with your API key and configuration
+    GenuinSDK.shared.initialize(apiKey: "YOUR_API_KEY", configuration: configuration)
+    return true
+}
 
 ```
 
 </CodeGroup>
 
-####Swift UI
+**Swift UI**
+
 In your SwiftUI’s App file initialize the GenuinSDK as follows:
 <CodeGroup>
 
@@ -549,7 +611,7 @@ Genuin Carousel Embed View Wrapper
 
 <CodeGroup>
 
-``` Basic Embed
+```Basic Embed
 import SwiftUI
 import UIKit
 import GenuinCore
@@ -583,7 +645,8 @@ struct GenuinCarouselViewWrapper: UIViewRepresentable {
 
 ```
 
-```With customization and SSO
+```Embed with Customization & SSO
+
 import SwiftUI
 import UIKit
 import GenuinCore
