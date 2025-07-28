@@ -283,169 +283,7 @@ class YourActivity : AppCompatActivity() {
 
 </CodeGroup>
 
-**5. Load SDK in seperate activity**
-
-<CodeGroup>
-
-```kotlin
-
-GenuinSDK.loadSDK(context)
-
-```
-</CodeGroup>
-                                
-
-**6. Load SDK in your custom activity**
-
-Put below code in `activity_custom.xml` file
-
-<CodeGroup>
-
-
-```Kotlin activity_custom.xml
-
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
-```
-</CodeGroup>
-
-Put below code in `CustomActivity.kt` file
-
-<CodeGroup>
-
-```Kotlin CustomActivity.kt
-
-import com.begenuin.begenuin.FeedFragment
-
-class CustomActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom)
-
-        val genuinFeedFragment = FeedFragment()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.frameLayout, genuinFeedFragment)
-            .addToBackStack("feedFragment").commit()
-    }
-}
-
-
-```
-</CodeGroup>
-
-
-<Note>**Note**: In your custom activity, set soft input mode to `adjustPan` for better performance </Note>
-
-<CodeGroup>
-
-``` kotlin AndroidManifest.xml
-android:windowSoftInputMode="adjustPan"
-```
-</CodeGroup>
-
-
-**7. Load SDK with bottom navigation and fragment**
-
-Add below code in `res/navigation/mobile_navigation.xml`
-
-<CodeGroup>
-
-```xml
-
-<?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-
-    <fragment
-        android:id="@+id/navigation_community"
-        android:name="com.begenuin.begenuin.FeedFragment"
-        android:label="@string/title_communities" />
-
-</navigation>
-
-```
-</CodeGroup>
-
-Add below code in your activity
-
-<CodeGroup>
-
-```kotlin ViewPager2
-override fun onCreate(savedInstanceState: Bundle?) {
-  super.onCreate(savedInstanceState)
-  setSupportActionBar(Toolbar(this))
-  initViewPager()
-  val navView: BottomNavigationView = binding.navView
-  navView.setOnItemSelectedListener { item ->
-    when (item.itemId) {
-      R.id.navigation_community -> {
-        binding.viewPager.setCurrentItem(1, false)
-        true
-      }
-
-      else -> false
-    }
-  }
-}
-private fun initViewPager() {
-  val myPagerAdapter = MyPagerAdapter(this)
-  binding.viewPager.adapter = myPagerAdapter
-}
-
-class MyPagerAdapter(fragmentActivity: FragmentActivity) :
-  FragmentStateAdapter(fragmentActivity) {
-  override fun createFragment(position: Int): Fragment {
-    return when (position) {
-      0 -> FeedFragment()
-      else -> FeedFragment()
-    }
-  }
-  override fun getItemCount(): Int {
-    return NUM_PAGES
-  }
-  companion object {
-    private const val NUM_PAGES = 1
-  }
-}
-
-```
-
-```kotlin NavHost
-override fun onCreate(savedInstanceState: Bundle?) {
-  super.onCreate(savedInstanceState)
-
-  setSupportActionBar(Toolbar(this))
-  val navView: BottomNavigationView = binding.navView
-
-  val navController =
-    findNavController(R.id.nav_host_fragment_activity_bottom_tab_with_nav_host)
-  // Passing each menu ID as a set of Ids because each
-  // menu should be considered as top level destinations.
-  val appBarConfiguration = AppBarConfiguration(
-    setOf(
-      R.id.navigation_community
-    )
-  )
-  setupActionBarWithNavController(navController, appBarConfiguration)
-  navView.setupWithNavController(navController)
-}
-```
-</CodeGroup>
-
-**8. Want to override our default loader.**
+**5. Want to override our default loader.**
 
 We are using lottie animation for our loader. You can put your custom lottie animation loader with the name `loader_mix.json` in the `res/raw` folder. Make sure you use the same name as provided.
 
@@ -1030,7 +868,7 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
 
 <CodeGroup>
 
-```Compose Basic Embed
+```kotlin Basic Embed
 @Composable
 fun CarouselComposeViewWrapper(
     modifier: Modifier = Modifier,
@@ -1055,7 +893,7 @@ fun CarouselComposeViewWrapper(
 }
 
 ```
-```Compose Embed with Customization & SSO
+```kotlin Embed with Customization & SSO
 
 @Composable
 fun CarouselComposeViewWrapper(
@@ -1121,7 +959,7 @@ Example Usage
 
 <CodeGroup>
 
-```Compose Basic Embed
+```kotlin Basic Embed
 
 CarouselComposeViewWrapper(
         embedId = "YOUR_EMBED_ID",
@@ -1129,7 +967,7 @@ CarouselComposeViewWrapper(
     )
 ```
 
-```Compose Embed With Customization and SSO
+```kotlin Embed With Customization and SSO
 
 //This is Optional
     val params = HashMap<String, Any>()
@@ -1227,7 +1065,7 @@ To load standardwall the parent activity must be `FragmentActivity`
 
 <CodeGroup>
 
-```Basic Implementation
+```kotlin Basic Embed
 
 @Composable
 fun StandardWallComposeFragmentWrapper(
@@ -1258,7 +1096,7 @@ fun StandardWallComposeFragmentWrapper(
 
 ```
 
-```With Customization and SSO
+```kotlin Embed With Customization and SSO
 
 @Composable
 fun StandardWallComposeFragmentWrapper(
@@ -1312,7 +1150,7 @@ Example usage
 
 <CodeGroup>
 
-```Basic Implementation
+```kotlin Basic Embed
 
 StandardWallComposeFragmentWrapper(
                             embedId = "YOUR_EMBED_ID",
@@ -1321,7 +1159,7 @@ StandardWallComposeFragmentWrapper(
 
 ```
 
-```With Customization and SSO
+```kotlin Embed with Customization and SSO
 
 //This is Optional
     val params = HashMap<String, Any>()
