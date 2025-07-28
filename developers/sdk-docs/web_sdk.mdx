@@ -1265,6 +1265,51 @@ window.genuinAuth = (data) => {
 };
 ```
 
+##### Auth Callback Parameters
+
+The auth callback passes certain parameters that allow you to perform necessary actions after a user is successfully logged in or redirected — depending on the flow you’ve implemented.
+For example, it includes returnQueryParams, which is a string containing query parameters that indicate the context in which the auth callback was triggered.
+This helps determine what action should be taken.
+
+Example: If a user is trying to comment on a post and the auth callback is triggered, returnQueryParams might include action=comment.
+You can extract this action parameter and pass it to the embed to perform the corresponding operation.
+
+**Note** : To use this, you must have the genuin auth callback implemented, the user must be logged in, and you must pass the video slug as well.
+
+```html
+window.genuinAuth = (data) => {
+  // Trigger your login mechanism here
+
+  // Option 1: Use a custom redirect function
+  redirectToLogin();
+
+  // Option 2: Directly redirect to login URL
+  // window.location.href = `LOGIN_URL`;
+
+  // data.returnQueryParams contains the query parameters
+  const params = new URLSearchParams(data.returnQueryParams);
+  const action = params.get("action");
+
+  // Pass the above `action` value to the embeds below.
+  // There are two ways to pass this: via init or via data-attribute
+};
+
+window.genuin.init({
+  action: 'Pass action to perform, e.g., comment',
+  video: 'VIDEO_SLUG'
+});
+
+<div
+  id="gen-sdk-1"
+  class="gen-sdk-class"
+  style="height: 390px; margin-top: 12px;"
+  data-embed-id="Your Embed Id"
+  data-api-key="Your API Key"
+  data-action="e.g., comment"
+  data-video="VIDEO_SLUG">
+</div>
+```
+
 #### Dynamically Update SDK Context
 
 You can use the update() method to dynamically change the SDK’s contextual parameters at any point after initialization. This is especially useful when the page content changes based on user interaction (e.g., clicking a new topic, navigating to a different section) and you want the feed to reflect the new context without reinitializing the SDK.
