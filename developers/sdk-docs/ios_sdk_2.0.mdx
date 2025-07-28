@@ -3,12 +3,12 @@ title: 'iOS SDK 2.0'
 description: 'Genuin iOS SDK comprises features such as brand feed, communities, and groups.'
 ---
 
-| SDK | Description | Dependency* |
-| -------- | ------------------- | -------- | 
-| Core  | Includes the core functionality of the Genuin Ecosystem: Embeds and User authentication. | pod "GenuinCore", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
-| UI  | Additional UI flows like comments, search, deep-links, notifications, group/community detail etc. | pod "GenuinUI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
-| Camera  | Camera flows for video content creation. | pod "GenuinCamera", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
-| AI  | Additional flows for AI assisted community/group creation. | pod "GenuinAI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => 2.x.x |
+| SDK | Description | 
+| -------- | ------------------- | 
+| Core  | Includes the core functionality of the Genuin Ecosystem: Embeds and User authentication. | 
+| UI  | Additional UI flows like comments, search, deep-links, notifications, group/community detail etc. |
+| Camera  | Camera flows for video content creation. | 
+| AI  | Additional flows for AI assisted community/group creation. | 
 
 ## Requirements
 
@@ -45,14 +45,6 @@ To add Genuin SDK to your iOS project via Swift Package Manager:
 **1. In Xcode, go to:**
 File > Swift Packages > Add Package Dependency
 
-When prompted, enter the Genuin SDK repository URL:
-
-<CodeGroup>
-
-```
-https://bitbucket.org/genuindev/genuin_sdk_ios
-```
-</CodeGroup>
 
 **2. When prompted, enter the Genuin SDK repository URL:**
 
@@ -97,7 +89,7 @@ If your project doesn't have the CocoaPods setup then start with `pod init` whic
 
 <CodeGroup>
 
-```In Poffile
+```swift In Podfile
 platform :ios, '13.0'
 
 target 'YourProject' do
@@ -131,7 +123,7 @@ end
 
 <CodeGroup>
 
-```In Podfile
+```swift In Podfile
 pod "GenuinCore", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
 
 ```
@@ -142,7 +134,7 @@ pod "GenuinCore", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", 
 
 <CodeGroup>
 
-```In Podfile
+```swift In Podfile
 pod "GenuinUI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
 
 ```
@@ -153,7 +145,7 @@ pod "GenuinUI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :t
 
 <CodeGroup>
 
-```In Podfile
+```swift In Podfile
 pod "GenuinCamera", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
 
 ```
@@ -164,7 +156,7 @@ pod "GenuinCamera", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git"
 
 <CodeGroup>
 
-```In Podfile
+```swift In Podfile
 pod "GenuinAI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
 ```
 
@@ -226,7 +218,7 @@ Cocoapods (with all sdk initialize)
 
 <CodeGroup>
 
-```
+```swift
 GenuinUI.shared.initialize() //Initialize method is required if GenuinUI sdk is integrated
 GenuinCamera.shared.initialize() //Initialize method is required if GenuinCamera sdk is integrated
 GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is integrated
@@ -260,7 +252,7 @@ To load your lottie animation accross the Genuin SDK, you can add it here `confi
 
 <CodeGroup>
 
-```In SceneDelegate.swift
+```swift In SceneDelegate.swift
 
 import GenuinCore
 import GenuinUI
@@ -280,9 +272,9 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
     // For QA Environment
     configuration.environment = .qa 
 
-GenuinUI.shared.initialize() //Initialize method is required if GenuinUI sdk is integrated
-GenuinCamera.shared.initialize() //Initialize method is required if GenuinCamera sdk is integrated
-GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is integrated
+    GenuinUI.shared.initialize() //Initialize method is required if GenuinUI sdk is integrated
+    GenuinCamera.shared.initialize() //Initialize method is required if GenuinCamera sdk is integrated
+    GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is integrated
 
 
     // Initialize the SDK with your API key and configuration
@@ -291,7 +283,7 @@ GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is 
 
 ```
 
-```In  AppDelegate.swift
+```swift In  AppDelegate.swift
 
 import GenuinCore
 import GenuinUI
@@ -322,12 +314,12 @@ GenuinAI.shared.initialize() //Initialize method is required if GenuinAI sdk is 
 
 </CodeGroup>
 
-**Swift UI**
+### Instructions for `SwiftUI`:
 
 In your SwiftUI’s App file initialize the GenuinSDK as follows:
 <CodeGroup>
 
-```
+```swift
 import SwiftUI
 import GenuinCore
 import GenuinUI
@@ -601,7 +593,7 @@ GenuinSDK.shared.initializeStandardWall(embedId: "YOUR_EMBED_ID", containerView:
 
 </Note>
 
-## Embed with Swift UI
+## Embed with SwiftUI
 
 ### Carousel Embed 
 
@@ -611,7 +603,7 @@ Genuin Carousel Embed View Wrapper
 
 <CodeGroup>
 
-```Swift Basic Embed
+```swift Basic Embed
 import SwiftUI
 import UIKit
 import GenuinCore
@@ -645,7 +637,7 @@ struct GenuinCarouselViewWrapper: UIViewRepresentable {
 
 ```
 
-```Swift Embed with Customization & SSO
+```swift Embed with Customization & SSO
 
 import SwiftUI
 import UIKit
@@ -693,7 +685,7 @@ Example Usage
 
 <CodeGroup>
 
-``` Swift Basic Embed
+```swift Basic Embed
 import SwiftUI
 
 struct CarouselView: View {
@@ -713,7 +705,7 @@ struct CarouselView: View {
 
 
 ```
-```Swith With customization and SSO
+```swift Embed with Customization & SSO
 import SwiftUI
 import UIKit
 import GenuinCore
@@ -758,14 +750,6 @@ struct CarouselContextView: View {
 
 </CodeGroup>
 
-<Note> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app. </Note>
-
-
-
-<Note>
-**Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the above function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app.
-
-</Note>
 
 
 ### Standard Wall Embed
@@ -774,7 +758,7 @@ Standard Wall View Wrapper
 
 <CodeGroup>
 
-```StandardWallView 
+```swift Basic Embed 
 import SwiftUI
 import GenuinCore
 
@@ -801,7 +785,7 @@ Example Usage
 
 <CodeGroup>
 
-``` 
+```swift Basic Embed 
 import SwiftUI
 
 struct StandardWallView: View {
