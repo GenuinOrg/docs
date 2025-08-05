@@ -1112,7 +1112,7 @@ Step 1: Assign Delegate `GenuinLinkOutInterceptorDelegate`:
 
 <CodeGroup>
 
-```swift 
+```swift YourClass.swift
 
 GenuinSDK.shared.registerLinkoutInterceptor(associateDomains: [ARRAY_OF_ASSOCIATED_DOMAINS_HANDLED_BY_YOUR_APP], linkOutInterceptorDelegate: YOUR_ANY_CLASS)
 
@@ -1122,15 +1122,18 @@ GenuinSDK.shared.registerLinkoutInterceptor(associateDomains: [ARRAY_OF_ASSOCIAT
 
 <Note>
  **Note**: 
- `ARRAY_OF_ASSOCIATED_DOMAINS_HANDLED_BY_YOUR_APP` accepts associcated domains supported by your apps. You can pass comma seperated domains like e.g. ["apple.com", "https://apple.com", "www.apple.com", "applinks:apple.com"]
+
+`ARRAY_OF_ASSOCIATED_DOMAINS_HANDLED_BY_YOUR_APP` accepts associcated domains supported by your apps. You can pass comma seperated domains like e.g. ["apple.com", "https://apple.com", "www.apple.com", "applinks:apple.com"]
+
 `YOUR_ANY_CLASS` can be class which you want to handle the delegate method in.
+
 </Note>
 
 Step 2: Handle callback method
 
 <CodeGroup>
 
-```swift 
+```swift YourClass.swift
 extension YOUR_ANY_CLASS : GenuinLinkOutInterceptorDelegate{
   func onLinkOutIntercept(urlString: String, viewController: UIViewController?) {
     	/*
