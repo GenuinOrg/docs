@@ -60,11 +60,11 @@ https://bitbucket.org/genuindev/genuin_sdk_ios
 <CodeGroup>
 
 ```swift Version
-Version: 2.x.x
+Version: 2.0.0
 ```
 </CodeGroup>
 
-**Note:** Make sure all Genuin SDK modules are added with the same version (2.x.x) for compatibility.
+**Note:** Make sure all Genuin SDK modules are added with the same version (2.0.0) for compatibility.
 
 **Module Dependency Structure**
 The Genuin SDK is composed of multiple interdependent modules. These follow a linear dependency chain as outlined below:
@@ -97,7 +97,7 @@ target 'YourProject' do
 
   # Pods for YourProject
 
-genuin_sdk_version = '2.x.x'
+genuin_sdk_version = '2.0.0'
 
 pod "GenuinCore", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
 pod "GenuinUI", :git => "https://bitbucket.org/genuindev/genuin_sdk_ios.git", :tag => genuin_sdk_version
@@ -109,6 +109,9 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
+    if target.name == 'Giphy'
+      `xcrun -sdk iphoneos bitcode_strip -r Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK -o Pods/Giphy/GiphySDK/GiphyUISDK.xcframework/ios-arm64_armv7/GiphyUISDK.framework/GiphyUISDK`
+    end
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
       config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
@@ -354,7 +357,7 @@ struct GenuinSwiftUIApp: App {
 </CodeGroup>
 
 
-<Note>**Note**: Our SDK is well optimized for `iOS version 15.0` and above, but if you are using `iOS version 13` or `14` then put this `if #available(iOS 15.0, *)` condition while importing the GenuinSDK. Refer to the below code block </Note>
+<Note>**Note**: Our SDK is well optimized for `iOS version 15.0` and above, but if you are using `iOS version 13` or `14` then put this `if #available(iOS 15.0, *)` condition while importing the GenuinSDK. </Note>
 
 
 ## Monetization
@@ -450,9 +453,14 @@ Steps:
 </Note>
 
 
+
+
 ## Embed with Swift
 
 <Note> **Note**: Make sure you have followed the [installation steps](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#installation) in order to implement the Carousel Embed. </Note> 
+
+<Note> **Note**: In order to migrate from GenuinSDK 1.0 to 2.0, you need to replace `import GenuinSDK` to `import GenuinCore` in your codebase. </Note> 
+
 
 ### Carousel Embed
 
@@ -927,7 +935,7 @@ If you want to handle login process as per your requirement then follow the belo
 
 ```swift Swift
 
-GenuinSDK.shared.delegate = self ( YOUR_CONTROLLER )
+GenuinSDK.shared.delegate = self ( YOUR_ANY_CLASS )
 
 ```
 
@@ -939,7 +947,7 @@ GenuinSDK.shared.delegate = self ( YOUR_CONTROLLER )
 
 ```swift Swift
 
-extension YOUR_CONTROLLER : GenuinDelegate{
+extension YOUR_ANY_CLASS : GenuinDelegate{
   func presentLoginViewController(baseViewController : UIViewController) {
     guard let loginVC = GET AND ASSIGN YOUR CONTROLLER
     baseViewController.present(loginVC, animated: true)
@@ -1041,7 +1049,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func handleGenuinDeeplink(deeplinkURL: URL?) {
     if let dlURL = deeplinkURL, GenuinSDK.shared.willHandleDeepLink(url: dlURL){
        
-      GenuinSDK.initDeeplinkWith(url: dlURL)
       if let rootVC = window?.rootViewController as? UIViewController{
         DispatchQueue.main.async {
           GenuinSDK.shared.handleDeeplink(viewController: rootVC)
@@ -1058,7 +1065,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
         //redirect if genuin SDK handles the deeplink
         if let dlURL = userActivity.webpageURL , GenuinSDK.shared.willHandleDeepLink(url: dlURL){
-            GenuinSDK.initDeeplinkWith(url: dlURL)
             if let rootVC = window?.rootViewController as? UIViewController {
                 GenuinSDK.shared.handleDeeplink(viewController: rootVC)
             }
@@ -1076,21 +1082,11 @@ func application(_ application: UIApplication, continue userActivity: NSUserActi
 
 ### Instructions for `SceneDelegate`:
 
-1. In `SceneDelegate.swift`, implement the `scene(_:continue:)` method.
-2. Notify the SDK of the continued scene via `GenuinSDK.initDeeplinkWith(url: dlURL)`.
-3. Handle deep links using the root view controller by calling `GenuinSDK.shared.handleDeeplink(viewController: rootVC)`.
-
-<Note>
-
-**NOTE**: To handle redirection of the deeplink , it is mandatory to call `GenuinSDK.initDeeplinkWith(url: dlURL)`
-
-</Note>
+Handle deep links using the root view controller by calling `GenuinSDK.shared.handleDeeplink(viewController: rootVC)`.
 
 ### Instructions for `AppDelegate`:
 
-1. In `AppDelegate.swift`, implement the `application(_:continue:restorationHandler:)` method.
-2. Notify the SDK of the continued scene via `GenuinSDK.initDeeplinkWith(url: dlURL)`.
-3. Use `GenuinSDK.shared.handleDeeplink(viewController: rootVC)` to manage the deep link using the app's root view controller.
+Use `GenuinSDK.shared.handleDeeplink(viewController: rootVC)` to manage the deep link using the app's root view controller.
 
 <Note>
  **Note**: 
@@ -1106,6 +1102,49 @@ override func viewDidAppear(_ animated: Bool) {
     GenuinSDK.shared.handleDeeplink(viewController: self)
 }
 ```
+
+### Optional LinkOutInterceptor
+
+If you want to intercept Linkout clicks, you can implement `GenuinLinkOutInterceptorDelegate` as below:
+
+
+Step 1: Assign Delegate `GenuinLinkOutInterceptorDelegate`:
+
+<CodeGroup>
+
+```swift 
+
+GenuinSDK.shared.registerLinkoutInterceptor(associateDomains: [ARRAY_OF_ASSOCIATED_DOMAINS_HANDLED_BY_YOUR_APP], linkOutInterceptorDelegate: YOUR_ANY_CLASS)
+
+```
+
+</CodeGroup>
+
+<Note>
+ **Note**: 
+ `ARRAY_OF_ASSOCIATED_DOMAINS_HANDLED_BY_YOUR_APP` accepts associcated domains supported by your apps. You can pass comma seperated domains like e.g. ["apple.com", "https://apple.com", "www.apple.com", "applinks:apple.com"]
+`YOUR_ANY_CLASS` can be class which you want to handle the delegate method in.
+</Note>
+
+Step 2: Handle callback method
+
+<CodeGroup>
+
+```swift 
+extension YOUR_ANY_CLASS : GenuinLinkOutInterceptorDelegate{
+  func onLinkOutIntercept(urlString: String, viewController: UIViewController?) {
+    	/*
+         This callback will be triggered when user clicks on linkouts from any video and if it's domain matches the associateDomains provided.
+         
+         You will receive the url clicked and a current controller so you can handle the deeplink redirection from here in your app
+        */
+  }
+}
+
+```
+
+</CodeGroup>
+
 
 ## Handling Push Notifications
 
