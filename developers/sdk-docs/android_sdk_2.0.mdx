@@ -5,10 +5,10 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 | SDK | Description | Dependency* |
 | -------- | ------------------- | -------- | 
-| Core  | Includes the core functionality of the Genuin Ecosystem: Embeds and User authentication. | com.begenuin:core:2.0.0 |
-| UI  | Additional UI flows like comments, search, deep-links, notifications, group/community detail etc. | com.begenuin:ui:2.0.0 |
-| Camera  | Camera flows for video content creation. | com.begenuin:camera:2.0.0 |
-| AI  | Additional flows for AI assisted community/group creation. | com.begenuin:ai:2.0.0 |
+| Core  | Includes the core functionality of the Genuin Ecosystem: Embeds and User authentication. | com.begenuin:core:2.x.x |
+| UI  | Additional UI flows like comments, search, deep-links, notifications, group/community detail etc. | com.begenuin:ui:2.x.x |
+| Camera  | Camera flows for video content creation. | com.begenuin:camera:2.x.x |
+| AI  | Additional flows for AI assisted community/group creation. | com.begenuin:ai:2.x.x |
 
 ## Requirements
 
@@ -51,7 +51,7 @@ dependencyResolutionManagement {
 
 ```
 
-```java Groovy-build.gradle
+```kotlin Groovy-build.gradle
 
 allprojects {  
   repositories {
@@ -71,13 +71,13 @@ allprojects {
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-val genuinVersion = "2.0.0"
-implementation("com.begenuin:core:$genuinVersion")
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
 ```
 
-```java Groovy-build.gradle
-def genuinVersion = "2.0.0"
-implementation 'com.begenuin:core:$genuinVersion'
+```kotlin Groovy-build.gradle
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
 ```
 </CodeGroup>
 
@@ -86,15 +86,15 @@ implementation 'com.begenuin:core:$genuinVersion'
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-val genuinVersion = "2.0.0"
-implementation("com.begenuin:core:$genuinVersion")
-implementation("com.begenuin:ui:$genuinVersion")
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
+implementation("com.begenuin:ui:$genuin_version")
 ```
 
-```java Groovy-build.gradle
-def genuinVersion = "2.0.0"
-implementation 'com.begenuin:core:$genuinVersion'
-implementation 'com.begenuin:ui:$genuinVersion'
+```kotlin Groovy-build.gradle
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
+implementation('com.begenuin:ui:$genuin_version')
 ```
 </CodeGroup>
 
@@ -103,17 +103,17 @@ implementation 'com.begenuin:ui:$genuinVersion'
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-val genuinVersion = "2.0.0"
-implementation("com.begenuin:core:$genuinVersion")
-implementation("com.begenuin:ui:$genuinVersion")
-implementation("com.begenuin:camera:$genuinVersion")
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
+implementation("com.begenuin:ui:$genuin_version")
+implementation("com.begenuin:camera:$genuin_version")
 ```
 
-```java Groovy-build.gradle
-def genuinVersion = "2.0.0"
-implementation 'com.begenuin:core:$genuinVersion'
-implementation 'com.begenuin:ui:$genuinVersion'
-implementation 'com.begenuin:camera:$genuinVersion'
+```kotlin Groovy-build.gradle
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
+implementation('com.begenuin:ui:$genuin_version')
+implementation('com.begenuin:camera:$genuin_version')
 ```
 </CodeGroup>
 
@@ -122,23 +122,23 @@ implementation 'com.begenuin:camera:$genuinVersion'
 <CodeGroup>
 
 ```kotlin Kotlin-build.gradle.kts
-val genuinVersion = "2.0.0"
-implementation("com.begenuin:core:$genuinVersion")
-implementation("com.begenuin:ui:$genuinVersion")
-implementation("com.begenuin:camera:$genuinVersion")
-implementation("com.begenuin:ai:$genuinVersion")
+val genuin_version = "2.x.x"
+implementation("com.begenuin:core:$genuin_version")
+implementation("com.begenuin:ui:$genuin_version")
+implementation("com.begenuin:camera:$genuin_version")
+implementation("com.begenuin:ai:$genuin_version")
 ```
 
-```java Groovy-build.gradle
-def genuinVersion = "2.0.0"
-implementation 'com.begenuin:core:$genuinVersion'
-implementation 'com.begenuin:ui:$genuinVersion'
-implementation 'com.begenuin:camera:$genuinVersion'
-implementation 'com.begenuin:ai:$genuinVersion'
+```kotlin Groovy-build.gradle
+val genuin_version = "2.x.x"
+implementation('com.begenuin:core:$genuin_version')
+implementation('com.begenuin:ui:$genuin_version')
+implementation('com.begenuin:camera:$genuin_version')
+implementation('com.begenuin:ai:$genuin_version')
 ```
 </CodeGroup>
 
-Note: All modules must use a consistent version format — 2.0.0.
+Note: All modules must use a consistent version format — 2.x.x.
 
 **Dependency Hierarchy**
 The modules follow a linear dependency structure, where each subsequent module depends on the ones before it in the chain:
@@ -1420,33 +1420,6 @@ GenuinSDK.handleDeepLink(context = "YOUR_CONTEXT", intent = "YOUR_DEEPLINK_ACTIV
 </CodeGroup>
 
 <Note> **Note**: Need to call this function everytime your app receives any deeplink. This method will handle deeplink if it is our's otherwise it will ignore that. </Note>
-
-
-### Optional LinkOutInterceptor
-
-If you want to intercept Linkout clicks, you can implement LinkOutInterceptor as below:
-
-<CodeGroup>
-
-```kotlin YourActivity.kt
-
-GenuinSDK.registerLinkOutInterceptor(object : GenuinLinkOutInterceptor {
-
-    override fun onLinkOutIntercept(intent: Intent, context: Activity) {
-                /*
-                    This callback will be triggered when user clicks on linkouts 
-                    from any video and if it is found that link is handled by your app.
-
-                    You will receive whole intent data same as we will be receiving while 
-                    deeplink is clicked so you can handle the deeplink redirection from here
-                    in your app
-                */
-    }
-})
-
-```
-</CodeGroup>
-
 
 ## Handling Push Notifications
 
