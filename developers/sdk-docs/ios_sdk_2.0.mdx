@@ -172,7 +172,7 @@ Import the GenuinSDK module in your `SceneDelegate/AppDelegate`.
 <CodeGroup>
 
 ```swift SceneDelegate.swift
-import GenuinSDK
+import GenuinCore
 
 func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Optional configuration and attaching the UIWindow to UIWindowScene
@@ -197,7 +197,7 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
 ```
 
 ```swift AppDelegate.swift
-import GenuinSDK
+import GenuinCore
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Initialize the SDK configuration
@@ -569,7 +569,7 @@ GenuinSDK.shared.initializeEmbedFeed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE
 <CodeGroup>
 
 ```swift StandardWallFeedViewController.swift 
-import GenuinSDK
+import GenuinCore
 
 class StandardWallFeedViewController: UIViewController {
 
@@ -1178,7 +1178,7 @@ pod 'FirebaseMessaging', '~> 10.24.0'
 ```swift Swift
 
 import FirebaseMessaging
-import GenuinSDK
+import GenuinCore
 
 ```
 
@@ -1375,7 +1375,7 @@ func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent noti
 
 ```swift Swift
 
-import GenuinSDK
+import GenuinCore
 
 ```
 
