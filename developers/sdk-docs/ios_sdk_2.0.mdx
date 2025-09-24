@@ -466,6 +466,46 @@ Steps:
 
 <Tip> Refer to [Carousel View](https://resources.begenuin.com/developers/guides/embed#mobile-view) in Mobile</Tip>
 
+We have introduced new attribute `GenuinEmbedAttributes` that holds all the required data attributes needed to create and initialize an embed.
+
+You can initialize it with the following parameters:
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+init(
+    embedId: String,
+    uniqueId: String? = nil,
+    viewController: UIViewController,
+    ssoToken: String? = nil,
+    params: [String: Any]? = nil,
+    contextualParams: [String: Any]? = nil,
+    embedConfiguration: EmbedConfiguration = EmbedConfiguration()
+)
+
+
+```
+
+</CodeGroup>
+
+Parameters
+
+-  `embedId: String` – The identifier for the embed.
+-  `uniqueId: String?` (optional) – A unique identifier, if needed.
+-  `viewController: UIViewController` – The parent view controller for presenting the embed.
+-  `ssoToken: String?` (optional) – Single Sign-On token for authentication.
+-  `params: [String: Any]?` (optional) – Additional parameters for customization.
+-  `contextualParams: [String: Any]?` (optional) – Context-specific parameters for the embed.
+-  `embedConfiguration: EmbedConfiguration` (optional) – Configuration object for customizing embed behavior. Defaults to a new EmbedConfiguration instance.
+
+
+Creating and Loading an Embed
+You can create and load a GenuinEmbedView in following ways:
+
+
+#### Appraoch 01
+
 <CodeGroup>
 
 ```swift ViewController.swift (With SSO)
@@ -498,9 +538,11 @@ GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID"
 
 <Note> **Note**: To fetch the Embed you need to add `YOUR_EMBED_ID`, `YOUR_CONTAINER_VIEW` in which you want the embed, and `YOUR_VIEW_CONTROLLER` containing your container view, while calling the below function. For auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN" in order to implement Embed with SSO in your app. </Note>
 
-#### Vertical Carousel Embed
+#### Appraoch 02
 
-In `EmbedConfiguration` there is new option called `genuinCarouselConfiguration` by using it we can change the configs of carousel design.
+Initialize with Attributes During Creation
+
+Create the `GenuinEmbedAttributes` first, then pass it directly while initializing the embed view:
 
 <CodeGroup>
 
@@ -508,23 +550,73 @@ In `EmbedConfiguration` there is new option called `genuinCarouselConfiguration`
 
 // Below is an Example Code
 
-let genuinCarouselConfiguration = GenuinCarouselConfiguration()
-genuinCarouselConfiguration.interTileSpacing = 16.0
-genuinCarouselConfiguration.scrollDirection = .vertical //default value is .horizontal as described above.
-genuinCarouselConfiguration.tileCornerRadius = 16.0
-genuinCarouselConfiguration.aspectRatio = .ratio4x5
-
-let embedConfiguration = EmbedConfiguration()
-embedConfiguration.genuinCarouselConfiguration = genuinCarouselConfiguration //here you can pass the GenuinCarouselConfiguration
-
-GenuinSDK.shared.initializeEmbed(embedId: "YOUR_KEY", containerView: <YOUR_CONTAINER_VIEW>, viewConroller: self, embedConfiguration: embedConfiguration)
+let attributes = GenuinEmbedAttributes(embedId: YOUR_EMBED_ID, viewController: YOUR_VIEW_CONTROLLER)
+let embedView = GenuinEmbedView(attributes: attributes)
+self.YOUR_VIEW.addSubview(embedView)
+embedView.fetchDataAndLoad()
 
 ```
 
 </CodeGroup>
 
-Check the additional information [here.](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#additional-information)
+#### Appraoch 03
 
+Initialize First, Then Set Attributes
+
+Create the embed view first and assign the attributes afterward:
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+// Below is an Example Code
+
+let embedView = GenuinEmbedView()
+let attributes = GenuinEmbedAttributes(embedId: YOUR_EMBED_ID, viewController: YOUR_VIEW_CONTROLLER)
+embedView.initWith(attributes: attributes)
+self.YOUR_VIEW.addSubview(embedView)
+embedView.fetchDataAndLoad()
+
+
+```
+
+</CodeGroup>
+
+#### Appraoch 04
+
+Adding the Embed View in a Storyboard
+
+Steps:
+
+1. When using **Interface Builder**, first create a wrapper view with your preferred height and constraints. This wrapper will serve as the container for the `GenuinEmbedView`.
+2. Drag a `UIView` for embed and add it inside your wrapper view.
+3. Set the embed view’s class to `GenuinEmbedView` in the Identity Inspector.
+4. If a module for the specified class does not appear , then set the module as `GenuinCore` in the module field below the class.
+5. Connect it to an `@IBOutlet` in your view controller (e.g., `embedView`).
+6. Example: Initialize and Load with an Outlet
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+@IBOutlet weak var embedView: GenuinEmbedView?
+
+func loadEmbed() {
+    //specify your attributes
+    let attributes = GenuinEmbedAttributes(embedId: videoEmbedId,
+                                           viewController: self)
+    embedView?.initWith(attributes: attributes)
+    embedView?.fetchDataAndLoad()
+}
+
+```
+
+</CodeGroup>
+
+7. Call `loadEmbed()` to initialize and load the embed.
+
+
+Check the additional information [here.](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#additional-information)
 
 ### Full Screen Embed
 
@@ -831,9 +923,7 @@ To configure the `EmbedConfiguration` based on your need you can change the belo
 4. **genuinCarouselConfiguration** = This is an optional parameter. You can pass `GenuinCarouselConfiguration` object in this parameter. If `GenuinCarouselConfiguration` is provided then the carousel design will change accordingly. The default values are listed below, which you can pass in `GenuinCarouselConfiguration` object.
 
 	-  `interTileSpacing` - spacing between the carousel's collection view items. It's default value is `8.0`
-	- `carouselInset` - edge insets for carousel's collection view. It's default value is `UIEdgeInsets(top: 8.0, left: 16.0, bottom: 0.0, right: 16.0)`
-	- `scrollDirection` - direction of carousel scroll. It's default value is `.horizontal`
-	- `aspectRatio` - define aspect ratio of carousel's collection view items. It's default value is `.ratio9x16`
+	- `viewInset` - edge insets for carousel's collection view. It's default value is `UIEdgeInsets(top: 8.0, left: 16.0, bottom: 0.0, right: 16.0)`
 	- `tileCornerRadius` - cornerRadius for the carousel's collection view items. It's default value is `8.0`
 
 
@@ -885,6 +975,260 @@ GenuinSDK.shared.initializeEmbed(embedId: "EMBED_ID", uniqueId: "YOUR_UNIQUE_ID"
 ```
 
 </CodeGroup>
+
+<Note>
+
+**Note**: You can pass above parameters in `GenuinEmbedAttributes` as well  
+
+</Note>
+
+## Placement with Swift
+
+<Note> **Note**: Make sure you have followed the [installation steps](https://resources.begenuin.com/developers/sdk-docs/ios_sdk#installation) in order to implement the Carousel Embed. </Note> 
+
+<Note> **Note**: In order to migrate from GenuinSDK 1.0 to 2.0, you need to replace `import GenuinSDK` to `import GenuinCore` in your codebase. </Note> 
+
+
+GenuinPlacementAttributes
+
+We have introduced new attribute `GenuinPlacementAttributes` which is used to hold all the necessary data for creating and initializing a placement view.
+
+You can initialize it with the following parameters:
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+init(
+    placementId: String,
+    styleId: String,
+    uniqueId: String? = nil,
+    viewController: UIViewController,
+    ssoToken: String? = nil,
+    params: [String: Any]? = nil,
+    contextualParams: [String: Any]? = nil,
+    placementConfiguration: PlacementConfiguration = PlacementConfiguration()
+)
+
+
+```
+
+</CodeGroup>
+
+Parameters
+
+- `placementId: String` – Identifier for the placement.
+- `styleId: String` – Identifier for the placement style.
+- `uniqueId: String?` (optional) – Unique identifier for this placement instance.
+- `viewController: UIViewController` – Parent view controller that will present the placement.
+- `ssoToken: String?` (optional) – Single Sign-On token for authentication.
+- `params: [String: Any]?` (optional) – Additional parameters to customize the placement.
+- `contextualParams: [String: Any]?` (optional) – Context-specific parameters for the placement.
+- `placementConfiguration: PlacementConfiguration` (optional) – Custom configuration object. Defaults to a new instance of PlacementConfiguration.
+
+
+Creating and Loading an Placement
+
+You can create and load a `GenuinPlacementView` in following ways:
+
+#### Appraoch 01
+
+Initialize placement
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+let placementConfiguration = PlacementConfiguration()
+
+GenuinSDK.shared.initializePlacement(
+    placementId: "PLACEMENT_ID",
+    styleId: "STYLE_ID",
+    containerView: YOUR_CONTAINER_VIEW,
+    viewController: YOUR_CONTROLLER,
+    contextualParams: [
+        "page_context": "<PAGE_CONTEXT>",
+        "geo": [
+            "lat": XX.XXX,          // Float or Double
+            "long": XX.XXX,         // Float or Double
+            "radius_limit": <RADIUS_LIMIT> // Int
+        ],
+        "place": [
+            "country": "<COUNTRY_CODE>",
+            "state": "<STATE>",
+            "city": "<CITY>",
+            "zipcode": <ZIP>        // Int
+        ],
+        "time": <timestamp>,        // Long
+        "user_segments": [
+            "age": "<AGE>",
+            "min_age": "<MIN_AGE>",
+            "max_age": "<MAX_AGE>",
+            "segment": "<SEGMENT>",
+            "gender": "M/F/O",
+            "race": "<RACE>"
+        ],
+        "url": "https://url/",
+        "brands_ids": [
+            brandId1,               // Int
+            brandId2                // Int
+        ],
+        "user_interests": [""],
+        "posted_by_user_ids": [
+            "user_id1",
+            "user_id2"
+        ],
+        "previous_page_context": "<PREVIOUS_PAGE_CONTEXT>",
+        "user_context": "<CONTEXT>"
+    ],
+    placementConfiguration: placementConfiguration
+)
+
+```
+
+</CodeGroup>
+
+
+#### Appraoch 02
+
+Initialize with Attributes During Creation
+
+Create the `GenuinPlacementAttributes` first, then pass it directly while initializing the placement view:
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+let attributes = GenuinPlacementAttributes(
+    placementId: "YOUR_PLACEMENT_ID",
+    styleId: "YOUR_PLACEMENT_STYLE_ID",
+    viewController: self
+)
+
+let placementView = GenuinPlacementView(attributes: attributes)
+self.YOUR_VIEW.addSubview(placementView)
+placementView.fetchDataAndLoad()
+
+```
+
+</CodeGroup>
+
+#### Appraoch 03
+
+Initialize First, Then Set Attributes
+
+Create the placement view first and assign the attributes afterward:
+
+<CodeGroup>
+
+```swift ViewController.swift
+
+let placementView = GenuinPlacementView()
+let attributes = GenuinPlacementAttributes(
+    placementId: "YOUR_PLACEMENT_ID",
+    styleId: "YOUR_PLACEMENT_STYLE_ID",
+    viewController: self
+)
+placementView.initWith(attributes: attributes)
+self.viewIHeartVerticalCarousel.addSubview(placementView)
+placementView.fetchDataAndLoad()
+
+```
+
+</CodeGroup>
+
+#### Appraoch 04
+
+Adding the Placement View in a Storyboard
+
+Steps:
+
+1. When using **Interface Builder**, first create a wrapper view with your preferred height and constraints. This wrapper will serve as the container for the `GenuinPlacementView`.
+2. Drag a `UIView` for placement and add it inside your wrapper view.
+3. Set the placement view’s class to `GenuinPlacementView` in the Identity Inspector.
+4. If a module for the specified class does not appear , then set the module as `GenuinCore` in the module field below the class.
+5. Connect it to an `@IBOutlet` in your view controller (e.g., `placementView`).
+6. Example: Initialize and Load with an Outlet
+
+<CodeGroup>
+
+``` swift ViewController.swift
+
+@IBOutlet weak var placementView: GenuinPlacementView?
+
+func loadPlacement() {
+    let attributes = GenuinPlacementAttributes(
+        placementId: "YOUR_PLACEMENT_ID",
+        styleId: "YOUR_PLACEMENT_STYLE_ID",
+        viewController: self
+    )
+    viewPlacement.initWith(attributes: attributes)
+    viewPlacement.fetchDataAndLoad()
+}
+
+```
+
+</CodeGroup>
+
+7. Call `loadPlacement()` to initialize and load the placement.
+
+
+## Loading Embed and Placement Views in the Background
+
+You can fetch data for an embed or placement view in the background as per your requirement and add it to your view hierarchy once the data is ready.
+
+### Example: Loading an Embed in the Background
+
+<CodeGroup>
+
+``` swift ViewController.swift
+
+let embedView = GenuinEmbedView()
+let attributes = GenuinEmbedAttributes(
+    embedId: YOUR_EMBED_ID,
+    viewController: YOUR_VIEW_CONTROLLER
+)
+    
+embedView.initWith(attributes: attributes)
+    
+embedView.fetchDataInBackground { success in
+    if success {
+        self.YOUR_VIEW.addSubview(embedView)
+        embedView.load()
+    }
+}
+
+```
+
+</CodeGroup>
+
+### Example: Loading a Placement in the Background
+
+<CodeGroup>
+
+``` swift ViewController.swift
+
+let placementView = GenuinPlacementView()
+let attributes = GenuinPlacementAttributes(
+    placementId: "YOUR_PLACEMENT_ID",
+    styleId: "YOUR_PLACEMENT_STYLE_ID",
+    viewController: self
+)
+    
+placementView.initWith(attributes: attributes)
+    
+placementView.fetchDataInBackground { success in
+    if success {
+        self.carouselContainer1.addSubview(placementView)
+        placementView.load()
+    }
+}
+
+```
+
+</CodeGroup>
+
+
 
 ## Handle Login : via AutoLogin Approach
 
