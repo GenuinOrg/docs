@@ -610,6 +610,8 @@ override fun onDestroy() {
 
 **4. Load embed feed asynchronously:** 
 
+In order to load embed feeds asynchronously, instead of calling load(), use loadAsync with a callback (as shown). This callback will be triggered once the process of fetching data is complete, along with a boolean flag indicating whether the operation was successful and non-empty feed was retrieved. 
+
 <CodeGroup>
 
 ```Kotlin activity_full_embed.xml
@@ -894,10 +896,8 @@ fun CarouselComposeViewWrapper(
     ssoToken: String = "",
     isDirectDeepLinkEnabled: Boolean = false,
     isShowProfileEnabled: Boolean = false,
-    aspectRatio: CarouselTileAspectRatio = CarouselTileAspectRatio.RATIO_9_16,
     interTileSpacing: Int = 24,
     tileCornerRadius: Int = 24,
-    scrollDirection: CarouselScrollDirection = CarouselScrollDirection.HORIZONTAL,
     leftInsets: Int = 24,
     topInsets: Int = 24,
     rightInsets: Int = 24,
@@ -979,7 +979,6 @@ CarouselComposeViewWrapper(
         ssoToken = "YOUR_SSO_TOKEN",
         isShowProfileEnabled = false,
         isDirectDeepLinkEnabled = false,
-        aspectRatio = CarouselTileAspectRatio.RATIO_4_5,
         tileCornerRadius = 32,
         leftInsets = 32,
         topInsets = 32,
@@ -1038,11 +1037,7 @@ To configure the `EmbedParams` based on your need you can pass the below values.
 
   b. **carouselInset** - edge insets for carousel's view. It's default value is `top: 8dp, left: 16dp, bottom: 0dp, right: 16dp`
 
-  c. **scrollDirection** - direction of carousel scroll. It's default value is `CarouselScrollDirection.HORIZONTAL`
-
-  d. **aspectRatio** - define aspect ratio of carousel's view items. It's default value is `CarouselTileAspectRatio.RATIO_9_16`
-
-  e. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
+  c. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
 
 
 <img height="200" src="/visual-aids/developers/guides/Carousel%20Spacing%20-%20Android.png" />
@@ -1616,6 +1611,8 @@ override fun onDestroy() {
 </CodeGroup>
 
 **4. Load placement feed asynchronously:** 
+
+In order to load placement feeds asynchronously, instead of calling load(), use loadAsync with a callback (as shown). This callback will be triggered once the process of fetching data is complete, along with a boolean flag indicating whether the operation was successful and non-empty feed was retrieved. 
 
 <CodeGroup>
 
