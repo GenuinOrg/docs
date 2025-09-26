@@ -603,8 +603,8 @@ Steps:
 
 func loadEmbed() {
     //specify your attributes
-    let attributes = GenuinEmbedAttributes(embedId: videoEmbedId,
-                                           viewController: self)
+    let attributes = GenuinEmbedAttributes(embedId: YOUR_EMEBED_ID,
+                                           viewController: YOUR_VIEW_CONTROLLER)
     embedView?.initWith(attributes: attributes)
     embedView?.fetchDataAndLoad()
 }
@@ -1102,7 +1102,7 @@ Create the `GenuinPlacementAttributes` first, then pass it directly while initia
 let attributes = GenuinPlacementAttributes(
     placementId: "YOUR_PLACEMENT_ID",
     styleId: "YOUR_PLACEMENT_STYLE_ID",
-    viewController: self
+    viewController: YOUR_VIEW_CONTROLLER
 )
 
 let placementView = GenuinPlacementView(attributes: attributes)
@@ -1127,10 +1127,10 @@ let placementView = GenuinPlacementView()
 let attributes = GenuinPlacementAttributes(
     placementId: "YOUR_PLACEMENT_ID",
     styleId: "YOUR_PLACEMENT_STYLE_ID",
-    viewController: self
+    viewController: YOUR_VIEW_CONTROLLER
 )
 placementView.initWith(attributes: attributes)
-self.viewIHeartVerticalCarousel.addSubview(placementView)
+self.YOUR_VIEW.addSubview(placementView)
 placementView.fetchDataAndLoad()
 
 ```
@@ -1160,10 +1160,10 @@ func loadPlacement() {
     let attributes = GenuinPlacementAttributes(
         placementId: "YOUR_PLACEMENT_ID",
         styleId: "YOUR_PLACEMENT_STYLE_ID",
-        viewController: self
+        viewController: YOUR_VIEW_CONTROLLER
     )
-    viewPlacement.initWith(attributes: attributes)
-    viewPlacement.fetchDataAndLoad()
+    placementView.initWith(attributes: attributes)
+    placementView.fetchDataAndLoad()
 }
 
 ```
@@ -1212,14 +1212,14 @@ let placementView = GenuinPlacementView()
 let attributes = GenuinPlacementAttributes(
     placementId: "YOUR_PLACEMENT_ID",
     styleId: "YOUR_PLACEMENT_STYLE_ID",
-    viewController: self
+    viewController: YOUR_VIEW_CONTROLLER
 )
     
 placementView.initWith(attributes: attributes)
     
 placementView.fetchDataInBackground { success in
     if success {
-        self.carouselContainer1.addSubview(placementView)
+        self.YOUR_VIEW.addSubview(placementView)
         placementView.load()
     }
 }
