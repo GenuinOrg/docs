@@ -320,7 +320,7 @@ Steps:
 
 <Note> **Note**: Make sure you have followed the [First 3 installation steps](https://resources.begenuin.com/developers/sdk-docs/android_sdk#installation) in order to implement the Carousel Embed </Note>
 
-### Carousel Embed
+### Embed
 
 <Tip> Refer to [Carousel View](https://resources.begenuin.com/developers/guides/embed#mobile-view) in mobile. </Tip>
 
@@ -335,7 +335,7 @@ Steps:
       android:layout_width="match_parent"
       android:layout_height="300dp">
 
-      <com.begenuin.core.ui.customview.embed.CarouselEmbedView
+      <com.begenuin.core.ui.customview.embed.GenuinEmbedView
         android:id="@+id/carousel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -373,7 +373,7 @@ geoJson.put("lat", XXXX.XXX)
 geoJson.put("long", XXXX.XXX)
 contextualParams["geo"] = geoJson.toString()
 
-carouselEmbedView.apply {
+genuinEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
@@ -384,7 +384,6 @@ carouselEmbedView.apply {
             setActivity(activityContext)
             setSSOToken("YOUR_SSO_TOKEN")
             setParams(params) // User specific params
-            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
             setInterTileSpacing(24) // values should be in pixels
             setInsets(
                left = 24, // values should be in pixels
@@ -408,7 +407,7 @@ geoJson.put("lat", XXXX.XXX)
 geoJson.put("long", XXXX.XXX)
 contextualParams["geo"] = geoJson.toString()
 
-carouselEmbedView.apply {
+genuinEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
@@ -417,7 +416,6 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
-            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
             setInterTileSpacing(24) // values should be in pixels
             setInsets(
                left = 24, // values should be in pixels
@@ -455,8 +453,8 @@ carouselEmbedView.apply {
 
 
 ```kotlin EmbedActivity.kt (With SSO)
-val carouselEmbedView = CarouselEmbedView(context)
-llCarouselContainer.addView(carouselEmbedView)
+val genuinEmbedView = GenuinEmbedView(context)
+llCarouselContainer.addView(genuinEmbedView)
 
 //This is Optional
 val params = HashMap<String, Any>()
@@ -473,7 +471,7 @@ geoJson.put("lat", XXXX.XXX)
 geoJson.put("long", XXXX.XXX)
 contextualParams["geo"] = geoJson.toString()
 
-carouselEmbedView.apply {
+genuinEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
@@ -482,7 +480,6 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
-            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
             setInterTileSpacing(24) // values should be in pixels
             setInsets(
                left = 24, // values should be in pixels
@@ -508,10 +505,10 @@ geoJson.put("lat", XXXX.XXX)
 geoJson.put("long", XXXX.XXX)
 contextualParams["geo"] = geoJson.toString()
 
-val carouselEmbedView = CarouselEmbedView(context)
-llCarouselContainer.addView(carouselEmbedView)
+val genuinEmbedView = GenuinEmbedView(context)
+llCarouselContainer.addView(genuinEmbedView)
 
-carouselEmbedView.apply {
+genuinEmbedView.apply {
             setEmbedParams(
                embedId = "YOUR_EMBED_ID", 
                uniqueId="UNIQUE_ID",
@@ -520,7 +517,6 @@ carouselEmbedView.apply {
                isShowProfileEnabled = false
             )
             setActivity(activityContext)
-            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
             setInterTileSpacing(24) // values should be in pixels
             setInsets(
                left = 24, // values should be in pixels
@@ -537,30 +533,6 @@ carouselEmbedView.apply {
 
 </CodeGroup>
 
-
-#### Vertical Carousel Embed
-
-To implement vertical carousel, you can use `setScrollDirection(CarouselScrollDirection.VERTICAL)` and other configurations will be same as above.
-
-<CodeGroup>
-
-```kotlin VerticalEmbedActivity.kt
-
-// Example Code Snippet
-
-carouselEmbedView.apply {
-            setEmbedParams(
-               embedId = "YOUR_EMBED_ID", 
-               uniqueId="UNIQUE_ID",
-            )
-            setActivity(activityContext)
-            setScrollDirection(CarouselScrollDirection.VERTICAL)
-            setAspectRatio(CarouselTileAspectRatio.RATIO_4_5)
-            load()
-        }
-
-```
-</CodeGroup>
 
 
 <Note> **Note**: To initialise the Embed you need to add your activity context `(setActivity(activityContext))` in which you want the embed. To auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN"`(setSSOToken("YOUR_SSO_TOKEN"))` in order to implement Embed with SSO in your app. </Note>
@@ -606,11 +578,7 @@ To configure the `EmbedParams` based on your need you can pass the below values.
 
   b. **carouselInset** - edge insets for carousel's view. It's default value is `top: 8dp, left: 16dp, bottom: 0dp, right: 16dp`
 
-  c. **scrollDirection** - direction of carousel scroll. It's default value is `CarouselScrollDirection.HORIZONTAL`
-
-  d. **aspectRatio** - define aspect ratio of carousel's view items. It's default value is `CarouselTileAspectRatio.RATIO_9_16`
-
-  e. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
+  c. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
 
 
 <img height="200" src="/visual-aids/developers/guides/Carousel%20Spacing%20-%20Android.png" />
@@ -624,16 +592,39 @@ To configure the `EmbedParams` based on your need you can pass the below values.
 
 override fun onResume() {
     super.onResume()
-    carouselEmbedView.resumeVideoAutoPlay()
+    genuinEmbedView.play()
 }
 
 override fun onPause() {
-    carouselEmbedView.pauseVideoAutoPlay()
+    genuinEmbedView.pause()
     super.onPause()
+}
+
+override fun onDestroy() {
+    genuinEmbedView.release()
+    super.onDestroy()
 }
 
 ```
 </CodeGroup>
+
+**4. Load embed feed asynchronously:** 
+
+<CodeGroup>
+
+```Kotlin activity_full_embed.xml
+
+genuinEmbedView.loadAsync {
+  success ->
+    if (success) { 
+      binding.genuinEmbedView.visibility = View.VISIBLE
+    }
+}
+
+
+```
+</CodeGroup>
+
 
 ### Full Screen Embed
 
@@ -882,7 +873,7 @@ fun CarouselComposeViewWrapper(
         modifier = modifier,
         factory = { viewContext ->
             // Creates view
-            CarouselEmbedView(viewContext)
+            GenuinEmbedView(viewContext)
                 .setEmbedParams(
                     embedId,
                 )
@@ -924,7 +915,7 @@ fun CarouselComposeViewWrapper(
         modifier = modifier,
         factory = { viewContext ->
             // Creates view
-            CarouselEmbedView(viewContext)
+            GenuinEmbedView(viewContext)
                 .setEmbedParams(
                     embedId = embedId,
                     uniqueId = uniqueId,
@@ -932,7 +923,6 @@ fun CarouselComposeViewWrapper(
                     isDirectDeepLinkEnabled = isDirectDeepLinkEnabled
                 )
                 .setActivity(activity)
-                .setAspectRatio(aspectRatio)
                 .setInterTileSpacing(interTileSpacing) // values should be in pixels
                 .setInsets(
                     left = leftInsets, // values should be in pixels
@@ -944,7 +934,6 @@ fun CarouselComposeViewWrapper(
                 .setSSOToken(ssoToken)
                 .setParams(params)
                 .setContextualParams(contextualParams)
-                .setScrollDirection(scrollDirection)
                 .load()
         }
     )
@@ -1227,12 +1216,431 @@ We need to pass below arguments in order to cofigure `StandardWallEmbed`.
   c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
 
 
+## Placement
+
+**1. Load Placement with XML**
+
+<CodeGroup>
+
+```xml activity_placement.xml
+
+<LinearLayout
+      android:id="@+id/llPlacementContainer"
+      android:layout_width="match_parent"
+      android:layout_height="300dp">
+
+      <com.begenuin.core.ui.customview.embed.GenuinPlacementView
+        android:id="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:interTileSpacing="12dp"
+        app:leftInset="12dp"
+        app:topInset="12dp"
+        app:rightInset="12dp"
+        app:bottomInset="12dp"
+        app:tileCornerRadius="12dp"
+        />
+</LinearLayout>
+
+```
+</CodeGroup>
+
+<Note> **Note**: Placement Container height must be fixed or match_parent. It can not be wrap_content else placement will not appear. </Note>
+
+<CodeGroup>
+
+```kotlin PlacementActivity.kt (With SSO)
+
+//This is Optional
+val params = HashMap<String, Any>()
+params["name"] = "John Doe"
+params["email"] = "john.doe@begenuin.com"
+params["nickname"] = "john"
+params["mobile"] = "1XXXXXXXXXX"
+
+//This is Optional
+val geoJson = JSONObject()
+geoJson.put("lat", XX.XXX)
+geoJson.put("long",  XX.XXX)
+geoJson.put("radius_limit", <RADIUS_LIMIT>)
+
+val placeJson = JSONObject()
+placeJson.put("country", "<COUNTRY_CODE>")
+placeJson.put("state", "<STATE>")
+placeJson.put("city", "<CITY>")
+placeJson.put("zipcode", <ZIP>)
+
+val userSegmentsJson = JSONObject()
+userSegmentsJson.put("age", "<AGE>")
+userSegmentsJson.put("min_age", "<MIN_AGE>")
+userSegmentsJson.put("max_age", "<MAX_AGE>")
+userSegmentsJson.put("segment", "<SEGMENT>")
+userSegmentsJson.put("gender", "M/F/O")
+userSegmentsJson.put("race", "<RACE>")
+
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = "<PAGE_CONTEXT>"
+contextualParams["geo"] = geoJson.toString()
+contextualParams["place"] = placeJson.toString()
+contextualParams["time"] = <timestamp>
+contextualParams["user_segments"] = userSegmentsJson.toString()
+contextualParams["url"] = "https://url/"
+contextualParams["brands_ids"] = JSONArray(arrayListOf(brandId1, brandId2))
+contextualParams["community_ids"] = JSONArray(arrayListOf("comm_id1","comm_id2"))
+contextualParams["loop_ids"] = JSONArray(arrayListOf("loop_id1", "loop_id2"))
+contextualParams["user_interest"] = JSONArray(arrayListOf(""))
+contextualParams["posted_by_user_ids"] = JSONArray(arrayListOf("user_id1", "user_id2"))
+contextualParams["previous_page_context"] = "<PREVIOUS_PAGE_CONTEXT>"
+contextualParams["user_context"] = "<CONTEXT>"
+
+
+genuinPlacementView.apply {
+            setPlacementParams(
+               placementId = "YOUR_PLACEMENT_ID", 
+               styleId = "YOUR_STYLE_ID", 
+               uniqueId="UNIQUE_ID",
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+            )
+            setActivity(activityContext)
+            setSSOToken("YOUR_SSO_TOKEN")
+            setParams(params) // User specific params
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
+            setContextualParams(contextualParams) // Contextual params
+            load()
+        }
+```
+
+```kotlin PlacementActivity.kt (Without SSO)
+
+//This is Optional
+val geoJson = JSONObject()
+geoJson.put("lat", XX.XXX)
+geoJson.put("long",  XX.XXX)
+geoJson.put("radius_limit", <RADIUS_LIMIT>)
+
+val placeJson = JSONObject()
+placeJson.put("country", "<COUNTRY_CODE>")
+placeJson.put("state", "<STATE>")
+placeJson.put("city", "<CITY>")
+placeJson.put("zipcode", <ZIP>)
+
+val userSegmentsJson = JSONObject()
+userSegmentsJson.put("age", "<AGE>")
+userSegmentsJson.put("min_age", "<MIN_AGE>")
+userSegmentsJson.put("max_age", "<MAX_AGE>")
+userSegmentsJson.put("segment", "<SEGMENT>")
+userSegmentsJson.put("gender", "M/F/O")
+userSegmentsJson.put("race", "<RACE>")
+
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = "<PAGE_CONTEXT>"
+contextualParams["geo"] = geoJson.toString()
+contextualParams["place"] = placeJson.toString()
+contextualParams["time"] = <timestamp>
+contextualParams["user_segments"] = userSegmentsJson.toString()
+contextualParams["url"] = "https://url/"
+contextualParams["brands_ids"] = JSONArray(arrayListOf(brandId1, brandId2))
+contextualParams["community_ids"] = JSONArray(arrayListOf("comm_id1","comm_id2"))
+contextualParams["loop_ids"] = JSONArray(arrayListOf("loop_id1", "loop_id2"))
+contextualParams["user_interest"] = JSONArray(arrayListOf(""))
+contextualParams["posted_by_user_ids"] = JSONArray(arrayListOf("user_id1", "user_id2"))
+contextualParams["previous_page_context"] = "<PREVIOUS_PAGE_CONTEXT>"
+contextualParams["user_context"] = "<CONTEXT>"
+
+
+genuinPlacementView.apply {
+            setPlacementParams(
+               placementId = "YOUR_PLACEMENT_ID", 
+               styleId = "YOUR_STYLE_ID", 
+               uniqueId="UNIQUE_ID",
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+            )
+            setActivity(activityContext)
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
+            setContextualParams(contextualParams) // Contextual params
+            load()
+        }
+
+```
+
+</CodeGroup>
+
+**2. Load Placement Programmatically**
+
+<CodeGroup>
+
+```xml activity_placement.xml
+
+<LinearLayout
+     android:id="@+id/llPlacementContainer"
+     android:layout_width="match_parent"
+     android:layout_height="300dp">           
+</LinearLayout>
+```
+</CodeGroup>
+
+<Note> **Note**: Placement Container height must be fixed or match_parent. It can not be wrap_content else placement will not appear. </Note>
+
+
+<CodeGroup>
+
+
+```kotlin PlacementActivity.kt (With SSO)
+val genuinPlacementView = GenuinPlacementView(context)
+llPlacementContainer.addView(genuinPlacementView)
+
+//This is Optional
+val params = HashMap<String, Any>()
+params["name"] = "John Doe"
+params["email"] = "john.doe@begenuin.com"
+params["nickname"] = "john"
+params["mobile"] = "1XXXXXXXXXX"
+
+//This is Optional
+val geoJson = JSONObject()
+geoJson.put("lat", XX.XXX)
+geoJson.put("long",  XX.XXX)
+geoJson.put("radius_limit", <RADIUS_LIMIT>)
+
+val placeJson = JSONObject()
+placeJson.put("country", "<COUNTRY_CODE>")
+placeJson.put("state", "<STATE>")
+placeJson.put("city", "<CITY>")
+placeJson.put("zipcode", <ZIP>)
+
+val userSegmentsJson = JSONObject()
+userSegmentsJson.put("age", "<AGE>")
+userSegmentsJson.put("min_age", "<MIN_AGE>")
+userSegmentsJson.put("max_age", "<MAX_AGE>")
+userSegmentsJson.put("segment", "<SEGMENT>")
+userSegmentsJson.put("gender", "M/F/O")
+userSegmentsJson.put("race", "<RACE>")
+
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = "<PAGE_CONTEXT>"
+contextualParams["geo"] = geoJson.toString()
+contextualParams["place"] = placeJson.toString()
+contextualParams["time"] = <timestamp>
+contextualParams["user_segments"] = userSegmentsJson.toString()
+contextualParams["url"] = "https://url/"
+contextualParams["brands_ids"] = JSONArray(arrayListOf(brandId1, brandId2))
+contextualParams["community_ids"] = JSONArray(arrayListOf("comm_id1","comm_id2"))
+contextualParams["loop_ids"] = JSONArray(arrayListOf("loop_id1", "loop_id2"))
+contextualParams["user_interest"] = JSONArray(arrayListOf(""))
+contextualParams["posted_by_user_ids"] = JSONArray(arrayListOf("user_id1", "user_id2"))
+contextualParams["previous_page_context"] = "<PREVIOUS_PAGE_CONTEXT>"
+contextualParams["user_context"] = "<CONTEXT>"
+
+
+genuinPlacementView.apply {
+            setPlacementParams(
+               placementId = "YOUR_PLACEMENT_ID", 
+               styleId = "YOUR_STYLE_ID", 
+               uniqueId="UNIQUE_ID",
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+            )
+            setActivity(activityContext)
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
+            setSSOToken("YOUR_SSO_TOKEN")
+            setParams(params) // User specific params
+            setContextualParams(contextualParams) // Contextual params
+            load()
+        }
+```
+
+```kotlin PlacementActivity.kt (Without SSO)
+
+//This is Optional
+val geoJson = JSONObject()
+geoJson.put("lat", XX.XXX)
+geoJson.put("long",  XX.XXX)
+geoJson.put("radius_limit", <RADIUS_LIMIT>)
+
+val placeJson = JSONObject()
+placeJson.put("country", "<COUNTRY_CODE>")
+placeJson.put("state", "<STATE>")
+placeJson.put("city", "<CITY>")
+placeJson.put("zipcode", <ZIP>)
+
+val userSegmentsJson = JSONObject()
+userSegmentsJson.put("age", "<AGE>")
+userSegmentsJson.put("min_age", "<MIN_AGE>")
+userSegmentsJson.put("max_age", "<MAX_AGE>")
+userSegmentsJson.put("segment", "<SEGMENT>")
+userSegmentsJson.put("gender", "M/F/O")
+userSegmentsJson.put("race", "<RACE>")
+
+val contextualParams = HashMap<String, Any>()
+contextualParams["page_context"] = "<PAGE_CONTEXT>"
+contextualParams["geo"] = geoJson.toString()
+contextualParams["place"] = placeJson.toString()
+contextualParams["time"] = <timestamp>
+contextualParams["user_segments"] = userSegmentsJson.toString()
+contextualParams["url"] = "https://url/"
+contextualParams["brands_ids"] = JSONArray(arrayListOf(brandId1, brandId2))
+contextualParams["community_ids"] = JSONArray(arrayListOf("comm_id1","comm_id2"))
+contextualParams["loop_ids"] = JSONArray(arrayListOf("loop_id1", "loop_id2"))
+contextualParams["user_interest"] = JSONArray(arrayListOf(""))
+contextualParams["posted_by_user_ids"] = JSONArray(arrayListOf("user_id1", "user_id2"))
+contextualParams["previous_page_context"] = "<PREVIOUS_PAGE_CONTEXT>"
+contextualParams["user_context"] = "<CONTEXT>"
+
+
+val genuinPlacementView = GenuinPlacementView(context)
+llPlacementContainer.addView(genuinPlacementView)
+
+genuinPlacementView.apply {
+            setPlacementParams(
+               placementId = "YOUR_PLACEMENT_ID", 
+               styleId = "YOUR_STYLE_ID", 
+               uniqueId="UNIQUE_ID",
+               interactionDeepLink = "YOUR_DEEPLINK",
+               isDirectDeepLinkEnabled = false,
+            )
+            setActivity(activityContext)
+            setInterTileSpacing(24) // values should be in pixels
+            setInsets(
+               left = 24, // values should be in pixels
+               top = 24, // values should be in pixels
+               right = 24, // values should be in pixels
+               bottom = 24, // values should be in pixels
+            )
+            setTileCornerRadius(24) // values should be in pixels
+            setContextualParams(contextualParams) // Contextual params
+            load()
+        }
+
+```
+
+</CodeGroup>
+
+
+
+<Note> **Note**: To initialise the Placement you need to add your activity context `(setActivity(activityContext))` in which you want the placement. To auto login in the SDK,  you shall pass "YOUR_SSO_TOKEN"`(setSSOToken("YOUR_SSO_TOKEN"))` in order to implement Placement with SSO in your app. </Note>
+
+To configure the `PlacementParams` based on your need you can pass the below values.
+
+
+1. **placementId** = The Placement Id that you want to load.
+
+2. **styleId** = The Style Id that you want to load.
+
+3. **uniqueId** = This is an optional parameter. This uniqueId is used when we need to display same placement in multiple/same screen. We need to provide uniqueId for the same placementId in multiple/same screen.
+
+4. **interactionDeepLink** = This is an optional parameter. You can pass a deeplink URL in this parameter. If a deeplink URL is given then all the interaction/clicks in the full screen view will redirect to the deeplink URL given. If not passed then the regular flow will work. It should be a correct URL else user will not be redirected.
+
+5. **isDirectDeepLinkEnabled** = This is an optional boolean parameter. Default value is false. If this parameter is true then  all the interaction/clicks in the full screen view will redirect to the specific video in white labelled app associated with video and also value of this parameter "**interactionDeepLink**" will be ignored. If not passed then the regular flow will work. 
+
+<Note> **Note**: For using `isDirectDeepLinkEnabled` parameter, you must have [white labelled your domain](https://resources.begenuin.com/retail-media/build/how_to_white-label_your_community) first and also integrated the [Handling deep link](https://resources.begenuin.com/developers/sdk-docs/android_sdk#handling-deep-link) part in your main app in which you want to redirect this video to. </Note>
+
+
+**Add user specific parameters (Optional)**
+
+  a. **name** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  b. **mobile** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  c. **email** - This is an optional string parameter. Pass this parameter for `signup/login`.
+
+  d. **nickname** - This is an optional string parameter. If nickname is available in genuin ecosystem it will be used, else genuin will generate of its own.
+
+  e. **profile_image**: This is an optional string parameter. Pass the `profile_image` parameter if you want to show the profile image in the SDK. 
+
+**Add contextual parameters (Optional)**
+
+    a. **page_context** - This is an optional string parameter. Pass this parameter for '`context`', so that feed could load based on that context.
+    
+    b. **lat** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the latitude and context.
+
+    c. **long** - This is an optional float parameter. Pass this parameter in `geo` so that the feed could load based on the longitude and context.
+
+**Add design configurations (Optional)**
+
+  a. **interTileSpacing** - spacing between the carousel's view items. It's default value is `8dp`
+
+  b. **Inset** - edge insets for placement's view. It's default value is `top: 8dp, left: 16dp, bottom: 0dp, right: 16dp`
+
+  c. **tileCornerRadius** - cornerRadius for the carousel's view items. It's default value is `8dp`
+
+
+<img height="200" src="/visual-aids/developers/guides/Carousel%20Spacing%20-%20Android.png" />
+
+
+**3. Manage carousel videos auto-play** 
+
+<CodeGroup>
+
+```kotlin PlacementActivity.kt
+
+override fun onResume() {
+    super.onResume()
+    genuinPlacementView.play()
+}
+
+override fun onPause() {
+    genuinPlacementView.pause()
+    super.onPause()
+}
+
+override fun onDestroy() {
+    genuinPlacementView.release()
+    super.onDestroy()
+}
+
+```
+</CodeGroup>
+
+**4. Load placement feed asynchronously:** 
+
+<CodeGroup>
+
+```Kotlin activity_full_placement.xml
+
+genuinPlacementView.loadAsync {
+  success ->
+    if (success) { 
+      binding.genuinPlacementView.visibility = View.VISIBLE
+    }
+}
+
+
+```
+</CodeGroup>
+
+
+
+
 
 ## Handle Login : via AutoLogin Approach
 
 To Auto Login in the SDK, You need to call below method, whenever user is log in to your application. 
 
-<Note> **Note**: You don't need to call the below method if you have implemented the Embed With SSO already. </Note>
+<Note> **Note**: You don't need to call the below method if you have implemented the Embed/Placement With SSO already. </Note>
 
 <CodeGroup>
 
