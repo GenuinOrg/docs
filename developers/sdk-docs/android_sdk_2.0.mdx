@@ -12,9 +12,9 @@ description: 'Genuin Android SDK comprises features such as brand feed, communit
 
 ## Requirements
 
-| Platform | Minimum SDK Version | Language | Supported Orientations | Supported Destinations |
-| -------- | ------------------- | -------- | ---------------------- | ---------------------- |
-| Android  | 24                  | Java/Kotlin    | Portrait               | Mobile           |
+| Platform | Minimum SDK Version | Language | Supported Orientations | Supported Destinations | Minimum AGP Version |
+| -------- | ------------------- | -------- | ---------------------- | ---------------------- | -------------------- |
+| Android  | 24                  | Java/Kotlin    | Portrait               | Mobile           | 8.6.0                |
 
 ## Installation
 
@@ -46,6 +46,9 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
+    maven {
+      setUrl("https://jitpack.io")
+    }
   }
 }
 
@@ -57,6 +60,9 @@ allprojects {
   repositories {
     google()
     mavenCentral()
+    maven {
+      setUrl("https://jitpack.io")
+    }
   }
 }
 
